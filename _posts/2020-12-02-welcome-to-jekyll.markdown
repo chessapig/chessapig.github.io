@@ -1,9 +1,36 @@
 ---
-layout: post
-title:  "Post number 1"
+layout: post 
+title:  "Hello world!"
 date:   2020-12-02 16:03:47 -0500
 categories: jekyll update
 ---
+
+<!--setup mathjax-->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+
+</script>
+
+I haven't been myself these past couple weeks.
+
+
+And now I made a website!
+
+Theres even latex integration:
+
+<p> 
+\[\int \LaTeX \]
+</p>
+
+It will be nice to have all my ~stuff~ consolidated in one place, be it artistic or acedemic or educational.
+
+I'm going to post all my old twitter threads (lightly edited)
+
+There are pros and cons to the "twitter thread" writing format, but it's pretty obvious the platform was not designed for permenence
+
+
+
 
 
 <b>this is my first post isnt that cool</b>
