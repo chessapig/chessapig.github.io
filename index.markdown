@@ -5,4 +5,4 @@
 layout: home
 ---
 
-test
+test index
