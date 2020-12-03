@@ -38,12 +38,12 @@ $theme-colors: map-merge((
 
 $back-primary:        $body-bg;
 $back-secondary:      $black;
-$link-color:            $primary;
-$link-hover-color:      darken($link-color, 15%);
+$link-color:          $primary;
+$link-hover-color:    darken($link-color, 15%);
 $mark-bg:             #ff19ff;
 
 $card-bg:               #1d4487;
 $card-border-color:     $light;
 $card-cap-bg:           $dark;
 
-$base-line-height: 1.5
+
