@@ -35,7 +35,9 @@
 
 body {
   min-height: 100vh;
+  height: 100%;
 }
+
 
 .section {
   &:nth-child(even) {
@@ -70,4 +72,15 @@ blockquote {
   border-left: .25em solid #dfe2e5;
   color: #6a737d;
   padding: 0 1em;
+}
+
+.gallery {
+  display: block;
+  margin: auto;
+  width: auto;
+  height: auto;
+  padding-bottom: 25px;
+  margin-top: 20px;
+  max-height: 80vh;
+  max-width: 80vw;
 }

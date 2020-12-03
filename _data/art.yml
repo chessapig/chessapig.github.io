@@ -12,19 +12,12 @@
 
 - title: "Turtle"
   thumbnail: "/gallery/thumbnails/turtle.jpg"
-  file: "/gallery/thumbnails/turtle.png"
+  file: "/gallery/images/turtle.png"
   description: "he do be sunbathing"
   type: drawing
 
-
-- title: "Fuzzy"
-  file: "/gallery/thumbnails/test2.png"
-  description: "he do be climbing"
-  link: /noodles
-  type: drawing
-
-- title: "Fuzzy"
-  file: "/gallery/thumbnails/test3.png"
-  description: "he do be climbing"
-  link: /noodles
-  type: drawing
+- title: "Checkerboard"
+  thumbnail: "/gallery/images/checkerboard.gif"
+  file: "/gallery/images/checkerboard.gif"
+  description: "he do be spinning"
+  type: gif

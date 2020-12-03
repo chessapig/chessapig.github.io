@@ -7,13 +7,13 @@ show_sidebar: true
 
 
 <div class="row">
-  <div class="col-md-3 mb-1">
+  <div class="col-md-3 mb-5">
     <div class="card">
-      <img class="card-img-top" src="/static/images/noahsinger.jpeg"/>
+      <img class="card-img-top" src="/static/images/jolene.jpg"/>
       <div class="card-body">
         <div class="card-text">
-          <i class="fas fa-user"></i> Elliot Kienzle <br/>
-          <a href="https://twitter.com/singerng_" target="_blank">@chessapigbay</a> <br/>
+          <i class="fas fa-user"></i> Elliot <br/>
+          <i class="fab fa-twitter"></i><a href="https://twitter.com/chessapigbay" target="_blank">@chessapigbay</a> <br/>
         </div>
       </div>
     </div>

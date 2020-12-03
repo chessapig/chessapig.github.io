@@ -4,13 +4,9 @@
 
 layout: default
 ---
-
-
-
-test index  
 <div id="galleryCarousel" class="carousel slide" data-interval="20000" data-ride="carousel">
-    {% assign size =  {{site.data.art | size | minus: 1}} %}
-    <ol class="carousel-indicators">
+    {% assign size =  site.data.art | size | minus: 1 %}
+    <ol class="carousel-indicators mb-0">
         {% for i in (0..size) %}
             {% if i==0 %} {%- assign isActive = "active" -%}
             {% else %} {%- assign isActive = "" -%}
@@ -25,17 +21,15 @@ test index
             {% else %} {%- assign isActive = "" -%}
             {% endif %}
                 <div class= '{{"carousel-item" | append: isActive }}'>
-                    <img src='{{art.thumbnail}}' class='d-block h-10' alt='{{art.title}}'>
-                    <div class="carousel-caption">
+                    <img src='{{art.thumbnail}}' class="gallery" alt='{{art.title}}' >
+                    <div class="carousel-caption mb-0">
+                        <a href='{{art.file}}'>
                         <h3>{{art.title}}</h3>
+                        </a>
                         <p>{{art.description}}</p>
                     </div>
-
-
-
-
                 </div>
-            {% assign i = {{ i | plus: 1 }} %}
+            {% assign i =  i | plus: 1  %}
         {% endfor %}
     </div>
     <a class="carousel-control-prev" href="#galleryCarousel" role="button" data-slide="prev">
