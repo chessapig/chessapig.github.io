@@ -1,6 +1,6 @@
 ---
 layout: blog 
-title:  "Hello world!"
+title:  "A Harbinger of Things to Come"
 date:   2020-12-02 16:03:47 -0500
 categories: blog
 excerpt: "I haven't been myself these past couple weeks. Maybe it's the fall air, maybe quarantine has finally gotten to me, but I've betrayed one of my core values..."
