@@ -7,7 +7,7 @@ show_sidebar: true
 
 
 <div class="row">
-  <div class="col-md-3 mb-5">
+  <div class="col-md-3 mb-1">
     <div class="card">
       <img class="card-img-top" src="/static/images/jolene.jpg"/>
       <div class="card-body">
@@ -35,9 +35,8 @@ show_sidebar: true
   </div>
 
   <div class="col-md-9 mb-4">
-    <h1>Noah Singer</h1>
-    <p>I study computer science and math at Harvard (Pforzheimer House '22). I want to understand what problems can be solved by computational processes,
-      how such problems can best be solved, and what effect solving (or being unable to solve) such problems has on society. After graduating, I plan to pursue a Ph.D. and a career in research in theoretical computer science. <a href="/index/cv.pdf">Here</a> is my CV.</p>
+    <h1>About</h1>
+    <p>Hello! 
     <br/>
 
     <div class="p-3">

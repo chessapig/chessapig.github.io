@@ -8,6 +8,8 @@
 // @import "variables";
 @import "myVariables";
 
+@import "minima/minima";
+
 // only take the things we need from bootstrap
 @import "bootstrap/mixins";
 @import "bootstrap/reboot";
@@ -40,13 +42,13 @@ body {
 
 
 .section {
-  &:nth-child(even) {
-    background-color: white;
-  }
+  // &:nth-child(even) {
+  //   background-color: white;
+  // }
 
-  &:nth-child(odd) {
-    background-color: lighten($back-primary, 75%);
-  }
+  // &:nth-child(odd) {
+  //   background-color: lighten($back-primary, 0%);
+  // }
 }
 
 .card-header .card-title {
@@ -64,14 +66,7 @@ body {
 .navbar-brand {
   font-family: "Fira Mono";
   font-size: 1.4em;
-  @include glow(4, #8bee82);
-}
-
-/* https://medium.com/@cjcnex/a-reflection-on-solving-blockquote-style-in-jekyll-e6109c8c03a */
-blockquote {
-  border-left: .25em solid #dfe2e5;
-  color: #6a737d;
-  padding: 0 1em;
+  @include glow(4, $primary);
 }
 
 .gallery {
@@ -84,3 +79,5 @@ blockquote {
   max-height: 80vh;
   max-width: 80vw;
 }
+
+

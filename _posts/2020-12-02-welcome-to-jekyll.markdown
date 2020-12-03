@@ -1,9 +1,9 @@
 ---
-layout: post 
+layout: blog 
 title:  "Hello world!"
 date:   2020-12-02 16:03:47 -0500
-categories: jekyll update
-excerpt: "I haven't been myself these past couple weeks. Maybe it's the fall air, maybe quarantine has finally gotten to me, but I've betread one of my core values:"
+categories: blog
+excerpt: "I haven't been myself these past couple weeks. Maybe it's the fall air, maybe quarantine has finally gotten to me, but I've betread one of my core values..."
 ---
 
 

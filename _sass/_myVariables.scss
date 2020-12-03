@@ -7,13 +7,18 @@ $headings-font-weight: 600;
 @import "bootstrap/functions";
 @import "bootstrap/variables";
 
+$body-bg:          #122140;
+$body-color:       #91c3e0;
+$dark:              lighten($body-bg, 20%);
+$light:             lighten($body-bg, 80%);
+
 $primary:       #fcf3b2; 
 $secondary:     #f79383;
 $success:       $green !default;
 $info:          $cyan !default;
 $warning:       $yellow !default;
 $danger:        $red !default;
-$light:         $gray-100 !default;
+$light:         $body-color !default;
 $dark:          $gray-800 !default;
 
 $theme-colors: () !default;
@@ -29,8 +34,7 @@ $theme-colors: map-merge((
 ), $theme-colors);
 
 
-$body-bg:          #122140;
-$body-color:       #91c3e0;
+
 
 $back-primary:        $body-bg;
 $back-secondary:      $black;
@@ -39,5 +43,7 @@ $link-hover-color:      darken($link-color, 15%);
 $mark-bg:             #ff19ff;
 
 $card-bg:               #1d4487;
-$card-border-color:     lighten($body-bg, 80%);
-$card-cap-bg:           lighten($body-bg, 20%);
+$card-border-color:     $light;
+$card-cap-bg:           $dark;
+
+$base-line-height: 1.5
