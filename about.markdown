@@ -35,56 +35,18 @@ show_sidebar: true
   </div>
 
   <div class="col-md-9 mb-4">
-    <h1>About</h1>
-    <p>Hello! 
+    <h1>Hello, I'm Elliot!</h1>
+    <p>You'll probably get a pretty good sense of my interests from the content on this site, but just in case: I like math and physics. In fact, Right now I'm studying math and physics, and hopefully someday I'll know enough to study mathematical physics. My fav is differential geometry, which studies local propreties of curvey spaces, like a many-dimensional potato. I like how visual it is. Geometry is like the interpeter of the mathematical pantheon, all the other fields look to it for intuition. Not to mention, physics is a subfield of geometry ;). So many things, in physics or elsewise, have really beutiful geometric interpetations. I honestly believe anything in life is better with manifolds.
+    
+      <br/>  <br/>
+    
+    But I like other stuff too! I really enjoy earth/space sciences, so Astronomy, Geology, Atmospheric science, and espically Oceanography. For related reasons, I love marine bio, and all the friendly invertebrate it brings. Land mammals are overrated.
+    
+      <br/>  <br/>
+    
+    Recently (few months ago) I picked up art, thanks to an ipad and procreate, and have had lots of fun with that since.I posted some of my finished drawings at the <a href="/gallery">gallery</a>. I've also always been facinated by generative art, but I'm always turned away by my own biases against programming. But a couple weeks ago, I crossed the avivation barrier and have since managed to finish some things! You can check it out at the <a href="/gallery">gallery</a>, and there'll likely be more of that to come. Exciting times.  
+    </p>
     <br/>
 
-    <div class="p-3">
-      <div class="row section pt-3">
-        <div class="col">
-          <h3>Interests</h3>
-
-          <p>I have broad interests in theoretical computer science, including in complexity, cryptography, and algorithms. Some particular questions that interest me are: Why does interaction make computational tasks more tractable? What about non-black-box/non-oracle access to code or data? Some of my recent areas of study include communication complexity, incidence geometry, streaming algorithms, and Boolean function analysis.
-        </div>
-      </div>
-
-      <div class="row section pt-3">
-        <div class="col">
-          <h3>Activities</h3>
-
-          <p><strong>Teaching.</strong>
-            I was a teaching assistant for the following courses:
-            <ul>
-              <li><em>CS 121: Introduction to Theoretical Computer Science</em> in Fall 2020 (Prof. Madhu Sudan and Adam Hesterberg)</li>
-              <li><em>CS 161: Operating Systems</em> in Spring 2020 (Prof. James Mickens)</li>
-              <li><em>CS 121: Introduction to Theoretical Computer Science</em> in Fall 2019 (Profs. Boaz Barak and Madhu Sudan)</li>
-            </ul>
-          For CS 121 in Fall 2019 and Fall 2020, I have organized guest lectures in the "CS 121.5" recitation section for advanced students.</p>
-
-          <p><strong>Community.</strong> In Fall 2020, I am a CS <a href="https://harvardcs.info/advising/pca/">Peer Concentration Adviser</a> and <a href="https://www.harvardwics.com/mentorships">Women in CS (WiCS) mentor</a>. In Spring 2019, I worked with Harvard's <a href="http://digilit.io/">Digital Literacy Project</a>
-            to teach Scratch and Processing.js to Boston-area middle school students.
-
-          <p><strong>Work Experience.</strong>
-          In Summer 2019, I worked as a software engineering intern at Airbnb in San Francisco on the Host Growth &amp; Traffic team, where I built a production data pipeline to discover and manage large quantities of Google search advertising keywords targeting Airbnb hosts.</p>
-        </div>
-      </div>
-
-      <div class="row section pt-3">
-        <div class="col">
-          <h3>Hobbies</h3>
-          
-          <p><strong>Literature.</strong> I love science fiction! My favorite short story is William Gibson's <a href="http://www.lib.ru/GIBSON/frag_rose.txt">Fragments of
-            a Hologram Rose</a>. Some of my favorite novels are Gibson's <em>Neuromancer</em>,
-            Le Guin's <em>The Dispossessed</em>, Jemisin's <em>The Fifth Season</em> and Robinson's <em>Red Mars</em>.</p>
-
-          <p><strong>Music.</strong> I listen mostly to electronica, alt rock, dance,
-            and hip hop; my favorite artists include Daft
-            Punk, Ratatat, Gorillaz, Kanye West,
-            and The Strokes. I play classical piano in my free time.</p>
-
-          <p><strong>Others.</strong> When school's not in session, I spend a lot of time catching up on television, baking, playing tennis, and watching hockey (go Caps!) and basketball.</p>
-        </div>
-      </div>
-    </div>
   </div>
 </div>

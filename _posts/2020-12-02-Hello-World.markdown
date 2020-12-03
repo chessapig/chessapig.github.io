@@ -16,10 +16,10 @@ I've been programming.
 
 It started innocently enough, with an idle fantasy of animating pretty shapes. Usually these flights of fancy end with me quickly remembering why I don't like computers, but this time I actually succeeded. And I think I got cocky, because now in my infinite hubris, I'm making a website.
 
-I'm building this with Jekyll, and hosting it with Github pages (I couldn't use wordpress / squarespace / other site generators, because I want to customize and embed my own code.) I've never used github before, so that was a pain. Not knowing anything, my goal was maximal copy-pasting with minimal understanding (whats a CSS??). Instead of a website, I ended up Frankensteins monster, robbed from the graves of the default Jekyll theme and https://singerng.github.io/. RIP.
+I'm building this with Jekyll, and hosting it with Github pages (I couldn't use wordpress / squarespace / other site generators, because I want to customize and embed my own code.) I've never used github before, so that was a pain. Not knowing anything, my goal was maximal copy-pasting with minimal understanding (whats a CSS??). Instead of a website, I got Frankensteins monster, robbed from the graves of the default Jekyll theme and <a href="https://singerng.github.io/">https://singerng.github.io/</a>. RIP.
 
 But alas, I failed my goal, and ended up learning something 
-🤷. Websites are pretty cool! Theres even latex integration:
+🤷. Websites are pretty cool! You can even do latex integration:
 
 <p> 
 \[\int \LaTeX \]
@@ -33,6 +33,6 @@ I'm also going to use this as a blog. Maybe I'll try explaining some cool math s
 
 Stick around, there are big things to come.
 
-^(for charitable interpretations of "big")^
+<sub>(for charitable definitions of "big")</sub>
 
 
