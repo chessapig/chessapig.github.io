@@ -1,14 +1,17 @@
+- title: "Fuzzy"
+  thumbnail: "/gallery/thumbnails/fuzzi_boi.jpg"
+  file: "/gallery/images/fuzzi_boi.png"
+  description: "he do be climbing"
+  type: drawing
+
+
+
 - title: "Noodles"
   thumbnail: "/gallery/thumbnails/noodles.jpg"
   file: "/gallery/images/noodles.png"
   description: "she do be sleeping"
   type: drawing
 
-- title: "Fuzzy"
-  thumbnail: "/gallery/thumbnails/fuzzi_boi.jpg"
-  file: "/gallery/images/fuzzi_boi.png"
-  description: "he do be climbing"
-  type: drawing
 
 - title: "Turtle"
   thumbnail: "/gallery/thumbnails/turtle.jpg"
