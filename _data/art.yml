@@ -1,19 +1,19 @@
 - title: "Noodles"
-  file: "/gallery/thumbnails/noodles.png"
+  thumbnail: "/gallery/thumbnails/noodles.jpg"
+  file: "/gallery/images/noodles.png"
   description: "she do be sleeping"
-  link: /noodles
   type: drawing
 
 - title: "Fuzzy"
-  file: "/gallery/thumbnails/fuzzi_boi.png"
+  thumbnail: "/gallery/thumbnails/fuzzi_boi.jpg"
+  file: "/gallery/images/fuzzi_boi.png"
   description: "he do be climbing"
-  link: /noodles
   type: drawing
 
-- title: "Fuzzy"
-  file: "/gallery/thumbnails/test1.png"
-  description: "he do be climbing"
-  link: /noodles
+- title: "Turtle"
+  thumbnail: "/gallery/thumbnails/turtle.jpg"
+  file: "/gallery/thumbnails/turtle.png"
+  description: "he do be sunbathing"
   type: drawing
 
 
