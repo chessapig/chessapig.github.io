@@ -1,0 +1,30 @@
+- title: "Noodles"
+  file: "/gallery/thumbnails/noodles.png"
+  description: "she do be sleeping"
+  link: /noodles
+  type: drawing
+
+- title: "Fuzzy"
+  file: "/gallery/thumbnails/fuzzi_boi.png"
+  description: "he do be climbing"
+  link: /noodles
+  type: drawing
+
+- title: "Fuzzy"
+  file: "/gallery/thumbnails/test1.png"
+  description: "he do be climbing"
+  link: /noodles
+  type: drawing
+
+
+- title: "Fuzzy"
+  file: "/gallery/thumbnails/test2.png"
+  description: "he do be climbing"
+  link: /noodles
+  type: drawing
+
+- title: "Fuzzy"
+  file: "/gallery/thumbnails/test3.png"
+  description: "he do be climbing"
+  link: /noodles
+  type: drawing

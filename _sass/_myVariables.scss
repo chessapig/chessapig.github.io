@@ -1,0 +1,43 @@
+$font-family-sans-serif: "Open Sans", sans-serif !default;
+$font-size-base: 1.1rem !default;
+$headings-font-family: "Raleway", serif !default;
+$headings-font-weight: 600;
+
+
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+
+$primary:       #fcf3b2; 
+$secondary:     #f79383;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $yellow !default;
+$danger:        $red !default;
+$light:         $gray-100 !default;
+$dark:          $gray-800 !default;
+
+$theme-colors: () !default;
+$theme-colors: map-merge((
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+), $theme-colors);
+
+
+$body-bg:          #122140;
+$body-color:       #91c3e0;
+
+$back-primary:        $body-bg;
+$back-secondary:      $black;
+$link-color:            $primary;
+$link-hover-color:      darken($link-color, 15%);
+$mark-bg:             #ff19ff;
+
+$card-bg:               lighten($body-bg, 15%);
+$card-border-color:     lighten($body-bg, 80%);
+$card-cap-bg:           lighten($body-bg, 20%);
