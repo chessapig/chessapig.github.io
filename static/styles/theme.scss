@@ -1,0 +1,75 @@
+---
+---
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400');
+@import url('https://fonts.googleapis.com/css?family=Raleway:600');
+@import url('https://fonts.googleapis.com/css?family=Fira+Mono:400');
+
+// @import "variables";
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+$back-primary: #000050;
+$back-secondary: #280052;
+
+// only take the things we need from bootstrap
+@import "bootstrap/mixins";
+@import "bootstrap/reboot";
+@import "bootstrap/type";
+@import "bootstrap/grid";
+@import "bootstrap/list-group";
+@import "bootstrap/code";
+@import "bootstrap/nav";
+@import "bootstrap/navbar";
+@import "bootstrap/utilities";
+@import "bootstrap/dropdown";
+@import "bootstrap/card";
+@import "bootstrap/buttons";
+@import "bootstrap/images";
+@import "bootstrap/transitions";
+
+
+
+//@import "rouge";
+
+.bg-gradient {
+  background-image: linear-gradient(120deg,$back-primary, $back-secondary);
+}
+
+body {
+  min-height: 100vh;
+}
+
+.section {
+  &:nth-child(even) {
+    background-color: white;
+  }
+
+  &:nth-child(odd) {
+    background-color: lighten($back-primary, 75%);
+  }
+}
+
+.card-header .card-title {
+  margin-bottom: 0;
+}
+
+@mixin glow($size, $color) {
+  $all: ();
+  @for $i from 1 through 5 {
+    $all: append($all, 0 0 ($i*$i*$size) + px $color, comma);
+  }
+  text-shadow: $all;
+}
+
+.navbar-brand {
+  font-family: "Fira Mono";
+  font-size: 1.4em;
+  @include glow(4, #ee82ee);
+}
+
+/* https://medium.com/@cjcnex/a-reflection-on-solving-blockquote-style-in-jekyll-e6109c8c03a */
+blockquote {
+  border-left: .25em solid #dfe2e5;
+  color: #6a737d;
+  padding: 0 1em;
+}

@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: About
 permalink: /about/
 show_sidebar: true
@@ -9,10 +9,10 @@ show_sidebar: true
 <div class="row">
   <div class="col-md-3 mb-4">
     <div class="card">
-      <img class="card-img-top" src="/static/images/noahsinger.jpg"/>
+      <img class="card-img-top" src="/static/images/noahsinger.jpeg"/>
       <div class="card-body">
         <div class="card-text">
-          <i class="fas fa-user"></i> Noah Singer (<a href="https://www.mypronouns.org/he-him" target="_blank">he/him</a>)<br/>
+          <i class="fas fa-user"></i> Elliot Kienzle (<a href="https://www.mypronouns.org/he-him" target="_blank">he/him</a>)<br/>
           <i class="fas fa-building"></i> Harvard University<br/>
           <i class="fas fa-envelope"></i> <em>first</em> <em>last</em> <em>(at)</em> college <em>(dot)</em> harvard <em>(dot)</em> edu<br/>
           <i class="fab fa-github"></i> <a href="https://github.com/singerng" target="_blank">@singerng</a> <br/>
@@ -29,7 +29,7 @@ show_sidebar: true
         <h3 class="card-title">Recent Blog Posts</h3>
       </div>
       <ul class="list-group list-group-flush">
-        {% for post in site.posts limit:5 %}
+        {% for post in site.posts limit:5 %} 
           <ul class="list-group-item">
             <a class="text-dark" href="{{ post.url }}"><h6>{{ post.title | markdownify | remove: '<p>' | remove: '</p>' }}</h6></a>
           </ul>
