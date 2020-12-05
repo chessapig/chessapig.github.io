@@ -63,7 +63,7 @@ function setup() {
 
 
 function draw() {
-	var bgOpacity= constrain(Math.pow(16*v.bgOpacity,2), 0,255);
+	var bgOpacity= constrain(interpolate(v.bgOpacity,params.style.bgOpacity)-1,0,255);
 	var bgColor=this.color(setAlpha(v.bgColor,bgOpacity));
 	background(bgColor);
   
@@ -85,21 +85,17 @@ function update(){
 		doMove:v.doMoveNoise, 
 		radius:v.noiseRadius, 
 		//velocity: v.noiseCenterVelocity,
-		scale: pow(10,map(v.noiseScale,0,1,
-			params.noise.noiseScale.minOrderMag,
-			params.noise.noiseScale.maxOrderMag)),
-		velocity: pow(10,map(v.noiseCenterVelocity,0,1,
-			params.noise.noiseCenterVelocity.minOrderMag,
-			params.noise.noiseCenterVelocity.maxOrderMag)),
+		scale: interpolate(v.noiseScale,params.noise.noiseScale),
+		velocity: interpolate(v.noiseCenterVelocity,params.noise.noiseCenterVelocity),
 	});
 	
 
 	
-	var strokeOpacity= constrain(Math.pow(16*v.strokeOpacity,2), 0,255);
+	var strokeOpacity= constrain(interpolate(v.strokeOpacity,params.style.strokeOpacity)-1,0,255);
 	var strokeColorStart=this.color(setAlpha(v.strokeColorStart,strokeOpacity));
 	var strokeColorEnd=this.color(setAlpha(v.strokeColorEnd,strokeOpacity));
 
-	var fillOpacity= constrain(Math.pow(16*v.fillOpacity,2), 0,255);
+	var fillOpacity= constrain(interpolate(v.fillOpacity,params.style.fillOpacity)-1,0,255);
 	var fillColorStart=this.color(setAlpha(v.fillColorStart,fillOpacity));
 	var fillColorEnd=this.color(setAlpha(v.fillColorEnd,fillOpacity));
 
@@ -153,25 +149,19 @@ function windowResized() {
  center=createVector(width/2,height/2);
 }
 
-function interpolate(value,params){
-	//send the values to 0 to 1
-	value = map(value,params.min,params.max,0,1);
-
-
-	if(params.interpolateType==null){params.interpolateType="lin";} //set default
-	//apply some sort of easing function
-	switch(params.interpolateType){
+function interpolate(value,valueParams){
+	switch(valueParams.interpolateType){
 		case 'exp':
-			value = map(exp(value),0,1);
+			value = map(value,valueParams.min,valueParams.max,0,1);
+			value = pow(10,map(value,0,1,valueParams.minValue,valueParams.maxValue));
+			
 			break;
 
 		case "lin":
-			value = map(alue),0,1);
+			value = map(value,valueParams.min,valueParams.max,valueParams.minValue,valueParams.maxValue);
 			break;
-		
 	}
 
-
+	return value;
 }
-
 

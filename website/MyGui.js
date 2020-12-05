@@ -124,6 +124,7 @@ function makePresetField(GUI,title,presets){
 	GUI.controls[title].addButton("Apply Preset", function() {
 		//print(presets[GUI.controls[title].getValue("preset:").value]);
 		GUI.setGUIFromValues(presets[GUI.controls[title].getValue("preset:").value]);
+		background(0);
 	});
 	
 	

@@ -29,7 +29,10 @@ params: {
 			default: 	.27,
 			min: 		0,
 			max: 		1,
-			step: 		.001	
+			step: 		.001,
+			interpolateType: 'exp',
+			minValue:0, 
+			maxValue:2.5	
 		},
 	  
 		strokeColorStart: {
@@ -47,7 +50,10 @@ params: {
 			default: 	1,
 			min: 		0,
 			max: 		1,
-			step: 		.001	
+			step: 		.001,	
+			interpolateType: 'exp',
+			minValue:0, 
+			maxValue:2.5
 		},
 	  
 		strokeThicknessStart: {
@@ -82,7 +88,10 @@ params: {
 			default: 	0,
 			min: 		0,
 			max: 		1,
-			step: 		.001	
+			step: 		.001,	
+			interpolateType: 'exp',
+			minValue:0, 
+			maxValue:2.5,
 		},
 	},
 
@@ -174,8 +183,9 @@ params: {
 			min: 		0,
 			max: 		1,
 			step: 		.001,	
-			minOrderMag:-4,
-			maxOrderMag:-2
+			interpolateType: 'exp',
+			minValue:-4, 
+			maxValue:-1
 		},   
 	
 		doMoveNoise: {
@@ -190,8 +200,8 @@ params: {
 			max: 		1,
 			step: 		.001,	
 			interpolateType: 'exp',
-			minOrderMag:-3,
-			maxOrderMag:-1
+			minValue:-3, 
+			maxValue:-1
 		},  
 	},
 },
@@ -230,6 +240,9 @@ presets: {
 	"sunquake":	{"doShowPoints":false,"bgColor":"#000000","bgOpacity":0.339,"strokeColorStart":"#d6eef0","strokeColorEnd":"#dcd138","strokeOpacity":1,"strokeThicknessStart":1,"strokeThicknessEnd":0,"fillColorStart":"#000000","fillColorEnd":"#000000","fillOpacity":0,"radiusStart":0,"radiusEnd":200,"numLoops":100,"numPointsStart":8,"numPointsEnd":8,"noiseType":{"index":0,"label":"radial","value":"radial"},"doLoopNoise":false,"randomScaleStart":2,"randomScaleEnd":0.09,"noiseRadius":0.18,"noiseScale":1,"noiseCenterVelocity":0.08},
 
 	"amoeba": {"doShowPoints":false,"bgColor":"#1c1212","bgOpacity":1,"strokeColorStart":"#50663d","strokeColorEnd":"#000000","strokeOpacity":1,"strokeThicknessStart":20,"strokeThicknessEnd":0,"fillColorStart":"#0e4e1e","fillColorEnd":"#1e0a3e","fillOpacity":1,"radiusStart":337,"radiusEnd":0,"numLoops":16,"numPointsStart":20,"numPointsEnd":3,"noiseType":{"index":0,"label":"radial","value":"radial"},"doLoopNoise":true,"randomScaleStart":2,"randomScaleEnd":2,"noiseRadius":0.77,"noiseScale":1,"noiseCenterVelocity":0.093},
+
+
+	"caustics": {"doShowPoints":false,"bgColor":"#000000","bgOpacity":0,"strokeColorStart":"#feffb3","strokeColorEnd":"#000000","strokeOpacity":0.083,"strokeThicknessStart":1,"strokeThicknessEnd":1,"fillColorStart":"#ffffff","fillColorEnd":"#ffffff","fillOpacity":0,"radiusStart":200,"radiusEnd":200,"numLoops":1,"numPointsStart":8,"numPointsEnd":8,"noiseType":{"index":0,"label":"radial","value":"radial"},"randomScaleStart":0.596,"randomScaleEnd":0.5,"noiseRadius":0.22,"noiseScale":0.845,"doMoveNoise":true,"noiseCenterVelocity":0.143},
 }
 
 }
