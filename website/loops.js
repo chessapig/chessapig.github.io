@@ -28,8 +28,9 @@ function setup() {
 
 	v=Object.assign({},presets["default"]); //make copy, so to not edit the presets
 	settings=new MyGUI(params,v);
-	makeJSONField(settings,"master");
 	makePresetField(settings,"master",presets);
+	makeJSONField(settings,"master");
+	
 	
 
 	noiseOptions={

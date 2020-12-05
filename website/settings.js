@@ -12,7 +12,7 @@ params: {
 
 
 	style: {
-		displayName: "style",
+		displayName: "Style Controls",
 	
 		doShowPoints: {
 			type: 		"boolean",
@@ -89,7 +89,7 @@ params: {
 
 
 	ani: {
-		displayName: "ani",
+		displayName: "Animation controls",
 		loopDuration: 5,
 		frameRate: 30,
 	  
@@ -135,7 +135,7 @@ params: {
 	},
 
 	noise: {
-		displayName: "noise",
+		displayName: "Noise Controls",
 	
 		noiseType: {
 			type: 		"dropdown",
@@ -252,7 +252,7 @@ presets: {
 			strokeThicknessStart: 1,
 		},
 
-	"ooh aah":	{"doShowPoints":false,"bgColor":"#ff2929","bgOpacity":0.27,"strokeColorStart":"#ff7575","strokeColorEnd":"#000000","strokeOpacity":1,"strokeThicknessStart":1,"strokeThicknessEnd":1,"fillColorStart":"#ffffff","fillColorEnd":"#454545","fillOpacity":0,"radiusStart":73,"radiusEnd":421,"numLoops":43,"numPointsStart":15,"numPointsEnd":8,"doLoopNoise":false,"noiseType":"radial","randomScaleStart":0.15,"randomScaleEnd":1,"noiseRadius":0.67,"noiseScale":0.259,"noiseCenterVelocity":0.642},
+	"sunquake":	{"doShowPoints":false,"bgColor":"#000000","bgOpacity":0.339,"strokeColorStart":"#d6eef0","strokeColorEnd":"#dcd138","strokeOpacity":1,"strokeThicknessStart":1,"strokeThicknessEnd":0,"fillColorStart":"#000000","fillColorEnd":"#000000","fillOpacity":0,"radiusStart":0,"radiusEnd":200,"numLoops":100,"numPointsStart":8,"numPointsEnd":8,"noiseType":{"index":0,"label":"radial","value":"radial"},"doLoopNoise":false,"randomScaleStart":2,"randomScaleEnd":0.09,"noiseRadius":0.18,"noiseScale":1,"noiseCenterVelocity":0.08},
 }
 
 }
