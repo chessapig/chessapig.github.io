@@ -173,8 +173,8 @@ perturbRadial(center, randomScale, noiseOptions){
 			break;
 
 		case 'radial':
-			var random=0;
-			if(!noiseOptions.doLoop){ //if dont loop, then continue to move the center
+      var random=0;
+			if(noiseOptions.doMove){ //if dont loop, then continue to move the center
 				//print(noiseOptions.center);
 				noiseOptions.center += 2*Math.PI*animLoop.elapsedFramesTotal/animLoop.framesPerLoop*noiseOptions.velocity/animLoop.framesPerSecond*noiseOptions.radius*noiseOptions.scale;
 			}

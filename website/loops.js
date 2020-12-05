@@ -20,7 +20,7 @@ function preload(){
 }
 
 function setup() {
-	createCanvas(displayWidth, displayHeight);
+	createCanvas(windowWidth, windowHeight);
 	frameRate(params.ani.frameRate);
 	center=createVector(width/2,height/2);
 	
@@ -30,8 +30,9 @@ function setup() {
 	settings=new MyGUI(params,v);
 	makePresetField(settings,"master",presets);
 	makeJSONField(settings,"master");
-	
-	
+	settings.controls.master.expand();
+	settings.setGUIFromValues(presets["default"]);
+
 
 	noiseOptions={
 		seed: 12345,
@@ -78,12 +79,10 @@ function draw() {
 
 
 function update(){
-	print(v);
-	
 	doShowPoints=v.doShowPoints;
 	Object.assign(noiseOptions,{
 		type:v.noiseType, 
-		doLoop:v.doLoopNoise, 
+		doMove:v.doMoveNoise, 
 		radius:v.noiseRadius, 
 		//velocity: v.noiseCenterVelocity,
 		scale: pow(10,map(v.noiseScale,0,1,
@@ -135,6 +134,9 @@ function update(){
 // check for keyboard events
 function keyPressed(){
 	switch(key) {
+		case 'h':
+			settings.toggleVisibility();
+			break;
   
   }  
   
@@ -146,11 +148,30 @@ function setAlpha(color,alpha){
 }
 
 
-//function windowResized() {
-//  resizeCanvas(windowWidth, windowHeight);
-//  center=createVector(width/2,height/2);
-//}
+function windowResized() {
+ resizeCanvas(windowWidth, windowHeight);
+ center=createVector(width/2,height/2);
+}
+
+function interpolate(value,params){
+	//send the values to 0 to 1
+	value = map(value,params.min,params.max,0,1);
 
 
+	if(params.interpolateType==null){params.interpolateType="lin";} //set default
+	//apply some sort of easing function
+	switch(params.interpolateType){
+		case 'exp':
+			value = map(exp(value),0,1);
+			break;
+
+		case "lin":
+			value = map(alue),0,1);
+			break;
+		
+	}
+
+
+}
 
 

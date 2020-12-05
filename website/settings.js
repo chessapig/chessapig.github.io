@@ -7,7 +7,7 @@ var json = {
 
 params: {
 	master: {
-		displayName: "master",
+		displayName: "Master",
 	  },
 
 
@@ -55,7 +55,7 @@ params: {
 			default: 	1,
 			min: 		0,
 			max: 		20,
-			step: 		0.2	
+			step: 		0.1,
 		},
 	
 		strokeThicknessEnd: {
@@ -63,7 +63,7 @@ params: {
 			default: 	1,
 			min: 		0,
 			max: 		20,
-			step: 		0.2	
+			step: 		0.1	
 		},
 	
 	  
@@ -91,7 +91,7 @@ params: {
 	ani: {
 		displayName: "Animation controls",
 		loopDuration: 5,
-		frameRate: 30,
+		frameRate: 60,
 	  
 		radiusStart: {
 			type: 		"number",
@@ -143,26 +143,21 @@ params: {
 			default: 	{index:0,value:"radial"},
 			index:0,
 		},
-	
-		doLoopNoise: {
-			type: 		"boolean",
-			default: 	"false"	
-		},
 		
 		randomScaleStart: {
 			type: 		"number",
 			default: 	1,
 			min: 		0,
-			max: 		2,
-			step: 		0.01	
+			max: 		1,
+			step: 		0.001	
 		},
 	
 		randomScaleEnd: {
 			type: 		"number",
 			default: 	1,
 			min: 		0,
-			max: 		2,
-			step: 		0.01	
+			max: 		1,
+			step: 		0.001	
 		}, 
 	
 		noiseRadius: {
@@ -170,7 +165,7 @@ params: {
 			default: 	0.2,
 			min: 		0,
 			max: 		1,
-			step: 		.01	
+			step: 		.001	
 		},   
 	
 		noiseScale: {
@@ -183,12 +178,18 @@ params: {
 			maxOrderMag:-2
 		},   
 	
+		doMoveNoise: {
+			type: 		"boolean",
+			default: 	"false"	
+		},
+
 		noiseCenterVelocity: {
 			type: 		"number",
 			default: 	.2,
 			min: 		0,
 			max: 		1,
 			step: 		.001,	
+			interpolateType: 'exp',
 			minOrderMag:-3,
 			maxOrderMag:-1
 		},  
@@ -224,35 +225,11 @@ presets: {
 			strokeThicknessStart: 1,
 		},
 
-	"red": {
-			bgColor: "#FF0000",
-			bgOpacity: 1,
-			doLoopNoise: "false",
-			doShowPoints: false,
-			fillColorEnd: "#ffffff",
-			fillColorStart: "#ffffff",
-			fillOpacity: 0,
-			frameRate: undefined,
-			loopDuration: undefined,
-			noiseCenterVelocity: 0,
-			noiseRadius: 0.25,
-			noiseScale: 0.845,
-			noiseType: {index:0,value:"radial"},
-			numLoops: 1,
-			numPointsEnd: 8,
-			numPointsStart: 8,
-			radiusEnd: 200,
-			radiusStart: 200,
-			randomScaleEnd: 0.5,
-			randomScaleStart: 0.5,
-			strokeColorEnd: "#FF0000",
-			strokeColorStart: "#000000",
-			strokeOpacity: 1,
-			strokeThicknessEnd: 1,
-			strokeThicknessStart: 1,
-		},
+	"Moir‌é": {"doShowPoints":false,"bgColor":"#c2bce7","bgOpacity":1,"strokeColorStart":"#ff0000","strokeColorEnd":"#2c302c","strokeOpacity":1,"strokeThicknessStart":0.6,"strokeThicknessEnd":1.4,"fillColorStart":"#000000","fillColorEnd":"#000000","fillOpacity":0,"radiusStart":0,"radiusEnd":147,"numLoops":100,"numPointsStart":19,"numPointsEnd":19,"noiseType":{"index":0,"label":"radial","value":"radial"},"randomScaleStart":1.26,"randomScaleEnd":0,"noiseRadius":0.48,"noiseScale":0,"doMoveNoise":true,"noiseCenterVelocity":0.129},
 
 	"sunquake":	{"doShowPoints":false,"bgColor":"#000000","bgOpacity":0.339,"strokeColorStart":"#d6eef0","strokeColorEnd":"#dcd138","strokeOpacity":1,"strokeThicknessStart":1,"strokeThicknessEnd":0,"fillColorStart":"#000000","fillColorEnd":"#000000","fillOpacity":0,"radiusStart":0,"radiusEnd":200,"numLoops":100,"numPointsStart":8,"numPointsEnd":8,"noiseType":{"index":0,"label":"radial","value":"radial"},"doLoopNoise":false,"randomScaleStart":2,"randomScaleEnd":0.09,"noiseRadius":0.18,"noiseScale":1,"noiseCenterVelocity":0.08},
+
+	"amoeba": {"doShowPoints":false,"bgColor":"#1c1212","bgOpacity":1,"strokeColorStart":"#50663d","strokeColorEnd":"#000000","strokeOpacity":1,"strokeThicknessStart":20,"strokeThicknessEnd":0,"fillColorStart":"#0e4e1e","fillColorEnd":"#1e0a3e","fillOpacity":1,"radiusStart":337,"radiusEnd":0,"numLoops":16,"numPointsStart":20,"numPointsEnd":3,"noiseType":{"index":0,"label":"radial","value":"radial"},"doLoopNoise":true,"randomScaleStart":2,"randomScaleEnd":2,"noiseRadius":0.77,"noiseScale":1,"noiseCenterVelocity":0.093},
 }
 
 }

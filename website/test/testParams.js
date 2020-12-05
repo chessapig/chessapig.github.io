@@ -26,7 +26,10 @@ params: {
 			default: 5,
 			min: 0,
 			max: 10,
-			step: .1
+			step: .1,
+			interpolateType: 'exp',
+			minValue: -4,
+			maxValue: 1,
 			},
 	
 		myColor: {

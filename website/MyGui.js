@@ -5,7 +5,7 @@ class MyGUI {
 
 		var i=0;
 		for(const paramTitle in params){
-			this.controls[paramTitle]=QuickSettings.create(210*i, 0, params[paramTitle].displayName); 
+			this.controls[paramTitle]=QuickSettings.create(210*i, 0, params[paramTitle].displayName).collapse(); 
 			i++;
 		}
 
@@ -36,7 +36,6 @@ class MyGUI {
 		if(v[p.title]!=null){
 			setting=v[p.title];
 		} 
-		print(setting);
 		switch(p.type){
 			case 'number':
 				guiObject.bindRange(p.title, p.min, p.max, setting, p.step, v);
@@ -74,6 +73,20 @@ class MyGUI {
 	addWindow(title){
 		this.controls[title]=QuickSettings.create(0, 0, title);
 	}
+
+	toggleVisibility(){
+		if(this.isVisible){
+			for(const title in this.controls){
+				this.controls[title].hide();
+			}
+			this.isVisible=false;
+		} else {
+			for(const title in this.controls){
+				this.controls[title].show();
+			}
+			this.isVisible=true;
+		}
+	}
 }
 
 function makeJSONField(GUI,title){
@@ -82,6 +95,8 @@ function makeJSONField(GUI,title){
 	}
 	//print(this.controls[control]);
 	
+
+	GUI.controls[title].addTextArea("JSON","");
 	GUI.controls[title].addButton("generate JSON", function() {
 		var output={};
 		GUI.setValuesFromGUI(output);
@@ -93,7 +108,6 @@ function makeJSONField(GUI,title){
 		var input = JSON.parse(GUI.controls[title].getValue("JSON"));
 		GUI.setGUIFromValues(input);
 	});
-	GUI.controls[title].addTextArea("JSON","");
 	
 }
 
@@ -107,7 +121,7 @@ function makePresetField(GUI,title,presets){
 	var presetList=Object.keys(presets);
 	//presetList.splice(0, 0, " "); //add a "blank preset" option
 	GUI.controls[title].addDropDown("preset:",presetList);
-	GUI.controls[title].addButton("Apply", function() {
+	GUI.controls[title].addButton("Apply Preset", function() {
 		//print(presets[GUI.controls[title].getValue("preset:").value]);
 		GUI.setGUIFromValues(presets[GUI.controls[title].getValue("preset:").value]);
 	});
