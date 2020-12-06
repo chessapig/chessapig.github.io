@@ -13,7 +13,20 @@ params: {
 
 	style: {
 		displayName: "Style Controls",
-	
+
+		blendMode: {
+			type: 		"dropdown",
+			options:	["normal","difference","lighter","multiply","screen","hard light", "color burn","color dodge","overlay"],
+			default: 	{index:0,value:"source-over"},
+			lookup: {
+				"normal":"source-over",
+				//"remove":"destination-out",
+				"hard light":"hard-light",
+				"color burn":"color-burn",
+				"color dodge":"color-dodge"
+			}
+		},
+
 		doShowPoints: {
 			type: 		"boolean",
 			default: 	false,	
@@ -150,7 +163,6 @@ params: {
 			type: 		"dropdown",
 			options:	["radial","none"],
 			default: 	{index:0,value:"radial"},
-			index:0,
 		},
 		
 		randomScaleStart: {
@@ -158,7 +170,10 @@ params: {
 			default: 	1,
 			min: 		0,
 			max: 		1,
-			step: 		0.001	
+			step: 		0.001,	
+			interpolateType: 'exp',
+			minValue:-1, 
+			maxValue:1
 		},
 	
 		randomScaleEnd: {
@@ -166,7 +181,10 @@ params: {
 			default: 	1,
 			min: 		0,
 			max: 		1,
-			step: 		0.001	
+			step: 		0.001,				
+			interpolateType: 'exp',
+			minValue:-1, 
+			maxValue:1
 		}, 
 	
 		noiseRadius: {
@@ -237,12 +255,21 @@ presets: {
 
 	"Moir‌é": {"doShowPoints":false,"bgColor":"#c2bce7","bgOpacity":1,"strokeColorStart":"#ff0000","strokeColorEnd":"#2c302c","strokeOpacity":1,"strokeThicknessStart":0.6,"strokeThicknessEnd":1.4,"fillColorStart":"#000000","fillColorEnd":"#000000","fillOpacity":0,"radiusStart":0,"radiusEnd":147,"numLoops":100,"numPointsStart":19,"numPointsEnd":19,"noiseType":{"index":0,"label":"radial","value":"radial"},"randomScaleStart":1.26,"randomScaleEnd":0,"noiseRadius":0.48,"noiseScale":0,"doMoveNoise":true,"noiseCenterVelocity":0.129},
 
-	"sunquake":	{"doShowPoints":false,"bgColor":"#000000","bgOpacity":0.339,"strokeColorStart":"#d6eef0","strokeColorEnd":"#dcd138","strokeOpacity":1,"strokeThicknessStart":1,"strokeThicknessEnd":0,"fillColorStart":"#000000","fillColorEnd":"#000000","fillOpacity":0,"radiusStart":0,"radiusEnd":200,"numLoops":100,"numPointsStart":8,"numPointsEnd":8,"noiseType":{"index":0,"label":"radial","value":"radial"},"doLoopNoise":false,"randomScaleStart":2,"randomScaleEnd":0.09,"noiseRadius":0.18,"noiseScale":1,"noiseCenterVelocity":0.08},
+	"sunquake":	{"doShowPoints":false,"bgColor":"#000000","bgOpacity":0.308,"strokeColorStart":"#d6eef0","strokeColorEnd":"#dcd138","strokeOpacity":0.83,"strokeThicknessStart":2.5,"strokeThicknessEnd":0,"fillColorStart":"#000000","fillColorEnd":"#000000","fillOpacity":0,"radiusStart":0,"radiusEnd":200,"numLoops":100,"numPointsStart":8,"numPointsEnd":8,"noiseType":{"index":0,"label":"radial","value":"radial"},"randomScaleStart":1,"randomScaleEnd":1,"noiseRadius":0.433,"noiseScale":0.724,"doMoveNoise":false,"noiseCenterVelocity":0.08},
 
 	"amoeba": {"doShowPoints":false,"bgColor":"#1c1212","bgOpacity":1,"strokeColorStart":"#50663d","strokeColorEnd":"#000000","strokeOpacity":1,"strokeThicknessStart":20,"strokeThicknessEnd":0,"fillColorStart":"#0e4e1e","fillColorEnd":"#1e0a3e","fillOpacity":1,"radiusStart":337,"radiusEnd":0,"numLoops":16,"numPointsStart":20,"numPointsEnd":3,"noiseType":{"index":0,"label":"radial","value":"radial"},"doLoopNoise":true,"randomScaleStart":2,"randomScaleEnd":2,"noiseRadius":0.77,"noiseScale":1,"noiseCenterVelocity":0.093},
 
 
 	"caustics": {"doShowPoints":false,"bgColor":"#000000","bgOpacity":0,"strokeColorStart":"#feffb3","strokeColorEnd":"#000000","strokeOpacity":0.083,"strokeThicknessStart":1,"strokeThicknessEnd":1,"fillColorStart":"#ffffff","fillColorEnd":"#ffffff","fillOpacity":0,"radiusStart":200,"radiusEnd":200,"numLoops":1,"numPointsStart":8,"numPointsEnd":8,"noiseType":{"index":0,"label":"radial","value":"radial"},"randomScaleStart":0.596,"randomScaleEnd":0.5,"noiseRadius":0.22,"noiseScale":0.845,"doMoveNoise":true,"noiseCenterVelocity":0.143},
+
+	"iridescent":{"blendMode":{"index":6,"label":"hard light","value":"hard light"},"doShowPoints":false,"bgColor":"#000000","bgOpacity":0.272,"strokeColorStart":"#a8e6ff","strokeColorEnd":"#b96e6e","strokeOpacity":0.568,"strokeThicknessStart":6,"strokeThicknessEnd":0,"fillColorStart":"#00ff33","fillColorEnd":"#ffffff","fillOpacity":0.073,"radiusStart":0,"radiusEnd":200,"numLoops":100,"numPointsStart":8,"numPointsEnd":8,"noiseType":{"index":0,"label":"radial","value":"radial"},"randomScaleStart":1,"randomScaleEnd":0,"noiseRadius":0.399,"noiseScale":0.662,"doMoveNoise":true,"noiseCenterVelocity":0.144},
+
+	"startbursts":{"blendMode":{"index":1,"label":"difference","value":"difference"},"doShowPoints":false,"bgColor":"#ffffff","bgOpacity":1,"strokeColorStart":"#000000","strokeColorEnd":"#000000","strokeOpacity":1,"strokeThicknessStart":0,"strokeThicknessEnd":0,"fillColorStart":"#001975","fillColorEnd":"#1e2f6c","fillOpacity":1,"radiusStart":241,"radiusEnd":20,"numLoops":10,"numPointsStart":20,"numPointsEnd":3,"noiseType":{"index":0,"label":"radial","value":"radial"},"randomScaleStart":1,"randomScaleEnd":0.605,"noiseRadius":0.938,"noiseScale":1,"doMoveNoise":false,"noiseCenterVelocity":0.093},
+
+	"technicolor": {"blendMode":{"index":1,"label":"difference","value":"difference"},"doShowPoints":false,"bgColor":"#ffffff","bgOpacity":1,"strokeColorStart":"#ffffff","strokeColorEnd":"#ffffff","strokeOpacity":1,"strokeThicknessStart":1,"strokeThicknessEnd":1,"fillColorStart":"#ff2424","fillColorEnd":"#4f268c","fillOpacity":1,"radiusStart":187,"radiusEnd":228,"numLoops":15,"numPointsStart":8,"numPointsEnd":8,"noiseType":{"index":0,"label":"radial","value":"radial"},"randomScaleStart":0,"randomScaleEnd":1,"noiseRadius":0.586,"noiseScale":0.68,"doMoveNoise":true,"noiseCenterVelocity":0},
+
+	"V A P O R W A V E": {"blendMode":{"index":2,"label":"lighter","value":"lighter"},"doShowPoints":false,"bgColor":"#000000","bgOpacity":1,"strokeColorStart":"#ffffff","strokeColorEnd":"#ffffff","strokeOpacity":0.778,"strokeThicknessStart":0.2,"strokeThicknessEnd":1.8,"fillColorStart":"#ff2424","fillColorEnd":"#5800db","fillOpacity":0.595,"radiusStart":125,"radiusEnd":349,"numLoops":100,"numPointsStart":20,"numPointsEnd":20,"noiseType":{"index":0,"label":"radial","value":"radial"},"randomScaleStart":0,"randomScaleEnd":0.148,"noiseRadius":0.084,"noiseScale":0.791,"doMoveNoise":true,"noiseCenterVelocity":0}
+
 }
 
 }

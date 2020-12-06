@@ -24,14 +24,23 @@ function setup() {
 	frameRate(params.ani.frameRate);
 	center=createVector(width/2,height/2);
 	
-
-
-	v=Object.assign({},presets["default"]); //make copy, so to not edit the presets
+	// background(0);
+	// var start="amoeba";
+	
+	var start="default";
+	v=Object.assign({},presets[start]); //make copy, so to not edit the presets
 	settings=new MyGUI(params,v);
 	makePresetField(settings,"master",presets);
 	makeJSONField(settings,"master");
 	settings.controls.master.expand();
-	settings.setGUIFromValues(presets["default"]);
+	settings.controls.master.addHTML("TIPS",
+	"<li>double click collapse, click+drag to move</li>"+
+	"<li>press 'h' to hide GUI</li>"+
+	 "<li>presets are pretty, but try iterating on them further!</li>"+
+	 "<li>use <u>generate JSON</u> to send pretty parameters to your friends and/or me (I can add them as a preset!)</li>"+
+	 "<li><u>bgOpacity</u> is probably the most significant field...</li></ul>")
+	settings.setGUIFromValues(presets[start]);
+	//settings.toggleVisibility();
 
 
 	noiseOptions={
@@ -47,10 +56,10 @@ function setup() {
 			seed: 	noiseOptions.seed,
 			},
 		gif:false
-		//gif:true,
-		//gifFileName:image.gif,
-		//gifRender:false,
-		//gifOpen:true 
+		// gif:true,
+		// gifFileName:image.gif,
+		// gifRender:false,
+		// gifOpen:true 
 		});
   
 	//print(v);
@@ -69,11 +78,19 @@ function draw() {
   
 	this.update();
 
+	push();
+	var mode;
+	if(v.blendMode.value!=null){mode=v.blendMode.value;}
+	else{mode=v.blendMode}
+	if(params.style.blendMode.lookup[mode]!=null){mode= params.style.blendMode.lookup[mode]};
+	blendMode(mode);
+	
 	for(var i=0;i<loops.length;i++){
 		var perturbedLoop = loops[i].getCopy();
 		perturbedLoop.perturbRadial(noiseOptions);
 		perturbedLoop.display();
 	}
+	pop();
 }
 
 
