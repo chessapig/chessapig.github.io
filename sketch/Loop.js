@@ -31,7 +31,7 @@ class Loop {
     
     let newPoints = this.loopPoints();
     for(var i=0;i<newPoints.length;i++){
-      curveVertex(newPoints[i].x, newPoints[i].y);
+      curveVertex(newPoints[i].p.x, newPoints[i].p.y);
     }
     endShape();
     pop();
@@ -85,17 +85,18 @@ class Circle extends Loop{
   }
   
   setCenter(newCenter){
-    var diff = p5.Vector.sub(newCenter,this.center);
+    var newCenterVector = new p5.Vector(newCenter.p.x,newCenter.p.y);
+    var diff = p5.Vector.sub(newCenterVector,this.center.p);
     for(var i=0;i<this.numPoints;i++){
         this.points[i].move(diff);
     }
-    this.center=newCenter;
+    this.center.move(diff);
   }
   
   setRadius(newRadius){
     for(var i=0;i<this.numPoints;i++){
       if(this.radius!=0){
-        var pt = this.points[i].scalePoint(this.center,newRadius/this.radius);
+        var pt = this.points[i].scalePoint(this.center.p,newRadius/this.radius);
       }
     }
     this.radius=max(newRadius,0);
@@ -107,26 +108,33 @@ class Circle extends Loop{
   //forget the points you gave, jsut strat over
   constructCircle(){
     this.points=[];
-    var startPos = createVector(this.center.x+this.radius,this.center.y);
+    var startPos = createVector(this.center.p.x+this.radius,this.center.p.y);
     for (var i=0;i<this.numPoints;i++){ //Might want to add back in +1
       let p=createVector(startPos.x,startPos.y);
-      p.sub(this.center);
+      p.sub(this.center.p);
       p.rotate(2*PI*i/this.numPoints);
-      p.add(this.center); //rotate by certian ammount
+      p.add(this.center.p); //rotate by certian ammount
       this.points.push(new Point(p.x,p.y)); //append this to the list
+      
+      //print(new Point(p.x,p.y));
+      // print(this.points[i]);
     }
     //print(this.points.length);
   }
   
   getCopy(){
-    let newCircle = new Circle(this.strokeColor,this.fillColor, this.randomScale, this.center, this.radius, this.numPoints,this.strokeThickness);
+    let newCircle = new Circle(this.strokeColor,this.fillColor, this.randomScale, this.center.getCopy(), this.radius, this.numPoints,this.strokeThickness);
     return newCircle;
   }
   
-  perturbRadial(noiseType){
+  perturb(noiseOptions){
     for(var i=0;i<this.points.length;i++){
-      this.points[i].perturbRadial(this.center, this.randomScale,noiseType);
+      this.points[i].perturb(this.center, this.randomScale,noiseOptions);
     }
+    // if(noiseOptions.doPerturbCenter){
+    //   this.center.perturb(new p5.Vector(mouseX,mouseY), this.randomScale,noiseOptions);
+    //   print(new p5.Vector(mouseX,mouseY));
+    // }
   }
   
   update(strokeColor,fillColor,randomScale, center, radius, numPoints,strokeThickness){
@@ -152,22 +160,21 @@ class Circle extends Loop{
 
 class Point{
   constructor(x,y) {
-    this.x=x;
-    this.y=y;
+    // this.x=x;
+    // this.y=y;
     this.p=createVector(x,y);
 	this.diameter=5;
-	this.noiseDistance=0;
   }
   
   
   display() {
     push();
     ellipseMode(CENTER);
-    ellipse(this.x, this.y, this.diameter, this.diameter);
+    ellipse(this.p.x, this.p.y, this.diameter, this.diameter);
     pop();
   }
   
-perturbRadial(center, randomScale, noiseOptions){
+perturb(center, randomScale, noiseOptions){
 	switch(noiseOptions.type){
 		case 'none':
 			break;
@@ -177,38 +184,37 @@ perturbRadial(center, randomScale, noiseOptions){
 			if(noiseOptions.doMove){ //if dont loop, then continue to move the center
 				//print(noiseOptions.center);
 				noiseOptions.center += 2*Math.PI*animLoop.elapsedFramesTotal/animLoop.framesPerLoop*noiseOptions.velocity/animLoop.framesPerSecond*noiseOptions.radius*noiseOptions.scale;
-			}
-			
+      }
+			random = animLoop.noise2D(noiseOptions.center+this.p.x*noiseOptions.scale, this.p.y*noiseOptions.scale,noiseOptions);
+      random = map(random,1,-1,1+randomScale,1 -randomScale);
+      
+      this.scalePoint(center.p,random);
+      break;
 
-
-
-			random = animLoop.noise2D(noiseOptions.center+this.x*noiseOptions.scale, this.y*noiseOptions.scale,noiseOptions);
-			random = map(random,1,-1,1+randomScale,1 -randomScale);
-			this.scalePoint(center,random);
-	}
-	//print("noise"); print(map(noise(this.x*noiseScaleX, this.y*noiseScaleX, t*noiseScaleT),0,1,0.8,1.2));
-	//var random = exp(map(noise(this.x*noiseScaleX, this.y*noiseScaleX, t*noiseScaleT),0,1,-1*randomScale,1*randomScale));
-
-	//var random = noise(this.x*noiseScaleX, this.y*noiseScaleX, t*noiseScaleT);
-	//var random  = animLoop.noise(this.x*noiseScaleX, this.y*noiseScaleX);
-	//random= map(random,-1,1,constrain(1-randomScale*1,0,2),constrain(1+randomScale*1,0,2));
+    case '2D':
+      var random1=animLoop.noise2D(noiseOptions.center+this.p.x*noiseOptions.scale, this.p.y*noiseOptions.scale,noiseOptions);
+      var random2=animLoop.noise2D(noiseOptions.center+this.p.x*noiseOptions.scale, (this.p.y+1000)*noiseOptions.scale,noiseOptions); //move far enough over to be independent
+      var randVect=new p5.Vector(random1,random2);
+      randVect.mult(randomScale*noiseOptions.randomScale2D);
+      this.p.add(randVect);
+    }
 }
   
   scalePoint(center, scale){
     this.p.sub(center);
     this.p.mult(scale);
     this.p.add(center);
-    this.x=this.p.x;
-    this.y=this.p.y;
+
+    // this.x=this.p.x;
+    // this.y=this.p.y;
   }
   
   getCopy(){
-    return new Point(this.x,this.y);
+    return new Point(this.p.x,this.p.y);
   }
   
   move(v){
-    this.x+=v.x;
-    this.y+=v.y;
+    this.p.add(v);
   }
 }
 
@@ -231,7 +237,7 @@ perturbRadial(center, randomScale, noiseOptions){
    //baseLoop = generateCircle(createVector(width/2,height/3), center, 12);
   //baseLoop.setColor(color(255,0,0));
   //perturbedLoop = baseLoop.getCopy();
-  //perturbedLoop.perturbRadial(1);
+  //perturbedLoop.perturb(1);
 
 
 

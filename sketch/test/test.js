@@ -7,6 +7,8 @@ var params;
 
 var myText
 
+var doShowPoints;
+
 
 function preload(){
 	// var json = loadJSON('settings.txt');
@@ -26,13 +28,14 @@ function setup() {
 
 	v=Object.assign({},presets["grey"]); //make copy, so to not edit the presets
 	settings=new MyGUI(params,v);
-	
+	for(var title in settings.controls){
+		settings.controls[title].expand();
+	}
 
 	makeJSONField(settings,"test1");
 	makePresetField(settings,"test1",presets);
 
-	// var json={presets,params};
-	// saveJSON(json,'settings.txt');=
+
 }
 
 
@@ -40,12 +43,6 @@ function setup() {
 
 
 function draw() {
-	background(v.myColor);
-	fill(0);
-	textSize(60);
-	//interpolate(v.myNumber,params.test1.myNumber)
-	text("MyNumber: " + interpolate(v.myNumber,params.test1.myNumber),200,200);
-	//print(v.preset);
 }
 
 
@@ -63,22 +60,7 @@ function keyPressed(){
 }
 
 
-function interpolate(value,valueParams){
-	switch(valueParams.interpolateType){
-		case 'exp':
-			value = map(value,valueParams.min,valueParams.max,0,1);
-			print(map(value,0,1,valueParams.minValue,valueParams.maxValue));
-			value = pow(10,map(value,0,1,valueParams.minValue,valueParams.maxValue));
-			
-			break;
 
-		case "lin":
-			value = map(value,valueParams.min,valueParams.max,valueParams.minValue,valueParams.maxValue);
-			break;
-	}
-
-	return value;
-}
 
 
 

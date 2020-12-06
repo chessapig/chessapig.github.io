@@ -26,15 +26,15 @@ function setup() {
 	
 	// background(0);
 	// var start="amoeba";
-	
-	var start="default";
+
+	var start="cone";
 	v=Object.assign({},presets[start]); //make copy, so to not edit the presets
 	settings=new MyGUI(params,v);
 	makePresetField(settings,"master",presets);
 	makeJSONField(settings,"master");
 	settings.controls.master.expand();
 	settings.controls.master.addHTML("TIPS",
-	"<li>double click collapse, click+drag to move</li>"+
+	"<li>double click to collapse, click+drag to move</li>"+
 	"<li>press 'h' to hide GUI</li>"+
 	 "<li>presets are pretty, but try iterating on them further!</li>"+
 	 "<li>use <u>generate JSON</u> to send pretty parameters to your friends and/or me (I can add them as a preset!)</li>"+
@@ -44,7 +44,7 @@ function setup() {
 
 
 	noiseOptions={
-		seed: 12345,
+		seed: 12346,
 		radius: v.noiseRadius,
 		center: 0,
 	}
@@ -86,13 +86,27 @@ function draw() {
 	blendMode(mode);
 	
 	for(var i=0;i<loops.length;i++){
-		var perturbedLoop = loops[i].getCopy();
-		perturbedLoop.perturbRadial(noiseOptions);
-		perturbedLoop.display();
+		// if(v.doPerturbCenter){
+		// 	loops[i].center.perturb(center,loops[i].randomScale/params.ani.frameRate,noiseOptions);
+
+		// }
+		
+		if(v.doStayPut){
+			var perturbedLoop = loops[i].getCopy();
+			//print(perturbedLoop);
+			perturbedLoop.perturb(noiseOptions);
+			perturbedLoop.display();
+		} else {
+			loops[i].randomScale /= params.ani.frameRate; //divide by framerate so it doesnt move too fast
+			loops[i].perturb(noiseOptions);
+			loops[i].display();
+			loops[i].randomScale*=params.ani.frameRate; //fix it
+		}
+		
+		
 	}
 	pop();
 }
-
 
 
 function update(){
@@ -100,10 +114,11 @@ function update(){
 	Object.assign(noiseOptions,{
 		type:v.noiseType, 
 		doMove:v.doMoveNoise, 
-		radius:v.noiseRadius, 
-		//velocity: v.noiseCenterVelocity,
+		doPerturbCenter:v.doPerturbCenter,
+		radius:v.noiseRadius/params.ani.loopDuration*5,  //normalize to loop duration
 		scale: interpolate(v.noiseScale,params.noise.noiseScale),
 		velocity: interpolate(v.noiseCenterVelocity,params.noise.noiseCenterVelocity),
+		randomScale2D: params.noise.randomScale2D,
 	});
 	
 
@@ -121,7 +136,7 @@ function update(){
 		var strokeColor =     lerpColor(strokeColorStart,strokeColorEnd,map(i,0,v.numLoops,0,1));
 		var fillColor =       lerpColor(fillColorStart,fillColorEnd,map(i,0,v.numLoops,0,1)); //no fill
 		var strokeThickness = lerp(v.strokeThicknessStart,v.strokeThicknessEnd,map(i,0,v.numLoops,0,1));
-		//var center =        center;
+		//var circleCenter =    new Point(center.x,center.y);
 		var randomScale =     lerp(v.randomScaleStart,v.randomScaleEnd,map(i,0,v.numLoops,0,1));
 		var radius =          lerp(v.radiusStart,v.radiusEnd,map(i,0,v.numLoops,0,1));
 		var numPoints =       floor(lerp(v.numPointsStart,v.numPointsEnd,map(i,0,v.numLoops,0,1)));    
@@ -129,11 +144,13 @@ function update(){
 
 		//lets me use same code for making / updating the thing
 		if(i<loops.length){
-			loops[i].update(strokeColor,fillColor,randomScale, center, radius, numPoints,strokeThickness);
+			loops[i].update(strokeColor,fillColor,randomScale, loops[i].center, radius, numPoints,strokeThickness);
+			
 		}
 		else{ 
-			loops.push(new Circle(strokeColor,fillColor,randomScale, center, radius, numPoints,strokeThickness));
+			loops.push(new Circle(strokeColor,fillColor,randomScale, new Point(center.x,center.y), radius, numPoints,strokeThickness));
 		}
+		//loops[i].display();
 	}
 	if(v.numLoops<loops.length){
 		loops=loops.slice(0,v.numLoops);

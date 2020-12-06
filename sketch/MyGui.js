@@ -102,6 +102,7 @@ function makeJSONField(GUI,title){
 		GUI.setValuesFromGUI(output);
 		delete output["JSON"]; 
 		delete output["preset:"];
+		delete output["TIPS"];
 		GUI.controls[title].setValue("JSON",JSON.stringify(output));
 	});
 	GUI.controls[title].addButton("set JSON", function() {
