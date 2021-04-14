@@ -1,30 +1,30 @@
 - title: "Ollie"
-  thumbnail: "/gallery/images/ollie.jpg"
+  thumbnail: "/gallery/thumbnails/ollie.jpg"
   file: "/gallery/images/ollie.png"
   description: ""
   type: drawing
   
+- title: "Fuzzy"
+  thumbnail: "/gallery/thumbnails/fuzzy.jpg"
+  file: "/gallery/images/fuzzy.png"
+  description: ""
+  type: drawing
+
 - title: "Cozy"
-  thumbnail: "/gallery/thumbnails/cozy.mov"
-  file: "/gallery/images/cozy.mov"
+  thumbnail: "/gallery/thumbnails/cozy.jpg"
+  file: "/gallery/images/cozy.png"
   description: ""
   type: drawing
   
-- title: "Forest's Heart"
-  thumbnail: "/gallery/images/forest_heart.jpg"
-  file: "/gallery/images/forest_heart.png"
-  description: ""
-  type: drawing
-
-- title: "Fuzzy"
-  thumbnail: "/gallery/thumbnails/fuzzi_boi.jpg"
-  file: "/gallery/images/fuzzi_boi.png"
-  description: ""
-  type: drawing
-
 - title: "Amber"
   thumbnail: "/gallery/thumbnails/amber.jpg"
   file: "/gallery/images/amber.png"
+  description: ""
+  type: drawing
+
+- title: "Forests Heart"
+  thumbnail: "/gallery/thumbnails/forest_heart.jpg"
+  file: "/gallery/images/forest_heart.png"
   description: ""
   type: drawing
 
