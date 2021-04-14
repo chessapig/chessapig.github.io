@@ -1,26 +1,50 @@
+- title: "Ollie"
+  thumbnail: "/gallery/images/ollie.jpg"
+  file: "/gallery/images/Ollie.png"
+  description: ""
+  type: drawing
+  
+  - title: "Cozy"
+  thumbnail: "/gallery/thumbnails/cozy.mov"
+  file: "/gallery/images/cozy.mov"
+  description: ""
+  type: drawing
+  
+  - title: "Forest's Heart"
+  thumbnail: "/gallery/images/Forest_heart.jpg"
+  file: "/gallery/images/Forest_heart.png"
+  description: ""
+  type: drawing
+
 - title: "Fuzzy"
   thumbnail: "/gallery/thumbnails/fuzzi_boi.jpg"
   file: "/gallery/images/fuzzi_boi.png"
-  description: "he do be climbing"
+  description: ""
   type: drawing
 
-
+- title: "Amber"
+  thumbnail: "/gallery/thumbnails/amber.jpg"
+  file: "/gallery/images/amber.png"
+  description: ""
+  type: drawing
 
 - title: "Noodles"
   thumbnail: "/gallery/thumbnails/noodles.jpg"
   file: "/gallery/images/noodles.png"
-  description: "she do be sleeping"
+  description: ""
   type: drawing
 
 
 - title: "Turtle"
   thumbnail: "/gallery/thumbnails/turtle.jpg"
   file: "/gallery/images/turtle.png"
-  description: "he do be sunbathing"
+  description: ""
   type: drawing
 
 - title: "Checkerboard"
   thumbnail: "/gallery/images/checkerboard.gif"
   file: "/gallery/images/checkerboard.gif"
-  description: "he do be spinning"
+  description: ""
   type: gif
+
+
