@@ -1,16 +1,16 @@
 - title: "Ollie"
   thumbnail: "/gallery/images/ollie.jpg"
-  file: "/gallery/images/Ollie.png"
+  file: "/gallery/images/ollie.png"
   description: ""
   type: drawing
   
-  - title: "Cozy"
+- title: "Cozy"
   thumbnail: "/gallery/thumbnails/cozy.mov"
   file: "/gallery/images/cozy.mov"
   description: ""
   type: drawing
   
-  - title: "Forest's Heart"
+- title: "Forest's Heart"
   thumbnail: "/gallery/images/Forest_heart.jpg"
   file: "/gallery/images/Forest_heart.png"
   description: ""
