@@ -1,0 +1,41 @@
+- title: "A and B models: The story of mirror symmetry"
+  thumbnail: "A_B_Models.jpg"
+  file: "A_B_Models.pdf"
+  description: "Given to the UMD RIT in geometry and physics, during fall 2020."
+  type: presentation
+
+- title: "Cobordisms and the Thom Spectrum"
+  thumbnail: "Cobordisms.jpg"
+  file: "Cobordisms.pdf"
+  description: "Presentation for MATH734: Algebraic topology 2, Spring 2021"
+  type: presentation
+
+- title: "Higgs bundles, Mirror symmetry, and Geometric Langlands"
+  thumbnail: "Geometric_Langlands_S_Duality.jpg"
+  file: "Geometric_Langlands_S_Duality.pdf"
+  description: "Given to the UMD RIT in geometry and physics, during spring 2021."
+  type: presentation
+
+- title: "The Riemann-Roch Theorem"
+  thumbnail: "Riemann_Roch.jpg"
+  file: "Riemann_Roch.pdf"
+  description: "Presentation for MATH742: Geometric analysis, Fall 2020"
+  type: presentation
+
+- title: "Lie's Theorem"
+  thumbnail: "Lie_Theorem.png"
+  file: "Lie_Theorem.pdf"
+  description: "Presentation for MATH740: Lie groups, Fall 2020"
+  type: presentation
+
+- title: "Kahler Quantization and Physics"
+  thumbnail: "Kahler_Quantization.jpg"
+  file: "Kahler_Quantization.pdf"
+  description: "Presentation for MATH868C: Complex Geometry, Spring 2021"
+  type: presentation
+
+- title: "Higgs bundles and geometrix strucutres"
+  thumbnail: "Higgs_Bundles_Geometric_Structures.png"
+  file: "Higgs_Bundles_Geometric_Structures.pdf"
+  description: "Presentation for MATH848C: Geometric structures, Spring 2021"
+  type: presentation
