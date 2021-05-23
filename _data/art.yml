@@ -2,36 +2,42 @@
   thumbnail: "/gallery/thumbnails/ollie.jpg"
   file: "/gallery/images/ollie.png"
   description: ""
+  category: traditional
   type: drawing
   
 - title: "Fuzzy"
   thumbnail: "/gallery/thumbnails/fuzzy.jpg"
   file: "/gallery/images/fuzzy.png"
   description: ""
+  category: traditional
   type: drawing
 
 - title: "Cozy"
   thumbnail: "/gallery/thumbnails/cozy.jpg"
   file: "/gallery/images/cozy.png"
   description: ""
+  category: traditional
   type: drawing
   
 - title: "Amber"
   thumbnail: "/gallery/thumbnails/amber.jpg"
   file: "/gallery/images/amber.png"
   description: ""
+  category: traditional
   type: drawing
 
 - title: "Forests Heart"
   thumbnail: "/gallery/thumbnails/forest_heart.jpg"
   file: "/gallery/images/forest_heart.png"
   description: ""
+  category: traditional
   type: drawing
 
 - title: "Noodles"
   thumbnail: "/gallery/thumbnails/noodles.jpg"
   file: "/gallery/images/noodles.png"
   description: ""
+  category: traditional
   type: drawing
 
 
@@ -39,12 +45,45 @@
   thumbnail: "/gallery/thumbnails/turtle.jpg"
   file: "/gallery/images/turtle.png"
   description: ""
+  category: traditional
   type: drawing
 
 - title: "Checkerboard"
   thumbnail: "/gallery/images/checkerboard.gif"
   file: "/gallery/images/checkerboard.gif"
   description: ""
+  category: traditional
   type: gif
 
+- title: "Mirror symmetry"
+  filename: "ABmodel"
+  file: "/files/presentations/A_B_Models.pdf"
+  number: 5
+  description: ""
+  category: math
+  type: folder
+
+- title: "Cobordisms"
+  filename: "cobordism"
+  file: "/files/presentations/Cobordisms.pdf"
+  number: 4
+  description: ""
+  category: math
+  type: folder
+
+- title: "Higgs bundles and Geometric Langlands"
+  filename: "higgs"
+  file: "/files/presentations/Geometric_Langlands_S_Duality.pdf"
+  number: 12
+  description: ""
+  category: math
+  type: folder
+
+- title: "Gradient maps"
+  filename: "gradient"
+  file: ""
+  number: 6
+  description: ""
+  category: generative
+  type: folder
 

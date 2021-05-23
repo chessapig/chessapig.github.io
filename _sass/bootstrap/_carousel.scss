@@ -10,12 +10,13 @@
 
 .carousel {
   position: relative;
+  z-index: inherit;
 }
 
 .carousel-inner {
   position: relative;
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .carousel-item {
@@ -232,4 +233,5 @@
   padding-bottom: 20px;
   color: $carousel-caption-color;
   text-align: center;
+  text-shadow: 0px 0px 8px $body-bg !important;
 }

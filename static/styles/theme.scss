@@ -69,15 +69,4 @@ body {
   @include glow(4, $primary);
 }
 
-.gallery {
-  display: block;
-  margin: auto;
-  width: auto;
-  height: auto;
-  padding-bottom: 25px;
-  margin-top: 20px;
-  max-height: 80vh;
-  max-width: 80vw;
-}
-
 
