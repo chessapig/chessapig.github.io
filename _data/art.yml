@@ -95,3 +95,10 @@
   category: generative
   type: folder
 
+- title: "Mathscape"
+  filename: "banner"
+  file: "/gallery/Mathscape"
+  number: 4
+  description: ""
+  category: math
+  type: folder
