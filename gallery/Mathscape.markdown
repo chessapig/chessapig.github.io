@@ -7,9 +7,9 @@ layout: none
 
 <div class="container">
 
-<img src='/gallery/images/banner/PNGs/Mathscape.png'   style="height: 100%;">
+<img src='/gallery/images/banner/PNGs/Mathscape.PNG'   style="height: 100%;">
 
-</div>  <!-- end container -->
+</div>  <!-- end container  eek-->
 
 
 <style>
