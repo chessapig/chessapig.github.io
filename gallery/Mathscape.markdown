@@ -48,7 +48,7 @@ layout: none
     transform: translateX(-50%);
     top:0vh;
     height: 100vh;
-    width: 102vw;
+    width: 100vw;
     overflow: scroll;
 }
 .blank{
