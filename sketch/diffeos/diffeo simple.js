@@ -38,10 +38,10 @@ function setup(){
 	let x=0;
 	settings = QuickSettings.create(10,10, "click / double tab to collapse")
 		.addRange("Number of Iterations per frame",1,20,numIter,1,function(value) {numIter = value;})
-		.addRange("Noise Scale",0.5,1.5,noiseScale,0.01,function(value) {noiseScale = value;})
-		.addRange("Radius of Noise loop",0,1,noiseRadiusSlider,0.01,function(value) {noiseRadiusSlider = value;})
+		.addRange("Noise Scale",0.5,1.5,noiseScale,0.001,function(value) {noiseScale = value;})
+		.addRange("Radius of Noise loop",0,1,noiseRadiusSlider,0.001,function(value) {noiseRadiusSlider = value;})
 		.addBoolean("Move noise center?",doMoveNoise,function(value) {doMoveNoise = value;})
-		.addRange("Velocity of center of noise loop",-1,1,noiseVelocity,0.01,function(value) {noiseVelocity = value;})
+		.addRange("Velocity of center of noise loop",-1,1,noiseVelocity,0.001,function(value) {noiseVelocity = value;})
 		.addBoolean("draw lines?",doShowLines,function(value) {doShowLines = value;})
 		.addButton("Save",function(){makeGif()})
 		//.addDropDown("Save format", ["gif", "webm", "png"], function(value) {saveFormat=value});
@@ -150,7 +150,7 @@ class Point{
 		// get random x from (x,y)
 		this.pos.x = width/2*(1+
 			animLoop.noise2D(
-				noiseCenter+lastPos.x/width*noiseScale,   //x coord inpiut
+				noiseCenter+noiseRadius+lastPos.x/width*noiseScale,   //x coord inpiut //add noiseRadius s.t it always passes through at least one of the same point
 				lastPos.y/height*noiseScale,	//y coord input
 				noiseOptions));
 
@@ -158,7 +158,7 @@ class Point{
 		//get ranom y from (x,y)
 		this.pos.y = height/2*(1+
 			animLoop.noise2D(
-				noiseCenter+lastPos.x/width*noiseScale,  
+				noiseCenter+noiseRadius+lastPos.x/width*noiseScale,  
 				(2+lastPos.y/height)*noiseScale, //+1 to keep x and y uncorrelated
 				noiseOptions));
 
