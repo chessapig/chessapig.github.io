@@ -5,7 +5,7 @@ let gui,
 	capturer,
 	gifCapturing=false,
 	numIter=10,			//default
-	noiseScale=1.3,		//default
+	noiseScale=1.1,		//default
 	noiseRadiusSlider=0.5,	//default
 	noiseVelocity=0,	//default
 	doMoveNoise=false,	//default
@@ -13,7 +13,8 @@ let gui,
 	noiseRadius=0;
 	gifFrames=0;
 	fps=30,	//number of frames per second
-	loopTime=1; //number of seconds in loop
+	loopTime=5; //number of seconds in loop
+	saveFormat="webm";
 
 let smallCanvas=true;
 function setup(){
@@ -29,15 +30,7 @@ function setup(){
 	}
 
 
-	//setup gif encoder
-	frameRate(fps)
-	capturer = new CCapture( { 
-		format: 'gif', 
-		workersPath: 'js/', 
-		framerate: fps,
-		} );
-	gifFrames=0; //track how many frames in gif saved so far
-	console.log(capturer);
+
 
 
 	//setup gui
@@ -49,8 +42,18 @@ function setup(){
 		.addBoolean("Move noise center?",doMoveNoise,function(value) {doMoveNoise = value;})
 		.addRange("Velocity of center of noise loop",-1,1,noiseVelocity,0.01,function(value) {noiseVelocity = value;})
 		.addBoolean("draw lines?",doShowLines,function(value) {doShowLines = value;})
-		.addButton("Make Gif",function(){makeGif()})
+		.addButton("Save",function(){makeGif()})
+		//.addDropDown("Save format", ["gif", "webm", "png"], function(value) {saveFormat=value});
 	
+		//setup gif encoder
+		frameRate(fps)
+		capturer = new CCapture( { 
+			format: 'webm', 
+			workersPath: 'js/', 
+			framerate: fps,
+			} );
+		gifFrames=0; //track how many frames in gif saved so far
+		console.log(capturer);
 
 	//setup noise loop
 	noiseCenter=0;
@@ -87,13 +90,18 @@ function draw(){
 
 	//Creates picture
 	for(var n=0; n<numIter;n++){
-		var alpha = exp(map(n,0,numIter,0,log(100)));
-		stroke(255,255,255,exp(map(n,0,numIter,log(10),log(30))));
+		var alpha = exp(map(n,0,numIter,log(10),log(200)));
 		for(i = 0; i < numPts; i++){
-			var radius = map(i,0,numPts,1,10);
+			this.radius = map(i,0,numPts,1,5*height/500);
+
 
 			//fill(69,33,124,alpha);
-			points[i].setAlpha(alpha);
+			//points[i].setAlpha(alpha);
+
+			points[i].color = lerpColor(
+				color(7,153,242,alpha), 	//from
+				color(255,255,255,alpha),	//to
+				n/numIter)
 			points[i].move();
 			points[i].display();
 		}  
@@ -106,8 +114,9 @@ function draw(){
 		gifFrames+=1;
 		if(gifFrames>=loopTime*fps){
 			capturer.stop();
-			//capturer.save();
+			capturer.save();
 			gifCapturing=false;
+			gifFrames=0;
 		}
 	}
 
@@ -129,21 +138,8 @@ class Point{
 	constructor(){
 		this.startPos = createVector(random(width),random(height));
 		this.pos = this.startPos.copy();
-    this.radius = random(1, 15);
-		
-		
-		switch(floor(3*random())) {
-			case 0: 
-			this.color=color(69,33,124,10)
-				break;
-			case 1: 
-			this.color=color(7,153,242,10)
-				break;
-			case 2:
-				this.color=color(255,255,255,10)
-				break;
-		}
-		this.color=color(7,153,242,10);
+    	this.radius = random(1, 15);
+		this.color=color(255,255,255,10);
 		//this.color=color(255,255,255);
 	}
 	
@@ -168,7 +164,7 @@ class Point{
 
 		 //this.pos.x = width*noise((lastPos.x)/noiseScale, (lastPos.y)/noiseScale, frameCount*t);
 		 //this.pos.y = height*noise((lastPos.x+10*noiseScale)/noiseScale, (lastPos.y+10*noiseScale)/noiseScale, frameCount*t);
-		stroke(this.color);
+		stroke(color(red(this.color),green(this.color),blue(this.color),10));
 		if(doShowLines){
 			line(lastPos.x,lastPos.y,this.pos.x,this.pos.y); //draw line between last 2 points
 		}
