@@ -36,7 +36,7 @@ function setup(){
 
 	//setup gui
 	let x=0;
-	settings = QuickSettings.create(510,10, "Variables")
+	settings = QuickSettings.create(10,10, "click / double tab to collapse")
 		.addRange("Number of Iterations per frame",1,20,numIter,1,function(value) {numIter = value;})
 		.addRange("Noise Scale",0.5,1.5,noiseScale,0.01,function(value) {noiseScale = value;})
 		.addRange("Radius of Noise loop",0,1,noiseRadiusSlider,0.01,function(value) {noiseRadiusSlider = value;})
