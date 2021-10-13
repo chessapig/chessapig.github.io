@@ -17,6 +17,7 @@ let gui,
 	saveFormat="webm";
 
 let smallCanvas=false;
+
 function setup(){
 
 
