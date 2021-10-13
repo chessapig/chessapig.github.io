@@ -16,7 +16,7 @@ let gui,
 	loopTime=5; //number of seconds in loop
 	saveFormat="webm";
 
-let smallCanvas=true;
+let smallCanvas=false;
 function setup(){
 
 
