@@ -121,6 +121,10 @@ function update(){
 		randomScale2D: params.noise.randomScale2D,
 	});
 	
+	if(noiseOptions.doMove){ //if dont loop, then continue to move the center
+		//print(noiseOptions.center);
+		noiseOptions.center += 2*Math.PI*animLoop.elapsedFramesTotal/animLoop.framesPerLoop*noiseOptions.velocity/animLoop.framesPerSecond*noiseOptions.radius*noiseOptions.scale;
+	}
 
 	
 	var strokeOpacity= constrain(interpolate(v.strokeOpacity,params.style.strokeOpacity)-1,0,255);

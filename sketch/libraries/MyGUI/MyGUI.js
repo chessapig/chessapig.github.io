@@ -2,14 +2,15 @@
 class MyGUI {
 	constructor(params,v) { //create gui system bound to set of variables v
 		this.controls={};
+		
 
 		var i=0;
-		for(const paramTitle in params){
+		for(const paramTitle in params){ //create the big boxes
 			this.controls[paramTitle]=QuickSettings.create(210*i, 0, params[paramTitle].displayName).collapse(); 
 			i++;
 		}
 
-		for(const control in this.controls){
+		for(const control in this.controls){ //makes controls for them???
 			this.populateGUI(this.controls[control],params[control],v);
 		}
 
@@ -20,9 +21,10 @@ class MyGUI {
 
 
 	populateGUI(guiObject,p,v){
-		//print("populateGUI:  " + JSON.stringify(p));
+		print("populateGUI:  " + JSON.stringify(p));
 		for(const variable in p){
-			if(p[variable].type!= null){
+			//console.log(p[variable].doHide);
+			if(p[variable].type!= null ){// && p[variable].doHide!=1){
 				p[variable].title=variable; //add title field w/ name of class
 				this.makeGUIElement(guiObject,p[variable],v);
 			}
@@ -219,6 +221,25 @@ function colorToArray(hex){
 
 
 
+function interpolate(value,valueParams){
+	switch(valueParams.interpolateType){
+		case 'exp':
+			value = map(value,valueParams.min,valueParams.max,0,1);
+			value = pow(10,map(value,0,1,valueParams.minValue,valueParams.maxValue));
+			
+			break;
+
+		case "lin":
+			value = map(value,valueParams.min,valueParams.max,valueParams.minValue,valueParams.maxValue);
+			break;
+	}
+
+	return value;
+}
+
+function setAlpha(color,alpha){
+	return this.color(colorToArray(color)[0],colorToArray(color)[1],colorToArray(color)[2],alpha);
+}
 
 
 
