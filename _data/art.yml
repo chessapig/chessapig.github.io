@@ -26,7 +26,7 @@
   category: traditional
   type: drawing
 
-- title: "Forest's Heart"
+- title: "ForestHeart"
   thumbnail: "/gallery/thumbnails/forest_heart.jpg"
   file: "/gallery/images/forest_heart.png"
   description: ""
@@ -55,8 +55,27 @@
   category: traditional
   type: gif
 
+- title: "Higgs bundles and Geometric Langlands"
+  filename: "higgs"
+  filetype: ".jpg"
+  file: "/files/presentations/Geometric_Langlands_S_Duality.pdf"
+  number: 12
+  description: ""
+  category: math
+  type: folder
+
+- title: "Mathscape"
+  filename: "banner"
+  filetype: ".jpg"
+  file: "/gallery/Mathscape"
+  number: 4
+  description: ""
+  category: math
+  type: folder
+
 - title: "Mirror symmetry"
   filename: "ABmodel"
+  filetype: ".jpg"
   file: "/files/presentations/A_B_Models.pdf"
   number: 5
   description: ""
@@ -65,54 +84,43 @@
 
 - title: "Cobordisms"
   filename: "cobordism"
+  filetype: ".jpg"
   file: "/files/presentations/Cobordisms.pdf"
   number: 4
   description: ""
   category: math
   type: folder
 
-- title: "Higgs bundles and Geometric Langlands"
-  filename: "higgs"
-  file: "/files/presentations/Geometric_Langlands_S_Duality.pdf"
-  number: 12
-  description: ""
-  category: math
-  type: folder
-
 - title: "Bott periodicity"
   filename: "bott"
+  filetype: ".jpg"
   file: ""
   number: 3
   description: ""
   category: math
   type: folder
 
-- title: "Mathscape"
-  filename: "banner"
-  file: "/gallery/Mathscape"
-  number: 4
-  description: ""
-  category: math
-  type: folder
-
 - title: "Hyperbolic Band theroy"
   filename: "crystals"
+  filetype: ".png"
   file: ""
   number: 8
   description: ""
   category: math
   type: folder
 
-- title: "Hyperbolic Band theory flowcharts"
-  filename: "math"
+- title: "Flowcharts"
+  filename: "flowchart"
+  filetype: ".jpg"
   file: ""
-  number: 2
+  number: 3
   description: ""
   category: math
   type: folder
 
 - title: "Math"
-  filename: "crystals"
+  filename: "math"
+  filetype: ".png"
   file: ""
   number: 2
   description: ""
@@ -121,6 +129,7 @@
 
 - title: "Gradient maps"
   filename: "gradient"
+  filetype: ".jpg"
   file: ""
   number: 6
   description: ""

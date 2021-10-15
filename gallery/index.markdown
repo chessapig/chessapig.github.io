@@ -7,6 +7,55 @@ layout: default
 
 <div class="container">
 
+
+
+ {% assign n = 1 %}
+ {% for art in site.data.art %}
+    {% if art.type=="folder"%}
+        <a id='{{art.title}}'></a>
+        <section id='{{"screen" | append: n }}' class=screen>
+            <div id='{{"galleryCarousel" | append: n }}' class="carousel slide" data-interval="20000" data-ride="carousel">
+                <div class="carousel-inner">  
+                    {% for i in (1..art.number) %}
+                        {% if i==1 %} {%- assign isActive = " active" -%}
+                        {% else %} {%- assign isActive = "" -%}
+                        {% endif %}          
+                            <div class= '{{"carousel-item" | append: isActive }} borderr' width="100" height="100">
+                                {% assign filepath = 'images/' | append: art.filename | append:"/" | append:art.filename | append:i | append:art.filetype%}
+                                <img src='{{filepath}}' class='d-block rounded gallery blur' alt='{{art.title}}' >
+                                <img src='{{filepath}}' class="d-block rounded gallery" alt='{{art.title}}' >
+                                <div class="carousel-caption mb-0">
+                                    <a href='{{art.file}}'>
+                                    <h3>{{art.title}}</h3>
+                                    </a>
+                                    <p>{{art.description}}</p>
+                                </div>
+                            </div>     
+                    {% endfor %}
+                </div>
+                <ol class="carousel-indicators mb-0">
+                    {% for i in (1..art.number) %}
+                        {% if i==0 %} {%- assign isActive = " active" -%}
+                        {% else %} {%- assign isActive = "" -%}
+                        {% endif %}
+                        <li data-target='{{"#galleryCarousel" | append: n }}' data-slide-to="{{i-1}}" class="{{isActive}}"></li>
+                    {% endfor %}
+                </ol>
+                <a class="carousel-control-prev" href='{{"#galleryCarousel" | append: n }}' role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href='{{"#galleryCarousel" | append: n }}' role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </section>
+    {% endif %}  
+    {% assign n =  n | plus: 1  %}
+{% endfor %}
+
+
 <div class="blank"></div>
 <section id="screenA" class=screen>
     <div id="galleryCarouselA" class="carousel slide" data-interval="20000" data-ride="carousel">
@@ -52,54 +101,6 @@ layout: default
         </a>
     </div>
 </section>
-
-
- {% assign n = 1 %}
- {% for art in site.data.art %}
-    {% if art.type=="folder"%}
-        <section id='{{"screen" | append: n }}' class=screen>
-            <div id='{{"galleryCarousel" | append: n }}' class="carousel slide" data-interval="20000" data-ride="carousel">
-                <div class="carousel-inner">  
-                    {% for i in (1..art.number) %}
-                        {% if i==1 %} {%- assign isActive = " active" -%}
-                        {% else %} {%- assign isActive = "" -%}
-                        {% endif %}          
-                            <div class= '{{"carousel-item" | append: isActive }} borderr' width="100" height="100">
-                                {% assign filepath = 'images/' | append: art.filename | append:"/" | append:art.filename | append:i | append:".jpg"%}
-                                <img src='{{filepath}}' class='d-block rounded gallery blur' alt='{{art.title}}' >
-                                <img src='{{filepath}}' class="d-block rounded gallery" alt='{{art.title}}' >
-                                <div class="carousel-caption mb-0">
-                                    <a href='{{art.file}}'>
-                                    <h3>{{art.title}}</h3>
-                                    </a>
-                                    <p>{{art.description}}</p>
-                                </div>
-                            </div>     
-                    {% endfor %}
-                </div>
-                <ol class="carousel-indicators mb-0">
-                    {% for i in (1..art.number) %}
-                        {% if i==0 %} {%- assign isActive = " active" -%}
-                        {% else %} {%- assign isActive = "" -%}
-                        {% endif %}
-                        <li data-target='{{"#galleryCarousel" | append: n }}' data-slide-to="{{i-1}}" class="{{isActive}}"></li>
-                    {% endfor %}
-                </ol>
-                <a class="carousel-control-prev" href='{{"#galleryCarousel" | append: n }}' role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href='{{"#galleryCarousel" | append: n }}' role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-        </section>
-    {% endif %}  
-    {% assign n =  n | plus: 1  %}
-{% endfor %}
-
-
 
 <div class="blank"></div>
 
