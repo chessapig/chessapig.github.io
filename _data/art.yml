@@ -111,7 +111,7 @@
 
 - title: "Flowcharts"
   filename: "flowchart"
-  filetype: ".jpg"
+  filetype: ".JPG"
   file: ""
   number: 3
   description: ""
@@ -120,7 +120,7 @@
 
 - title: "Math"
   filename: "math"
-  filetype: ".png"
+  filetype: ".PNG"
   file: ""
   number: 2
   description: ""
