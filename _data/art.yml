@@ -95,7 +95,7 @@
   category: math
   type: folder
 
-  - title: "Hyperbolic Band theroy"
+- title: "Hyperbolic Band theroy"
   filename: "crystals"
   file: ""
   number: 8
@@ -103,7 +103,7 @@
   category: math
   type: folder
 
-  - title: "Hyperbolic Band theory flowcharts"
+- title: "Hyperbolic Band theory flowcharts"
   filename: "math"
   file: ""
   number: 2
@@ -111,15 +111,13 @@
   category: math
   type: folder
 
-  - title: "Math"
+- title: "Math"
   filename: "crystals"
   file: ""
   number: 2
   description: ""
   category: math
   type: folder
-
-
 
 - title: "Gradient maps"
   filename: "gradient"
