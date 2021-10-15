@@ -87,18 +87,44 @@
   category: math
   type: folder
 
-- title: "Gradient maps"
-  filename: "gradient"
-  file: ""
-  number: 6
-  description: ""
-  category: generative
-  type: folder
-
 - title: "Mathscape"
   filename: "banner"
   file: "/gallery/Mathscape"
   number: 4
   description: ""
   category: math
+  type: folder
+
+  - title: "Hyperbolic Band theroy"
+  filename: "crystals"
+  file: ""
+  number: 8
+  description: ""
+  category: math
+  type: folder
+
+  - title: "Hyperbolic Band theory flowcharts"
+  filename: "math"
+  file: ""
+  number: 2
+  description: ""
+  category: math
+  type: folder
+
+  - title: "Math"
+  filename: "crystals"
+  file: ""
+  number: 2
+  description: ""
+  category: math
+  type: folder
+
+
+
+- title: "Gradient maps"
+  filename: "gradient"
+  file: ""
+  number: 6
+  description: ""
+  category: generative
   type: folder
