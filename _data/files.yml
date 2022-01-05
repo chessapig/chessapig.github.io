@@ -1,7 +1,20 @@
+- title: "Hyperbolic band theory through Higgs bundles"
+  thumbnail: "hyperbolic_band_theory.jpg"
+  file: "hyperbolic_band_theory.pdf"
+  description: "Given to the Geometry and Mathematical Physics Seminar at the University of Saskatchewan"
+  type: presentation
+
+
+- title: "Topological recursion: For fun and profit"
+  thumbnail: "topological_recursion.png"
+  file: "topological_recursion.pdf"
+  description: "Given to the UMD RIT in geometry and physics, Fall 2021."
+  type: presentation
+
 - title: "A and B models: The story of mirror symmetry"
   thumbnail: "A_B_Models.jpg"
   file: "A_B_Models.pdf"
-  description: "Given to the UMD RIT in geometry and physics, during fall 2020."
+  description: "Given to the UMD RIT in geometry and physics, Fall 2020."
   type: presentation
 
 - title: "Cobordisms and the Thom Spectrum"
@@ -13,7 +26,14 @@
 - title: "Higgs bundles, Mirror symmetry, and Geometric Langlands"
   thumbnail: "Geometric_Langlands_S_Duality.jpg"
   file: "Geometric_Langlands_S_Duality.pdf"
-  description: "Given to the UMD RIT in geometry and physics, during spring 2021."
+  description: "Given to the UMD RIT in geometry and physics, Spring 2021."
+  type: presentation
+
+
+- title: "Electromagnetism on a Riemann surface"
+  thumbnail: "em_on_riemann_surface.jpg"
+  file: "em_on_riemann_surface.pdf"
+  description: "Presentation for MATH669: Riemann surfaces, Fall 2021"
   type: presentation
 
 - title: "The Riemann-Roch Theorem"
@@ -34,7 +54,7 @@
   description: "Presentation for MATH868C: Complex Geometry, Spring 2021"
   type: presentation
 
-- title: "Higgs bundles and geometrix strucutres"
+- title: "Higgs bundles and geometric structures"
   thumbnail: "Higgs_Bundles_Geometric_Structures.png"
   file: "Higgs_Bundles_Geometric_Structures.pdf"
   description: "Presentation for MATH848C: Geometric structures, Spring 2021"

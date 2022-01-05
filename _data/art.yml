@@ -109,6 +109,16 @@
   category: math
   type: folder
 
+  - title: "Topological recursion"
+  filename: "topological_recursion"
+  filetype: ".jpg"
+  file: ""
+  number: 5
+  description: ""
+  category: math
+  type: folder
+
+
 - title: "Flowcharts"
   filename: "flowchart"
   filetype: ".JPG"
