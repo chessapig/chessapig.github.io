@@ -1,5 +1,5 @@
 let Shader;
-const balls=[],num=4000;
+const balls=[],num=400;
 
 
 let system;
@@ -50,7 +50,7 @@ function setup() {
 	createLoop({
 		duration: 15, 
 		noiseOptions,
-		gif: true,
+		gif: false,
     render:false,
     open:true
 		});
