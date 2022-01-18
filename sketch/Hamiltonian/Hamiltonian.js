@@ -1,5 +1,5 @@
 let Shader;
-const balls=[],num=400;
+const balls=[],num=10000;
 
 
 let system;
