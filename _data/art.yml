@@ -4,7 +4,7 @@
   description: ""
   category: traditional
   type: drawing
-  
+
 - title: "Fuzzy"
   thumbnail: "/gallery/thumbnails/fuzzy.jpg"
   file: "/gallery/images/fuzzy.png"
@@ -100,7 +100,7 @@
   category: math
   type: folder
 
-- title: "Hyperbolic Band theroy"
+- title: "Hyperbolic Band theory"
   filename: "crystals"
   filetype: ".PNG"
   file: ""
@@ -109,7 +109,7 @@
   category: math
   type: folder
 
-  - title: "Topological recursion"
+- title: "Topological recursion"
   filename: "topological_recursion"
   filetype: ".jpg"
   file: ""
