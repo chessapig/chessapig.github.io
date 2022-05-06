@@ -18,7 +18,7 @@ let gui,
 	loopTime=5; //number of seconds in loop
 	saveFormat="webm";
 
-let smallCanvas=false;
+let smallCanvas=true;
 
 let angle;
 var doAccumulate=true;
