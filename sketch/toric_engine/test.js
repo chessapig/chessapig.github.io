@@ -1,65 +1,36 @@
-// 4D Open Simplex Noise Loop
-// Daniel Shiffman
-// https://thecodingtrain.com/CodingChallenges/137-4d-opensimplex-noise-loop
-// https://youtu.be/3_0Ax95jIrk
 
-
-let loopTime=.1;
-let noiseRadius=1;
-let noiseScale=10;
-let fr=30;
-let v;
-let opts={
-	"scale": 3,
-	"radius":.1
-}
-
+let t=0,
+	r=0;
 
 function setup(){
-	canvas = createCanvas(500, 500).canvas;
-	noise = new OpenSimplexNoise(Date.now());
-	noStroke();
-	frameRate(fr);
-	opts.obj=noise;
+	createCanvas(windowWidth, windowHeight);
+	c=createGraphics(windowWidth, windowHeight);
+
+	background(0);
+	c.background(0);
+
+	gui = createGui();
+    b = createButton("Button", 50, 50);
 }
 
   
-  function draw() {
-	translate(width/2,height/2);
-	scale(height/2);
-	background(0);
-	fill(255);
+function draw() {
+	
 
+	c.translate(width/2,height/2);
+	c.scale(height/2);
+	//c.background(255);
+	c.fill(120);
 
-	//set angle
-	angle=frameCount/fr/loopTime;
-	//angle=frameCount/2;
+	c.circle(r*sin(t),r*cos(t),1,1)
 
-	noStroke();
+	t+=.03;
 
-	let inc = 1/30;
-	for (let x = -1; x < 1; x+=inc) {
-		for (let y = -1; y < 1; y+=inc) {
-		//let n = noise.noise4D(noiseScale*x, noiseScale*y, uoff, voff);
-		//let n=noiseLoop(noise,x,y,angle,noiseScale,noiseRadius);
-		let n = noise2D(x,y,angle,opts);
-		//n=n*.5+.5;
-		fill(n*255);
-		ellipse(x,y,.01,.01)
-		}
+	//image(c,0,0,width,height)
+
+	drawGui();
+	if(b.isPressed) {
+		print(b.label + " is pressed.");
 	}
-
-	opts.randomGradient=true;
-	stroke(255);
-	strokeWeight(.005);
-
-	inc*=4;
-	for (let x = -1; x < 1; x+=inc) {
-		for (let y = -1; y < 1; y+=inc) {
-			v = noiseVector(x,y,angle,opts).mult(.01).rotate(PI/2).add(createVector(x,y));
-
-			line(x,y,v.x,v.y);
-		}
-	}
-  }
+}
   

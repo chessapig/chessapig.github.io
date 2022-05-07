@@ -2,17 +2,45 @@
 let n=1, 
 	m=1,
 	doLine=true,
-	perturb=0;
+	doGraph=false,
+	doEvolve=false;
+	doMarkPoint=true;
+	perturb=-3;
+	perturbAngle=0;
 	perturbMin=-5,
 	bkgOpactity=50,
-	graphScale=2;
+	graphScale=3,
+	resolution=30,
+	markedVelocity=.5;
+	perminantOffset=-0.25;
 
-var o;
+let os=[];
+let c;
+
+let maxSHOs=100;
+	numSHOs=5;
+	SHOslider=numSHOs;
+	SHOmultiplier=1;
+
+
+let fps=30;
+	gifCapturing=false;
+	gifFrames=0;
+	fps=30,	//number of frames per second
+	loopTime=5; //number of seconds in loop
+	saveFormat="webm";
+
 
 function setup(){
-	createCanvas(windowWidth, windowHeight);
+	c=createCanvas(windowWidth,windowHeight);
 
-	background(21, 8, 50);
+	bkg = color(11, 13, 31);
+	color1=color(188, 182, 207);
+	color2=color(87, 4, 99);
+	color3=color(230, 247, 181);
+
+
+	background(bkg);
 
 	stroke(255);
 	strokeWeight(.01);
@@ -21,72 +49,270 @@ function setup(){
 	x=0;
 	y=0;
 
-	oX=new Osscilator(1,.5,0);
-	oY=new Osscilator(1,.5,0);
+	
+
+
+
+	for(var i = 0; i <= maxSHOs; i++){
+		t=i/maxSHOs;
+		col=color(255*(1-t*.8));
+		os[i]=new DoubleOsscilator(
+			1, 	sqrt(t*0.8),		perminantOffset,
+			1,	sqrt((1-t)*0.8),	perminantOffset,
+			lerpColor(color1,color2,t));
+	} 
+	updatePerturb();
+
+
+	// o=new DoubleOsscilator(1,.5,0,1,.5,0);
+	// o.x.dM=.001;
+
+
+	// oX=new Osscilator(1,.5,0);
+	// oY=new Osscilator(1,.5,0);
 
 	settings = QuickSettings.create(10,10, "click / double tab to collapse")
-		.addRange("Mass X",-10,10,1,1,function(value) {oX.M = value; })
-		.addRange("Mass Y",-10,10,1,1,function(value) {oY.M = value; })
-		.addRange("Mass X perturb",perturbMin,0.001,perturbMin,.01,function(value) {oX.dM = pow(10,value)-pow(10,perturbMin); })
-		.addRange("Mass Y perturb",perturbMin,0.001,perturbMin,.01,function(value) {oY.dM = pow(10,value)-pow(10,perturbMin); })
-		.addRange("X radius",0,1,.5,.01,function(value) {oX.r = value; })
-		.addRange("Y radius",0,1,.5,.01,function(value) {oY.r = value; })
+		.addRange("number of osscilators",0,10,SHOslider,1,function(value){
+			SHOslider=value;
+			numSHOs = SHOslider*SHOmultiplier;
+		})
+		.addRange("multiply number of osscilators by 10?",0,1,0,1,function(value) {
+			SHOmultiplier=value*9+1;
+			numSHOs = SHOslider*SHOmultiplier;
+		})
+		.addRange("Mass X",-10,10,1,1,function(value) {
+			for(var i = 0; i <= maxSHOs; i++){
+				os[i].x.M = value;
+			} })
+		.addRange("Mass Y",-10,10,1,1,function(value) {
+			for(var i = 0; i <= maxSHOs; i++){
+				os[i].y.M = value;
+			} })
+		.addRange("perturb mass angle",0,1,perturbAngle,.01,function(value) {
+			perturbAngle=value;
+			updatePerturb();
+			 })
+		.addRange("perturb mass ammount",perturbMin,0.001,perturb,.01,function(value) {
+		perturb=value;
+		updatePerturb(perturb);
+			})
+		.addRange("X radius",0,1,.5,.01,function(value) {for(var i = 0; i <= maxSHOs; i++){
+			os[i].x.r=value;
+		}  })
+		.addRange("Y radius",0,1,.5,.01,function(value) {
+			for(var i = 0; i <= maxSHOs; i++){
+				os[i].y.r=value;
+			}  
+		})
+		.addRange("set reletive phase offset",-3,0.001,-3,.01,function(value) {
+			offset=pow(10,value)-pow(10,-3);
+			for(var i = 0; i <= maxSHOs; i++){
+				t=i/maxSHOs;
+				os[i].x.phaseOffset=t*offset-perminantOffset;
+				os[i].y.phaseOffset=t*offset-perminantOffset;
+			};
+		})
 		.addRange("background opactity",0,255,bkgOpactity,1,function(value) {bkgOpactity=value;})
-		.addBoolean("draw line?",doLine,function(value) {doLine = value;})
+		.addBoolean("draw lines?",doLine,function(value) {doLine = value;})
+		.addBoolean("draw graph?",doGraph,function(value) {doGraph = value;})
 		.addRange("graph scale",0,10,graphScale,.01,function(value) {graphScale = value; })
+		.addRange("resolution",0,100,resolution,1,function(value) {resolution = value; })
+		.addBoolean("Evolve around ?",doEvolve,function(value) {doEvolve = value;})
+		.addBoolean("Mark a point?",doMarkPoint,function(value) {doMarkPoint = value;})
+		.addRange("velocity of evolution",0,1,markedVelocity,.01,function(value) {markedVelocity = value; })
+		.addButton("Save",function(){makeGif();});
+
+	//setup gif encoder
+	frameRate(fps)
+	capturer = new CCapture( { 
+		format: 'webm', 
+		workersPath: 'js/', 
+		framerate: fps,
+		} );
+	gifFrames=0; //track how many frames in gif saved so far
+	console.log(capturer);
 
 
-	oY.dM=.001;
+	settings.hideControl("X radius").hideControl("Y radius");
+	settings.hideControl("graph scale").hideControl("draw graph?");
+	// oY.dM=.001;
 
-	graph = createGraphics(200,200);
-	graph.translate(graph.width/2,graph.height/2);
-	graph.scale(graph.height/2);
-	graph.scale(1,-1); //set it so positive quadrent is positive
-	graph.background(0);
-	graph.stroke(255);
-	graph.strokeWeight(.01);
+	setupGraph();
+	
 }
 
+function updatePerturb(){
+	let numP=pow(10,perturb)-pow(10,perturbMin);;
+	for(var i = 0; i <= maxSHOs; i++){
+		os[i].x.dM =  numP*cos(perturbAngle*PI/2);
+		os[i].y.dM =  numP*sin(perturbAngle*PI/2);
+	} 
+}
 
 function draw(){
 	translate(width/2,height/2);
 	scale(height/2);
-	background(21, 8, 50,bkgOpactity);
+	background(bkg,bkgOpactity);
 
 
 
-	for(let i=0;i<1000;i++){
-		oX.move();
-		oY.move();
-		//circle(oX.q,oY.q,0,0)
+	for(var i = 0; i <= maxSHOs; i++){
+		os[i].drawOrbit(doDraw(i));
+		// if(i%floor(maxSHOs/numSHOs)==0){
 
-		xLast=x;
-		yLast=y;
+		// 	os[i].drawOrbit(doRender);
+		// }
+		
+	}
+	if(doMarkPoint){
+		for(var i = 0; i <= maxSHOs; i++){
+			if(doDraw(i)){
+				os[i].drawPoint();
+			}
+		}
+	}
+	
+	if(doGraph){
+		updateGraph();
+		image(graph,-1,-1,.5,.5);
+	}
+	
+	//capture frame
+	if(gifCapturing){
+		console.log(gifFrames);
+		capturer.capture(document.getElementById('defaultCanvas0'));
+		gifFrames+=1;
+		if(gifFrames>=loopTime*fps){
+			capturer.stop();
+			capturer.save();
+			gifCapturing=false;
+			gifFrames=0;
+		}
 
-		x=oX.q;
-		y=oY.q;
+		
+	}
+	
+}
 
-		if(doLine){line(x,y,xLast,yLast);}
-		else{circle(x,y,0,0)}
+//decide wether or not the ith osscilator should actually be drawn
+function doDraw(i){
+	return i%floor(maxSHOs/numSHOs)==0 || i==maxSHOs;
+}
+
+function addPhaseOffest(p){
+	for(var i = 0; i <= maxSHOs; i++){
+		t=i/maxSHOs;
+		os[i].move(t*p);
+	}
+}
+
+
+class DoubleOsscilator{
+	constructor(Mx,rx,px, My,ry,py,color){
+		this.x=new Osscilator(Mx,rx,px);
+		this.y=new Osscilator(My,ry,py);
+		this.color=color;
+		//this.pOffset=phaseOffset;
 	}
 
+	move(p){
+		this.x.move(p);
+		this.y.move(p);
+	}
 
+	draw(){ //allow different hcoice of canvas
+		push();
+		strokeWeight(.02);
+		//let col = this.color;
+		//col.setAlpha(40);
+		stroke(this.color);
+		if(doLine){
+			line(this.x.q,this.y.q, this.x.qLast, this.y.qLast);
+		}else {
+			circle(this.x.q,this.y.q,0,0);
+		}
+		col.setAlpha(255);
+		pop();
+	}
 
+	drawOrbit(doRender){
+		for(let n=0;n<resolution;n++){
+			this.x.move(1/resolution);
+			this.y.move(1/resolution);
+			if(doRender){
+				this.draw();
+			}
+		}
+		if(doEvolve){ //move a tiny bit extra
+			let phaseVel = markedVelocity/200;
+			this.x.move(phaseVel);
+			this.y.move(phaseVel);
+		}
+	}
 
-	updateGraph()
-	image(graph,0,-1,.5,.5)
+	drawPoint(){
+		push();
+		strokeWeight(.003);
+		stroke(color3);
+		fill(this.color);
+		circle(this.x.q,this.y.q,.05,.05);
+		pop();
+	}
 }
+
+
+
+
+class Osscilator{
+	constructor(M,r,phaseOffset){
+		this.M=M
+		this.r=r;
+		this.phaseOffset=phaseOffset;
+		this.phase=0;
+
+		this.dM=0;
+
+		this.q=0;
+		this.qLast=0;
+
+	}
+
+	//Always repeates with period an integer divsor of 1
+	move(t){ //eolve by time t
+		//this.rLast=this.r;
+		//this.phaseLast=this.phase;
+		this.qLast=this.q;
+		this.phase = this.phase + (this.M+this.dM)* t;
+		this.q=this.r*sin((this.phase+this.phaseOffset)*2*PI);
+	}
+
+	getH(){
+		return 4*pow(this.r,2)
+	}
+	getMass(){
+		return this.M+this.dM;
+	}
+
+}
+
 
 function updateGraph(){
 	graph.push();
-	graph.rotate( atan2(oY.getMass(),oX.getMass()) );
+	//graph.rotate( atan2(o.y.getMass(),o.x.getMass()) );
+	//graph.rotate( atan2(oYs[1].getMass(),oXs[1].getMass()) );
 	let s=graphScale;
 	drawGrid(graph,s);
 
-	graph.fill(255,0,0);
-	graph.ellipse(oX.getH()/s,oY.getH()/s,.1,.1)
+	//graph.ellipse(o.x.getH()/s,o.y.getH()/s,.1,.1);
+	for(var i = 0; i <= maxSHOs; i++){
+		if(doDraw(i)){
+			graph.fill(os[i].color);
+			graph.ellipse(os[i].x.getH()/s,os[i].y.getH()/s,.1,.1);
+		}
+	}
 	graph.pop();
 }
+
 
 function drawGrid(g,scale){
 	g.background(0);
@@ -117,100 +343,30 @@ function drawGrid(g,scale){
 	
 }
 
-class Osscilator{
-	constructor(M,r,phase){
-		this.M=M
-		this.r=r;
-		this.phase=phase;
-
-		this.dM=0;
-
-
-		this.step=.01;
-	}
-
-	move(){
-		this.phase = this.phase + (this.M+this.dM)* this.step;
-		this.q=this.r*sin(this.phase);
-	}
-
-	getH(){
-		return 4*pow(this.r,2)
-	}
-
-	getMass(){
-		return this.M+this.dM;
-	}
-
-
+function setupGraph(){
+	graph = createGraphics(200,200);
+	graph.translate(graph.width/2,graph.height/2);
+	graph.scale(graph.height/2);
+	graph.scale(1,-1); //set it so positive quadrent is positive
+	graph.background(0);
+	graph.stroke(255);
+	graph.strokeWeight(.01);
 }
 
 
-// class Point{
-// 	constructor(pos){
-// 		this.q=pos;
-// 		this.qLast=pos;
-// 		this.p=createVector(0,0);
-// 	}
-	
-// 	move(){
-// 		this.qLast = this.q.copy();
+//togge gui visibility
+function keyPressed(){
+	switch(key) {
+		case 'h':
+			settings.toggleVisibility();
+			break;
+  }  
+}
 
+function makeGif(){
+	console.log("make gif");
+	capturer.start();
+	gifCapturing=true;
 
-		
-
-
-// 		if(doRotate){
-// 			//map that matters
-
-// 			//let angle=Math.pow((this.pos.mag()-.5),2)-.25; //logistic
-
-
-// 			this.pos.rotate(this.startPos.mag()*PI*2);
-
-// 		}
-		
-
-
-// 		// //-----Add Perturbation----
-// 		n.periodic=true;
-// 		perturb = noiseVector(this.lastPos.x,this.lastPos.y,angle,n);
-// 		perturb.mult(perturbationStr);
-// 		perturb.rotate(PI/2);
-
-// 		this.pos= this.pos.add(perturb);
-// 		if(this.pos.x<-1){this.pos.x+=2; this.crossing=true;};
-// 		if(this.pos.x>1){this.pos.x-=2;this.crossing=true;};
-
-// 		if(this.pos.y<-1){this.pos.y+=2;this.crossing=true;};
-// 		if(this.pos.y>1){this.pos.y-=2;this.crossing=true;};
-
-// 		let distFromStart = dist(this.pos,this.startPos);
-// 		if(this.minDis>distFromStart){
-// 			this.minDist=distFromStart; 
-// 			this.denominator}
-// 	}
-	
-// 	display(){
-	
-// 		noStroke();
-// 		fill(this.color);
-// 		ellipse(this.pos.x,this.pos.y,this.radius,this.radius);
-		
-
-// 		stroke(color(red(this.color),green(this.color),blue(this.color),30));
-// 		strokeWeight(.005);
-// 		if(doShowLines && !this.crossing){
-// 			line(this.lastPos.x,this.lastPos.y,this.pos.x,this.pos.y); //draw line between last 2 points
-// 		}
-// 		this.crossing=false;
-// 	}
-	
-// 	setAlpha(alpha){
-// 		this.color=color(red(this.color),green(this.color),blue(this.color),alpha);
-// 	}
-	
-// 	resetPos(){
-// 		this.pos=this.startPos.copy();
-// 	}
-// }
+	console.log(gifFrames);
+}
