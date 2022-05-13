@@ -32,7 +32,7 @@ let fps=30;
 
 
 function setup(){
-	c=createCanvas(windowWidth,windowHeight);
+	c=createCanvas(500,500);
 
 	bkg = color(11, 13, 31);
 	color1=color(188, 182, 207);
@@ -196,7 +196,10 @@ function draw(){
 
 //decide wether or not the ith osscilator should actually be drawn
 function doDraw(i){
-	return i%floor(maxSHOs/numSHOs)==0 || i==maxSHOs;
+	if(numSHOs==1){return i==50}
+	else {
+		return i%floor(maxSHOs/numSHOs)==0 || i==maxSHOs;
+	}
 }
 
 function addPhaseOffest(p){
