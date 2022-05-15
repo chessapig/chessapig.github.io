@@ -5,12 +5,12 @@ let n=1,
 	doGraph=false,
 	doEvolve=false;
 	doMarkPoint=true;
-	perturb=-3;
+	perturb=-2.5;
 	perturbAngle=0;
 	perturbMin=-5,
-	bkgOpactity=50,
+	bkgOpactity=100,
 	graphScale=3,
-	resolution=30,
+	resolution=100,
 	markedVelocity=.5;
 	perminantOffset=-0.25;
 
@@ -34,11 +34,14 @@ let fps=30;
 function setup(){
 	c=createCanvas(windowWidth,windowHeight);
 
-	bkg = color(11, 13, 31);
-	color1=color(188, 182, 207);
-	color2=color(87, 4, 99);
-	color3=color(230, 247, 181);
-
+	//bkg = color(11, 13, 31);
+	bkg=color(BKG);
+	//color1=color(188, 182, 207);
+	color1=color(WHITE);
+	//color2=color(87, 4, 99);
+	color2=color(GREEN);
+	//color3=color(230, 247, 181);
+	color3=color(YELLOW);
 
 	background(bkg);
 
@@ -134,7 +137,7 @@ function setup(){
 
 
 	settings.hideControl("X radius").hideControl("Y radius");
-	settings.hideControl("graph scale").hideControl("draw graph?");
+	settings.hideControl("graph scale").hideControl("Save");
 	// oY.dM=.001;
 
 	setupGraph();
@@ -152,9 +155,15 @@ function updatePerturb(){
 function draw(){
 	translate(width/2,height/2);
 	scale(height/2);
-	background(bkg,bkgOpactity);
+	let bkg_color = color(BKG);
+	bkg_color.setAlpha(bkgOpactity);
+	background(bkg_color);
 
 
+	if(doGraph){
+		updateGraph();
+		image(graph,-1,-1,.75,.75);
+	}
 
 	for(var i = 0; i <= maxSHOs; i++){
 		os[i].drawOrbit(doDraw(i));
@@ -172,10 +181,7 @@ function draw(){
 		}
 	}
 	
-	if(doGraph){
-		updateGraph();
-		image(graph,-1,-1,.5,.5);
-	}
+	
 	
 	//capture frame
 	if(gifCapturing){
@@ -196,7 +202,10 @@ function draw(){
 
 //decide wether or not the ith osscilator should actually be drawn
 function doDraw(i){
-	return i%floor(maxSHOs/numSHOs)==0 || i==maxSHOs;
+	if(numSHOs==1){return i==50}
+	else {
+		return i%floor(maxSHOs/numSHOs)==0 || i==maxSHOs;
+	}
 }
 
 function addPhaseOffest(p){
@@ -315,9 +324,9 @@ function updateGraph(){
 
 
 function drawGrid(g,scale){
-	g.background(0);
+	g.background(color(DARK));
 	g.strokeWeight(0.01);
-	g.stroke(255,100);
+	g.stroke(color(WHITE));
 
 	//minor grid
 	for(let n=0; n<2*scale; n=n+0.5){
