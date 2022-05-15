@@ -55,12 +55,8 @@ class Oscillator2D_sim{
 
 	update(){
 		this.p.over();
-<<<<<<< Updated upstream
 		let maxFreq=max(this.freqX,this.freqY);
 		let dt=.005*this.timeScale/maxFreq; 
-=======
-		let dt=.005*this.timeScale; 
->>>>>>> Stashed changes
 		
 
 		let fX = -this.x;
@@ -68,13 +64,8 @@ class Oscillator2D_sim{
 		let damp=1;
 		if(this.p.dragging){
 			let mouseF=20;
-<<<<<<< Updated upstream
 			fX = mouseF*maxFreq/this.freqX*(mX-this.x);
 			fY = mouseF*maxFreq/this.freqY*(mY-this.y);
-=======
-			fX = mouseF*(mX-this.x);
-			fY = mouseF*(mY-this.y);
->>>>>>> Stashed changes
 			damp=0.98;
 		} 
 		this.px = damp*(this.px+fX*dt);
