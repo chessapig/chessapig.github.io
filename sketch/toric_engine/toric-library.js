@@ -156,6 +156,7 @@ class Oscillator1D_sim extends Oscillator2D_sim{
 		this.y=0;
 		this.py=0;
 	}
+	
 }
 
 
