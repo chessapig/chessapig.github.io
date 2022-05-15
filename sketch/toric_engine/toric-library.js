@@ -1,4 +1,5 @@
 let BKG = '#2c2621';
+//let BKG = '#ffffff';
 let DARK = '#1b1613';
 let WHITE = '#e6cfb3';
 let OLIVE = '#806D30';
@@ -35,55 +36,119 @@ function drawSpring(point,x0,y0){
 }
 
 class Oscillator2D_sim{
-	constructor(x,px,massX,y,py,massY){
+	constructor(x,px,freqX,y,py,freqY){
 		this.x=x;
 		this.y=y;
 		this.px=px;
 		this.py=py;
-		this.massX=massX;
-		this.massY=massY;
+		this.freqX=freqX;
+		this.freqY=freqY;
+		this.timeScale=1;
 
 		this.p = new Point(x,y);
-		this.k=2;
+
+		this.doDrawOrbit=true;
+		this.doDrawSpring=true;
+		this.resolution=100;
+		this.doRotateEvolve=false;
 	}
 
 	update(){
 		this.p.over();
-		let dt=.005; 
+		let maxFreq=max(this.freqX,this.freqY);
+		let dt=.005*this.timeScale/maxFreq; 
+		
 
-		let fX = -this.k*this.x;
-		let fY = -this.k*this.y;
-		let mouseF=20;
+		let fX = -this.x;
+		let fY = -this.y;
 		let damp=1;
 		if(this.p.dragging){
-			fX = mouseF*(mX-this.x);
-			fY = mouseF*(mY-this.y);
+			let mouseF=20;
+			fX = mouseF*maxFreq/this.freqX*(mX-this.x);
+			fY = mouseF*maxFreq/this.freqY*(mY-this.y);
 			damp=0.98;
-		}
+		} 
+		this.px = damp*(this.px+fX*dt);
+		this.py = damp*(this.py+fY*dt);
 
-		this.px = damp*(this.px-fX*dt);
-		this.py = damp*(this.py-fY*dt);
-
-		this.x += -this.px/this.massX * dt;
-		this.y += -this.py/this.massY * dt;
-
-
+		this.x += this.px*this.freqX**2 * dt;
+		this.y += this.py*this.freqY**2 * dt;
+		 
 		this.p.moveTo(this.x,this.y);
-		
+
+		//this.makeTrueOscillator();
 	}
 
 	draw(){
-		drawSpring(this.p,0,0);
-		 this.p.draw();
+		if(this.doDrawOrbit){
+			this.drawOrbit();
+		}
+		if(this.doDrawSpring){
+			drawSpring(this.p,0,0);
+		}
+		this.p.draw();
 	}
+
+
+	drawOrbit(){
+		for(let n=0;n<this.resolution;n++){
+			this.rotatePhase(1/this.resolution*2*PI);
+			stroke(color(WHITE));
+			line(this.x,this.y, this.xLast, this.yLast);
+			if(n%10==1){
+				//this.p.draw();
+			}
+		}
+	}
+
+	//calculate the phase and radius, increase the phse by t, then calculate the position and momenta again
+	rotatePhase(t){
+		this.xLast=this.x;
+		this.yLast=this.y;
+		this.makeActionAngleCoords();
+		this.phaseX+=t*this.freqX;
+		this.phaseY+=t*this.freqY;
+		this.makePhysicalCoords();
+		//this.x+=t*.1;
+		//console.log(this);
+		//noLoop();
+
+	}
+
+	makeActionAngleCoords(){
+
+		var pXscaled=this.px*this.freqX;
+		var pYscaled=this.py*this.freqY;
+
+		//radii of each
+		this.rX=sqrt(this.x**2+pXscaled**2);
+		this.rY=sqrt(this.y**2+pYscaled**2);
+
+		//phase of each
+		this.phaseX=atan2(this.x,pXscaled);
+		this.phaseY=atan2(this.y,pYscaled);
+
+	}
+
+	makePhysicalCoords(){
+		this.x=this.rX*sin(this.phaseX);
+		this.px=this.rX*cos(this.phaseX)/this.freqX;
+
+		this.y=this.rY*sin(this.phaseY);
+		this.py=this.rY*cos(this.phaseY)/this.freqY;
+		this.p.moveTo(this.x,this.y);
+	}
+
+
+
 
 
 }
 
 
 class Oscillator1D_sim extends Oscillator2D_sim{
-	constructor(x,px,massX){
-		super(x,px,massX,0,0,1);
+	constructor(x,px,freq){
+		super(x,px,freq,0,0,1);
 	}
 
 	update(){
@@ -102,6 +167,9 @@ class Oscillator2D{
 		this.color=color;
 
 		this.p=new Point(this.x.q,this.y.q);
+		this.doEvolve=false;
+		this.evolutionRate=5;
+		this.resolution=10;
 		//this.pOffset=phaseOffset;
 	}
 
@@ -132,16 +200,14 @@ class Oscillator2D{
 	// 	pop();
 	// }
 
-	drawOrbit(doRender){
-		for(let n=0;n<resolution;n++){
-			this.x.move(1/resolution);
-			this.y.move(1/resolution);
-			if(doRender){
-				this.draw();
-			}
+	drawOrbit(){
+		for(let n=0;n<this.resolution;n++){
+			this.x.move(1/this.resolution);
+			this.y.move(1/this.resolution);
+			line(this.x.q,this.y.q, this.x.qLast, this.y.qLast);
 		}
-		if(doEvolve){ //move a tiny bit extra
-			let phaseVel = markedVelocity/200;
+		if(this.doEvolve){ //move a tiny bit extra
+			let phaseVel = evolutionRate/200;
 			this.x.move(phaseVel);
 			this.y.move(phaseVel);
 		}
@@ -402,3 +468,132 @@ class Point{
 		//this.dy= mY-pmY;
 	}
 }
+
+
+
+// class Oscillator2D_sim{
+// 	constructor(x,px,massX,y,py,massY){
+// 		this.x=x;
+// 		this.y=y;
+// 		this.px=px;
+// 		this.py=py;
+// 		this.massX=massX;
+// 		this.massY=massY;
+
+// 		this.p = new Point(x,y);
+// 		this.k=1;
+
+// 		this.doDrawOrbit=true;
+// 		this.doDrawSpring=true;
+// 		this.resolution=100;
+// 		this.doRotateEvolve=false;
+
+// 		this.freqX = sqrt(this.k/this.massX);
+// 		this.freqY = sqrt(this.k/this.massY);
+// 	}
+
+// 	update(){
+// 		this.p.over();
+// 		let dt=.005; 
+
+// 		if(!this.doRotateEvolve){
+// 			let fX = -this.k*this.x;
+// 			let fY = -this.k*this.y;
+// 			let mouseF=20;
+// 			let damp=1;
+// 			if(this.p.dragging){
+// 				fX = mouseF*(mX-this.x);
+// 				fY = mouseF*(mY-this.y);
+// 				damp=0.98;
+// 			} 
+// 			this.px = damp*(this.px+fX*dt);
+// 			this.py = damp*(this.py+fY*dt);
+
+// 			this.x += this.px/this.massX * dt;
+// 			this.y += this.py/this.massY * dt;
+// 		} else {
+// 			if(this.p.dragging){
+// 				let fX = -this.k*this.x;
+// 				let fY = -this.k*this.y;
+// 				let mouseF=20;
+// 				let damp=1;
+// 					fX = mouseF*(mX-this.x);
+// 					fY = mouseF*(mY-this.y);
+// 					damp=0.98;
+
+// 				this.px = damp*(this.px-fX*dt);
+// 				this.py = damp*(this.py-fY*dt);
+	
+// 				this.x += -this.px/this.massX * dt;
+// 				this.y += -this.py/this.massY * dt;
+// 				// this.x += -this.px/this.massX * dt;
+// 				// this.y += -this.py/this.massY * dt;
+// 			} else {
+// 				this.rotatePhase(-.001);
+// 			}
+// 		}
+		 
+// 		this.p.moveTo(this.x,this.y);
+
+// 		//this.makeTrueOscillator();
+// 	}
+
+// 	draw(){
+// 		if(this.doDrawOrbit){
+// 			this.drawOrbit();
+// 		}
+// 		if(this.doDrawSpring){
+// 			drawSpring(this.p,0,0);
+// 		}
+// 		this.p.draw();
+// 	}
+
+
+// 	drawOrbit(){
+// 		for(let n=0;n<this.resolution;n++){
+// 			this.rotatePhase(1/this.resolution);
+// 			line(this.x,this.y, this.xLast, this.yLast);
+// 		}
+// 	}
+
+// 	//calculate the phase and radius, increase the phse by t, then calculate the position and momenta again
+// 	rotatePhase(t){
+// 		this.xLast=this.x;
+// 		this.yLast=this.y;
+// 		this.makeActionAngleCoords();
+// 		this.phaseX+=t*2*PI;
+// 		this.phaseY+=t*2*PI;
+// 		this.makePhysicalCoords();
+// 		//this.x+=t*.1;
+// 		//console.log(this);
+// 		//noLoop();
+
+// 	}
+
+// 	makeActionAngleCoords(){
+// 		//radii of each
+// 		this.rX=sqrt(this.x**2+this.px**2);
+// 		this.rY=sqrt(this.y**2+this.py**2);
+
+// 		//phase of each
+// 		this.phaseX=atan2(this.x,this.px);
+// 		this.phaseY=atan2(this.y,this.py);
+
+// 		//hamiltonian of each
+// 		this.HX = this.rX*this.massX;
+// 		this.HY = this.rY*this.massY;
+// 	}
+
+// 	makePhysicalCoords(){
+// 		this.x=this.rX*sin(this.phaseX);
+// 		this.px=this.rX*cos(this.phaseX);
+
+// 		this.y=this.rY*sin(this.phaseY);
+// 		this.py=this.rY*cos(this.phaseY);
+// 	}
+
+
+
+
+
+// }

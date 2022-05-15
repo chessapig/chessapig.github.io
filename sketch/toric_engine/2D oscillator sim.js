@@ -6,18 +6,25 @@ let pos_gX = [0,2]; //x-osscilaotor graph base position
 let pos_oY = [1,0]; //x-osscilaotor base position
 let pos_gY = [2,0]; //x-osscilaotor graph base position
 
-let slider_massX;
-let slider_massY;
+let slider_freqX;
+let slider_freqY;
 
+let res=500;
+let xOffset=0;
 
 function setup() {
-	c = createCanvas(500, 500);
-	//c = createCanvas(windowWidth, windowHeight);
+	
+	res=windowHeight;
+	xOffset=(windowWidth-windowHeight)/2;
+	//c = createCanvas(res, res);
+	c = createCanvas(windowWidth, windowHeight);
 	strokeWeight(.01);
 
 	
-	oSim=new Oscillator2D_sim(.2,0,1,.2,-.2,3);
+	oSim=new Oscillator2D_sim(.5,0,3,.2,-.2,1);
 	oSim.p.size=2;
+	oSim.timeScale=1;
+	//oSim.doDrawOrbit=false;
 
 	gX=new Graph(); //graph of phase space in X-axis
 	//gX.doMinorGrid=false;
@@ -42,15 +49,15 @@ function setup() {
 	gY.setup();
 
 	normalizeCoords();
-	slider_massX = createSlider(1, 5, 1, 1);
-	slider_massY = createSlider(1, 5, 1, 1);
+	slider_freqX = createSlider(1, 5, oSim.freqX, 1);
+	slider_freqY = createSlider(1, 5, oSim.freqY, 1);
 
 	rotate(PI/2);
-	slider_massX.position(275, 325);
-	slider_massX.style('width', '200px')
+	slider_freqX.position(275/500*res+xOffset, 325/500*res);
+	slider_freqX.style('width', '200px')
 
-	slider_massY.position(275, 425);
-	slider_massY.style('width', '200px')
+	slider_freqY.position(275/500*res+xOffset, 425/500*res);
+	slider_freqY.style('width', '200px')
   }
 
 function draw() {
@@ -58,22 +65,24 @@ function draw() {
 	background_color.setAlpha(200);
 	background(background_color);
 
-	//update values of masses
-	let massX=slider_massX.value();
-	let massY=slider_massY.value();
-	oSim.massX=massX;
-	oSim.massY=massY;
+	//update values of periods
+	let freqX=slider_freqX.value();
+	let freqY=slider_freqY.value();
+	oSim.freqX=freqX;
+	oSim.freqY=freqY;
 
 	push();
 		textSize(18);
 		fill(color(WHITE));
-		text('Mass of X-oscillator: ', 275, 305);
-		text('Mass of Y-oscillator: ', 275, 405);
+		text('Freq. of X-oscillator: ', 275/500*res+xOffset, 305/500*res);
+		text('Freq. of Y-oscillator: ', 275/500*res+xOffset, 405/500*res);
 
 		textSize(24);
 		fill(color(YELLOW));
-		text(str(massX), 450, 305);
-		text(str(massY), 450, 405);
+		text(str(freqX), 450/500*res+xOffset, 305/500*res);
+		text(str(freqY), 450/500*res+xOffset, 405/500*res);
+
+		//text(str(oSim.rX*cos(oSim.phaseX)),30,30);
 	pop();
 
 	normalizeCoords();
@@ -84,23 +93,35 @@ function draw() {
 	scale(rescale);
 	mX/=rescale;mY/=rescale;
 
+	//draw many points along orbit
+	// let Points=[];
+	// let numPts=5;
+	// for(let n=0;n<numPts;n++){
+	// 	oSim.rotatePhase(1/numPts*2*PI);
+	// 	oSim.p.draw();
+	// 	Points.push(new Point(oSim.p.x,oSim.px));
+	// 	//Points[n].draw();
+	// }
 	
 	//draw X osscilator graph
 	push();
 		translate(pos_gX[0],pos_gX[1]);
 		gX.update();
-		gX.drawPoint(oSim.x,oSim.px/oSim.massX,color(WHITE));
+		// for(let n=0;n<numPts;n++){
+		// 	gX.drawPoint(Points[n].x,Points[n].y*oSim.freqX,color(WHITE));
+		// }
+		gX.drawPoint(oSim.x,oSim.px*oSim.freqX,color(WHITE));
 		gX.drawBorder();
 		image(gX.c,-1,-1,2,2);
 	pop();
 
-	//draw X osscilator graph
+	//draw Y osscilator graph
 	push();
 		translate(pos_gY[0],pos_gY[1]);
 		gY.c.push();
 		gY.c.rotate(-PI/2);
 		gY.update();
-		gY.drawPoint(oSim.y,oSim.py/oSim.massY/2,color(WHITE));
+		gY.drawPoint(oSim.y,oSim.py*oSim.freqY,color(WHITE));
 		gY.drawBorder();
 		gY.c.pop();
 		image(gY.c,-1,-1,2,2);
