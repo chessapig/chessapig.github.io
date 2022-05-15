@@ -23,8 +23,12 @@ function setup() {
 	
 	oSim=new Oscillator2D_sim(.5,0,3,.2,-.2,1);
 	oSim.p.size=2;
+<<<<<<< Updated upstream
 	oSim.timeScale=1;
 	//oSim.doDrawOrbit=false;
+=======
+	oSim.doDrawOrbit=false;
+>>>>>>> Stashed changes
 
 	gX=new Graph(); //graph of phase space in X-axis
 	//gX.doMinorGrid=false;
@@ -53,10 +57,17 @@ function setup() {
 	slider_freqY = createSlider(1, 5, oSim.freqY, 1);
 
 	rotate(PI/2);
+<<<<<<< Updated upstream
 	slider_freqX.position(275/500*res+xOffset, 325/500*res);
 	slider_freqX.style('width', '200px')
 
 	slider_freqY.position(275/500*res+xOffset, 425/500*res);
+=======
+	slider_freqX.position(275, 325);
+	slider_freqX.style('width', '200px')
+
+	slider_freqY.position(275, 425);
+>>>>>>> Stashed changes
 	slider_freqY.style('width', '200px')
   }
 
@@ -74,6 +85,7 @@ function draw() {
 	push();
 		textSize(18);
 		fill(color(WHITE));
+<<<<<<< Updated upstream
 		text('Freq. of X-oscillator: ', 275/500*res+xOffset, 305/500*res);
 		text('Freq. of Y-oscillator: ', 275/500*res+xOffset, 405/500*res);
 
@@ -81,6 +93,15 @@ function draw() {
 		fill(color(YELLOW));
 		text(str(freqX), 450/500*res+xOffset, 305/500*res);
 		text(str(freqY), 450/500*res+xOffset, 405/500*res);
+=======
+		text('Freq. of X-oscillator: ', 275, 305);
+		text('Freq. of Y-oscillator: ', 275, 405);
+
+		textSize(24);
+		fill(color(YELLOW));
+		text(str(freqX), 450, 305);
+		text(str(freqY), 450, 405);
+>>>>>>> Stashed changes
 
 		//text(str(oSim.rX*cos(oSim.phaseX)),30,30);
 	pop();
