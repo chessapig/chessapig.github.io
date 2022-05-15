@@ -32,7 +32,7 @@ let fps=30;
 
 
 function setup(){
-	c=createCanvas(500,500);
+	c=createCanvas(windowWidth,windowHeight);
 
 	//bkg = color(11, 13, 31);
 	bkg=color(BKG);
