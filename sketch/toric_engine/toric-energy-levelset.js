@@ -8,7 +8,7 @@ let n=1,
 	perturb=-2.5;
 	perturbAngle=0;
 	perturbMin=-5,
-	bkgOpactity=100,
+	bkgOpactity=255,
 	graphScale=3,
 	resolution=100,
 	markedVelocity=.5;
@@ -32,7 +32,7 @@ let fps=30;
 
 
 function setup(){
-	c=createCanvas(windowWidth,windowHeight);
+	c=createCanvas(windowWidth,windowHeight,SVG);
 
 	//bkg = color(11, 13, 31);
 	bkg=color(BKG);
@@ -46,7 +46,8 @@ function setup(){
 	background(bkg);
 
 	stroke(255);
-	strokeWeight(.01);
+	//strokeWeight(.01);
+	strokeWeight(1);
 	fill(255);
 	t=0;
 	x=0;
@@ -123,7 +124,10 @@ function setup(){
 		.addBoolean("Evolve around ?",doEvolve,function(value) {doEvolve = value;})
 		.addBoolean("Mark a point?",doMarkPoint,function(value) {doMarkPoint = value;})
 		.addRange("velocity of evolution",0,1,markedVelocity,.01,function(value) {markedVelocity = value; })
-		.addButton("Save",function(){makeGif();});
+		//.addButton("Save",function(){makeGif();});
+
+	settings = QuickSettings.create(220,10, "save")
+		.addButton("Save svg", () => save() );
 
 	//setup gif encoder
 	frameRate(fps)
@@ -231,7 +235,8 @@ class DoubleOsscilator{
 
 	draw(){ //allow different hcoice of canvas
 		push();
-		strokeWeight(.02);
+		//strokeWeight(.02);
+		strokeWeight(2);
 		//let col = this.color;
 		//col.setAlpha(40);
 		stroke(this.color);
@@ -261,7 +266,8 @@ class DoubleOsscilator{
 
 	drawPoint(){
 		push();
-		strokeWeight(.003);
+		//strokeWeight(.003);
+		strokeWeight(1);
 		stroke(color3);
 		fill(this.color);
 		circle(this.x.q,this.y.q,.05,.05);

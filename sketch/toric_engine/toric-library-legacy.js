@@ -503,32 +503,42 @@ class Graph{
 
 
 class Point{
-	//p is position
-	//c is canvas
-	constructor(p){
-		this.p=p;
-
-		this.fill=color(GREEN);
-		this.stroke=color(WHITE);
-		this.strokeWeight=.01;
+	constructor(x,y){
+		this.x=x;
+		this.y=y;
+		this.moveTo(x,y);
 		
+
 		this.size=1;
 		this.detectionRadius=1;
 
 		this.rollover=false; //is the mouse over the object?
 		this.dragging=false; //is the object being dragged?
+
+		// this.doTrail=true;
+		// this.trail= createGraphics(300,300);
+		// this.trail.translate(this.trail.width/2,this.trail.height/2);
+		// this.trail.scale(this.trail.height/2);
+		// this.trail.stroke(color(PURPLE));
+		// this.trail.strokeWeight(.01);
+		// this.trail.fill(color(PURPLE));
+		//this.trail.background(color(BKG));
 	}
 
-	set p(p){
-		this.pLast=this.p;
+	moveTo(x,y){
+		this.xlast=this.x;
+		this.x=x;
+
+		this.ylast=this.y;
+		this.y=y;
 	}
 
-	// easeTo(x,y){
-	// 	let ease=.9;
-	// 	let easeX=(this.x-x)*ease+x;
-	// 	let easeY=(this.y-y)*ease+y;
-	// 	this.moveTo(easeX,easeY);
-	// }
+	easeTo(x,y){
+		let ease=.9;
+		let easeX=(this.x-x)*ease+x;
+		let easeY=(this.y-y)*ease+y;
+		this.moveTo(easeX,easeY);
+	}
 
 
 	draw(){
@@ -561,7 +571,7 @@ class Point{
 		} else { this.rollover=true;}
 	}
 
-	drag() {
+	update() {
 		// Adjust location if being dragged
 		if(this.dragging){
 			this.easeTo(mX,mY);
@@ -647,3 +657,130 @@ class Cx{
 
 
 }
+
+// class Oscillator2D_sim{
+// 	constructor(x,px,massX,y,py,massY){
+// 		this.x=x;
+// 		this.y=y;
+// 		this.px=px;
+// 		this.py=py;
+// 		this.massX=massX;
+// 		this.massY=massY;
+
+// 		this.p = new Point(x,y);
+// 		this.k=1;
+
+// 		this.doDrawOrbit=true;
+// 		this.doDrawSpring=true;
+// 		this.resolution=100;
+// 		this.doRotateEvolve=false;
+
+// 		this.freqX = sqrt(this.k/this.massX);
+// 		this.freqY = sqrt(this.k/this.massY);
+// 	}
+
+// 	update(){
+// 		this.p.over();
+// 		let dt=.005; 
+
+// 		if(!this.doRotateEvolve){
+// 			let fX = -this.k*this.x;
+// 			let fY = -this.k*this.y;
+// 			let mouseF=20;
+// 			let damp=1;
+// 			if(this.p.dragging){
+// 				fX = mouseF*(mX-this.x);
+// 				fY = mouseF*(mY-this.y);
+// 				damp=0.98;
+// 			} 
+// 			this.px = damp*(this.px+fX*dt);
+// 			this.py = damp*(this.py+fY*dt);
+
+// 			this.x += this.px/this.massX * dt;
+// 			this.y += this.py/this.massY * dt;
+// 		} else {
+// 			if(this.p.dragging){
+// 				let fX = -this.k*this.x;
+// 				let fY = -this.k*this.y;
+// 				let mouseF=20;
+// 				let damp=1;
+// 					fX = mouseF*(mX-this.x);
+// 					fY = mouseF*(mY-this.y);
+// 					damp=0.98;
+
+// 				this.px = damp*(this.px-fX*dt);
+// 				this.py = damp*(this.py-fY*dt);
+	
+// 				this.x += -this.px/this.massX * dt;
+// 				this.y += -this.py/this.massY * dt;
+// 				// this.x += -this.px/this.massX * dt;
+// 				// this.y += -this.py/this.massY * dt;
+// 			} else {
+// 				this.rotatePhase(-.001);
+// 			}
+// 		}
+		 
+// 		this.p.moveTo(this.x,this.y);
+
+// 		//this.makeTrueOscillator();
+// 	}
+
+// 	draw(){
+// 		if(this.doDrawOrbit){
+// 			this.drawOrbit();
+// 		}
+// 		if(this.doDrawSpring){
+// 			drawSpring(this.p,0,0);
+// 		}
+// 		this.p.draw();
+// 	}
+
+
+// 	drawOrbit(){
+// 		for(let n=0;n<this.resolution;n++){
+// 			this.rotatePhase(1/this.resolution);
+// 			line(this.x,this.y, this.xLast, this.yLast);
+// 		}
+// 	}
+
+// 	//calculate the phase and radius, increase the phse by t, then calculate the position and momenta again
+// 	rotatePhase(t){
+// 		this.xLast=this.x;
+// 		this.yLast=this.y;
+// 		this.makeActionAngleCoords();
+// 		this.phaseX+=t*2*PI;
+// 		this.phaseY+=t*2*PI;
+// 		this.makePhysicalCoords();
+// 		//this.x+=t*.1;
+// 		//console.log(this);
+// 		//noLoop();
+
+// 	}
+
+// 	makeActionAngleCoords(){
+// 		//radii of each
+// 		this.rX=sqrt(this.x**2+this.px**2);
+// 		this.rY=sqrt(this.y**2+this.py**2);
+
+// 		//phase of each
+// 		this.phaseX=atan2(this.x,this.px);
+// 		this.phaseY=atan2(this.y,this.py);
+
+// 		//hamiltonian of each
+// 		this.HX = this.rX*this.massX;
+// 		this.HY = this.rY*this.massY;
+// 	}
+
+// 	makePhysicalCoords(){
+// 		this.x=this.rX*sin(this.phaseX);
+// 		this.px=this.rX*cos(this.phaseX);
+
+// 		this.y=this.rY*sin(this.phaseY);
+// 		this.py=this.rY*cos(this.phaseY);
+// 	}
+
+
+
+
+
+// }

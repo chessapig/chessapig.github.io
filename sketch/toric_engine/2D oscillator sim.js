@@ -68,7 +68,7 @@ function draw() {
 	//update values of periods
 	let freqX=slider_freqX.value();
 	let freqY=slider_freqY.value();
-	oSim.freqX=freqX;
+	oSim.freqX=freqX;//+.001;
 	oSim.freqY=freqY;
 
 	push();
@@ -110,7 +110,7 @@ function draw() {
 		// for(let n=0;n<numPts;n++){
 		// 	gX.drawPoint(Points[n].x,Points[n].y*oSim.freqX,color(WHITE));
 		// }
-		gX.drawPoint(oSim.x,oSim.px*oSim.freqX,color(WHITE));
+		gX.drawPoint([oSim.x,oSim.px*oSim.freqX],color(WHITE));
 		gX.drawBorder();
 		image(gX.c,-1,-1,2,2);
 	pop();
@@ -121,7 +121,7 @@ function draw() {
 		gY.c.push();
 		gY.c.rotate(-PI/2);
 		gY.update();
-		gY.drawPoint(oSim.y,oSim.py*oSim.freqY,color(WHITE));
+		gY.drawPoint([oSim.y,oSim.py*oSim.freqY],color(WHITE));
 		gY.drawBorder();
 		gY.c.pop();
 		image(gY.c,-1,-1,2,2);
