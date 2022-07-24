@@ -71,19 +71,19 @@ class Controls {
         if(!controls.enabled){ return;}
         const {x, y, deltaY} = e;
         const direction = deltaY > 0 ? -1 : 1;
-        const factor = 0.05;
-        const zoom =  direction * factor;
+        const factor = 0.03;
+        const zoom =  1+direction * factor;
 
         const wx = (x-controls.view.x)/(width*controls.view.zoom);
         const wy = (y-controls.view.y)/(height*controls.view.zoom);
         
 
-        controls.view.zoom += zoom;
+        let newZoom=controls.view.zoom*zoom;
 
+        controls.view.x += wx*width*(controls.view.zoom-newZoom);
+        controls.view.y += wy*height*(controls.view.zoom-newZoom);
 
-
-        controls.view.x -= wx*width*zoom;
-        controls.view.y -= wy*height*zoom;
+        controls.view.zoom = newZoom;
     }
 
     return {worldZoom}
