@@ -36,7 +36,7 @@ function draw() {
 
 	g.drawGrid();
 	//g.drawPoint(0,0,color(WHITE));
-	g.drawPoint(oSim.x,oSim.px/oSim.massX,color(WHITE));
+	g.drawPoint([oSim.x,oSim.px/oSim.massX],color(WHITE));
 	g.drawBorder();
 	image(g.c,-1,-1,2,2);
 
