@@ -60,9 +60,14 @@ h3 {
   color: $success; 
   }
 
-  blockquote {
-    font-style: normal !important;
-    }
+
+em {
+  color: $success !important; 
+  }
+  
+blockquote {
+  font-style: normal !important;
+  }
 
 
 

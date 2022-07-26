@@ -173,3 +173,7 @@ $$[X_{H},X_{H'}] = X_{\{H,H'\}}$$
 >### Remark
 >We can think of the fundamental structure of classical mechanics as the algebra of smooth functions $C^\infty(M)$ with Poisson bracket ('classical observables'). This alternate point of view to symplectic geometry gives a clear philosophical correspondence with quantum mechanics. There, the fundamental structure is the algebra of operators on a Hilbert space with commutator ('quantum observables'). To 'quantize' a classical system, you associate a Hilbert space to a symplectic manifold, and construct a Lie algebra homomorphism from smooth functions with Poisson bracket to operators with commutator. In practice, this procedure can be rather difficult and is almost never possible in full generality, but that's a story for another time.
 
+
+--- 
+
+[Next: Applying these ideas to higher dimensional harmonic osscilators](/blog/2022/07/24/Toric.html)

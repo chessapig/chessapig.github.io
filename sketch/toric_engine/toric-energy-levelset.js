@@ -32,7 +32,7 @@ let fps=30;
 
 
 function setup(){
-	c=createCanvas(windowWidth,windowHeight,SVG);
+	c=createCanvas(windowWidth,windowHeight);
 
 	//bkg = color(11, 13, 31);
 	bkg=color(BKG);
@@ -46,8 +46,8 @@ function setup(){
 	background(bkg);
 
 	stroke(255);
-	//strokeWeight(.01);
-	strokeWeight(1);
+	strokeWeight(.01);
+	//strokeWeight(1);
 	fill(255);
 	t=0;
 	x=0;
@@ -127,7 +127,7 @@ function setup(){
 		//.addButton("Save",function(){makeGif();});
 
 	settings = QuickSettings.create(220,10, "save")
-		.addButton("Save svg", () => save() );
+		.addButton("Save svg", () => save() ).hide();
 
 	//setup gif encoder
 	frameRate(fps)
@@ -235,8 +235,8 @@ class DoubleOsscilator{
 
 	draw(){ //allow different hcoice of canvas
 		push();
-		//strokeWeight(.02);
-		strokeWeight(2);
+		strokeWeight(.02);
+		//strokeWeight(2);
 		//let col = this.color;
 		//col.setAlpha(40);
 		stroke(this.color);
@@ -266,8 +266,8 @@ class DoubleOsscilator{
 
 	drawPoint(){
 		push();
-		//strokeWeight(.003);
-		strokeWeight(1);
+		strokeWeight(.003);
+		//strokeWeight(1);
 		stroke(color3);
 		fill(this.color);
 		circle(this.x.q,this.y.q,.05,.05);

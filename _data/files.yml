@@ -1,61 +1,110 @@
 - title: "Hyperbolic band theory through Higgs bundles"
   thumbnail: "hyperbolic_band_theory.jpg"
   file: "hyperbolic_band_theory.pdf"
-  description: "Given to the Geometry and Mathematical Physics Seminar at the University of Saskatchewan"
+  arxiv: "https://arxiv.org/abs/2201.12689"
+  description: "r"
+  where: Geometry and Mathematical Physics Seminar at the University of Saskatchewan, fall 2022; JMM 2022;
+  video: https://www.youtube.com/watch?v=Jm8L3jA8pfI
   type: presentation
+  subtype: research
 
+- title: "The Dark Magic of Integrable Systems"
+  thumbnail: "dark_magic.jpg"
+  file: "dark_magic.pdf"
+  description: "The nefarious physicsts, always a cult of symmetry, have gone too far this time. By constructing a theory with not 1, but 2 supersymmetric partners, they evoked the dark magic of integrable systems. Now they must clean up their mess. They leave gauge theory grove for Loui-ville, a humdrum town caught in the eternal cycles around the tori in an integrable system. Next they brave the soliton swamps, coming face to face with the Toad-a lattices and their waves of hopping toads. They escape the swamp through the spectral cemetary, where the spirits of long-passed integrable systems are chained to forever cover their riemann surfaces. At last, they come upon the Seiberg-Witten summit, a fortress of spectral curves built by the supersymmetric theory they brought into the world."
+  where: "UMD RIT in geometry and physics, Spring 2022"
+  video: https://www.youtube.com/watch?v=oWTwOpqyNh
+  type: presentation
+  subtype: seminar
+
+- title: "BPS states, Seiberg-Witten theory, and Integrable systems"
+  thumbnail: "BPS.jpg"
+  file: "BPS.pdf"
+  description: "a trilogy of talks that all explore the power of BPS states in math and physics. First, I relate the BPS representations of supersymmetric algebras with BPS monopoles. Second, I go through Seiberg and Wittens solution for the low energy effective field theory of N=2, D=4 super yang mills. Vitally, they use the topological aspect of BPS states to pull back a lattice from the free theory to the whole vacuum moduli space, giving an integrable system. Third, I give a unified description of BPS states as variations of hodge structures, and discuss how various avatars of BPS states fit in to the story."
+  where: "UMD RIT in geometry and physics, Spring 2022"
+  video: https://www.youtube.com/watch?v=OtO17nIseQ4 https://www.youtube.com/watch?v=QGMl73z2iBQ https://www.youtube.com/watch?v=JFow8ZkPrV8  
+  type: presentation
+  subtype: seminar
 
 - title: "Topological recursion: For fun and profit"
   thumbnail: "topological_recursion.png"
   file: "topological_recursion.pdf"
-  description: "Given to the UMD RIT in geometry and physics, Fall 2021."
+  description: "How do rainbows relate to quantum gravity, random matricies, and WKB analysis? Im glad you asked. These all have underlying recursive formula, based on cutting up riemann surfaces into pairs of pants. These various types of 'topological recursion' were unified by Eynard and Orantin, relating each recursive structure to a spectral curve of a simple polynomial."
+  where: "UMD RIT in geometry and physics, Fall 2021"
+  video: https://www.youtube.com/watch?v=5AqN2fjE1Ko
   type: presentation
+  subtype: seminar
 
 - title: "A and B models: The story of mirror symmetry"
   thumbnail: "A_B_Models.jpg"
   file: "A_B_Models.pdf"
-  description: "Given to the UMD RIT in geometry and physics, Fall 2020."
+  description: "A statement of mirror symmetry, thought of as an equivalence of frobenius manifolds. Two sorts of 'topological twisting' should give equivlent topological field theories. The first gives the A-model, which is a path integral counting holomorphic curves in a kahler manifold. The second gives the B-model, a Landau-Ginzburg theory whose physics depends on the singularity structure of a holomorphic function. Underlying both is the structure of a frobenius manifold-- Mirror symmetry conjectures that its the same structure"
+  where: "UMD RIT in geometry and physics, Fall 2020"
   type: presentation
+  subtype: seminar
 
 - title: "Cobordisms and the Thom Spectrum"
   thumbnail: "Cobordisms.jpg"
   file: "Cobordisms.pdf"
-  description: "Presentation for MATH734: Algebraic topology 2, Spring 2021"
+  description: "In the first part, I give a whimsical introduction to cobordisms, what they do for algebraic topologists, and how they come up in mathematics. In the second, I construct the Thom spectrum associated to the cobordism cohomology theory, using the Pontryagin-Thom construction."
+  where: "MATH734: Algebraic topology 2, UMD, Spring 2021"
   type: presentation
+  video: https://www.youtube.com/watch?v=GP43dTtd
+  subtype: class
 
 - title: "Higgs bundles, Mirror symmetry, and Geometric Langlands"
   thumbnail: "Geometric_Langlands_S_Duality.jpg"
   file: "Geometric_Langlands_S_Duality.pdf"
-  description: "Given to the UMD RIT in geometry and physics, Spring 2021."
+  where: "UMD RIT in geometry and physics, Spring 2021"
+  description: "A summary of the Kapustin-Witten approach to the geometric Langlands program. "
+  video: https://www.youtube.com/watch?v=R8OXUN-ko50, https://www.youtube.com/watch?v=cygqJBf89KI&
   type: presentation
-
+  subtype: seminar
 
 - title: "Electromagnetism on a Riemann surface"
   thumbnail: "em_on_riemann_surface.jpg"
   file: "em_on_riemann_surface.pdf"
-  description: "Presentation for MATH669: Riemann surfaces, Fall 2021"
+  description: "Maxwells equations have a very elegant formulation in terms of differential forms. As a U(1) gauge theory, the electromagnetic field is a connection on a U(1) principle bundle. These are equivalent to holomorphic line bundles! The moduli space of solutions to vacuum maxell's equations on a riemann surface is the Jacobian. We can give much of classical Riemann surface theory a gauge-theoretic coat of paint. This observation, generalized to nonableian groups and noncompact groups, is the heart of the nonabelain hodge correspondence." 
+  where: "MATH669: Riemann surfaces, UMD, Fall 2021"
   type: presentation
+  subtype: class
 
 - title: "The Riemann-Roch Theorem"
   thumbnail: "Riemann_Roch.png"
   file: "Riemann_Roch.pdf"
-  description: "Presentation for MATH742: Geometric analysis, Fall 2020"
+  description: "The Riemann-Roch theorem gives the number of linearly independent holomorphic sections to a line bundle. I explain morally why divisors should correspond to line bundles, and present the usual sheaf-theoretic derivation of Riemann-Roch. But to me, Riemann-Roch relates the solutions of differential equations to the genus, bridging analysis and toppology. This was my first intoxicating taste of the Atiyah-Singer index theorem."
+  where: "MATH742: Geometric analysis, UMD, Fall 2020"
   type: presentation
+  subtype: class
 
 - title: "Lie's Theorem"
   thumbnail: "Lie_Theorem.png"
   file: "Lie_Theorem.pdf"
-  description: "Presentation for MATH740: Lie groups, Fall 2020"
+  description: "A short (~15 minute) exposition & proof of Lie's theorem, which says that solvable Lie algebras act like upper triangular matricies."
+  where: "MATH740: Lie groups, UMD, Fall 2020"
   type: presentation
+  subtype: class
 
 - title: "Kahler Quantization and Physics"
   thumbnail: "Kahler_Quantization.jpg"
   file: "Kahler_Quantization.pdf"
-  description: "Presentation for MATH868C: Complex Geometry, Spring 2021"
+  description: "Geometric quantization associates a Kahler manifold to a vector space of holomorphic sections of a line bundle. By taking higher and higher powers of the line bundle, there are more and more holomorphic sections. In the limit, each point on the manifold sits in CP infinity by the Kodira embedding. These are coherent states, acting as quantum analogous of a classical point particle. This strategy is very useful in pure Kahler geometry."
+  where: "MATH868C: Complex Geometry, UMD, Spring 2021"
   type: presentation
+  subtype: class
 
 - title: "Higgs bundles and geometric structures"
   thumbnail: "Higgs_Bundles_Geometric_Structures.png"
   file: "Higgs_Bundles_Geometric_Structures.pdf"
-  description: "Presentation for MATH848C: Geometric structures, Spring 2021"
+  description: "An introduction to the theory of Higgs bundles and the nonabelian hodge correspondence. I emphasized the aspects related to geometric structures, in particular how the Hitchin section of SL(2,C) Higgs bundles gives hyperbolic structures."
+  where: "MATH848C: Geometric structures, UMD, Spring 2021"
   type: presentation
+  subtype: class
+
+- title: "Enceladus and its ocean"
+  thumbnail: "enceladus.png"
+  file: "enceladus.pdf"
+  description: "I describe forced libration, and how libration measurements were used to prove Enceladus had a global subsurface ocean. An exposition of the paper 'Enceladus measured physical libration requires a global subsurface ocean' by Thomas et.al"
+  where: "ASTR430: The Solar System, UMD, Spring 2021"
+  type: presentation
+  subtype: class

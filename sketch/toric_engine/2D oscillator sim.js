@@ -70,6 +70,7 @@ p.setup = function(){
 
 	background_color=p.color(BKG);
 	background_color.setAlpha(200);
+	time=0;
   }
 
   p.draw = function(){
@@ -152,16 +153,18 @@ p.setup = function(){
 	p.push();
 		p.translate(pos_oX[0],pos_oX[1]);
 		var newPoint = new Point(p,oSim4.x,0);
-		drawSpring(p,newPoint,0,0);
+		drawSpring(p,newPoint,0,0,time,p.pow(3*oSim4.px**2,.2));
 	p.pop();
 
 	//draw Y osscilator
 	p.push();
 		p.translate(pos_oY[0],pos_oY[1]);
 		var newPoint = new Point(p,0,oSim4.y);
-		drawSpring(p,newPoint,0,0);
+		drawSpring(p,newPoint,0,0,time,p.pow(3*oSim4.py**2,.2));
 	p.pop();
 
+	time+=.02;
+	oSim4.time=time;
 
 }
 	

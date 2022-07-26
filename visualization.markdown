@@ -5,9 +5,12 @@ permalink: /visualization/
 show_sidebar: true
 ---
 
+<style>
+
 # Code Sketches
 
 Click the titles to go to each of the sketches
+
 
 ## <a href="/sketch/strings">String art</a>
 
@@ -24,6 +27,10 @@ More mathematically, every map from the circle to itself gives a piece of string
 <img src="/sketch/strings/Examples/mobius.png"   height="400"/>
 <img src="/sketch/strings/Examples/logo_loop.gif" height="400"/>
 
+## <a href="/sketch/diffeos">Dynamics of random maps</a>
+An illustration of dynamics of a random map from the plane to itself. It plots the trajectories of a few random points, showing where and how they accumulate. The map is periodically modulating perlin noise. As the map changes, you can see all sorts of bifurcations and dynamic effects. Here are some more [examples](https://twitter.com/chessapigbay/status/1448164156713078785), and a little more [context](https://twitter.com/chessapigbay/status/1448151992426172416)
+
+![](/sketch/diffeos/Examples/fluer_de_lis.gif)
 
 
 ## <a href="/sketch/Hoops">Hoops</a>
@@ -32,12 +39,16 @@ Just some fun blobs. I suggest looking thru the presets.
 <img src="/sketch/Hoops/Examples/sunquake.gif" alt="Gif of blobs" width="600"/>
 
 
+## <a href="/sketch/toric_engine"> Toric geometry and harmonic oscillators </a>
 
-## <a href="/sketch/diffeos">Dynamics of random maps</a>
-An illustration of dynamics of a random map from the plane to itself. It plots the trajectories of a few random points, showing where and how they accumulate. The map is periodically modulating perlin noise. As the map changes, you can see all sorts of bifurcations and dynamic effects. Here are some more [examples](https://twitter.com/chessapigbay/status/1448164156713078785), and a little more [context](https://twitter.com/chessapigbay/status/1448151992426172416)
+I explained the mathematical context pretty extensivly [in this post](/blog/2022/07/24/Toric.html), which also holds several other sketches. For the cliff notes, try my [thread on twitter](https://twitter.com/chessapigbay/status/1522857228419620864). Some outputs:
 
-![](/sketch/diffeos/Examples/fluer_de_lis.gif)
+<img src="/sketch/strings/Examples/sphere.gif" height="400"/>
+<img src="/sketch/strings/Examples/sombrero.gif" height="400"/>
 
+
+<img src="/sketch/strings/Examples/canoli.png" height="400"/>
+<img src="/sketch/strings/Examples/fleur.png" height="400"/>
 
 
 ##  <a href="/sketch/tori">KAM Tori</a>

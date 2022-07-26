@@ -55,6 +55,24 @@
   category: traditional
   type: gif
 
+- title: "The dark magic of Integrable systems"
+  filename: "dark_magic"
+  filetype: ".jpg"
+  file: "/files/presentations/Geometric_Langlands_S_Duality.pdf"
+  number: 6
+  description: ""
+  category: math
+  type: folder
+
+- title: "Hyperbolic Band theory"
+  filename: "crystals"
+  filetype: ".PNG"
+  file: "/files/presentations/.pdf"
+  number: 8
+  description: ""
+  category: math
+  type: folder
+
 - title: "Higgs bundles and Geometric Langlands"
   filename: "higgs"
   filetype: ".jpg"
@@ -69,6 +87,25 @@
   filetype: ".jpg"
   file: "/gallery/Mathscape"
   number: 4
+  description: ""
+  category: math
+  type: folder
+
+- title: "Topological recursion"
+  filename: "toprecursion"
+  filetype: ".jpeg"
+  file: "/files/presentations/topological_recursion.pdf"
+  number: 5
+  description: ""
+  category: math
+  type: folder
+
+
+- title: "Topological recursion"
+  filename: "topologicalrecursion"
+  filetype: ".jpeg"
+  file: "/files/presentations/topological_recursion.pdf"
+  number: 5
   description: ""
   category: math
   type: folder
@@ -99,25 +136,6 @@
   description: ""
   category: math
   type: folder
-
-- title: "Hyperbolic Band theory"
-  filename: "crystals"
-  filetype: ".PNG"
-  file: ""
-  number: 8
-  description: ""
-  category: math
-  type: folder
-
-- title: "Topological recursion"
-  filename: "topological_recursion"
-  filetype: ".jpg"
-  file: ""
-  number: 5
-  description: ""
-  category: math
-  type: folder
-
 
 - title: "Flowcharts"
   filename: "flowchart"
