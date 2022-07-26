@@ -11,7 +11,7 @@ let BLUE = '#4aa3cb';
 
 
 
-function normalizeCoords(){
+function normalizeCoords(p){
 	strokeWeight(.01);
 	translate(width/2,height/2);
 	scale(height/2);

@@ -1,4 +1,5 @@
 
+var lissajousWithGraph = function(p){
 
 let pos_o2D = [-.5,-.5]; //2D osscilator base poisition
 let pos_oX = [0,1]; //x-osscilaotor base position relative to 2D osscilator
@@ -12,21 +13,28 @@ let slider_freqY;
 let res=500;
 let xOffset=0;
 
-function setup() {
-	
-	res=windowHeight;
-	xOffset=(windowWidth-windowHeight)/2;
-	//c = createCanvas(res, res);
-	c = createCanvas(windowWidth, windowHeight);
-	strokeWeight(.01);
+let oSim4;
+let background_color,
+	time,
+	pos_sliderX,
+	pos_sliderY;
+
+p.setup = function(){
+
+	res=p.windowHeight;
+	xOffset=(p.windowWidth-p.windowHeight)/2;
+	var width = document.getElementById('lissajousWithGraph').offsetWidth;
+		c = p.createCanvas(width, p.windowHeight);
+		c.parent("lissajousWithGraph");
+	normalizeCoords(p);
 
 	
-	oSim=new Oscillator2D_sim(.5,0,3,.2,-.2,1);
-	oSim.p.size=2;
-	oSim.timeScale=1;
+	oSim4=new Oscillator2D_sim(p,.5,0,3,.2,-.2,1);
+	oSim4.pt.size=2;
+	oSim4.timeScale=1;
 	//oSim.doDrawOrbit=false;
 
-	gX=new Graph(); //graph of phase space in X-axis
+	gX=new Graph(p); //graph of phase space in X-axis
 	//gX.doMinorGrid=false;
 	gX.minorGridScale=2;
 	gX.resolution=500;
@@ -37,7 +45,7 @@ function setup() {
 	//gX.yLabel="p";
 	gX.setup();
 
-	gY=new Graph(); //graph of phase space in X-axis
+	gY=new Graph(p); //graph of phase space in X-axis
 	//gY.doMinorGrid=false;
 	gY.minorGridScale=2;
 	gY.resolution=500;
@@ -48,50 +56,53 @@ function setup() {
 	//gY.yLabel="p";
 	gY.setup();
 
-	normalizeCoords();
-	slider_freqX = createSlider(1, 5, oSim.freqX, 1);
-	slider_freqY = createSlider(1, 5, oSim.freqY, 1);
+	slider_freqX = p.createSlider(1, 5, oSim4.freqX, 1);
+	slider_freqY = p.createSlider(1, 5, oSim4.freqY, 1);
 
-	rotate(PI/2);
-	slider_freqX.position(275/500*res+xOffset, 325/500*res);
+	p.rotate(p.PI/2);
+	pos_sliderX=[275/500*res+xOffset, 325/500*res];
+	slider_freqX.position(pos_sliderX[0],pos_sliderX[1]);
 	slider_freqX.style('width', '200px')
 
-	slider_freqY.position(275/500*res+xOffset, 425/500*res);
+	pos_sliderY=[275/500*res+xOffset, 425/500*res];
+	slider_freqY.position(pos_sliderY[0],pos_sliderY[1]);
 	slider_freqY.style('width', '200px')
+
+	background_color=p.color(BKG);
+	background_color.setAlpha(200);
   }
 
-function draw() {
-	let background_color=color(BKG);
-	background_color.setAlpha(200);
-	background(background_color);
+  p.draw = function(){
+	p.background(background_color);
+	
 
 	//update values of periods
 	let freqX=slider_freqX.value();
 	let freqY=slider_freqY.value();
-	oSim.freqX=freqX;//+.001;
-	oSim.freqY=freqY;
+	oSim4.freqX=freqX;//+.001;
+	oSim4.freqY=freqY;
 
-	push();
-		textSize(18);
-		fill(color(WHITE));
-		text('Freq. of X-oscillator: ', 275/500*res+xOffset, 305/500*res);
-		text('Freq. of Y-oscillator: ', 275/500*res+xOffset, 405/500*res);
+	p.push();
+	p.textSize(18);
+	p.fill(p.color(WHITE));
+	p.text('freq. of X-oscillator: ', pos_sliderX[0], (pos_sliderX[1]-20));
+	p.text('freq. of Y-oscillator: ', pos_sliderY[0], (pos_sliderY[1]-20));
 
-		textSize(24);
-		fill(color(YELLOW));
-		text(str(freqX), 450/500*res+xOffset, 305/500*res);
-		text(str(freqY), 450/500*res+xOffset, 405/500*res);
+	console.log(pos_sliderX);
+	p.textSize(24);
+	p.fill(p.color(YELLOW));
+	p.text(p.str(freqX), pos_sliderX[0]+175, pos_sliderX[1]-20);
+	p.text(p.str(freqY), pos_sliderY[0]+175, pos_sliderY[1]-20);
+	p.pop();
 
-		//text(str(oSim.rX*cos(oSim.phaseX)),30,30);
-	pop();
+	normalizeCoords(p);
 
-	normalizeCoords();
-	translate(pos_o2D[0],pos_o2D[1]);
-	mX+=.5;
-	mY+=.5;
+	p.translate(pos_o2D[0],pos_o2D[1]);
+	p.mX+=.5;
+	p.mY+=.5;
 	var rescale=0.5;
-	scale(rescale);
-	mX/=rescale;mY/=rescale;
+	p.scale(rescale);
+	p.mX/=rescale;p.mY/=rescale;
 
 	//draw many points along orbit
 	// let Points=[];
@@ -104,62 +115,58 @@ function draw() {
 	// }
 	
 	//draw X osscilator graph
-	push();
-		translate(pos_gX[0],pos_gX[1]);
+	p.push();
+		p.translate(pos_gX[0],pos_gX[1]);
 		gX.update();
 		// for(let n=0;n<numPts;n++){
 		// 	gX.drawPoint(Points[n].x,Points[n].y*oSim.freqX,color(WHITE));
 		// }
-		gX.drawPoint([oSim.x,oSim.px*oSim.freqX],color(WHITE));
+		gX.drawPoint([oSim4.x,oSim4.px*oSim4.freqX],p.color(WHITE));
 		gX.drawBorder();
-		image(gX.c,-1,-1,2,2);
-	pop();
+		p.image(gX.c,-1,-1,2,2);
+	p.pop();
 
 	//draw Y osscilator graph
-	push();
-		translate(pos_gY[0],pos_gY[1]);
+	p.push();
+		p.translate(pos_gY[0],pos_gY[1]);
 		gY.c.push();
-		gY.c.rotate(-PI/2);
+		gY.c.rotate(-p.PI/2);
 		gY.update();
-		gY.drawPoint([oSim.y,oSim.py*oSim.freqY],color(WHITE));
+		gY.drawPoint([oSim4.y,oSim4.py*oSim4.freqY],p.color(WHITE));
 		gY.drawBorder();
 		gY.c.pop();
-		image(gY.c,-1,-1,2,2);
-	pop();
+		p.image(gY.c,-1,-1,2,2);
+	p.pop();
 
 	
 	for(let i=0;i<10;i++){ //update 10 times to improve accuracy
-		oSim.update();
+		oSim4.update();
 	}
-	push();
+	p.push();
 		//translate(pos_o2D[0],pos_o2D[1]);
 		//mX-=0.5; mY-=0.5;
-		oSim.draw();
-	pop();
+		oSim4.draw();
+	p.pop();
 
 		//draw X osscilator
-	push();
-		translate(pos_oX[0],pos_oX[1]);
-		var newPoint = new Point(oSim.x,0);
-		drawSpring(newPoint,0,0);
-	pop();
+	p.push();
+		p.translate(pos_oX[0],pos_oX[1]);
+		var newPoint = new Point(p,oSim4.x,0);
+		drawSpring(p,newPoint,0,0);
+	p.pop();
 
 	//draw Y osscilator
-	push();
-	translate(pos_oY[0],pos_oY[1]);
-		var newPoint = new Point(0,oSim.y);
-		drawSpring(newPoint,0,0);
-	pop();
+	p.push();
+		p.translate(pos_oY[0],pos_oY[1]);
+		var newPoint = new Point(p,0,oSim4.y);
+		drawSpring(p,newPoint,0,0);
+	p.pop();
 
 
 }
+	
+p.mousePressed = function(){ oSim4.pt.pressed();}
+p.mouseReleased= function() { oSim4.pt.released(); }
 
-function mousePressed(){
-	oSim.p.pressed();
 }
-
-function mouseReleased(){
-	oSim.p.released();
-}
-
-  
+var myp5 = new p5(lissajousWithGraph,"lissajousWithGraph");

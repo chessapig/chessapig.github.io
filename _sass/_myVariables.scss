@@ -7,14 +7,14 @@ $headings-font-weight: 600;
 @import "bootstrap/functions";
 @import "bootstrap/variables";
 
-$body-bg:          #122140;
-$body-color:       #91c3e0;
+$body-bg:          #2c2621;
+$body-color:       #e6cfb3;
 $dark:              lighten($body-bg, 20%);
 $light:             lighten($body-bg, 80%);
 
-$primary:       #fcf3b2; 
-$secondary:     #f79383;
-$success:       $green !default;
+$primary:       #ea925c; 
+$secondary:     #6ed38e;       
+$success:       #63a4ca;
 $info:          $cyan !default;
 $warning:       $yellow !default;
 $danger:        $red !default;
@@ -45,5 +45,4 @@ $mark-bg:             #ff19ff;
 $card-bg:               #1d4487;
 $card-border-color:     $light;
 $card-cap-bg:           $dark;
-
 

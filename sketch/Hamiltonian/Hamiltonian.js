@@ -18,7 +18,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(300,300,WEBGL);
+  createCanvas(windowWidth,windowHeight,WEBGL);
   canvas0 = createGraphics(width,height,WEBGL);
   canvas1 = createGraphics(width,height,WEBGL);
   canvas2 = createGraphics(width,height,WEBGL);
@@ -101,7 +101,7 @@ function draw() {
 
 
 function Hamiltonian(position, momentum){
-  return momentum.magSq() + (position.magSq()*sq(dq))**0.9; //+ 100/(exp(-(momentum.magSq()/10))+1);//-abs(position.x)*dq;
+  return momentum.magSq() + (position.magSq()*sq(dq))**0.9; // + 100/(exp(-(momentum.magSq()/10))+1);//-abs(position.x)*dq;
 }
 
 function plotHamiltonian(){

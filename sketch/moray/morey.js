@@ -1,3 +1,5 @@
+var moray = function(p){
+
 let coords=[];
 let d;
 let t;
@@ -28,12 +30,17 @@ let morayDensity=100,
 
 let smallCanvas=true;
 
-function setup() {
+var width,height,canvas;
+
+p.setup = function() {
 	d=1;
-	pixelDensity(d);
-	if(smallCanvas){createCanvas(500, 500)}
-	else {createCanvas(windowWidth, windowHeight);}
-	background(100);
+	p.pixelDensity(d);
+	if(smallCanvas){canvas = p.createCanvas(500, 500)}
+	else {canvas= p.createCanvas(p.windowWidth, p.windowHeight);}
+	canvas.parent("moray");
+	p.background(100);
+	width=p.width;
+	height=p.height;
 	for(x=0; x<width; x++){
 		coords[x]=[];
 		for(y=0; y<height; y++){
@@ -47,7 +54,7 @@ function setup() {
 	
 
 	//parameters for this program
-	settings = QuickSettings.create((width+10)%windowWidth,10, "Parameters")
+	settings = QuickSettings.create((width+10)%p.windowWidth,10, "Parameters")
 		.addBoolean("Moray patterns?",doMoray,function(value) {doMoray = value;})
 		.addBoolean("Pause",pause,function(value) {pause = value;})
 		.addRange("number of lines",20,3000,morayDensity,1,function(value) {morayDensity = value;})
@@ -65,10 +72,10 @@ function setup() {
 	settings.hideControl("Diffeomorphism name");
 
 	//global settings, apply to any program
-	noiseSettings = QuickSettings.create((width+220)%windowWidth,10, "Noise settings")
+	noiseSettings = QuickSettings.create((width+220)%p.windowWidth,10, "Noise settings")
 		.addRange("Noise Scale",0.5,1.5,noiseScale,0.001,function(value) {
 			noiseScale = value;
-			if(pause){pause=false;draw();pause=true;}
+			if(pause){pause=false;p.draw();pause=true;}
 		})
 		.addRange("Radius of Noise loop",0,1,noiseRadiusSlider,0.001,function(value) {noiseRadiusSlider = value;})
 		.addBoolean("Move noise center?",doMoveNoise,function(value) {doMoveNoise = value;})
@@ -77,7 +84,7 @@ function setup() {
 
 	
 	//setup gif encoder
-	frameRate(fps)
+	p.frameRate(fps)
 	capturer = new CCapture( { 
 		format: 'webm', 
 		workersPath: 'js/', 
@@ -90,7 +97,7 @@ function setup() {
 	noiseCenter=0;
 
 	noiseOptions={
-		seed: floor(random()*10000),
+		seed: p.floor(p.random()*10000),
 		radius: noiseRadius,
 		center: noiseCenter,
 	}
@@ -102,8 +109,8 @@ function setup() {
 		});
 }
 
-function draw() {
-	loadPixels();
+p.draw = function() {
+	p.loadPixels();
 	for(x=0; x<width; x++){
 		for(y=0; y<height; y++){
 			index = 4*(y*width  +x);
@@ -136,27 +143,27 @@ function draw() {
 			coords[x][y][1]=y1;
 
 
-			value0x=map(sin(2*PI*(x0*morayDensity)),-1,1,0,1); //assigns starting value
-			value0y=map(sin(2*PI*(y0*morayDensity)),-1,1,0,1); //assigns starting value
+			value0x=p.map(p.sin(2*p.PI*(x0*morayDensity)),-1,1,0,1); //assigns starting value
+			value0y=p.map(p.sin(2*p.PI*(y0*morayDensity)),-1,1,0,1); //assigns starting value
 
-			value1x = map(sin(2*PI*(x1*morayDensity + phase)),-1,1,0,1);
-			value1y = map(sin(2*PI*(y1*morayDensity + phase)),-1,1,0,1);
+			value1x = p.map(p.sin(2*p.PI*(x1*morayDensity + phase)),-1,1,0,1);
+			value1y = p.map(p.sin(2*p.PI*(y1*morayDensity + phase)),-1,1,0,1);
 			valueX=1-(1-value0x)*(1-value1x); //multiply starting an ending
 			valueY=1-(1-value0y)*(1-value1y);
 			//valueX=valueY;
-			pixels[index] = valueX*255;
-			pixels[index+1] = valueY*255;
-			pixels[index+2] = 255;
-			pixels[index+3] = 255;
+			p.pixels[index] = valueX*255;
+			p.pixels[index+1] = valueY*255;
+			p.pixels[index+2] = 255;
+			p.pixels[index+3] = 255;
 
 			if(doMoray){value=1-(1-value0x)*(1-value1x)}
 			else {value=value1x}
-			pixels[index] = value*255;
-			pixels[index+1] = value*255;
-			pixels[index+2] = value*255;
+			p.pixels[index] = value*255;
+			p.pixels[index+1] = value*255;
+			p.pixels[index+2] = value*255;
 		}
 	}
-	updatePixels();
+	p.updatePixels();
 	if(!pause){
 		t+=dt*speed; 
 	}
@@ -178,13 +185,13 @@ function draw() {
 
 function windowResized() {
 	if(!smallCanvas){
-		resizeCanvas(windowWidth, windowHeight)
+		p.resizeCanvas(windowWidth, windowHeight)
 	}
 
    }
 
 //togge gui visibility
-function keyPressed(){
+p.keyPressed = function(){
 	switch(key) {
 		case 'h':
 			settings.toggleVisibility();
@@ -219,16 +226,16 @@ function getVectField(x,y,name){ //x,y from -1 to 1
 		case "noise":
 			x-=0.5;
 			y-=0.5;
-			vX = noise(
+			vX = p.noise(
 				noiseCenter+noiseRadius+x*noiseScale,   //x coord inpiut //add noiseRadius s.t it always passes through at least one of the same point
 				y*noiseScale);	//y coord input
-			vY = noise(
+			vY = p.noise(
 				noiseCenter+noiseRadius+x*noiseScale,  
 				(2+y)*noiseScale); //+1 to keep x and y uncorrelated
 			break;
 	}
 
-	return createVector(vX,vY);
+	return p.createVector(vX,vY);
 }
 
 
@@ -239,8 +246,8 @@ function diffeo(x,y,t,name){ //map x,y from [0,1]^2 to [0,1]^2
 
 	switch(name){
 		case "sin":
-			x1=(sin(2*PI*(y+x*t))+1)/2;
-			y1=(cos(2*PI*(x-y*t))+1)/2;
+			x1=(p.sin(2*p.PI*(y+x*t))+1)/2;
+			y1=(p.cos(2*p.PI*(x-y*t))+1)/2;
 			break;
 
 		case "noise":
@@ -256,5 +263,10 @@ function diffeo(x,y,t,name){ //map x,y from [0,1]^2 to [0,1]^2
 				noiseOptions);
 	}
 
-	return createVector(x1,y1);
+	return p.createVector(x1,y1);
 }
+
+}
+
+
+var moray = new p5(moray);

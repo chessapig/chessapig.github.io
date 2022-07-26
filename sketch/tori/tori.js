@@ -18,7 +18,7 @@ let gui,
 	loopTime=5; //number of seconds in loop
 	saveFormat="webm";
 
-let smallCanvas=true;
+let smallCanvas=false;
 
 let angle;
 var doAccumulate=true;
@@ -57,7 +57,7 @@ function setup(){
 
 	//setup gui
 	let x=0;
-	settings = QuickSettings.create(10,10, "click / double tab to collapse")
+	diffeoSettings = QuickSettings.create(10,10, "click / double tab to collapse")
 		.addRange("Number of points",1,numPtsMax,numPts,1,function(value) {numPts = value;})
 		.addRange("Number of Iterations per frame",1,200,numIter,1,function(value) {numIter = value;})
 		.addRange("Noise Scale",0.5,3,n.scale,0.001,function(value) {
@@ -284,7 +284,7 @@ function windowResized() {
 function keyPressed(){
 	switch(key) {
 		case 'h':
-			settings.toggleVisibility();
+			diffeoSettings.toggleVisibility();
 			break;
   }  
 }
