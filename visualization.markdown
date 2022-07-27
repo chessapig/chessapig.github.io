@@ -5,7 +5,6 @@ permalink: /visualization/
 show_sidebar: true
 ---
 
-<style>
 
 # Code Sketches
 
@@ -43,12 +42,12 @@ Just some fun blobs. I suggest looking thru the presets.
 
 I explained the mathematical context pretty extensivly [in this post](/blog/2022/07/24/Toric.html), which also holds several other sketches. For the cliff notes, try my [thread on twitter](https://twitter.com/chessapigbay/status/1522857228419620864). Some outputs:
 
-<img src="/sketch/strings/Examples/sphere.gif" height="400"/>
-<img src="/sketch/strings/Examples/sombrero.gif" height="400"/>
+<img src="/sketch/toric_engine/Examples/sphere.gif" height="400"/>
+<img src="/sketch/toric_engine/Examples/sombrero.gif" height="400"/>
 
 
-<img src="/sketch/strings/Examples/canoli.png" height="400"/>
-<img src="/sketch/strings/Examples/fleur.png" height="400"/>
+<img src="/sketch/toric_engine/Examples/canoli.png" height="400"/>
+<img src="/sketch/toric_engine/Examples/fleur.png" height="400"/>
 
 
 ##  <a href="/sketch/tori">KAM Tori</a>
@@ -65,23 +64,3 @@ A failed attempt to find some KAM tori. When a system has lots of conserved quan
 Incidentally, the tori with sufficiently irrational frequency ratios remain, separating the chaotic regions. 
 
 This sketch is my attempt to see the invariant torus decomposition in the flesh. I start with the simplest integrable system, rotation by a radius-dependent angle, and perturb it. Unfortunately, I couldn't see much recognizable in the orbits of this system. But, at some point I goofed up and forgot to update the rotation angle for each point, so every point was running under its own dynamical system. This made some pretty mesmerizing dances when perturbed, as each particle spirals in or blossoms out.
-
-  <div class="col-md-9 mb-4">
-    <h1>Hello!</h1>
-    <p> TODO <br/>
-    <a href="https://chessapig.github.io/sketch/diffeos">ooh look at the pretty diffeomorphisms</a>
-    <br>
-    <a href="https://chessapig.github.io/sketch/Hoops">ooh look at the pretty lines</a>
-    <br>
-    <a href="https://chessapig.github.io/sketch/tori">ooh look at the pretty tori</a>
-    aaaaaa
-    <!-- <h1>Hello, I'm Elliot!</h1>
-    <p>You'll probably get a pretty good sense of my interests from the content on this site, but just in case: I like math and physics. In fact, Right now I'm studying math and physics, and hopefully someday I'll know enough to study mathematical physics. My fav is differential geometry, which studies local propreties of curvey spaces, like a many-dimensional potato. I like how visual it is. Geometry is like the interpeter of the mathematical pantheon, all the other fields look to it for intuition. Not to mention, physics is a subfield of geometry ;). So many things, in physics or elsewise, have really beutiful geometric interpetations. I honestly believe anything in life is better with manifolds.
-      <br/>  <br/>
-    But I like other stuff too! I really enjoy earth/space sciences, so Astronomy, Geology, Atmospheric science, and espically Oceanography. For related reasons, I love marine bio, and all the friendly invertebrate it brings. Land mammals are overrated.
-      <br/>  <br/>
-    Recently (few months ago) I picked up art, thanks to an ipad and procreate, and have had lots of fun with that since.I posted some of my finished drawings at the <a href="/gallery">gallery</a>. I've also always been facinated by generative art, but I'm always turned away by my own biases against programming. But a couple weeks ago, I crossed the avivation barrier and have since managed to finish some things! You can check it out at the <a href="/gallery">gallery</a>, and there'll likely be more of that to come. Exciting times.  
-    </p>
-    <br/> -->
-  <!-- </div>
-</div> -->

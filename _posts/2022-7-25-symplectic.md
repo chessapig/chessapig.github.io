@@ -1,7 +1,7 @@
 ---
 layout: default 
 title:  "The shape of motion: A primer on geometric mechanics"
-date:   2022-07-24 16:03:47 -0500
+date:   2022-07-24 16:03:46 -0500
 categories: blog
 excerpt: "An introduction to symplectic geometry and classical mechanics, meant to introduce the ideas needed for the Harmonic osscilator thingy. "
 ---

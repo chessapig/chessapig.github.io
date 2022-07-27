@@ -92,16 +92,6 @@
   type: folder
 
 - title: "Topological recursion"
-  filename: "toprecursion"
-  filetype: ".jpeg"
-  file: "/files/presentations/topological_recursion.pdf"
-  number: 5
-  description: ""
-  category: math
-  type: folder
-
-
-- title: "Topological recursion"
   filename: "topologicalrecursion"
   filetype: ".jpeg"
   file: "/files/presentations/topological_recursion.pdf"

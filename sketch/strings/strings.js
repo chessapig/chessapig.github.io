@@ -12,13 +12,17 @@ var	mBorder=1;
 var	phaseVelocity=0;
 var	doBorder=true,
 	doHyperbolic=true,
-	doRandomize=true;
+	doRandomize=true,
+	doAccumulate=false;
+	doAddLines=false;
 var	diffeoParam=0.5;
 var	ani=0.3;
 var	aniVelocity=0;
 var maxLines=10000;
 var	NLines=1000;
 var	NSlider=1;
+
+const radius=250; //radius of starting circle
 
 var [mobiusA,mobiusB,mobiusC,mobiusD] = [0.1,0,0,0.1],
 	doTanScaleMobius=true;
@@ -27,7 +31,10 @@ var [mobiusA,mobiusB,mobiusC,mobiusD] = [0.1,0,0,0.1],
 var borderName="Epicycloid",
 	diffeoName="mobius+square";
 
-var settings;
+var diffeoSettings,
+	graphicsSettings,
+	borderSettings,
+	mobiusSettings;
 
 
 function setup() {
@@ -52,8 +59,8 @@ function setup() {
 		})
 		.addRange("diffeo multiplier",1,10,multiplier,1,function(value) {multiplier = value;})
 		.addRange("diffeo parameter",0,1,diffeoParam,.001,function(value) {diffeoParam = value;})
-		.addDropDown("Border shape",["Epicycloid","Random","Ellipse"], function(value){borderName=value.value;})
-		.addRange("border modifier (integer)",1,10,mBorder,1,function(value) {mBorder = value;})
+		//.addDropDown("Border shape",["Epicycloid","Random","Ellipse"], function(value){borderName=value.value;})
+		//.addRange("border modifier (integer)",1,10,mBorder,1,function(value) {mBorder = value;})
 		.addRange("Randomness scale",0,4,randScaleDiffeo,.001,function(value) {randScaleDiffeo = value;})
 		.addRange("phase",0,1,phase,.01,function(value) {phase = value;})
 		.addRange("Velocity of phase change",0,1,phaseVelocity,.01,function(value) {phaseVelocity = value;})
@@ -78,11 +85,15 @@ function setup() {
 		.addBoolean("Sample randomly?",doRandomize,function(value){doRandomize=value;})
 		.addBoolean("draw border?",doBorder,function(value) {doBorder = value;})
 		.addBoolean("draw hyperbolic geodesics?",doHyperbolic,function(value) {doHyperbolic = value;})
-		.addBoolean("pan and zoom?",false,function(value) {controls.enabled=value;});
+		.addBoolean("pan and zoom?",false,function(value) {controls.enabled=value;})
+		.addBoolean("accumulate (press space)",false, function(value){
+			doAccumulate=value;
+			graphicsSettings.setValue("pan and zoom?",false);
+		})
 
 	borderSettings = QuickSettings.create((width+430)%windowWidth,10, "Border control")
 		.addDropDown("Border shape",["Epicycloid","Random","Ellipse"], function(value){borderName=value.value;})
-		.addRange("Border perturbation strength",0,500,offsetScale,1,function(value) {offsetScale = value;})
+		.addRange("Border perturbation strength",0,radius,offsetScale,1,function(value) {offsetScale = value;})
 		.addRange("border modifier (integer)",1,10,mBorder,1,function(value) {mBorder = value;})
 		.addRange("Randomness scale",0,4,randScaleBorder,.001,function(value) {randScaleBorder = value;})
 		.collapse();
@@ -142,8 +153,10 @@ function updatePtsAndITers(){
 
 
 function draw() {
-	blendMode(BLEND);
-	background(0,20,10);
+	if(!doAccumulate){
+		blendMode(BLEND);
+		background(0,20,10);
+	}
 	blendMode(ADD);
 
 
@@ -157,32 +170,39 @@ function draw() {
 	scale(controls.view.zoom);
 	translate(width/2,height/2);
 	
+	strokeWeight(100/(NLines)/20);
+	if(!doAccumulate){
+		strokeWeight(100/(NLines));		
+	
+		//initialize points
+		for(i=0;i<N;i++){
+			pts[i]=border(i/N);
+		}
+			
 
-	//initialize points
-	for(i=0;i<N;i++){
-		pts[i]=border(i/N);
-	}
-		
-
-	//Draw the border circle, by going around the outside points
-	if(doBorder){ 
-		drawBorder();
-		if(diffeoName=="mobius"){
-			//drawTransformedCircle(mobiusA,mobiusB,mobiusC,mobiusD);
+		//Draw the border circle, by going around the outside points
+		if(doBorder){ 
+			drawBorder();
+			if(diffeoName=="mobius"){
+				//drawTransformedCircle(mobiusA,mobiusB,mobiusC,mobiusD);
+			}
 		}
 	}
 
 	push();
 
-	strokeWeight(100/(NLines));
+	//strokeWeight(100/(NLines));
 	//NIters=floor(NLines/NPoints)+1;
 	let x=0,
 		xNew=0;
 	for(i=0;i<NPoints;i++){
 
-		if(doRandomize){
+
+		if(doAccumulate && doAddLines){
+			x=random();
+		} else if(!doAccumulate && doRandomize){
 			x=rand(i); //lil deterministic pseudorandom function
-		} else {
+		} else if (!doRandomize){
 			x=i/NPoints;
 		}
 		
@@ -206,6 +226,7 @@ function draw() {
 			x=xNew;
 		}
 	}
+	
 
 	pop();
 	
@@ -250,13 +271,13 @@ function drawBorder(){
   //parametrically define a path, based off parameter x in [0,1]
 function border(x){
 
-	let offset=createVector(0,0);
-	let R=250;
+	let offset=createVector(0,0),
+		thisRad=radius;
 	switch(borderName){
 		case "Epicycloid":
 			offset=createVector(cos(2*PI*x*(mBorder+1)),sin(2*PI*x*(mBorder+1)));
 			offset.y-=1/(mBorder+1); //recorrect to keep it centered
-			R-=offsetScale;
+			thisRad-=offsetScale;
 			break;
 		case "Random":
 			offset=createVector(noise(randScaleBorder*x)+noise(randScaleBorder*(1-x))-1,noise(randScaleBorder*x+5)+noise(randScaleBorder*(1-x)+5)-1);
@@ -268,9 +289,7 @@ function border(x){
 
 	offset.mult(offsetScale);
 	
-	
-	let circle=createVector(cos(2*PI*(x)),sin(2*PI*(x))).mult(R);
-	
+	let circle=createVector(cos(2*PI*(x)),sin(2*PI*(x))).mult(radius);
 	return circle.add(offset);
 }
   
@@ -443,6 +462,20 @@ function keyPressed(){
 			}
 			
 			break;
+		
+		case ' ':
+			doAddLines=true;
+			break;
   }  
 }
 
+function keyReleased(){
+	switch(key) {
+		
+		case ' ':
+			doAddLines=false;
+			break;
+  }  
+}
+
+doAddLines
