@@ -33,14 +33,8 @@ show_sidebar: true
   </div>
 
   <div class="col-md-9 mb-4">
-    <h1>Hello!</h1>
-    <p> TODO <br/>
-    <a href="https://chessapig.github.io/sketch/diffeos">ooh look at the pretty diffeomorphisms</a>
-    <br>
-    <a href="https://chessapig.github.io/sketch/Hoops">ooh look at the pretty lines</a>
-    <br>
-    <a href="https://chessapig.github.io/sketch/tori">ooh look at the pretty tori</a>
-    aaaaaa
+    <h1>TODO</h1>
+    <p> Incoming mathematics graduate student at UC Berkeley. I like mathematical physics, epically the intersections with geometry and topology. I got undergraduate degrees in math and physics from the University of Maryland (UMD)<br/>
     <!-- <h1>Hello, I'm Elliot!</h1>
     <p>You'll probably get a pretty good sense of my interests from the content on this site, but just in case: I like math and physics. In fact, Right now I'm studying math and physics, and hopefully someday I'll know enough to study mathematical physics. My fav is differential geometry, which studies local propreties of curvey spaces, like a many-dimensional potato. I like how visual it is. Geometry is like the interpeter of the mathematical pantheon, all the other fields look to it for intuition. Not to mention, physics is a subfield of geometry ;). So many things, in physics or elsewise, have really beutiful geometric interpetations. I honestly believe anything in life is better with manifolds.
       <br/>  <br/>
