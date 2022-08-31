@@ -15,6 +15,7 @@ excerpt: "An introduction to symplectic geometry and classical mechanics, meant 
 <script language="javascript" type="text/javascript" src="/sketch/toric_engine/toric-library-instanced.js"></script>
 <script language="javascript" type="text/javascript" src="/sketch/toric_engine/1D oscillator sim.js"></script>
 
+*Page still under construction, please excuse the typos*
 
 # Introduction
 A physicist sees the world through harmonic oscillators. The very first thing they study is the motion of a spring, equivalently a particle sitting in a characteristic quadratic potential. They then generalize to quantum mechanics, or to classical field theory and the wave equations, then to the free field in quantum field theory. Reality is merely a perturbed oscillator. Armed with this simple example they completely understand, physicists can tackle much harder problems. 

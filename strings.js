@@ -11,7 +11,7 @@ var	phase=0;
 var	mBorder=1;
 var	phaseVelocity=0;
 var	doBorder=true,
-	doHyperbolic=false,
+	doHyperbolic=true,
 	doRandomize=true,
 	doAccumulate=false;
 	doAddLines=false;
@@ -29,7 +29,7 @@ var [mobiusA,mobiusB,mobiusC,mobiusD] = [0.1,0,0,0.1],
 	
 
 var borderName="Epicycloid",
-	diffeoName="test";
+	diffeoName="mobius+square";
 
 var diffeoSettings,
 	graphicsSettings,
@@ -38,11 +38,10 @@ var diffeoSettings,
 
 
 function setup() {
-	canvas=createCanvas(windowWidth, windowHeight,P2D);
+	canvas=createCanvas(windowWidth, windowHeight);
 	canvas.mouseWheel(e => Controls.zoom(controls).worldZoom(e)); //Controls from libraries/zoom
 	controls.enabled=false;
 	colorMode(HSB, 100)
-	smooth();
 	
 	NIters=1;
 	NPoints=1000;
@@ -50,9 +49,9 @@ function setup() {
 
 	//parameters for this program
 	diffeoSettings = QuickSettings.create((width+10)%windowWidth,10, "Diffeomorphism control")
-		.addDropDown("Circle diffeo",["test","mobius+square","mobius","multiply","noise","logistic","cosine","Arnold Tounges","zero"], function(value){
+		.addDropDown("Circle diffeo",["mobius+square","mobius","multiply","noise","logistic","cosine","Arnold Tounges","zero"], function(value){
 			diffeoName=value.value;
-			if(diffeoName=="mobius" || diffeoName == "mobius+square"){
+			if(diffeoName=="mobius"){
 				mobiusSettings.show();
 			} else {
 				mobiusSettings.hide();
@@ -154,11 +153,6 @@ function updatePtsAndITers(){
 
 
 function draw() {
-	window.mousePressed = e => Controls.move(controls).mousePressed(e)
-	window.mouseMoved = e => Controls.move(controls).mouseMoved(e);
-	window.mouseReleased = e => Controls.move(controls).mouseReleased(e)
-	window.mouseWheel = e => Controls.zoom(controls).worldZoom(e)
-
 	if(!doAccumulate){
 		blendMode(BLEND);
 		background('#2c2621');
@@ -176,10 +170,9 @@ function draw() {
 	scale(controls.view.zoom);
 	translate(width/2,height/2);
 	
-	if(doAccumulate){
-		strokeWeight(100/(NLines)/20);
-	} else if(!doAccumulate){
-		strokeWeight(100/(NLines)*4);		
+	strokeWeight(100/(NLines)/20);
+	if(!doAccumulate){
+		strokeWeight(100/(NLines));		
 	
 		//initialize points
 		for(i=0;i<N;i++){
@@ -327,8 +320,6 @@ switch(diffeoName){
 		// x=mobius(x,mobiusA,mobiusB,mobiusC,mobiusD);
 		// x=fract(2*x);
 		return x;
-	case "test":
-		return fract(exp(5*x+3));
 	default:
 		return 1*x;
 }

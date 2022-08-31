@@ -9,7 +9,7 @@ show_sidebar: true
 <div class="row">
   <div class="col-md-3 mb-1">
     <div class="card">
-      <img class="card-img-top" src="/static/images/Jolene.jpg"/>
+      <img class="card-img-top" src="/static/images/headshot.jpg"/>
       <div class="card-body">
         <div class="card-text">
           <i class="fas fa-user"></i> whale <br/>
@@ -34,7 +34,7 @@ show_sidebar: true
 
   <div class="col-md-9 mb-4">
     <h1>TODO</h1>
-    <p> Incoming mathematics graduate student at UC Berkeley. I like mathematical physics, epically the intersections with geometry and topology. I got undergraduate degrees in math and physics from the University of Maryland (UMD)<br/>
+    <p> Hello! I am a first year mathematics PhD student at UC Berkeley. I'm interested in mathematical physics, espically its intersections with geometry and topology.  I got undergraduate degrees in math and physics from the University of Maryland (UMD)<br/>
     <!-- <h1>Hello, I'm Elliot!</h1>
     <p>You'll probably get a pretty good sense of my interests from the content on this site, but just in case: I like math and physics. In fact, Right now I'm studying math and physics, and hopefully someday I'll know enough to study mathematical physics. My fav is differential geometry, which studies local propreties of curvey spaces, like a many-dimensional potato. I like how visual it is. Geometry is like the interpeter of the mathematical pantheon, all the other fields look to it for intuition. Not to mention, physics is a subfield of geometry ;). So many things, in physics or elsewise, have really beutiful geometric interpetations. I honestly believe anything in life is better with manifolds.
       <br/>  <br/>
