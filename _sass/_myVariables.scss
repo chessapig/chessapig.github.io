@@ -9,11 +9,13 @@ $headings-font-weight: 600;
 
 $body-bg:          #2c2621;
 $body-color:       #e6cfb3;
-$dark:              lighten($body-bg, 20%);
+$dark:              lighten($body-bg, 10%);
 $light:             lighten($body-bg, 80%);
 
 $primary:       #ea925c; 
-$secondary:     #6ed38e;       
+$secondary:     #6ed38e;
+$bold:          #f34d41;    
+$tertiary:      #9f79dd;   
 $success:       #63a4ca;
 $info:          $cyan !default;
 $warning:       $yellow !default;

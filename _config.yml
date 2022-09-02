@@ -53,3 +53,6 @@ plugins:
 
 include:
   - _static
+
+kramdown:
+  auto_ids: true

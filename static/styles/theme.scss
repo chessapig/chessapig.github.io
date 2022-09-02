@@ -45,8 +45,20 @@ body {
   justify-content: center
     
 }
+/** Tables */
+table { margin-bottom: 1.5rem; width: 100%; text-align: left; color: $body-color; border-collapse: collapse; border: 1px solid $body-color; }
 
+table tr:nth-child(even) { background-color: $dark; }
 
+table th, table td { padding: 0.5rem 0.75rem; }
+
+table th { background-color: $dark; border: 1px solid $body-color; border-bottom-color: $body-color; }
+
+table td { border: 1px solid $body-color; }
+
+b, strong {
+	color: $bold;
+	}
 
 h1 {
   color: $primary; 
@@ -60,6 +72,10 @@ h3 {
   color: $success; 
   }
 
+h4 {
+	color: $tertiary; 
+	}
+
 
 em {
   color: $success !important; 
@@ -72,13 +88,13 @@ blockquote {
 
 
 .section {
-  // &:nth-child(even) {
-  //   background-color: white;
-  // }
+  &:nth-child(even) {
+    background-color: white;
+  }
 
-  // &:nth-child(odd) {
-  //   background-color: lighten($back-primary, 0%);
-  // }
+  &:nth-child(odd) {
+    background-color: lighten($back-primary, 0%);
+  }
 }
 
 .card-header .card-title {

@@ -18,6 +18,17 @@ $grey-color:       #828282 !default;
 $grey-color-light: lighten($grey-color, 40%) !default;
 $grey-color-dark:  darken($grey-color, 25%) !default;
 
+/** Tables */
+table { margin-bottom: 1.5rem; width: 100%; text-align: left; color: #d9eaf4; border-collapse: collapse; border: 1px solid #e8e8e8; }
+
+table tr:nth-child(even) { background-color: #122140; }
+
+table th, table td { padding: 0.5rem 0.75rem; }
+
+table th { background-color: #122140; border: 1px solid #122140; border-bottom-color: #122140; }
+
+table td { border: 1px solid #122140; }
+
 $table-text-align: left !default;
 
 // Width of the content area
