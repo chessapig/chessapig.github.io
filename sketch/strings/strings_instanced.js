@@ -176,6 +176,65 @@ var frobenius = function(p){
 		//s.borderStrength=(p.sin(p.frameCount/100)*.5+.5)*3;
 	}
 }
+
+var square = function(p){
+	let s;
+	let progress
+	let parent="string3";
+	p.setup=function() {
+		p.smooth();
+		var width = document.getElementById(parent).offsetWidth;
+		canvas=p.createCanvas(700, 700);
+		canvas.parent(parent);
+		
+		s = new String_power(p,1000,2);
+		s.doRandomizePosition=true;
+		
+		s.lineDiamModifier=3;
+		progress=1;
+
+		makeListeners(s,canvas,parent)
+
+		// let m = new Mobius(p);
+		// m.testComplex();
+	}
+	
+	p.draw=function() {
+
+		progress=p.frameCount/400*.5;
+		s.draw_animated(p.floor(s.NPoints));
+		s.phase=progress;
+		//s.borderStrength=(p.sin(p.frameCount/100)*.5+.5)*3;
+	}
+}
+
+var random = function(p){
+	let s;
+	let progress
+	let parent="string4";
+	p.setup=function() {
+		p.smooth();
+		var width = document.getElementById(parent).offsetWidth;
+		canvas=p.createCanvas(700, 700);
+		canvas.parent(parent);
+		
+		s = new String_random(p,1000,20,20);
+		progress=1;
+
+		makeListeners(s,canvas,parent)
+
+		// let m = new Mobius(p);
+		// m.testComplex();
+	}
+	
+	p.draw=function() {
+
+		//progress=p.frameCount/100*.5;
+		s.draw_animated(p.floor(s.NPoints*progress));
+		//s.phase=progress;
+		//s.borderStrength=(p.sin(p.frameCount/100)*.5+.5)*3;
+	}
+}
 	
 
 
@@ -185,5 +244,6 @@ var frobenius = function(p){
 
 // var string3 = new p5(string3);
 
- var frobenius = new p5(frobenius);
+var square = new p5(square);
+//var random = new p5(random);
 

@@ -21,6 +21,7 @@ var	aniVelocity=0;
 var maxLines=3000;
 var	NLines=1000;
 var	NSlider=1;
+var lineDiamModifier=10;
 
 const radius=250; //radius of starting circle
 
@@ -179,7 +180,7 @@ function draw() {
 	if(doAccumulate){
 		strokeWeight(100/(NLines)/20);
 	} else if(!doAccumulate){
-		strokeWeight(100/(NLines)*4);		
+		strokeWeight(100/(NLines)*lineDiamModifier);		
 	
 		//initialize points
 		for(i=0;i<N;i++){
@@ -247,7 +248,7 @@ function draw() {
 function drawBorder(){
 	push();
 
-	strokeWeight(1);
+	strokeWeight(lineDiamModifier);
 
 	//start with rainbow circle
 	for(i=0;i<N;i++){
@@ -415,7 +416,7 @@ function periodicNoise(x,r=1,seed=0){
   
   
   function colorMap(x){
-	return color(x*100,70,90);
+	return color(x*100,70,90,200/lineDiamModifier);
   }
 
 

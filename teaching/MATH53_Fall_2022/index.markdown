@@ -30,12 +30,16 @@ show_sidebar: true
 | Date | Topics      | Handout| Solutions|
 | ---- | ----------- | ----------| -------- |
 |      | Single variable review  | [worksheet](worksheets/Worksheet_0.pdf)   | [Notes](worksheets/single_var_review.pdf) from the review session  |
-| 8/24 | No official discussion. Unofficially, we talked about topology, calculus, and the gauss-bonnet theorem.   |     | |
-| 8/26 | Introductions, creating a hyperbolic paraboloid out of sticks and rubber bands.   |[Webpage with activity](https://mathcraft.wonderhowto.com/how-to/make-hyperbolic-paraboloid-using-skewers-0131751/)      | |
-| 8/29 | Parametric curves and their calculus, Lissajous curves      | [worksheet](worksheets/worksheet_parametric_curves.pdf)    |[solutions](worksheets/worksheet_parametric_curves_solution.pdf) |
-| 8/31 | Parametric curves continued, polar coordinates, cardiods | [worksheet](worksheets/worksheet_polar.pdf)    |     |
-| 9/02 | Vectors, dot and cross products  | [worksheet](worksheets/worksheet_vectors.pdf)     |     |
-
+| wed 8/24 | No official discussion. Unofficially, we talked about topology, calculus, and the gauss-bonnet theorem.   |     | |
+| fri 8/26 | Introductions, creating a hyperbolic paraboloid out of sticks and rubber bands.   |[Webpage with activity](https://mathcraft.wonderhowto.com/how-to/make-hyperbolic-paraboloid-using-skewers-0131751/)      | |
+| mon 8/29 | Parametric curves and their calculus, Lissajous curves      | [worksheet](worksheets/worksheet_parametric_curves.pdf)    |[solutions](worksheets/worksheet_parametric_curves_solution.pdf) |
+| wed 8/31 | Parametric curves continued, polar coordinates, cardiods | [worksheet](worksheets/worksheet_polar.pdf)    |     |
+| fri 9/02 | Vectors, dot and cross products  | [worksheet](worksheets/worksheet_vectors.pdf)     |    |
+| mon 9/05 | Homework questions | | |
+| wed 9/07 | Quiz one: Parametric equations, polar coordiantes, vector algebra | [quiz](worksheets/quiz/quiz_1.pdf) | [solutions] |
+| fri 9/09 | Level sets, quadradic surfaces | | |
+| mon 9/12 | Multivariable limits, epsilon-delta definition | | |
+| wed 9/14 | Quiz two: Multivariable functions, partial derivatives | [quiz](worksheets/quiz/quiz_1.pdf) | |
 
 ## Resources
 

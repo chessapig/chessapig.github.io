@@ -26,16 +26,21 @@ class Strings{
         this.NIters=1;
         this.NPoints=this.p.floor(this.NLines/this.NIters);
         this.NBorder=this.NPoints;
+		this.lineDiamModifier=NLines/100;
+		this.phase=0;
 
 		this.controls=new Control(p);
 		this.p.colorMode(this.p.HSB, 100);
 
-		this.toggleFocus();
+		//this.toggleFocus();
 
 		this.doHyperbolic=false;
 		this.doExtend=true;
+		this.doRandomizePosition=false;
 
     }
+
+
 
 	// set NIters(n){
 	// 	//this.NIters=n;
@@ -44,7 +49,9 @@ class Strings{
 
 	// set NPoints(n){
 	// 	//this.NPoints=n;
-	// 	this.NIters=this.p.floor(this.NLines/this.NPoints);
+	// 	//this.NIters=this.p.floor(this.NLines/this.NPoints);
+	// 	this.NLines=n;
+	// 	this.lineDiamModifier=this.NLines/50;
 	// }
 
 	// set NLines(n){
@@ -56,11 +63,22 @@ class Strings{
 	draw(){
 		this.setupDraw();
 		this.drawBorder();
-		this.drawStrings();
+		this.drawStrings(this.NPoints*p);
 		if(!this.controls.focused){
 			this.p.background(this.BKG+"AA");
 		}
 	}
+
+	//f gives percentage of strings that are strung
+	draw_animated(f){
+		this.setupDraw();
+		this.drawBorder();
+		this.drawStrings(f);
+		if(!this.controls.focused){
+			this.p.background(this.BKG+"AA");
+		}
+	}
+
 
 	setupDraw(){
 		this.p.blendMode(this.p.BLEND);
@@ -71,12 +89,12 @@ class Strings{
 		this.p.translate(this.controls.view.x, this.controls.view.y);
 		this.p.scale(this.controls.view.zoom);
 		this.p.translate(this.p.width/2,this.p.height/2);
-		this.p.strokeWeight(100/(this.NLines));		
+		this.p.strokeWeight(100/(this.NLines)*this.lineDiamModifier);		
 	}
 
     drawBorder(){
         this.p.push();
-        this.p.strokeWeight(2);
+        this.p.strokeWeight(this.p.sqrt(this.lineDiamModifier)*2);
         this.p.blendMode(this.p.BLEND);
 
 
@@ -103,15 +121,23 @@ class Strings{
 		}
 		let x=0,
 			xNew=0;
-		for(let i=0;i<numStrings;i++){
-			//x=rand(p,i); //lil deterministic pseudorandom function
-			x=i/this.NPoints;
+
+		let numLinesDraw = numStrings;
+		if(! this.doRandomizePosition) {
+			numLinesDraw=this.p.min(numStrings,this.NPoints);
+		}
+		for(let i=0;i<numLinesDraw;i++){
+			if(this.doRandomizePosition){
+				x=rand(this.p,i);
+			} else {
+				x=i/this.NPoints;
+			}
 			xNew=0;
 
 
 
 			for(let iter=0;iter<this.NIters;iter++){
-				xNew=this.diffeo(x)
+				xNew=this.circle_map(x)
 				this.p.stroke(this.colorMap(x)); //Color by the starting point location
 
 				let pt=this.border(x);
@@ -159,6 +185,10 @@ class Strings{
 		return this.circle(x);
     }
 
+	circle_map(x){
+		return fract(this.diffeo(x) + this.phase);
+	}
+
 	diffeo(x){
 		return x;
 	}
@@ -168,7 +198,7 @@ class Strings{
 	}
 
 	colorMap(x){
-		return this.p.color(x*100,70,90);
+		return this.p.color(x*100,70,90,200/this.lineDiamModifier);
 	  }
 
 	toggleFocus(){
@@ -186,16 +216,47 @@ class Strings{
 
 
 class Strings_multiply extends Strings{
-	constructor(p,NLines=50,multiplier=2, phase=0){
+	constructor(p,NLines=50,multiplier=2){
 		super(p,NLines);
 		this.multiplier=multiplier;
-		this.phase=phase;
 	}
 
 	diffeo(x){
 		return fract(this.multiplier*x+this.phase);
 	}
 }
+
+class String_power extends Strings{
+	constructor(p,NLines=64,power=2){
+		super(p,NLines);
+		this.power=power;
+	}
+
+	diffeo(x){
+
+		let n0=this.p.floor(x*this.NLines);
+		let n=1;
+		for(let i=0;i<this.power;i++){
+			n = n*n0 % this.NLines;
+		}
+
+		return fract(n/this.NLines);
+	}
+}
+
+class String_random extends Strings{
+	constructor(p,NLines=100,rand_str=1, rand_scale=1){
+		super(p,NLines);
+		this.rand_str=rand_str;
+		this.rand_scale=rand_scale;
+	}
+
+	diffeo(x){
+
+		return fract(x+periodicNoise(this.p,x,this.rand_scale/5,10)*3*this.rand_str);
+	}
+}
+
 
 
 class Frobenius extends Strings{
@@ -236,9 +297,31 @@ class Strings_wrap_animation extends Strings_multiply{
 	}
 }
 
+class Mobius extends Strings{
+	constructor(p){
+		super(p);
+	}
+
+	testComplex(){
+		let z1 = new Cx(this.p,[0,1])
+		let z2 = new Cx(this.p,[1,1])
+		console.log(z1.p);
+		console.log(Cx.add(z1,z2));
+	}
+}
+
 
 
 function fract(x){
     return (x%1+1)%1;
 }
 
+//deterministic random number generator
+function rand(p,seed){
+	return fract(p.sin(seed*78.233) * 43758.5453);
+}
+
+function periodicNoise(p,x,r=1,seed=0){
+	return p.noise(r*p.cos(x*2*p.PI)+seed,r*p.sin(x*2*p.PI));
+}
+  
