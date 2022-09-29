@@ -36,10 +36,13 @@ show_sidebar: true
 | wed 8/31 | Parametric curves continued, polar coordinates, cardiods | [worksheet](worksheets/worksheet_polar.pdf)    |     |
 | fri 9/02 | Vectors, dot and cross products  | [worksheet](worksheets/worksheet_vectors.pdf)     |    |
 | mon 9/05 | Homework questions | | |
-| wed 9/07 | Quiz one: Parametric equations, polar coordiantes, vector algebra | [quiz](worksheets/quiz/quiz_1.pdf) | [solutions] |
+| wed 9/07 | Quiz one: Parametric equations, polar coordiantes, vector algebra | [quiz](worksheets/quiz/quiz_1.pdf) | [solutions](worksheets/quiz/quiz_1_solutions.pdf) |
 | fri 9/09 | Level sets, quadradic surfaces | | |
 | mon 9/12 | Multivariable limits, epsilon-delta definition | | |
-| wed 9/14 | Quiz two: Multivariable functions, partial derivatives | [quiz](worksheets/quiz/quiz_1.pdf) | |
+| wed 9/14 | Quiz two: Multivariable functions, partial derivatives | [quiz](worksheets/quiz/quiz_2.pdf) |   [solutions](worksheets/quiz/quiz_2_solutions.pdf) |
+| fri 9/16 | Partial derivatives and gradients | | |
+| wed 9/21 | Quiz three: Gradients, Tangent planes, Chain rule | [quiz](worksheets/quiz/quiz_3.pdf) |   [solutions](worksheets/quiz/quiz_3_solutions.pdf) |
+
 
 ## Resources
 
