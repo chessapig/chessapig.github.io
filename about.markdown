@@ -2,12 +2,12 @@
 layout: default
 title: About
 permalink: /about/
-show_sidebar: true
+show_sidebar: false
 ---
 
 
 <div class="row">
-  <div class="col-md-3 mb-1">
+  <div class="col-md-4 mb-1">
     <div class="card">
       <img class="card-img-top" src="/static/images/headshot.jpg"/>
       <div class="card-body">
@@ -32,9 +32,10 @@ show_sidebar: true
     </div>
   </div>
 
-  <div class="col-md-9 mb-4">
+  <div class="col-md-8 mb-4">
     <h1>Hello!</h1>
-    <p>  I am a first year mathematics PhD student at UC Berkeley. I'm interested in mathematical physics, espically its intersections with geometry and topology.  I got undergraduate degrees in math and physics from the University of Maryland (UMD)<br/>
+    <p>  I am a first year mathematics PhD student at UC Berkeley. I'm interested in mathematical physics, espically its intersections with geometry and topology (Read more <a href="/research">here</a>).  I got undergraduate degrees in math and physics from the University of Maryland (UMD)<br/>
+    <p>I was drawn to geometry because my approach to math is very visual. I try to capture my images of mathematical objects using digital art, which you can check out in the <a href="/gallery">gallery</a>
     <!-- <h1>Other activities</h1>
     <h2>MoMath </h2>
     In the summer of 2022, I worked at the national meusuem of a

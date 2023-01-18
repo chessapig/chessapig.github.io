@@ -88,10 +88,10 @@ Perceptually, That's alllllmost applying a Mobius transform. A Riemann surface s
 
 I'm not sure I buy this. I've sushed away many of my problems. The big thing is, people have actually measured the metric on the space of colors. By putting two colors next to each-other and seeing if the human eye can discern them, we get a local notion of distance (See [this thread](https://twitter.com/akivaw/status/1482883705479778307) by @akivaw). This metric is very much not homogenous, so what's the deal?
 
-I think the experiments are measuring a biological metric, dictated by the resolution of our rods and cones. In contrast, that described above is psychological, measuring how far apart our mental conception of the colors lie. an *Ontological* metric, if you will. Unfortunately, this isn't symmetric either. The crispening effect says that psychological distance between colors can be amplified with a carefully chosen background, violating background invariance (Fig. 6).
+I think the experiments are measuring a biological metric, dictated by the resolution of our rods and cones. In contrast, that described above is psychological, measuring how far apart our mental conception of the colors lie. an *Ontological* metric, if you will. Unfortunately, this isn't symmetric either. The crispening effect says that psychological distance between colors can be ampiified with a carefully chosen background, violating background invariance (Fig. 6).
 
-| ![Image](/assets/colors/complex.jpg) |
+| ![Image](/assets/colors/crispening.png) |
 | -- |
 | Fig 6: The crispening effect, from [this paper](https://mathematical-neuroscience.springeropen.com/articles/10.1186/s13408-020-00084-x)| 
 
-Still, I can't let go of the hyperbolic color space. I want to imagine spaceships when I mix colors together, it's just human nature. It really makes a lovely story. :)
+Still, I can't let go of the hyperbolic color space. I want to imagine spaceships when I mix colors together, it's just human nature. It makes a lovely story. :)
