@@ -7,15 +7,15 @@ show_sidebar: true
 
 # Coloumb branch reading seminar
 
-**Meeting time and location:** Wednsday 2:00-3:00 pm, Evans 1015   
+**Meeting time and location:** Wednsday 2:00-4:00 pm, Evans 1015   
 ## Schedule
 
-| Date 		| Speaker 	| Topic      					|
-| ---- 		| ---- 		| ----------- 					| 
-|  2/1   	| N/A  		| Planning meeting 				|
-|  2/8    	|   		|  								| 
-|  2/15   	|  			|  								|
-|  2/22   	|   		| 								|
+| Date 		| Speaker 	| Topic      					| Notes  	|
+| ---- 		| ---- 		| ----------- 					|  ----		|
+|  [2/1](#21)   	| Elliot Kienzle  		| Planning meeting 		| [I](\files\coloumb_notes\day_1.pdf) |
+|  [2/8](#28)    	| Eric Jankowski, Elliot Kienzle   |  	Introduction to supersymmetry |  |
+|  2/15   	|  			|  								|			|
+|  2/22   	|   		| 								|			|
 
 
 
@@ -56,7 +56,20 @@ Coloumb branches are a active area of research which is not yet mature, meaning 
   - an alternative description/construction of the spaces constructed by BFN in the above paper
 
 
+## Talk details
 
+### 2/1
+*Speaker:* Elliot Kienzle \\
+*Topic:* Planning meeting \\
+*Notes:* [Day one notes](\files\coloumb_notes\day_1.pdf) \\
+*Summary:* Discussed the motivation behind coloumb branches, and why we care about studying them. Discussed the future topics of the reading seminar.
+
+
+### 2/8
+*Speaker:* Eric Jankowski, Elliot Kienzle \\
+*Topic:* Introduction to supersymmetry \\
+*Notes:*  \\
+*Summary:* We will introduce supersymmetric lie algebras, and their representations as superfields. For general lie superalgebra theory, see [A sketch of Lie superalgebra theory](https://link.springer.com/article/10.1007/BF01609166) by Kac. For supersymmetry in the context of quantum field theory, and its relationship to hyperkahelr geometry, see [Hyperkahler metrics and supersymmetry](https://link.springer.com/article/10.1007/BF01214418) by HKLR.
 
 
 
