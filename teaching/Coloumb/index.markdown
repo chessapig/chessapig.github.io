@@ -12,9 +12,9 @@ show_sidebar: true
 
 | Date 		| Speaker 	| Topic      					| Notes  	|
 | ---- 		| ---- 		| ----------- 					|  ----		|
-|  [2/1](#21)   	| Elliot Kienzle  		| Planning meeting 		| [I](\files\coloumb_notes\day_1.pdf) |
-|  [2/8](#28)    	| Eric Jankowski, Elliot Kienzle   |  	Introduction to supersymmetry |  |
-|  2/15   	|  			|  								|			|
+|  [2/1](#21)   	|   		| Planning meeting 		| [I](\files\coloumb_notes\day_1.pdf) |
+|  [2/8](#28)    	| Eric Jankowski, Elliot Kienzle   |  	Superalgebras | [Eric](\files\coloumb_notes\day_2_pt_1.pdf), [Elliot](\files\coloumb_notes\day_2_pt_2.pdf)  |
+|  [2/15](#215)   	|  	Elliot Kienzle		|  		Supersymmetry continued						|			|
 |  2/22   	|   		| 								|			|
 
 
@@ -67,9 +67,16 @@ Coloumb branches are a active area of research which is not yet mature, meaning 
 
 ### 2/8
 *Speaker:* Eric Jankowski, Elliot Kienzle \\
-*Topic:* Introduction to supersymmetry \\
+*Topic:* Superalgebras \\
+*Notes:*  [Lie superalgebras](\files\coloumb_notes\day_2_pt_1.pdf), [Physicist's supersymmetry algebras](\files\coloumb_notes\day_2_pt_2.pdf) \\
+*Summary:* Eric introduced supersymmetric lie algebras discussing their basic properties and classification. This follwed  [A sketch of Lie superalgebra theory](https://link.springer.com/article/10.1007/BF01609166) by Kac, and [MATHEMATICAL FOUNDATIONS OF SUPERSYMMETRY](https://arxiv.org/abs/0710.5742) by Caston and Fioresi. Elliot described what physicsts call a supersymmetry algebra, described in the first part of chapter 5 of [Hyperkahler metrics and supersymmetry](https://link.springer.com/article/10.1007/BF01214418) by HKLR.
+
+
+### 2/15
+*Speaker:*  Elliot Kienzle \\
+*Topic:* Supersymmetry continued \\
 *Notes:*  \\
-*Summary:* We will introduce supersymmetric lie algebras, and their representations as superfields. For general lie superalgebra theory, see [A sketch of Lie superalgebra theory](https://link.springer.com/article/10.1007/BF01609166) by Kac. For supersymmetry in the context of quantum field theory, and its relationship to hyperkahelr geometry, see [Hyperkahler metrics and supersymmetry](https://link.springer.com/article/10.1007/BF01214418) by HKLR.
+*Summary:* We will continue in chapter 5 of [Hyperkahler metrics and supersymmetry](https://link.springer.com/article/10.1007/BF01214418) by HKLR, talking about superspace, superfields, the meaning of $\mathcal{N}=1,2,4$ supersymmetry, and hinting at relationships with Kahler and Hyperkahler geometry.
 
 
 
