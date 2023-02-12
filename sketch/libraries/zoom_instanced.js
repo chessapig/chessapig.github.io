@@ -8,6 +8,23 @@ class Control {
 		this.focused=true;
 	}
 
+  //apply a transform to send screen coordinates to draw coordinates;
+  transformCoords(xcoord,ycoord){
+    //aapply each of the transforms below in reverse
+
+    xcoord-=this.view.x;      ycoord-=this.view.y; 
+    xcoord/=this.view.zoom;   ycoord/=this.view.zoom; 
+    xcoord-=this.p.width/2;   ycoord-= this.p.height/2;
+    return [xcoord,ycoord];
+  }
+
+  //setup canvas to be centered on 0,0
+  transformCanvas(){
+    this.p.translate(this.view.x, this.view.y);
+		this.p.scale(this.view.zoom);
+		this.p.translate(this.p.width/2,this.p.height/2);
+  }
+
 	mousePressed(e) {
 		if(!this.enabled){ return;}
 		this.viewPos.isDragging = true;

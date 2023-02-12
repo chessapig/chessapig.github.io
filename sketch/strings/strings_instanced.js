@@ -1,6 +1,6 @@
 var string = function(p){
 p.setup=function() {
-	var parent="string"
+	var parent="string1"
 	setupCanvas(p,parent);
 
 
@@ -75,43 +75,43 @@ p.draw=function() {
 
 
 var string2 = function(p){
-p.setup=function() {
-	setupCanvas(p,"string3");
-}
+	p.setup=function() {
+		setupCanvas(p,"string3");
+	}
 
-p.draw=function() {
-	p.push();
-	setupDraw(p);
+	p.draw=function() {
+		p.push();
+		setupDraw(p);
 
-	drawBorder(p);
-	
-	let x=0,
-		xNew=0;
-	for(i=0;i<NPoints;i++){
-		//x=rand(p,i); //lil deterministic pseudorandom function
-		x=i/N;
-		xNew=0;
+		drawBorder(p);
+		
+		let x=0,
+			xNew=0;
+		for(i=0;i<NPoints;i++){
+			//x=rand(p,i); //lil deterministic pseudorandom function
+			x=i/N;
+			xNew=0;
 
-		for(iter=0;iter<NIters;iter++){
-			xNew=diffeo(p,x,"multiply")
-			p.stroke(colorMap(p,x)); //Color by the starting point location
+			for(iter=0;iter<NIters;iter++){
+				xNew=diffeo(p,x,"multiply")
+				p.stroke(colorMap(p,x)); //Color by the starting point location
 
-			offsetScale=1.5;
-			mBorder=2;
-			pt=border(p,x,"Epicycloid");
-			endPt=border(p,xNew,"Epicycloid");
+				offsetScale=1.5;
+				mBorder=2;
+				pt=border(p,x,"Epicycloid");
+				endPt=border(p,xNew,"Epicycloid");
 
-			//drawStringHyperbolic(p,pt,endPt); 
-			p.line(pt.x,pt.y,endPt.x,endPt.y);
+				//drawStringHyperbolic(p,pt,endPt); 
+				p.line(pt.x,pt.y,endPt.x,endPt.y);
 
-			x=xNew;
+				x=xNew;
+			}
 		}
-	}
-	p.pop();
-	if(!controls.focused){
-		p.background(BKG+"AA");
-	}
-	}
+		p.pop();
+		if(!controls.focused){
+			p.background(BKG+"AA");
+		}
+		}
 }
 
 
@@ -133,6 +133,7 @@ var string3 = function(p){
 		s.draw();
 	}
 }
+
 
 
 var string4 = function(p){
@@ -180,7 +181,7 @@ var frobenius = function(p){
 var square = function(p){
 	let s;
 	let progress
-	let parent="string3";
+	let parent="string4";
 	p.setup=function() {
 		p.smooth();
 		var width = document.getElementById(parent).offsetWidth;

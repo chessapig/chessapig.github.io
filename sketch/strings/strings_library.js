@@ -465,7 +465,7 @@ class Cx{
 		this.t+=z.t;
 		this.makeCart();
         return this;
-	}
+	}7
 
 	static mult(p,z1,z2){
 		let z1_ = Cx.copy(p,z1);
@@ -477,6 +477,12 @@ class Cx{
 		this.cart=[this.x+z.x,this.y+z.y];
         return this;
 	}
+
+	static add(p,z1,z2){
+		let z1_ = Cx.copy(p,z1);
+		return z1_.add(z2);
+	}	
+
     
     inverse(){
         this.r=1/this.r;
@@ -486,7 +492,7 @@ class Cx{
     }
 
     static inverse(p,z){
-        let z_=copy(p,z);
+        let z_=Cx.copy(p,z);
         return z_.inverse();
     }
 
@@ -497,10 +503,21 @@ class Cx{
         return this;
     }
 
-	static add(p,z1,z2){
-		let z1_ = copy(p,z1);
-		return z1_.add(z2);
-	}	
+	static negative(p,z){
+		let z_=Cx.copy(p,z);
+		return z_.negative();
+	}
+
+	conjugate(){
+        this.y=-this.y;
+        this.makePolar();
+        return this;
+	}
+
+	static conjugate(p,z){
+		let z_=Cx.copy(p,z);
+		return z_.negative();
+	}
 
 	static copy(p,z){
 		return new Cx(p,[z.x,z.y]);
