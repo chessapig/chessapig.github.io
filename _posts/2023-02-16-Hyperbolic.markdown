@@ -11,7 +11,7 @@ excerpt: "a collection of interactive gizmos and gadgets for exploring hyperboli
 <script language="javascript" type="text/javascript" src="/sketch/libraries/p5.min.js"></script>
 <script language="javascript" type="text/javascript" src="/sketch/libraries/p5.gui.js"></script>
 <script language="javascript" type="text/javascript" src="/sketch/libraries/MyGUI/MyGUI.js"></script>
-<script language="javascript" type="text/javascript" src="/sketch/strings/farey/farey.js"></script>
+<script language="javascript" type="text/javascript" src="/sketch/strings/Farey/farey.js"></script>
 <script language="javascript" type="text/javascript" src="/sketch/libraries/zoom_instanced.js"></script>
 
 
@@ -68,5 +68,4 @@ The Farey tesselation affords surprising connections between number theory and h
     <div class="sketch" id="fuschian"></div>
 </div>
 
-Work in progress :( not working yet
-
+Work in progress :( 
