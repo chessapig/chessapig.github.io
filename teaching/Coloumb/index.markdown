@@ -19,7 +19,7 @@ show_sidebar: true
 |  [2/8](#28)    	| Eric Jankowski, Elliot Kienzle   |  	Superalgebras | [Eric](\files\coloumb_notes\day_2_pt_1.pdf), [Elliot](\files\coloumb_notes\day_2_pt_2.pdf)  |
 |  [2/15](#215)   	|  	Elliot Kienzle		|  Spin, Spinor, Spinest		|	[Notes](\files\coloumb_notes\day_3.pdf) 		|
 |  [2/22](#222)   	|   Elliot Kienzle 		| 	Square roots in supersymmetry							|	[Notes](\files\coloumb_notes\day_3.pdf)|
-|  [3/1]            |   Che Shen          |   Hyperkahler geometry from supersymmetry   | |
+|  [3/1](#31)          |   Che Shen          |   Hyperkahler geometry from supersymmetry   | |
 
 
 
@@ -95,5 +95,5 @@ Coloumb branches are a active area of research which is not yet mature, meaning 
 ### 3/1
 *Speaker:*  Che Shen \\
 *Topic:* Hyperkahler geometry through supersymmetry\\
-*Notes:*   [pages 1.5 to end](\files\coloumb_notes\day_3.pdf)\\
+*Notes:*  \\
 *Summary:* We introduce the hyperkahler quotient, and how it arises from supersymmetry. Followes  [Hyperkahler metrics and supersymmetry](https://link.springer.com/article/10.1007/BF01214418).
