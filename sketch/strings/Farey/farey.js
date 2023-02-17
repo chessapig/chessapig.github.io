@@ -1,28 +1,80 @@
 var farey = function(p){
 	let s;
-	let progress
 	let parent="farey";
 	p.setup=function() {
 		p.smooth();
 		canvas=p.createCanvas(700, 700);
 		canvas.parent(parent);
 		
-		s = new HyperbolicPlane(p);
+		s = new Farey(p,"farey");
 
 		makeListeners(s,canvas,parent)
-
-		// let m = new Mobius(p);
-		// m.testComplex();
 	}
 	
 	p.draw=function() {
-
 		s.draw();
-
 	}
 }
 
+var fuschian = function(p){
+	let s;
+	let parent="fuschian";
+	p.setup=function() {
+		p.smooth();
+		canvas=p.createCanvas(700, 700);
+		canvas.parent(parent);
+		
+		s = new Fuschian(p,"fuschian");
+
+		makeListeners(s,canvas,parent)
+	}
+	
+	p.draw=function() {
+		s.draw();
+	}
+}
+
+var ellipticStringArt = function(p){
+	let s;
+	let parent="ellipticStringArt";
+	p.setup=function() {
+		p.smooth();
+		canvas=p.createCanvas(700, 700);
+		canvas.parent(parent);
+		
+		s = new EllipticStringArt(p,"ellipticStringArt",50,new Cx(),.1);
+
+		makeListeners(s,canvas,parent)
+	}
+	
+	p.draw=function() {
+		s.draw();
+	}
+}
+
+var loxodromicStringArt = function(p){
+	let s;
+	let parent="loxodromicStringArt";
+	p.setup=function() {
+		p.smooth();
+		canvas=p.createCanvas(700, 700);
+		canvas.parent(parent);
+		
+		s = new LoxodromicStringArt(p,"loxodromicStringArt",50,new Cx([0,.2]),0);
+
+		makeListeners(s,canvas,parent)
+	}
+	
+	p.draw=function() {
+		s.draw();
+	}
+}
+
+
 var farey = new p5(farey);
+var fuschian = new p5(fuschian);
+var ellipticStringArt = new p5(ellipticStringArt);
+var loxodromicStringArt = new p5(loxodromicStringArt);
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -31,10 +83,12 @@ function makeListeners(s,canvas,parent){
 	canvas.mouseWheel(e => s.controls.worldZoom(e)); //Controls from libraries/zoom
 	canvas.mouseMoved(e => s.controls.mouseMoved(e));
 	canvas.mouseReleased(e => s.controls.mouseReleased(e));
-	canvas.doubleClicked(e => s.toggleFocus());
+	//canvas.doubleClicked(e => s.toggleFocus());
+	document.getElementById(parent).addEventListener("dblclick", e=>  s.toggleFocus());
 	document.addEventListener("keydown", event => {
 		if (event.code === 'Space') {
-		  s.doHyperbolic=!s.doHyperbolic;
+			event.preventDefault();
+		  s.cycleModel();
 	  	} 	 
 	});
 }
@@ -42,14 +96,18 @@ function makeListeners(s,canvas,parent){
 
 //general class, which every thing will build utop.
 class myCanvas{
-	constructor(p){
+	constructor(p,parent=""){
 		this.p=p;
+		this.parent=parent;
 		this.BKG='#2c2621';
 
 		this.controls=new Control(p);
 		disableScroll();
+		this.toggleFocus();
 
 	}
+
+	
 
 	toggleFocus(){
 		this.controls.focused=!this.controls.focused;
@@ -66,24 +124,29 @@ class myCanvas{
 	setupDraw(){
 		this.p.blendMode(this.p.BLEND);
 		this.p.background(this.BKG);
-		
-		
+	}
+	
+	transformCanvas(){
 		//zooms and scales
 		this.controls.transformCanvas();
 		this.p.strokeWeight(this.lineDiamModifier);	
 	}
-	
 }
 
 
+
+
+
 class HyperbolicPlane extends myCanvas{
-	constructor(p){
-		super(p);
+	constructor(p,parent){
+		super(p,parent);
 		this.complexScale=250; //sets radius of unit circle 
-		this.geodesicCutoff=.01; //sets the geodesic rendering cutoff in terms of radians
+		this.geodesicCutoff=.005; //sets the geodesic rendering cutoff in terms of radians
 		this.NBorder=1000;
 		this.lineDiamModifier=1;
 		this.model="Poincare_Disc"
+		this.doViewSelector=true;
+		this.doExtend=false;
 
 		//sets the hyperbolic view, defined as a translation by a complex number, followed by rotation by some angle
 		this.hyperbolicView=[0,new Cx()]; 
@@ -93,141 +156,66 @@ class HyperbolicPlane extends myCanvas{
 		//this.toggleFocus();
     }
 
+	cycleModel(){
+		if(this.controls.focused){
+			if(this.model=="Poincare_Disc"){
+				this.model = "Klein_Disc";
+			} else if (this.model=="Klein_Disc"){
+				this.model = "Poincare_Disc";
+			}
+		}
+		
+	}
+
 	draw(){
-		this.setupDraw();
+		
+		this.setupDraw(); //sets up blend mode, draws 
+		this.drawSliders(); //draws sliders before transforming coordinates
+		this.transformCanvas();
+
 		this.drawInfinity();
-		let numStrings=200;
-		//this.lineDiamModifier=5/this.controls.view.zoom;
-		// for(var i=0;i<numStrings;i++){
-		// 	this.drawGeodesic(i/numStrings,i/numStrings*2);
-		// }
 
-		//this.drawMobius();
-		let  generators = [ 
-			//[0,-1,1,0],
-			[1,1,0,1],
-			[0,-1,1,0]
-			];
+		this.drawLines();
 
-
-		//this.recurseFuschian(Cx.i(),generators,1, 3);
-		//this.drawFuschianGrp(generators);
-		
-		this.drawFarey();
-		//console.log(this.getComplexPoint());
-
-		//let coords=this.controls.transformCoords(this.p.mouseX,this.p.mouseY);
-		let a = this.getComplexPoint();
-		this.p.circle(a.x*this.complexScale,-a.y*this.complexScale,10/this.controls.view.zoom);
-		this.hyperbolicView=[0,a];
-
-		
-
-
+		if(this.doViewSelector){
+			let easingStrength=.2;
+			if(this.p.keyIsDown(this.p.SHIFT)){
+				let newA = this.getComplexPoint();
+				let a = this.hyperbolicView[1];
+				a.add(newA.add(a.copy().negative()).scale(easingStrength));
+			}
+			this.drawPoint(this.hyperbolicView[1]);
+		}
 
 		if(!this.controls.focused){
 			this.p.background(this.BKG+"AA");
 		}
 
-		
-	}
-
-	drawMobius(){
-		let z=new Cx(),
-			znew=new Cx();
-		let a = this.getComplexPoint();
-		for(let theta=0; theta<2*Math.PI; theta+= .1){
-			z.polar = [1,theta];
-			
-			znew = z.copy().unitCircleMobius(Math.PI*.2,Cx.zero());
-
-			//znew = z.copy().poincareDiscIsometry(a.x,a.y,0,1);
-			//znew = z.copy().poincareDiscIsometry(1,1,0,1);
-
-			//chose color according to starting point
-			this.drawGeodesic(z, znew) ;
+		if(!this.p.mouseIsPressed){
+			this.controls.mouseReleased();
 		}
 	}
 
-	//uses mouse to select complex number in unit disc
-	getComplexPoint(){
 
-		let coords=this.controls.transformCoords(this.p.mouseX,this.p.mouseY);
+	//by default,dont draw any sliders
+	drawSliders(){
 
-
-		let a = new Cx([coords[0],-coords[1]]);
-		a.mult(new Cx([1/this.complexScale,0]));
-		return a;
 	}
-
 	
-	drawFarey(){
+	
+	drawLines(){
 
-
-		//let a=this.getComplexPoint();
-
-
-		//iterate thru all pairs n/d, n'/d', connecting them if nd'-n'd=+-1
-		let numIters=50;
-		for(let d=0;d<numIters;d++){
-			for(let n=0;n<=d;n++){
-				for(let d1=0;d1<numIters;d1++){
-					for(let n1=0;n1<=d1;n1++){
-						if(n*d1-n1*d ==-1  ){
-							let start=new Cx();
-							start.polar = [1,n/d*2*Math.PI];
-							//start.unitCircleMobius(0,a); //apply a mobius transform to the start and end
-
-							let end=new Cx();
-							end.polar = [1,n1/d1*2*Math.PI];
-							//end.unitCircleMobius(0,a);
-
-
-							//draw the geodesics with color defined by n/d, the starting position of the geodesic
-							//this.drawGeodesic(start.t/(2*Math.PI),end.t/(2*Math.PI), this.colorMap(n/d));
-							this.drawGeodesic(start,end, this.colorMap(n/d));
-
-						}
-					}
-				}
-			}
-		}
-
-		//draw lines from zero to rational functions of the form n/d
-		// for(let d  = 1;d<=5;d++){
-		// 	for(let n=1; n<=d; n++){
-		// 		this.drawGeodesic(0,n/d);
-		// 	}
-		// }
 	}
 
-
-
-	//acts on the geodesic by each of the generators, draws the geodesics, and repeats 
-	recurseFuschian(z,generators,iter, maxIters){
-
-		//console.log(z0.t);
-
-
-		if(iter> maxIters){
-			return;
-		}
-
-		let g;
-		let znew=new Cx();
-		for(var i=0;i<generators.length;i++){
-			g = generators[i];
-
-			//apply g
-			znew=z.copy().poincareDiscIsometry(g[0],g[1],g[2],g[3]);
-			this.drawGeodesic(z,znew,this.colorMap(iter/(maxIters+1)));
-			this.recurseFuschian(znew,generators,iter+1, maxIters);
-
-			//apply g inverse, by taking the inverse of a 2 by 2 matrix, up to scale
-			znew=z.copy().poincareDiscIsometry(g[3],-g[1],-g[2],g[0]);
-			this.drawGeodesic(z,znew,this.colorMap(iter/(maxIters+1)));
-			this.recurseFuschian(znew,generators,iter+1, maxIters);
-		}
+	//draws a point at a complex number z
+	drawPoint(z){
+		this.p.push();
+		this.p.blendMode(this.p.BLEND);
+		this.p.stroke(this.colorMap(0));
+		this.p.strokeWeight(3/z.poincareMetric());
+		let circRadius=20/z.poincareMetric();
+		this.p.circle(z.x*this.complexScale,-z.y*this.complexScale,circRadius);
+		this.p.pop();
 	}
 
 	//draws the ideal boundary of the hyperbolic plane
@@ -261,6 +249,18 @@ class HyperbolicPlane extends myCanvas{
 
     }
 
+	//uses mouse to select complex number in unit disc
+	getComplexPoint(){
+
+		let coords=this.controls.transformCoords(this.p.mouseX,this.p.mouseY);
+
+
+		let a = new Cx([coords[0],-coords[1]]);
+		a.mult(new Cx([1/this.complexScale,0]));
+		return a;
+	}
+
+
 	//returns a vector contianing coordinates of border point
 	border(x){
 		return this.circle(x);
@@ -281,10 +281,6 @@ class HyperbolicPlane extends myCanvas{
 		arcAngle=Math.min(Math.abs(arcAngle), Math.abs(arcAngle+2*Math.PI));
 		return arcAngle;
 	}	
-
-
-	
-
 
 	//draw a geodesic from start to end, which are points on hyperbolic infinity defined by numbers from 0 to 2*pi.
 	//the assoicated poitns are given by border(start) and border(end)
@@ -330,7 +326,7 @@ class HyperbolicPlane extends myCanvas{
 				let r0=this.complexScale;
 				//let r0=this.p.sqrt(v1.mag()*v2.mag()); //our guess for radius of the border circle
 				let r1 =  r0*this.p.tan(theta); //radius of new circle
-				if(r1>100000 || isNaN(r1)){this.p.line(v1.x,v1.y,v2.x,v2.y);}
+				if(r1>100000000 || isNaN(r1)){this.p.line(v1.x,v1.y,v2.x,v2.y);}
 				else{ 
 					let c = v1.copy().add(v2).normalize().mult(this.p.sqrt(r0**2+r1**2));//center of new circle
 
@@ -367,6 +363,225 @@ class HyperbolicPlane extends myCanvas{
 	}
 }
 
+
+class Fuschian extends HyperbolicPlane{
+	drawLines(){
+		let  generators = [ 
+			//[0,-1,1,0],
+			[1,1,0,1],
+			[0,-1,1,0]
+			];
+
+		this.recurseFuschian(Cx.i(),generators,1, 3);
+	}
+
+	//acts on the geodesic by each of the generators, draws the geodesics, and repeats 
+	recurseFuschian(z,generators,iter, maxIters){
+
+		//console.log(z0.t);
+
+
+		if(iter> maxIters){
+			return;
+		}
+
+		let g;
+		let znew=new Cx();
+		for(var i=0;i<generators.length;i++){
+			g = generators[i];
+
+			//apply g
+			znew=z.copy().poincareDiscIsometry(g[0],g[1],g[2],g[3]);
+			this.drawGeodesic(z,znew,this.colorMap(iter/(maxIters+1)));
+			this.recurseFuschian(znew,generators,iter+1, maxIters);
+
+			//apply g inverse, by taking the inverse of a 2 by 2 matrix, up to scale
+			znew=z.copy().poincareDiscIsometry(g[3],-g[1],-g[2],g[0]);
+			this.drawGeodesic(z,znew,this.colorMap(iter/(maxIters+1)));
+			this.recurseFuschian(znew,generators,iter+1, maxIters);
+		}
+	}
+}
+
+class Farey extends HyperbolicPlane{
+	drawLines(){//let a=this.getComplexPoint();
+
+
+		//iterate thru all pairs n/d, n'/d', connecting them if nd'-n'd=+-1
+		let numIters=50;
+		for(let d=0;d<numIters;d++){
+			for(let n=0;n<=d;n++){
+				for(let d1=0;d1<numIters;d1++){
+					for(let n1=0;n1<=d1;n1++){
+						if(n*d1-n1*d ==-1  ){
+							let start=new Cx();
+							start.polar = [1,n/d*2*Math.PI];
+							//start.unitCircleMobius(0,a); //apply a mobius transform to the start and end
+
+							let end=new Cx();
+							end.polar = [1,n1/d1*2*Math.PI];
+							//end.unitCircleMobius(0,a);
+
+
+							//draw the geodesics with color defined by n/d, the starting position of the geodesic
+							//this.drawGeodesic(start.t/(2*Math.PI),end.t/(2*Math.PI), this.colorMap(n/d));
+							this.drawGeodesic(start,end, this.colorMap(n/d));
+
+						}
+					}
+				}
+			}
+		}
+
+		//draw lines from zero to rational functions of the form n/d
+		// for(let d  = 1;d<=5;d++){
+		// 	for(let n=1; n<=d; n++){
+		// 		this.drawGeodesic(0,n/d);
+		// 	}
+		// }
+	}
+}
+
+class StringArt extends HyperbolicPlane{
+	constructor(p,parent,numStrings,translate=new Cx(), rotate=0){
+		super(p,parent);
+		this.numStrings=numStrings;
+
+		this.translate=translate; //translation for mobius transform
+		this.rotate=rotate; //rotation for mobius transform
+	}
+
+	drawLines(){
+		drawMobiusLines();
+	}
+
+	drawMobiusLines(){
+		let z=new Cx(),
+			znew=new Cx();
+		for(let i=0; i<this.numStrings; i+= 1){
+			let theta=i*2*Math.PI/this.numStrings;
+			z.polar = [1,theta];
+			znew = z.copy().unitCircleMobius(this.rotate*2*Math.PI,this.translate);
+			this.drawGeodesic(z, znew) ;
+		}
+	}
+	
+}
+
+class EllipticStringArt extends StringArt{
+	constructor(p,parent,numStrings,translate=new Cx(), rotate=0){
+		super(p,parent,numStrings,translate,rotate);
+
+		this.doExtend=true;
+
+		//make it so the initial configuration doesnt overlap the sliders
+		this.controls.view.zoom=.5;
+		this.controls.view.x=200;
+		this.controls.view.y=200;
+		
+		//setup slider for number of strungs
+		this.pos_slider1 = [30,50];
+		this.slider_numStrings = this.p.createSlider(1, 150, numStrings, 1);
+		this.slider_numStrings.parent(this.parent);
+		this.slider_numStrings.position(this.pos_slider1[0], this.pos_slider1[1]);
+		this.slider_numStrings.style('width', '200px');
+
+		//setup slider for the angle
+		this.slider_angle = this.p.createSlider(0, 1, this.rotate, .01);
+		this.slider_angle.parent(this.parent);
+		this.slider_angle.position(this.pos_slider1[0], this.pos_slider1[1]+70);
+		this.slider_angle.style('width', '200px');
+
+	}
+
+
+	drawSliders(){
+
+		this.p.push();
+			this.p.textSize(18);
+			this.p.fill('#e6cfb3');
+			this.p.stroke('#e6cfb3');
+			this.p.strokeWeight(1);
+
+			this.p.text('Number of strings: ', this.pos_slider1[0]-10, this.pos_slider1[1]-10);
+			this.p.text('Rotation angle: ', this.pos_slider1[0]-10, this.pos_slider1[1]+60);
+
+			this.p.textSize(24);
+			this.p.fill(this.colorMap(1));
+			this.p.text(this.p.str(this.numStrings), this.pos_slider1[0]+150, this.pos_slider1[1]-10);
+			this.p.text(this.p.str(this.rotate), this.pos_slider1[0]+150, this.pos_slider1[1]+60);
+
+		this.p.pop();
+	}
+
+	drawLines(){
+		this.rotate= this.slider_angle.value();
+		this.numStrings= this.slider_numStrings.value();
+		this.lineDiamModifier=100/this.numStrings;
+
+		this.drawMobiusLines();
+	}
+}
+
+
+
+class LoxodromicStringArt extends StringArt{
+	constructor(p,parent,numStrings,translate=new Cx(), rotate=0){
+		super(p,parent,numStrings,translate,rotate);
+
+		this.doViewSelector=false;
+		
+		//setup slider for number of strungs
+		this.pos_slider1 = [30,50];
+		this.slider_numStrings = this.p.createSlider(1, 150, numStrings, 1);
+		this.slider_numStrings.parent(this.parent);
+		this.slider_numStrings.position(this.pos_slider1[0], this.pos_slider1[1]);
+		this.slider_numStrings.style('width', '200px');
+
+		//setup slider for the angle
+		// this.slider_angle = this.p.createSlider(0, 1, this.rotate, .01);
+		// this.slider_angle.parent(this.parent);
+		// this.slider_angle.position(this.pos_slider1[0], this.pos_slider1[1]+70);
+		// this.slider_angle.style('width', '200px');
+
+	}
+
+
+	drawSliders(){
+
+		this.p.push();
+			this.p.textSize(18);
+			this.p.fill('#e6cfb3');
+			this.p.stroke('#e6cfb3');
+			this.p.strokeWeight(1);
+
+			this.p.text('Number of strings: ', this.pos_slider1[0]-10, this.pos_slider1[1]-10);
+			// this.p.text('Rotation angle: ', this.pos_slider1[0]-10, this.pos_slider1[1]+60);
+
+			this.p.textSize(24);
+			this.p.fill(this.colorMap(1));
+			this.p.text(this.p.str(this.numStrings), this.pos_slider1[0]+150, this.pos_slider1[1]-10);
+			// this.p.text(this.p.str(this.rotate), this.pos_slider1[0]+150, this.pos_slider1[1]+60);
+
+		this.p.pop();
+	}
+
+	drawLines(){
+		// this.rotate= this.slider_angle.value();
+		this.numStrings= this.slider_numStrings.value();
+		this.lineDiamModifier=100/this.numStrings;
+
+
+		let easingStrength=.2;
+			if(this.p.keyIsDown(this.p.SHIFT)){
+				let newA = this.getComplexPoint();
+				this.translate.add(newA.add(this.translate.copy().negative()).scale(easingStrength));
+			}
+			this.drawPoint(this.translate);
+
+		this.drawMobiusLines();
+	}
+}
 
 
 
@@ -423,6 +638,13 @@ class Cx{
 		return z1_;
 	}	
 
+	//multiply by a real number
+	scale(x){
+		this.r*=x;
+		this.makeCart();
+        return this;
+	}
+
 	add(z){
 		this.cart=[this.x+z.x,this.y+z.y];
         return this;
@@ -469,13 +691,22 @@ class Cx{
 		return z_.negative();
 	}
 
+	norm(){
+        return Math.sqrt(this.x*this.x+this.y*this.y);
+	}
+
+	static norm(z){
+        return Math.sqrt(z.x*z.x+z.y*z.y);
+	}
+
+	copy(){
+		return new Cx([this.x,this.y]);
+	}
 	static copy(z){
 		return new Cx([z.x,z.y]);
 	}
 
-    copy(){
-		return new Cx([this.x,this.y]);
-	}
+    
 
     //set useful constants and variables
     static zero(){  return new Cx([0,0]);    }
@@ -531,6 +762,12 @@ class Cx{
         return this;
     }
 
+	//returns the metric scale factor for the poincare disc model in the unit disc 1/(1-|z|^2)^2
+	poincareMetric(){
+
+
+        return 1/(1-Math.pow(this.norm(),2));
+    }
 
    
 }
