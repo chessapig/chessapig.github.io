@@ -80,10 +80,13 @@ class HyperbolicPlane extends myCanvas{
 	constructor(p){
 		super(p);
 		this.complexScale=250; //sets radius of unit circle 
-		this.geodesicCutoff=.05; //sets the geodesic rendering cutoff in terms of radians
+		this.geodesicCutoff=.01; //sets the geodesic rendering cutoff in terms of radians
 		this.NBorder=1000;
 		this.lineDiamModifier=1;
 		this.model="Poincare_Disc"
+
+		//sets the hyperbolic view, defined as a translation by a complex number, followed by rotation by some angle
+		this.hyperbolicView=[0,new Cx()]; 
 
 		this.p.colorMode(this.p.HSB, 100);
 
@@ -100,11 +103,23 @@ class HyperbolicPlane extends myCanvas{
 		// }
 
 		//this.drawMobius();
+		let  generators = [ 
+			//[0,-1,1,0],
+			[1,1,0,1],
+			[0,-1,1,0]
+			];
+
+
+		//this.recurseFuschian(Cx.i(),generators,1, 3);
+		//this.drawFuschianGrp(generators);
+		
 		this.drawFarey();
 		//console.log(this.getComplexPoint());
 
-		let coords=this.controls.transformCoords(this.p.mouseX,this.p.mouseY);
-		this.p.circle(coords[0],coords[1],10);
+		//let coords=this.controls.transformCoords(this.p.mouseX,this.p.mouseY);
+		let a = this.getComplexPoint();
+		this.p.circle(a.x*this.complexScale,-a.y*this.complexScale,10/this.controls.view.zoom);
+		this.hyperbolicView=[0,a];
 
 		
 
@@ -124,12 +139,13 @@ class HyperbolicPlane extends myCanvas{
 		for(let theta=0; theta<2*Math.PI; theta+= .1){
 			z.polar = [1,theta];
 			
-			znew = z.copy().unitCircleMobius(0,a);
+			znew = z.copy().unitCircleMobius(Math.PI*.2,Cx.zero());
+
+			//znew = z.copy().poincareDiscIsometry(a.x,a.y,0,1);
+			//znew = z.copy().poincareDiscIsometry(1,1,0,1);
 
 			//chose color according to starting point
-			this.p.stroke(this.colorMap(start));
-			this.p.strokeWeight(this.p.sqrt(this.lineDiamModifier)*2);
-			this.drawGeodesic(z.t/(2*Math.PI), znew.t/(2*Math.PI)) ;
+			this.drawGeodesic(z, znew) ;
 		}
 	}
 
@@ -148,7 +164,7 @@ class HyperbolicPlane extends myCanvas{
 	drawFarey(){
 
 
-		let a=this.getComplexPoint();
+		//let a=this.getComplexPoint();
 
 
 		//iterate thru all pairs n/d, n'/d', connecting them if nd'-n'd=+-1
@@ -160,15 +176,16 @@ class HyperbolicPlane extends myCanvas{
 						if(n*d1-n1*d ==-1  ){
 							let start=new Cx();
 							start.polar = [1,n/d*2*Math.PI];
-							start.unitCircleMobius(0,a); //apply a mobius transform to the start and end
+							//start.unitCircleMobius(0,a); //apply a mobius transform to the start and end
 
 							let end=new Cx();
 							end.polar = [1,n1/d1*2*Math.PI];
-							end.unitCircleMobius(0,a);
+							//end.unitCircleMobius(0,a);
 
 
 							//draw the geodesics with color defined by n/d, the starting position of the geodesic
-							this.drawGeodesic(start.t/(2*Math.PI),end.t/(2*Math.PI), this.colorMap(n/d));
+							//this.drawGeodesic(start.t/(2*Math.PI),end.t/(2*Math.PI), this.colorMap(n/d));
+							this.drawGeodesic(start,end, this.colorMap(n/d));
 
 						}
 					}
@@ -184,14 +201,44 @@ class HyperbolicPlane extends myCanvas{
 		// }
 	}
 
+
+
+	//acts on the geodesic by each of the generators, draws the geodesics, and repeats 
+	recurseFuschian(z,generators,iter, maxIters){
+
+		//console.log(z0.t);
+
+
+		if(iter> maxIters){
+			return;
+		}
+
+		let g;
+		let znew=new Cx();
+		for(var i=0;i<generators.length;i++){
+			g = generators[i];
+
+			//apply g
+			znew=z.copy().poincareDiscIsometry(g[0],g[1],g[2],g[3]);
+			this.drawGeodesic(z,znew,this.colorMap(iter/(maxIters+1)));
+			this.recurseFuschian(znew,generators,iter+1, maxIters);
+
+			//apply g inverse, by taking the inverse of a 2 by 2 matrix, up to scale
+			znew=z.copy().poincareDiscIsometry(g[3],-g[1],-g[2],g[0]);
+			this.drawGeodesic(z,znew,this.colorMap(iter/(maxIters+1)));
+			this.recurseFuschian(znew,generators,iter+1, maxIters);
+		}
+	}
+
 	//draws the ideal boundary of the hyperbolic plane
 	drawInfinity(){
-		this.p.blendMode(this.p.ADD);
+		//this.p.blendMode(this.p.ADD);
         this.p.push();
 		
 
-        this.p.strokeWeight(this.p.sqrt(this.lineDiamModifier)*2);
-        
+        //this.p.strokeWeight(this.p.sqrt(this.lineDiamModifier)*2);
+		this.p.strokeWeight(this.p.sqrt(20/this.controls.view.zoom*this.lineDiamModifier)*2);
+
 
 
         var lastPt=this.border(0)
@@ -230,32 +277,47 @@ class HyperbolicPlane extends myCanvas{
 
 	//finds the arc angel between two angles from 0 to 2 pi, which will be a number less than pi
 	arcAngle(angle1,angle2){
-		let arcAngle = angle2-angle1;
+		let arcAngle = Math.min(angle2-angle1,angle1-angle2);
 		arcAngle=Math.min(Math.abs(arcAngle), Math.abs(arcAngle+2*Math.PI));
 		return arcAngle;
 	}	
-	//draw a geodesic from start to end, which are points on hyperbolic infinity defined by numbers from 0 to 1.
+
+
+	
+
+
+	//draw a geodesic from start to end, which are points on hyperbolic infinity defined by numbers from 0 to 2*pi.
 	//the assoicated poitns are given by border(start) and border(end)
-	drawGeodesic(start,end,color=this.colorMap(start)){
+	drawGeodesic(start,end,color=this.colorMap(start.t/(Math.PI*2))){
 		//convert the start and end points to coordinates
-		let v1=this.border(start);
-		let v2=this.border(end);
-		
+		//let v1=this.border(start);
+		//let v2=this.border(end);
+
+
+		this.p.blendMode(this.p.ADD);
+		//apply hyperbolic view transform
+		let z1 = start.copy().unitCircleMobius(this.hyperbolicView[0],this.hyperbolicView[1].copy().negative());
+		let v1 = this.p.createVector(z1.x*this.complexScale,z1.y*this.complexScale);
+
+		let z2 = end.copy().unitCircleMobius(this.hyperbolicView[0],this.hyperbolicView[1].copy().negative());
+		let v2 = this.p.createVector(z2.x*this.complexScale,z2.y*this.complexScale);
 		
 
+		
+
+
 		let angle1=v1.heading(); let angle2 = v2.heading();
-		let arcAngle = this.arcAngle(angle1,angle2);
-		if(arcAngle<this.geodesicCutoff){
+		let diff = this.arcAngle(angle1,angle2)/(2*Math.PI);
+		if(diff<this.geodesicCutoff){
 			return;
 		}
 
 		//let color = this.colorMap(start);
-		color.setAlpha(Math.sqrt(Math.abs(arcAngle-this.geodesicCutoff))*255);
+		color.setAlpha(Math.sqrt(Math.abs(diff-this.geodesicCutoff))*255);
 
 		this.p.stroke(color);
-		this.p.strokeWeight(this.p.sqrt(10/this.controls.view.zoom*arcAngle*this.lineDiamModifier)*2);
+		this.p.strokeWeight(this.p.sqrt(10/this.controls.view.zoom*this.lineDiamModifier * Math.sqrt(diff))*2);
 
-		//console.log(arcAngle);
 
 		switch(this.model){
 			case "Klein_Disc":

@@ -7,15 +7,19 @@ show_sidebar: true
 
 # Coloumb branch reading seminar
 
-**Meeting time and location:** Wednsday 2:00-4:00 pm, Evans 1015   
+*Meeting time and location:* Wednsday 2:00-4:00 pm, Evans 1015   \\
+*Zoom Information:*  Meeting ID: 935 2386 6641 $$\quad$$   Password: coulomb $$\quad$$ [Link](https://berkeley.zoom.us/j/93523866641?pwd=WTZrVjg2Ungwd3NxaDFVWHduMEFTZz09) \\
+*Past talks:* [Playlist](https://www.youtube.com/playlist?list=PLsy8IQq7bK4d5eh-lyy_MH8HFbfD2udgJ)
+
 ## Schedule
 
 | Date 		| Speaker 	| Topic      					| Notes  	|
 | ---- 		| ---- 		| ----------- 					|  ----		|
 |  [2/1](#21)   	|   		| Planning meeting 		| [I](\files\coloumb_notes\day_1.pdf) |
 |  [2/8](#28)    	| Eric Jankowski, Elliot Kienzle   |  	Superalgebras | [Eric](\files\coloumb_notes\day_2_pt_1.pdf), [Elliot](\files\coloumb_notes\day_2_pt_2.pdf)  |
-|  [2/15](#215)   	|  	Elliot Kienzle		|  		Supersymmetry continued						|			|
-|  2/22   	|   		| 								|			|
+|  [2/15](#215)   	|  	Elliot Kienzle		|  Spin, Spinor, Spinest		|	[Notes](\files\coloumb_notes\day_3.pdf) 		|
+|  [2/22](#222)   	|   Elliot Kienzle 		| 	Square roots in supersymmetry							|	[Notes](\files\coloumb_notes\day_3.pdf)|
+|  [3/1]            |   Che Shen          |   Hyperkahler geometry from supersymmetry   | |
 
 
 
@@ -69,14 +73,27 @@ Coloumb branches are a active area of research which is not yet mature, meaning 
 *Speaker:* Eric Jankowski, Elliot Kienzle \\
 *Topic:* Superalgebras \\
 *Notes:*  [Lie superalgebras](\files\coloumb_notes\day_2_pt_1.pdf), [Physicist's supersymmetry algebras](\files\coloumb_notes\day_2_pt_2.pdf) \\
+*Video:* [link](https://www.youtube.com/watch?v=-KDAFLx7-bo&list=PLsy8IQq7bK4d5eh-lyy_MH8HFbfD2udgJ&index=2&ab_channel=ElliotKienzle)\\
 *Summary:* Eric introduced supersymmetric lie algebras discussing their basic properties and classification. This follwed  [A sketch of Lie superalgebra theory](https://link.springer.com/article/10.1007/BF01609166) by Kac, and [MATHEMATICAL FOUNDATIONS OF SUPERSYMMETRY](https://arxiv.org/abs/0710.5742) by Caston and Fioresi. Elliot described what physicsts call a supersymmetry algebra, described in the first part of chapter 5 of [Hyperkahler metrics and supersymmetry](https://link.springer.com/article/10.1007/BF01214418) by HKLR.
-
+![image](\assets\images\superalgebra.jpg)
 
 ### 2/15
 *Speaker:*  Elliot Kienzle \\
-*Topic:* Supersymmetry continued \\
-*Notes:*  \\
-*Summary:* We will continue in chapter 5 of [Hyperkahler metrics and supersymmetry](https://link.springer.com/article/10.1007/BF01214418) by HKLR, talking about superspace, superfields, the meaning of $\mathcal{N}=1,2,4$ supersymmetry, and hinting at relationships with Kahler and Hyperkahler geometry.
+*Topic:* Spin, spinor, spinest\\
+*Notes:*   [First ~1.5 pages](\files\coloumb_notes\day_3.pdf)\\
+*Summary:* Quick scamper through clifford algebras, spins, and spinor representations. The material can be found in a great many places, for example [Spin Geometry, Lawson and Michelson](https://www.jstor.org/stable/j.ctt1bpmb28). I focus on $$3D$$ spinors with signature $$(2,1)$$, following the development in chapter 5 [Hyperkahler metrics and supersymmetry](https://link.springer.com/article/10.1007/BF01214418). I conclude with the notion that a spinor is a square root of a vector (a general philosophy which manifests particularly nicely in 3 dimensions), and a disucssion of Bott Periodicity:
+![image](\gallery\images\bott\bott1.jpg)
 
 
+### 2/22
+*Speaker:*  Elliot Kienzle \\
+*Topic:* Square roots in supersymmetry\\
+*Notes:*   [pages 1.5 to end](\files\coloumb_notes\day_3.pdf)\\
+*Summary:* We'll talk about supersymmetry in the context of quantum field theory. Philosophically, we describe various ways in which supersymmetry gives square roots of familiar objects: A spinor is the square root of a vector, a supersymmetry transform is the square root of translation, and multiple superpersymmetries give square roots of negative 1. We will roughly follow chapter 5 of [Hyperkahler metrics and supersymmetry](https://link.springer.com/article/10.1007/BF01214418), talking about superspace, superfields, the meaning of $$\mathcal{N}=1,2,4$$ supersymmetry. This is supplemented by parts of [Five Lectures on Supersymmetry, by Dan Freed](https://bookstore.ams.org/view?ProductCode=FLS). 
 
+
+### 3/1
+*Speaker:*  Che Shen \\
+*Topic:* Hyperkahler geometry through supersymmetry\\
+*Notes:*   [pages 1.5 to end](\files\coloumb_notes\day_3.pdf)\\
+*Summary:* We introduce the hyperkahler quotient, and how it arises from supersymmetry. Followes  [Hyperkahler metrics and supersymmetry](https://link.springer.com/article/10.1007/BF01214418).
