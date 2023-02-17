@@ -7,7 +7,7 @@ show_sidebar: true
 
 # Coloumb branch reading seminar
 
-*Meeting time and location:* Wednsday 2:00-4:00 pm, Evans 1015   \\
+*Meeting time and location:* Wednsday 2:00-4:00 pm, Evans 1015 from 2:00 to 3:00, then Evans 939 at 3:30-4:00   \\
 *Zoom Information:*  Meeting ID: 935 2386 6641 $$\quad$$   Password: coulomb $$\quad$$ [Link](https://berkeley.zoom.us/j/93523866641?pwd=WTZrVjg2Ungwd3NxaDFVWHduMEFTZz09) \\
 *Past talks:* [Playlist](https://www.youtube.com/playlist?list=PLsy8IQq7bK4d5eh-lyy_MH8HFbfD2udgJ)
 
@@ -81,6 +81,7 @@ Coloumb branches are a active area of research which is not yet mature, meaning 
 *Speaker:*  Elliot Kienzle \\
 *Topic:* Spin, spinor, spinest\\
 *Notes:*   [First ~1.5 pages](\files\coloumb_notes\day_3.pdf)\\
+*Video:* [link](https://www.youtube.com/watch?v=QCPXjXR48Fg&list=PLsy8IQq7bK4d5eh-lyy_MH8HFbfD2udgJ&index=2&ab_channel=ElliotKienzle)\\
 *Summary:* Quick scamper through clifford algebras, spins, and spinor representations. The material can be found in a great many places, for example [Spin Geometry, Lawson and Michelson](https://www.jstor.org/stable/j.ctt1bpmb28). I focus on $$3D$$ spinors with signature $$(2,1)$$, following the development in chapter 5 [Hyperkahler metrics and supersymmetry](https://link.springer.com/article/10.1007/BF01214418). I conclude with the notion that a spinor is a square root of a vector (a general philosophy which manifests particularly nicely in 3 dimensions), and a disucssion of Bott Periodicity:
 ![image](\gallery\images\bott\bott1.jpg)
 
