@@ -372,7 +372,14 @@ class Fuschian extends HyperbolicPlane{
 			[0,-1,1,0]
 			];
 
-		this.recurseFuschian(Cx.i(),generators,1, 3);
+		let reflectGenerators = [
+			[Cx.one(),Cx.one().negative()],
+			[Cx.i(),Cx.one()],
+			[Cx.i(),Cx.one().negative()]
+		];
+
+		//this.recurseFuschian(Cx.i(),generators,1, 3);
+		this.recurseReflect(Cx.i(),reflectGenerators,1,3);
 	}
 
 	//acts on the geodesic by each of the generators, draws the geodesics, and repeats 
@@ -401,11 +408,28 @@ class Fuschian extends HyperbolicPlane{
 			this.recurseFuschian(znew,generators,iter+1, maxIters);
 		}
 	}
+
+	recurseReflect(z,reflectGenerators,iter,maxIters){
+		if(iter> maxIters){
+			return;
+		}
+
+		let g;
+		let znew=new Cx();
+		for(var i=0;i<reflectGenerators.length;i++){
+			g = reflectGenerators[i];
+
+			//apply g
+			znew=z.copy().hyperbolicReflection(g[0],g[1]);
+			this.drawGeodesic(z,znew,this.colorMap(iter/(maxIters+1)));
+			this.recurseFuschian(znew,reflectGenerators,iter+1, maxIters);
+		}
+	}
 }
 
 class Farey extends HyperbolicPlane{
 	drawLines(){//let a=this.getComplexPoint();
-
+		this.doExtend=true;
 
 		//iterate thru all pairs n/d, n'/d', connecting them if nd'-n'd=+-1
 		let numIters=50;
@@ -630,7 +654,7 @@ class Cx{
 		this.t+=z.t;
 		this.makeCart();
         return this;
-	}7
+	}
 
 	static mult(z1,z2){
 		let z1_ = Cx.copy(z1);
@@ -762,10 +786,19 @@ class Cx{
         return this;
     }
 
+
+
+	//reflect along a line starting from start, and ending at end (ponts on the boundray at inifnity)
+	hyperbolicReflection(s,e){
+
+		this.conjugate();
+		this.poincareDiscIsometry(s.x,s.y,3,5);
+
+		return this;
+	}
+
 	//returns the metric scale factor for the poincare disc model in the unit disc 1/(1-|z|^2)^2
 	poincareMetric(){
-
-
         return 1/(1-Math.pow(this.norm(),2));
     }
 

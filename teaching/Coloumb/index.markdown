@@ -91,6 +91,7 @@ Coloumb branches are a active area of research which is not yet mature, meaning 
 *Topic:* Square roots in supersymmetry\\
 *Notes:*   [pages 1.5 to end](\files\coloumb_notes\day_3.pdf)\\
 *Summary:* We'll talk about supersymmetry in the context of quantum field theory. Philosophically, we describe various ways in which supersymmetry gives square roots of familiar objects: A spinor is the square root of a vector, a supersymmetry transform is the square root of translation, and multiple superpersymmetries give square roots of negative 1. We will roughly follow chapter 5 of [Hyperkahler metrics and supersymmetry](https://link.springer.com/article/10.1007/BF01214418), talking about superspace, superfields, the meaning of $$\mathcal{N}=1,2,4$$ supersymmetry. This is supplemented by parts of [Five Lectures on Supersymmetry, by Dan Freed](https://bookstore.ams.org/view?ProductCode=FLS). 
+![image](\assets\images\superspace.png)
 
 
 ### 3/1
