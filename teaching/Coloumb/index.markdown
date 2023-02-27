@@ -7,7 +7,7 @@ show_sidebar: true
 
 # Coloumb branch reading seminar
 
-*Meeting time and location:* Wednsday 2:00-4:00 pm, Evans 1015 from 2:00 to 3:00, then Evans 939 at 3:30-4:00   \\
+*Meeting time and location:* Wednsday 2:00-4:00 pm, Evans 730   \\
 *Zoom Information:*  Meeting ID: 935 2386 6641 $$\quad$$   Password: coulomb $$\quad$$ [Link](https://berkeley.zoom.us/j/93523866641?pwd=WTZrVjg2Ungwd3NxaDFVWHduMEFTZz09) \\
 *Past talks:* [Playlist](https://www.youtube.com/playlist?list=PLsy8IQq7bK4d5eh-lyy_MH8HFbfD2udgJ)
 
@@ -96,6 +96,8 @@ Coloumb branches are a active area of research which is not yet mature, meaning 
 
 ### 3/1
 *Speaker:*  Che Shen \\
-*Topic:* Hyperkahler geometry through supersymmetry\\
+*Topic:* Supersymmetric field theory via superspace\\
 *Notes:*  \\
-*Summary:* We introduce the hyperkahler quotient, and how it arises from supersymmetry. Followes  [Hyperkahler metrics and supersymmetry](https://link.springer.com/article/10.1007/BF01214418).
+*Summary:*
+
+We will introduce sigma model and leverage superspace formulation to construct supersymmetric field theories with 2 or 4 supercharges, following [Freed, Five Lectures on Supersymmetry](https://bookstore.ams.org/view?ProductCode=FLS). We will discuss the relationship between Kahler manifolds and SUSY field theories.
