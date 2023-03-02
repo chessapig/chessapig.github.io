@@ -19,7 +19,7 @@ show_sidebar: true
 |  [2/8](#28)    	| Eric Jankowski, Elliot Kienzle   |  	Superalgebras | [Eric](\files\coloumb_notes\day_2_pt_1.pdf), [Elliot](\files\coloumb_notes\day_2_pt_2.pdf)  |
 |  [2/15](#215)   	|  	Elliot Kienzle		|  Spin, Spinor, Spinest		|	[Notes](\files\coloumb_notes\day_3.pdf) 		|
 |  [2/22](#222)   	|   Elliot Kienzle 		| 	Square roots in supersymmetry							|	[Notes](\files\coloumb_notes\day_3.pdf)|
-|  [3/1](#31)          |   Che Shen          |   Hyperkahler geometry from supersymmetry   | |
+|  [3/1](#31)          |   Che Shen          |   Hyperkahler geometry from supersymmetry   |[Notes](\files\coloumb_notes\day_5.pdf) |
 
 
 
