@@ -97,7 +97,7 @@ Coloumb branches are a active area of research which is not yet mature, meaning 
 ### 3/1
 *Speaker:*  Che Shen \\
 *Topic:* Supersymmetric field theory via superspace\\
-*Notes:*  \\
+*Notes:*  [first 4.5 pages](\files\coloumb_notes\day_5.pdf)\\
 *Summary:*
 
 We will introduce sigma model and leverage superspace formulation to construct supersymmetric field theories with 2 or 4 supercharges, following [Freed, Five Lectures on Supersymmetry](https://bookstore.ams.org/view?ProductCode=FLS). We will discuss the relationship between Kahler manifolds and SUSY field theories.
