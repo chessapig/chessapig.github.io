@@ -8,7 +8,7 @@ show_sidebar: true
 # Coloumb branch reading seminar
 
 *Meeting time and location:* Wednsday 2:00-4:00 pm, Evans 730   \\
-*Zoom Information:*  Meeting ID: 935 2386 6641 $$\quad$$   Password: coulomb $$\quad$$ [Link](https://berkeley.zoom.us/j/93523866641?pwd=WTZrVjg2Ungwd3NxaDFVWHduMEFTZz09) \\
+<!-- *Zoom Information:*  Meeting ID: 935 2386 6641 $$\quad$$   Password: coulomb $$\quad$$ [Link](https://berkeley.zoom.us/j/93523866641?pwd=WTZrVjg2Ungwd3NxaDFVWHduMEFTZz09) \\ -->
 *Past talks:* [Playlist](https://www.youtube.com/playlist?list=PLsy8IQq7bK4d5eh-lyy_MH8HFbfD2udgJ)
 
 ## Schedule
@@ -20,6 +20,14 @@ show_sidebar: true
 |  [2/15](#215)   	|  	Elliot Kienzle		|  Spin, Spinor, Spinest		|	[Notes](\files\coloumb_notes\day_3.pdf) 		|
 |  [2/22](#222)   	|   Elliot Kienzle 		| 	Square roots in supersymmetry							|	[Notes](\files\coloumb_notes\day_3.pdf)|
 |  [3/1](#31)          |   Che Shen          |   Hyperkahler geometry from supersymmetry   |[Notes](\files\coloumb_notes\day_5.pdf) |
+|  [3/8](#38)          |   Che Shen          |  Supersymmetry and Kahler/hyperkahler manifold    |[Notes](\files\coloumb_notes\day_5.pdf) |
+|  [3/21](#321)       |   Swapnil Garg         |  Seiberg-Witten theory   |   |
+|  3/28      |       |   Spring break!   |   |
+|  [4/5](#45-412)       |   Jacob Erlikhman     |  Rozonsky-Witten theory  | [Sections 1-2](\files\coloumb_notes\RW_notes.pdf)  |
+|  [4/12](#45-412)        |   Jacob Erlikhman     |  Rozonsky-Witten theory pt 2    |  [Section 3](\files\coloumb_notes\RW_notes.pdf) |
+|  [4/19](#419)       |   Elliot Kienzle      |  Toric geometry   | [Notes](\files\coloumb_notes\toric_geometry_notes.pdf)   |
+|  [4/26](#426)       |   Elliot Kienzle      |  Abelian Coulomb branches   |  [Notes](\files\coloumb_notes\abelian_notes.pdf) |
+
 
 
 
@@ -90,6 +98,7 @@ Coloumb branches are a active area of research which is not yet mature, meaning 
 *Speaker:*  Elliot Kienzle \\
 *Topic:* Square roots in supersymmetry\\
 *Notes:*   [pages 1.5 to end](\files\coloumb_notes\day_3.pdf)\\
+*Video:* [link](https://www.youtube.com/watch?v=ym8Alw4akeU&list=PLsy8IQq7bK4d5eh-lyy_MH8HFbfD2udgJ&index=3)\\
 *Summary:* We'll talk about supersymmetry in the context of quantum field theory. Philosophically, we describe various ways in which supersymmetry gives square roots of familiar objects: A spinor is the square root of a vector, a supersymmetry transform is the square root of translation, and multiple superpersymmetries give square roots of negative 1. We will roughly follow chapter 5 of [Hyperkahler metrics and supersymmetry](https://link.springer.com/article/10.1007/BF01214418), talking about superspace, superfields, the meaning of $$\mathcal{N}=1,2,4$$ supersymmetry. This is supplemented by parts of [Five Lectures on Supersymmetry, by Dan Freed](https://bookstore.ams.org/view?ProductCode=FLS). 
 ![image](\assets\images\superspace.png)
 
@@ -98,6 +107,54 @@ Coloumb branches are a active area of research which is not yet mature, meaning 
 *Speaker:*  Che Shen \\
 *Topic:* Supersymmetric field theory via superspace\\
 *Notes:*  [first 4.5 pages](\files\coloumb_notes\day_5.pdf)\\
-*Summary:*
+*Video:* [link](https://www.youtube.com/watch?v=6Xip6Vnilko&list=PLsy8IQq7bK4d5eh-lyy_MH8HFbfD2udgJ&index=4)\\
+*Summary:* We will introduce sigma model and leverage superspace formulation to construct supersymmetric field theories with 2 or 4 supercharges, following [Freed, Five Lectures on Supersymmetry](https://bookstore.ams.org/view?ProductCode=FLS). We will discuss the relationship between Kahler manifolds and SUSY field theories.
 
-We will introduce sigma model and leverage superspace formulation to construct supersymmetric field theories with 2 or 4 supercharges, following [Freed, Five Lectures on Supersymmetry](https://bookstore.ams.org/view?ProductCode=FLS). We will discuss the relationship between Kahler manifolds and SUSY field theories.
+### 3/8
+*Speaker:*  Che Shen \\
+*Topic:* Supersymmetric field theory via superspace\\
+*Notes:*  [pages 4-end](\files\coloumb_notes\day_5.pdf)\\
+*Summary:* We will talk about the relationship between supersymmetry and Kahler/hyperkahler manifolds. This goes in two ways. On the one hand, the target space of a supersymmetric sigma model with 4 or 8 supercharges must be Kahler or hyperkahler. On the other hand, for some supersymmetric gauge theories, the moduli of vacua is given by Kahler/hyperkahler quotient.
+
+References: The main reference will be [Freed, Five Lectures on Supersymmetry](https://bookstore.ams.org/view?ProductCode=FLS). If people want to read ahead, the last paragraph on P71 has a general discussion about gauge theory. The section *The superspacetime $$M^{4,4}$$* will also be useful.
+
+### 3/21
+*Speaker:*  Swapnil Garg \\
+*Topic:* Seiberg-Witten theory\\
+*Summary:*
+We will introduce our first example of a Coulomb branch, which comes from Seiberg Witten theory. We study the low energy effective field theory limit of $$4D$$, $$\mathcal{N}=2$$ supersymmetric Yang mills theory. This produces a moduli space with a special Kahler structure. In particular, for gauge group $$SU(2)$$, the moduli space has a fibration by Elliptic curves. 
+
+For refrence, see the [origional paper](https://arxiv.org/abs/hep-th/9407087) by Seiberg and Witten. More pedagogically, check out these [Notes](https://arxiv.org/abs/2006.14038) by Martone.
+
+### 4/5-4/12
+*Speaker:*  Jacob Erlikhman \\
+*Topic:* Rozansky-Witten theory\\
+*Notes:*  [Notes](\files\coloumb_notes\RW_notes.pdf)\\
+*Summary:*
+we introduced RW theories as twisted 3d N=4 SYM sigma models and going over some basic results, we'll investigate its reduction/compactification on the circle. This time, We will find in the process that although the theory is usually defined only on compact hyperkahler targets, we can actually extend that definition to include certain non-compact ones, like the Coulomb branch of Seiberg-Witten theory. We'll obtain some interesting results for some simple spacetime 3-manifolds using this approach.
+
+Refrences:
+1. Rozansky, Witten "hyperkahler geometry and invariants of 3 manifolds, 1996
+2. Seiberg, Witten "Gauge dynamics and compactification to three dimensions" 1996
+3. Gukov et al "Rozansky-Witten geometry of Coulomb branches and logarithmic knot invariants" 2018
+4. Kapustin, rozansky, saulina "rozansky Witten theory and symplectic algebraic geometry I" 2008
+
+
+### 4/19
+*Speaker:*  Elliot Kienzle \\
+*Topic:* Toric geometry\\
+*Notes:*  [Notes](\files\coloumb_notes\toric_geometry_notes.pdf)\\
+*Summary:*
+I describe Toric geometry, including a dettailed description of moment maps and the symplectic reduction. I state the DelZant correspondence, and describe the combinatorial data underlying every toric manifold. This is a prelude to Hypertoric geometry, which is necessary to understand abelian Coulomb branches. 
+
+Refrences: See [De Silva's notes on Toric Geometry](https://people.math.ethz.ch/~acannas/Papers/toric.pdf)
+
+![image](\assets\images\toric_engine.jpeg)
+
+
+### 4/26
+*Speaker:*  Elliot Kienzle \\
+*Topic:* Abelian Coloumb branch\\
+*Notes:*  [Notes](\files\coloumb_notes\abelian_notes.pdf)\\
+*Summary:*
+I talk about the Higgs branches and Coloumb branches of $$3D, \, \mathcal{N}=4$$ SUSY gauge theories with abelian gauge group $$G$$ and matter $$M$$. In particular, I do out the examples of $$(G,M) = (U(1),\mathbb{C}^{n+1})$$ and $$(U(1)^n,\mathbb{C}^{n+1})$$. We compute these spaces using hypertoric geometry, and a taste of quiver varieties. We see that the Higgs branch of the first equals the Coloumb branch of the second, and vice versa. This is because the theories are mirror dual. This follows section 3 of [Bullimore, Dimofte, and Gaiotto](https://arxiv.org/abs/1503.04817). Finally, we discuss general how general coulomb branches can be described in terms of abelian gauge theories. This includes a very recent paper, which shows that all coloumb branches are hilbert schemes of hypertoric varieties, by [Roger Bielawski, Lorenzo Foscolo](https://arxiv.org/abs/2304.08125). This is the first construction of hyperkahler metrics on general Coloumb branches.
