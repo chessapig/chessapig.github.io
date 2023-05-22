@@ -1,0 +1,179 @@
+{
+  "main": {
+    "id": "33322f1582c8f9af",
+    "type": "split",
+    "children": [
+      {
+        "id": "7812bcf8d173a76f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5a024e68dfcc2342",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "2023-05-20-diary.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "7c89e4d63c1c2513",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "2023-05-21-diary.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "f815ff6ee40d4f49",
+    "type": "split",
+    "children": [
+      {
+        "id": "d0147e1e9c3b86a6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fd8d7bd0743bf5a1",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "2f31970b22ad8e65",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "33a1a46d0ad1e64f",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "4e37dd41dd5173dc",
+    "type": "split",
+    "children": [
+      {
+        "id": "c3d028bf9854f5bc",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "656b762b4abb9a24",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "2023-05-21-diary.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "593679ba91bdd897",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "2023-05-21-diary.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "7c66c1cc7db0160e",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "86d95c39d89a42de",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "2023-05-21-diary.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "7c89e4d63c1c2513",
+  "lastOpenFiles": [
+    "2023-05-20-diary.md",
+    "2023-05-21-diary.md",
+    "2023-05-01-diary.md",
+    "2023-05-02-diary.md",
+    "2023-05-10-diary.md",
+    "2023-05-13-diary.md",
+    "2023-05-06-diary.md",
+    "2023-05-04-diary.md",
+    "2023-05-09-diary.md",
+    "2023-05-08-diary.md",
+    "2023-05-07-diary.md",
+    "aaa.md",
+    "2023-05-01.md",
+    "Untitled.md"
+  ]
+}

@@ -48,3 +48,6 @@ $card-bg:               #1d4487;
 $card-border-color:     $light;
 $card-cap-bg:           $dark;
 
+hr.mine {
+  border-top: 1px solid lighten($body-bg,30%);
+}
