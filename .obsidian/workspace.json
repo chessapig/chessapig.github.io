@@ -25,19 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2021-09-25-hyperbolic-band-theory.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "f56219772d93c44a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "about.md",
+                "file": "_posts/talks/2023-05-11-cortex.md",
                 "mode": "source",
                 "source": false
               }
@@ -49,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "research.md",
+                "file": "_posts/talks/2023-01-23-polygons.md",
                 "mode": "source",
                 "source": false
               }
@@ -134,7 +122,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "about.md",
+                "file": "_posts/talks/2023-01-23-polygons.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -151,7 +139,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "about.md",
+                "file": "_posts/talks/2023-01-23-polygons.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -174,7 +162,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "about.md"
+                "file": "_posts/talks/2023-01-23-polygons.md"
               }
             }
           }
@@ -195,9 +183,24 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "f56219772d93c44a",
+  "active": "c09f32982766fc16",
   "lastOpenFiles": [
+    "_posts/talks/2023-05-11-cortex.md",
+    "_posts/talks/2023-01-23-polygons.md",
+    "research.md",
+    "_site/assets/images/comet_quiver.png",
+    "assets/images/comet_quiver.png",
+    "_site/assets/images/Screen Shot 2023-05-23 at 5.36.02 AM.png",
+    "assets/images/Screen Shot 2023-05-23 at 5.36.02 AM.png",
+    "assets/images/star_quiver.png",
+    "_site/assets/images/star_quiver.png",
+    "_site/assets/images/star__quiver.png",
     "_posts/2021-09-25-hyperbolic-band-theory.md",
+    "assets/images/star.md",
+    "_site/assets/images/star.md",
+    "_site/assets/images/star quiver.png",
+    "_site/assets/images/Screen Shot 2023-05-23 at 5.11.58 AM.png",
+    "assets/images/Screen Shot 2023-05-23 at 5.11.58 AM.png",
     "about.md",
     "code.md",
     "_posts/2023-01-01-hyperbolic-string-art.md",
@@ -206,7 +209,6 @@
     "_site/paper",
     "_site/2021-09-25-hyperbolic-band-theory.html",
     "teaching/teaching.md",
-    "research.md",
     "_posts/blog/2022-7-25-Toric.md",
     "_posts/2023-02-01-Coloumb.md",
     "blog.md",
@@ -214,9 +216,6 @@
     "_site/research.html",
     "talks.md",
     "writing/index.md",
-    "_site/assets/images/momath.jpeg",
-    "assets/images/momath.jpeg",
-    "_posts/talks/2023-05-11-cortex.md",
     "_posts/blog/2022-7-25-symplectic.md",
     "_posts/blog/2022-08-02-String art.md",
     "_posts/blog/2022-10-23-Colors.md",
@@ -226,21 +225,10 @@
     "_posts/talks/2021-11-23-electromagnetism.md",
     "_posts/talks/2021-11-23-topological-recursion.md",
     "_posts/talks/2021-05-07-higgs-bundles-geometric-structures.md",
-    "_posts/talks/2021-04-23-kapustin-witten.md",
-    "_posts/talks/2020-11-23-riemann-roch.md",
-    "_posts/talks/2020-11-01-mirror.md",
-    "_site/assets/images/ momath.jpeg",
-    "assets/images/ momath.jpeg",
-    "_site/assets/images/ momath w arrows.jpeg",
-    "assets/images/ momath w arrows.jpeg",
-    "assets/colors/hsb_cone.png",
     "_site/talk/polygons.html",
     "_site/2023-01-23-polygons.html",
     "_site/polygons.html",
     "_site/2023-01-01-hyperbolic-string-art.html",
-    "_site/code/toric.html",
-    "_site/assets/colors/hsb_cone.png",
-    "_site/assets/images/korok.png",
-    "assets/images/korok.png"
+    "_site/code/toric.html"
   ]
 }
