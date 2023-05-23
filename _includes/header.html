@@ -1,3 +1,28 @@
+
+  <!--load bootstrap + other related things-->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+  <script>
+    $(document).ready(function() {
+      $(".dropdown-toggle").dropdown();
+  });
+  
+  $(document).ready(function() {
+    $('body').on('mouseup', function (e) {
+      if (!$(e.target).hasClass("dropdown-menu")) {
+        $(".dropdown-menu").each(function () {
+          $(this).removeClass("show");
+        });
+      }
+    });
+  });
+  </script>
+ 
+
+
 <header class="site-header site-nav" role="banner">
   <body class="d-flex flex-column">
     <header>
@@ -8,33 +33,54 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
+
+
           <li class="nav-item {% if page.url == "/about" %}active{% endif %}">
             <a class="nav-link" href="/about">About <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item {% if page.url == "/research" %}active{% endif %}">
-            <a class="nav-link" href="/research">Research</a>
-          </li>
-          <li class="nav-item {% if page.url == "/visualization" %}active{% endif %}">
-            <a class="nav-link" href="/visualization">Visualization</a>
+
+          <li class="nav-item dropdown ">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Academic
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+              <li class="nav-item {% if page.url == "/research" %}active{% endif %}">
+                <a class="nav-link" href="/research">Research</a>
+              </li>
+              <li class="nav-item {% if page.url == "/writing" %}active{% endif %}">
+                <a class="nav-link" href="/writing">Writing</a>
+              </li>
+              <li class="nav-item {% if page.url == "/teaching" %}active{% endif %}">
+                <a class="nav-link" href="/teaching">Teaching and seminars</a>
+              </li>
+              <li><a class="nav-link" href="/files">Files</a></li>
+              <li class="nav-item {% if page.url == "/files/CV.pdf" %}active{% endif %}">
+                <a class="nav-link" href="/files/CV.pdf"">CV</a>
+              </li>
+              </ul>
           </li>
 
-          <li class="nav-item {% if page.url == "/gallery" %}active{% endif %}">
-            <a class="nav-link" href="/gallery">Gallery</a>
+          <li class="nav-item dropdown ">
+            <a class="nav-link dropdown-toggle" href="/gallery" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Artistic
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+              <li class="nav-item {% if page.url == "/blog" %}active{% endif %}">
+                <a class="nav-link" href="/blog">Blog</a>
+              </li>
+              <li class="nav-item {% if page.url == "/gallery" %}active{% endif %}">
+                <a class="nav-link" href="/gallery">Gallery</a>
+              </li>
+              <li class="nav-item {% if page.url == "/visualization" %}active{% endif %}">
+                <a class="nav-link" href="/visualization">Code</a>
+              </li>
+              </ul>
           </li>
 
-          <li class="nav-item {% if page.url == "/files" %}active{% endif %}">
-            <a class="nav-link" href="/files">Files</a>
-          </li>
-          <li class="nav-item {% if page.url == "/teaching" %}active{% endif %}">
-            <a class="nav-link" href="/teaching">Teaching</a>
-          </li>
-          <li class="nav-item {% if page.url == "/blog" %}active{% endif %}">
-            <a class="nav-link" href="/blog">Blog</a>
-          </li>
-          <li class="nav-item {% if page.url == "/files/CV.pdf" %}active{% endif %}">
-            <a class="nav-link" href="/files/CV.pdf"">CV</a>
-          </li>
+
+          
         </div>
       </nav>
 </header>
+
 

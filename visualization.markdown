@@ -13,6 +13,8 @@ Click the titles to go to each of the sketches
 
 ## <a href="/sketch/strings">String art</a>
 
+See also [this post](/blog/2023/02/16/Hyperbolic.html) for a more user frendly version
+
 <img src="/sketch/strings/Examples/wrongTan.png" width="1000"/>
 
 Put a bunch of nails labeled 1 thru N in a circle, and stretch strings between each peg $i$ and its double $2i$. the density of strings is highest wherever the strings cross, which happens on a cardoid curve. Use really tiny strings, and we can see the pure cardiod, like in the left picture below. These high-density curves are called caustics. This sketch explores how the caustics look with different maps, or deformed boundaries like the picture in the right.

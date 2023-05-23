@@ -1,0 +1,211 @@
+{
+  "main": {
+    "id": "079edc56e4e7ab17",
+    "type": "split",
+    "children": [
+      {
+        "id": "560f806afacb1b7a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5004cc564f72d480",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_posts/2023-02-01-Coloumb.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f56063d21c255229",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_posts/2023-01-01-hyperbolic-string-art.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "8577c7fee727ce18",
+    "type": "split",
+    "children": [
+      {
+        "id": "784639f3b57c835f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c69b7ad25463c2e6",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "43d9983079684e3e",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "7c8c324f5d71137e",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "6ef206bcfa0f9c8a",
+    "type": "split",
+    "children": [
+      {
+        "id": "1f42d707b1c2f981",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d90cd9034f1ad525",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "_posts/2023-01-01-hyperbolic-string-art.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "323f675859ca783f",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "_posts/2023-01-01-hyperbolic-string-art.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "8ffbf7509c1ad02c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "6fcca5507c2de9bd",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "_posts/2023-01-01-hyperbolic-string-art.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "f56063d21c255229",
+  "lastOpenFiles": [
+    "_site/code/hyperbolic-string-art.html",
+    "_site/code/Hyperbolic-string-art.html",
+    "_site/code",
+    "_posts/2023-02-01-Coloumb.md",
+    "_posts/talks/2020-11-23-riemann-roch.md",
+    "_posts/talks/2020-11-01-mirror.md",
+    "_posts/talks/2023-05-11-cortex.md",
+    "_posts/talks/2022-11-04-stick-bombs.md",
+    "_posts/talks/2022-03-12-enceladus.md",
+    "_posts/talks/2022-03-03-BPS.md",
+    "_posts/talks/2022-02-04-integrable.md",
+    "_posts/talks/2021-11-23-topological-recursion.md",
+    "_posts/talks/2021-11-23-electromagnetism.md",
+    "_posts/talks/2021-05-07-higgs-bundles-geometric-structures.md",
+    "_posts/talks/2021-05-05-cobordism.md",
+    "_posts/talks/2021-05-03-kahler-quantization.md",
+    "_posts/talks/2021-04-23-kapustin-witten.md",
+    "_posts/talks/2020-11-24-lie-theorem.md",
+    "_posts/2023-01-01-hyperbolic-string-art.md",
+    "_site/2023-01-01-Hyperbolic-string-art.html",
+    "_posts/blog/2023-02-16-Hyperbolic.md",
+    "_posts/blog/2022-7-25-Toric.md",
+    "_posts/blog/2022-08-02-String art.md",
+    "_site/Hyperbolic-string-art.html",
+    "_posts/blog/2022-10-23-Colors.md",
+    "_posts/blog/2020-12-02-A-Harbinger-of-Things-to-Come.md",
+    "_site/hyperbolic-string-art.html",
+    "gallery/images/bott/bott1.jpg.md",
+    "_site/gallery/images/bott/bott1.jpg.md",
+    "_posts/diary/aaa.md",
+    "teaching/Coloumb/index.md",
+    "_site/Coloumb.html",
+    "_posts/talks",
+    "_posts/untitled folder",
+    "_posts/seminar/`",
+    "_posts/seminar/untitled folder",
+    "assets/images/toric_engine.jpeg",
+    "assets/cortex/triangle.png",
+    "_site/assets/cortex/kazina.png",
+    "assets/cortex/kazina.png",
+    "_site/assets/cortex/Kanizsa_triangle 2.png",
+    "assets/cortex/Kanizsa_triangle 2.png",
+    "_site/assets/images/Kanizsa_triangle 2.png",
+    "assets/images/Kanizsa_triangle 2.png",
+    "assets/cortex/theta.png",
+    "assets/cortex/table.png"
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "main": {
+    "id": "cf7e8f4e0e0bcd57",
+    "type": "split",
+    "children": [
+      {
+        "id": "5eb20100564e352e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f9e46e95b89bf1fd",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "1e90ee1ad6430972",
+    "type": "split",
+    "children": [
+      {
+        "id": "38cace4b9dde9974",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ab6fc94f1fbff404",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "ad161e2aac129ea3",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "64d88270a347e90b",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "a7735ab2c540086b",
+    "type": "split",
+    "children": [
+      {
+        "id": "3200f41a43cdac51",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "20a901c6d16b4035",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "e4caa7d456d13859",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "1343fa0832c23c50",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "6d210e62822f9dba",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "f9e46e95b89bf1fd",
+  "lastOpenFiles": [
+    "_posts/sticks.jpg.md",
+    "projects/2022-11-04-stick-bombs.md",
+    "_posts",
+    "assets",
+    "talks/2022-11-04-stick-bombs.md",
+    "projects",
+    "Talks/2022-11-04-stick-bombs.md",
+    "talks",
+    "assets/popsicle sticks and tensegrities.png",
+    "assets/sticks.jpg",
+    "Screen Shot 2023-05-21 at 5.46.53 PM.png.md",
+    "diary/2023-05-10-diary.md",
+    "diary/aaa.md",
+    "diary/2023-05-01-diary.md",
+    "blog/2023-05-14-cortex.md",
+    "Talks",
+    "diary/2023-05-02-diary.md",
+    "blog/2022-7-25-symplectic.md",
+    "assets/colors/light.md",
+    "blog/2020-12-02-A-Harbinger-of-Things-to-Come.md",
+    "blog/2022-10-23-Colors.md",
+    "assets/colors",
+    "assets",
+    "blog/2023-02-16-Hyperbolic.md",
+    "diary/2023-05-04-diary.md",
+    "blog/2022-08-02-String art.md",
+    "blog/2022-7-25-Toric.md",
+    "blog/2022-05-01-obsidian.md",
+    "diary/2023-05-06-diary.md"
+  ]
+}

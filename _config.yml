@@ -56,3 +56,8 @@ include:
 
 kramdown:
   auto_ids: true
+
+collections:
+  posts:
+    output: true
+    permalink: /:categories/:title

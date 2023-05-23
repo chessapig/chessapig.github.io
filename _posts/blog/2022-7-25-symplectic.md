@@ -3,7 +3,8 @@ layout: default
 title:  "The shape of motion: A primer on geometric mechanics"
 date:   2022-07-24 16:03:46 -0500
 categories: blog
-excerpt: "An introduction to symplectic geometry and classical mechanics, meant to introduce the ideas needed for the Harmonic osscilator thingy. "
+tags: [blog]
+summary: "An introduction to symplectic geometry and classical mechanics, meant to introduce the ideas needed for the Harmonic osscilator thingy. "
 ---
 
 <script language="javascript" type="text/javascript" src="/sketch/libraries/p5.min.js"></script>

@@ -10,6 +10,7 @@ $headings-font-weight: 600;
 $body-bg:          #2c2621;
 $body-color:       #e6cfb3;
 $dark:              lighten($body-bg, 10%);
+$mid:              lighten($body-bg, 40%);
 $light:             lighten($body-bg, 80%);
 
 $primary:       #ea925c; 
@@ -44,10 +45,72 @@ $link-color:          $primary;
 $link-hover-color:    darken($link-color, 15%);
 $mark-bg:             #ff19ff;
 
-$card-bg:               #1d4487;
+$card-bg:               $body-bg;
 $card-border-color:     $light;
 $card-cap-bg:           $dark;
+
+$dropdown-bg:          $body-bg;
+$dropdown-link-hover-color:         lighten($primary,10%);
+$dropdown-link-hover-bg:  $dark;
+
+.project {
+  display: flex;
+  margin-bottom: 20px;
+}
+.project .project-details {
+  flex: 1;
+  padding-right: 20px;
+}
+.project .project-details h3 {
+  margin-top: 0;
+}
+.project .tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.project .tags .tag {
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: $mid;
+  background-color: $dark;
+  color: $secondary;
+}
+.project .project-details p {
+    margin-bottom: 0;
+  }
+  .project .project-image {
+    display: flex;
+    flex: 0.8;
+    justify-content: center;
+    align-items: center;
+    background-color: $dark;
+    border: 2px solid $mid;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .project .project-image img {
+    max-width: 100%;
+    height: auto;
+  }
+@media (max-width: 600px) {
+  .project {
+    flex-direction: column;
+  }
+  .project .project-details {
+    flex: 1;
+    padding-right: 20px;
+  }
+  .project .project-image {
+    flex-basis: 300px;
+    flex-shrink: 0;
+  }
+}
 
 hr.mine {
   border-top: 1px solid lighten($body-bg,30%);
 }
+

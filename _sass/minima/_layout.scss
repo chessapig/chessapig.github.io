@@ -50,10 +50,11 @@
     position: absolute;
     top: 9px;
     right: $spacing-unit / 2;
-    background-color: $background-color;
+    background-color: $body-bg;
     border: 1px solid $light;
     border-radius: 5px;
-    text-align: right;
+    text-align: left;
+
 
     label[for="nav-trigger"] {
       display: block;
@@ -199,7 +200,7 @@
 
 .post-meta {
   font-size: $small-font-size;
-  color: $dark;
+  color: lighten($dark,30%);
 }
 
 .post-link {

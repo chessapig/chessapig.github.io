@@ -12,7 +12,7 @@ show_sidebar: false
       <img class="card-img-top" src="/static/images/headshot.jpg"/>
       <div class="card-body">
         <div class="card-text">
-          <i class="fas fa-user"></i> ekienzle@berkeley.edu <br/>
+          <i class="fas fa-user"></i> ekienzle[at]berkeley[dot]edu <br/>
           <i class="fab fa-twitter"></i><a href="https://twitter.com/chessapigbay" target="_blank">@chessapigbay</a> <br/>
         </div>
       </div>
@@ -20,10 +20,10 @@ show_sidebar: false
     <br/>
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Recent Blog Posts</h3>
+        <h3> <a href="/blog" title="Link">Recent blog posts</a></h3>
       </div>
       <ul class="list-group list-group-flush">
-        {% for post in site.posts limit:5 %} 
+        {% for post in site.categories.blog limit:5 %} 
           <ul class="list-group-item">
             <a class="text-dark" href="{{ post.url }}"><h6>{{ post.title | markdownify | remove: '<p>' | remove: '</p>' }}</h6></a>
           </ul>
