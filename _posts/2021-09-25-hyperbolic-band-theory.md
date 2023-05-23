@@ -1,6 +1,5 @@
 ---
 permalink: /paper/hyperbolic-band-theory
-
 layout: project 
 title:  "Hyperbolic Band Theory Through Higgs Bundles"
 date:   2021-09-25 16:03:47 -0500
