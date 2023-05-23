@@ -25,8 +25,7 @@ pageHasContent: true
 ---
 
 
-For a frielndly introduction to string art, see [my twitter thread](https://twitter.com/chessapigbay/status/1584141465734635520).  This pge contians a collection of sketches of Hyperbolic string art. For a general audience introduciton to hyperbolic geometry and hyperbolic string art, see [my paper](/files/hyperbolic_string_art.pdf). This paper was accepted to Bridges 2023, but I wasn't able to make it that year.  While reading the paper, it would help to play with the sketches below. 
-
+For a frielndly introduction to string art, see [my twitter thread](https://twitter.com/chessapigbay/status/1584141465734635520).  This pge contians a collection of sketches of Hyperbolic string art. For a general audience introduciton to hyperbolic geometry and hyperbolic string art, see [my paper](/files/hyperbolic_string_art.pdf). This paper was accepted to Bridges 2023, but I wasn't able to make it that year.  While reading the paper, try playing along with the sketches below.
 <script language="javascript" type="text/javascript" src="/sketch/libraries/p5.min.js"></script>
 <script language="javascript" type="text/javascript" src="/sketch/libraries/p5.gui.js"></script>
 <script language="javascript" type="text/javascript" src="/sketch/libraries/MyGUI/MyGUI.js"></script>
@@ -34,19 +33,45 @@ For a frielndly introduction to string art, see [my twitter thread](https://twit
 <script language="javascript" type="text/javascript" src="/sketch/libraries/zoom_instanced.js"></script>
 
 
+<script>
+#instructions {
+      background-color: red;
+      color: white;
+      padding: 20px;
+    }
+
+    .instruction {
+      margin-bottom: 10px;
+    }
+
+    .instruction-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+</script>
+
 
 # Exploring hyperbolic space
 
 This page contains a number of sketches exploring hyperbolic space. All of them are interactive, with the following controls:
-- double click to enable/disable
-- click, drag, and scroll to zoom
-- hold *shift* to move selector dot
-- press *space* to toggle between Poincare disc model and Klein model
+
+
+<div class="card" >
+  <div class="card-body">
+    <h2 class="card-title">Controls: <strong>Double click</strong> to activate</h2>
+    <h6 class="card-subtitle mb-2 text-muted">Applies to all sketches on page</h6>
+    <p class="card-text">
+	    <ul>
+		    <li> <strong>double click</strong>: Enable/disable sketch</li>
+		    <li><strong> click+drag and scroll</strong>: move and zoom</li>
+		    <li><strong>Shift</strong>:  move selector dot to mouse</li>
+		    <li><strong>Space</strong>: Toggle between Poincare disc model and Klein model  </li>
+	    </ul> 
+    </p>
+	</div>
+</div>
 
 ## Hyperbolic string art
-
-For an introduction to 
-
 
 <div class="container" style="
     margin-top:0% ;

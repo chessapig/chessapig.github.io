@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2021-09-25-hyperbolic-band-theory.md",
+                "file": "_posts/2023-01-01-hyperbolic-string-art.md",
                 "mode": "source",
                 "source": false
               }
@@ -122,7 +122,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/2021-09-25-hyperbolic-band-theory.md",
+                "file": "_posts/2023-01-01-hyperbolic-string-art.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -139,7 +139,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/2021-09-25-hyperbolic-band-theory.md",
+                "file": "_posts/2023-01-01-hyperbolic-string-art.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -162,7 +162,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/2021-09-25-hyperbolic-band-theory.md"
+                "file": "_posts/2023-01-01-hyperbolic-string-art.md"
               }
             }
           }
@@ -185,17 +185,34 @@
   },
   "active": "c09f32982766fc16",
   "lastOpenFiles": [
+    "visualization.md",
+    "_posts/2023-02-01-Coloumb.md",
+    "_posts/talks/2023-05-11-cortex.md",
+    "_posts/2023-01-01-hyperbolic-string-art.md",
+    "_posts/2021-09-25-hyperbolic-band-theory.md",
+    "_posts/talks/2020-11-23-riemann-roch.md",
+    "_posts/talks/2022-03-03-BPS.md",
+    "_posts/diary/2023-05-09-7.md",
+    "_posts/diary/2023-05-10-8.md",
+    "_posts/diary/2023-05-08-6.md",
+    "_posts/diary/2023-05-13-9.md",
+    "_posts/diary/2023-05-21-11.md",
+    "_posts/diary/2023-05-20-10.md",
+    "_posts/diary/2023-05-04-3.md",
+    "_site/paper/hyperbolic-band-theory.html",
+    "_site/paper",
+    "_site/hyperbolic-band-theory.html",
+    "_posts/talks/2020-11-24-lie-theorem.md",
+    "_posts/talks/2020-11-01-mirror.md",
     "_posts/talks/2021-11-23-topological-recursion.md",
     "_posts/talks/2021-05-07-higgs-bundles-geometric-structures.md",
     "_posts/talks/2021-05-03-kahler-quantization.md",
     "_posts/talks/2022-11-04-stick-bombs.md",
     "_posts/talks/2022-02-04-integrable.md",
-    "_posts/talks/2022-03-03-BPS.md",
     "_posts/talks/2023-01-23-polygons.md",
     "_site/index.html",
     "index.md",
     "about.md",
-    "_posts/talks/2023-05-11-cortex.md",
     "research.md",
     "_site/assets/images/comet_quiver.png",
     "assets/images/comet_quiver.png",
@@ -204,32 +221,15 @@
     "assets/images/star_quiver.png",
     "_site/assets/images/star_quiver.png",
     "_site/assets/images/star__quiver.png",
-    "_posts/2021-09-25-hyperbolic-band-theory.md",
     "assets/images/star.md",
-    "_site/assets/images/star.md",
     "_site/assets/images/star quiver.png",
     "_site/assets/images/Screen Shot 2023-05-23 at 5.11.58 AM.png",
     "assets/images/Screen Shot 2023-05-23 at 5.11.58 AM.png",
-    "code.md",
-    "_posts/2023-01-01-hyperbolic-string-art.md",
     "_site/code/hyperbolic-string-art.html",
-    "_site/paper/hyperbolic-band-theory.html",
-    "_site/paper",
     "_site/2021-09-25-hyperbolic-band-theory.html",
-    "teaching/teaching.md",
-    "_posts/blog/2022-7-25-Toric.md",
-    "_posts/2023-02-01-Coloumb.md",
-    "blog.md",
-    "README.md",
     "_site/research.html",
-    "talks.md",
-    "writing/index.md",
-    "_posts/blog/2022-7-25-symplectic.md",
-    "_posts/blog/2022-08-02-String art.md",
-    "_posts/blog/2022-10-23-Colors.md",
     "_site/talk/polygons.html",
     "_site/2023-01-23-polygons.html",
-    "_site/polygons.html",
-    "_site/2023-01-01-hyperbolic-string-art.html"
+    "_site/polygons.html"
   ]
 }
