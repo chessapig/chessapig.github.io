@@ -1,15 +1,31 @@
 ---
-layout: default 
+permalink: /code/hyperbolic-string-art
+
+
+layout: project 
 title:  "Hyperbolic string art"
 date:   2023-01-01 16:03:47 -0500
 categories: code
 tags: [blog, talk, code, paper, expository, fun]
-talk-type: seminar
-image: \assets\images\superalgebra.jpg
-file:
+attributes: [fun-talk]
+image: /assets/images/hyperbolic.jpeg
+file: /files/presentations/hyperbolic-string-art.pdf
 talk-venue: UC Berkerly many cheerful facts, Fall 2023 
-summary: Stretching straight lines across a circle according to mathematical rules produces emergent patterns known as string art. We re-contextualize string art, envisioning the circle as the circle at infinity of the hyperbolic plane. The strings stretch across the Beltrami-Klein model of the hyperbolic plane, each line a hyperbolic geodesic. We examine the string art coming from M ̈obius transforms, by studying the envelope of the strings, the curve tangent to every string. We describe the envelopes of a Mobius transform in terms of the underlying hyperbolic symmetry. Elliptic Mobius transforms give hyperbolic circle envelopes, parabolic transforms give horocycles, and hyperbolic transforms give hypercircles. To visualize these envelopes, we use the Poincar ́e disc model, rendering each string as a circular arc orthogonal to the boundary. This draws all envelopes described above as Euclidean circles. We conclude with a purely aesthetic application, showing a hyperbolic string art fractal
+summary: I close my eyes, but all I see are strings. Stretch a line across a circle according to simple mathematical rules, and you get elegant patterns often dubbed "string art". For example, connect each angle $\theta$ to the angle $2 \theta$, and the heart-shaped cardiod emerges. This talk chronicles my fourier into *hyperbolic string art*, a recontextualization of string art imagining the circle as the boundary of the hyperbolic plane, and the straight lines as hyperbolic geodesics. The patterns arising from natural hyperbolic transforms reveal the symmetries and geometry of hyperbolic space.  With hyperbolic string art, we navigate the hyperbolic plane watching only the horizon, and visualize the moduli space of closed hyperbolic surfaces.
+
+paper-title: Hyperbolic String Art
+authors: Elliot Kienzle
+paper-year: 2022
+journal:
+paper-file:  /files/hyperbolic_string_art.pdf
+paper-abstract: Stretching straight lines across a circle according to mathematical rules produces emergent patterns known as string art. We re-contextualize string art, envisioning the circle as the circle at infinity of the hyperbolic plane. The strings stretch across the Beltrami-Klein model of the hyperbolic plane, each line a hyperbolic geodesic. We examine the string art coming from Mobius transforms, by studying the envelope of the strings, the curve tangent to every string. We describe the envelopes of a Mobius transform in terms of the underlying hyperbolic symmetry. Elliptic Mobius transforms give hyperbolic circle envelopes, parabolic transforms give horocycles, and hyperbolic transforms give hypercircles. To visualize these envelopes, we use the Poincare disc model, rendering each string as a circular arc orthogonal to the boundary. This draws all envelopes described above as Euclidean circles. We conclude with a purely aesthetic application, showing a hyperbolic string art fractal
+
+sketch-link: /sketch/strings
+pageHasContent: true
 ---
+
+
+For a frielndly introduction to string art, see [my twitter thread](https://twitter.com/chessapigbay/status/1584141465734635520).  This pge contians a collection of sketches of Hyperbolic string art. For a general audience introduciton to hyperbolic geometry and hyperbolic string art, see [my paper](/files/hyperbolic_string_art.pdf). This paper was accepted to Bridges 2023, but I wasn't able to make it that year.  While reading the paper, it would help to play with the sketches below. 
 
 <script language="javascript" type="text/javascript" src="/sketch/libraries/p5.min.js"></script>
 <script language="javascript" type="text/javascript" src="/sketch/libraries/p5.gui.js"></script>
@@ -19,14 +35,18 @@ summary: Stretching straight lines across a circle according to mathematical rul
 
 
 
+# Exploring hyperbolic space
 
-This is a collection of sketches exploring hyperbolic space. All of them are interactive, with the following controls:
+This page contains a number of sketches exploring hyperbolic space. All of them are interactive, with the following controls:
 - double click to enable/disable
 - click, drag, and scroll to zoom
 - hold *shift* to move selector dot
 - press *space* to toggle between Poincare disc model and Klein model
 
 ## Hyperbolic string art
+
+For an introduction to 
+
 
 <div class="container" style="
     margin-top:0% ;

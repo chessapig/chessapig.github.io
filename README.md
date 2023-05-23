@@ -1,2 +1,2 @@
 # chessapig.github.io
-i made a website
+Math and art

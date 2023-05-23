@@ -1,0 +1,110 @@
+---
+layout: default
+---
+<h1>{{ page.title }}</h1>
+
+{% if page.tags contains "paper" %}
+  <h5>
+    <p> {{ page.authors }} <em></em>
+      {%- if page.journal -%} 
+           &bull; <small>Published in</small> {{ page.journal }} 
+      {% endif %}
+      {%- if page.paper-file -%} 
+        &bull; <a href = "{{ page.paper-file }}">Paper</a>
+      {% endif %}
+      {%- if page.paper-year -%} 
+        &bull; {{ page.paper-year}} 
+      {% endif %}
+      {%- if page.arXiv -%} 
+      &bull; <a href = "{{page.arXiv}}">arXiv</a>
+      {% endif %}
+    </p>
+  </h5>
+<div class="project" data-tags="{{ attributes }}">
+  <div class="project-details">
+    <div class="tags">
+      {% for tag in page.tags %}
+        <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+  <p><h4>Abstract:</h4> {{ page.paper-abstract | markdownify }}</p>
+  {%- if page.talk-venue  -%}
+    <p style="margin-top:.5cm;">
+      <h4>Presented at:</h4>
+      <ul style="list-style-type: '↪'">
+      {% for talk in page.talk-venue %}
+        <li>{{ talk }}</li>
+      {% endfor %}
+      </ul>
+    </p>
+    {%- endif -%}
+  {%- if page.file -%}
+  <h4>Presentation file: <a  href="{{ page.file}}">
+    ⭐"꙰"꙰"꙰"꙰"꙰"꙰"꙰"꙰⭐
+  </a></h4 >
+  {%- endif -%}
+  {%- if page.sketch-link -%}
+  <p style="margin-top:.3cm;"></p>
+  <h4>Link to sketch: <a  href="{{ page.sketch-link }}">
+    ⭐"꙰"꙰"꙰"꙰"꙰"꙰"꙰"꙰⭐
+  </a></h4 >
+  {%- endif -%}
+</div>
+    {%- if page.image -%}
+      <div class="project-image">
+        <img src="{{ page.image }}" alt="{{ page.title }}" class="img-fluid" >
+      </div>
+      {%- endif -%}
+    
+  </div>
+
+
+
+  {% else %}
+
+
+
+<div class="project" data-tags="{{ page.attributes }}">
+  <div class="project-details">
+  {%- assign date_format = site.minima.date_format | default: "%b %Y" -%}
+  <span class="post-meta">{{ page.date | date: date_format }}</span>
+    <div class="tags">
+      {% for tag in page.tags %}
+        <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    <p><h4>Summary:</h4> {{ page.summary | markdownify }}</p>
+    {%- if page.talk-venue  -%}
+    <p style="margin-top:.5cm;">
+      <h4>Presented at:</h4>
+      <ul style="list-style-type: '↪'">
+      {% for talk in page.talk-venue %}
+        <li>{{ talk }}</li>
+      {% endfor %}
+      </ul>
+    </p>
+    {%- endif -%}
+  {%- if page.file -%}
+  <h4>File: <a  href="{{ page.file}}">
+    ⭐"꙰"꙰"꙰"꙰"꙰"꙰"꙰"꙰⭐
+  </a></h4 >
+  {%- endif -%}
+  {%- if page.sketch-link -%}
+  <p style="margin-top:.3cm;"></p>
+  <h4>Link to sketch: <a  href="{{ page.sketch-link }}">
+    ⭐"꙰"꙰"꙰"꙰"꙰"꙰"꙰"꙰⭐
+  </a></h4 >
+  {%- endif -%}
+  </div>
+  {%- if page.image -%}
+  <div class="project-image">
+    <img src="{{ page.image }}" alt="{{ page.title }}" class="img-fluid" >
+  </div>
+  {%- endif -%}
+</div>
+
+{%- endif -%}
+
+<hr class = "mine">
+
+{{ content }} 

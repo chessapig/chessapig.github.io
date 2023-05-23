@@ -5,6 +5,8 @@ date:   2022-08-02 16:03:47 -0500
 categories: blog
 summary: "Notebook about my string art experements"
 published: false
+
+pageHasContent: true
 ---
 
 

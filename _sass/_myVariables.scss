@@ -13,7 +13,7 @@ $dark:              lighten($body-bg, 10%);
 $mid:              lighten($body-bg, 40%);
 $light:             lighten($body-bg, 80%);
 
-$primary:       #ea925c; 
+$primary:       #E56B6F; 
 $secondary:     #6ed38e;
 $bold:          #f34d41;    
 $tertiary:      #9f79dd;   
@@ -36,15 +36,10 @@ $theme-colors: map-merge((
   "dark":       $dark
 ), $theme-colors);
 
-
-
-
 $back-primary:        $body-bg;
 $back-secondary:      $black;
-$link-color:          $primary;
+$link-color:          #ea925c;
 $link-hover-color:    darken($link-color, 15%);
-$mark-bg:             #ff19ff;
-
 $card-bg:               $body-bg;
 $card-border-color:     $light;
 $card-cap-bg:           $dark;
@@ -52,6 +47,8 @@ $card-cap-bg:           $dark;
 $dropdown-bg:          $body-bg;
 $dropdown-link-hover-color:         lighten($primary,10%);
 $dropdown-link-hover-bg:  $dark;
+
+
 
 .project {
   display: flex;
@@ -96,6 +93,30 @@ $dropdown-link-hover-bg:  $dark;
     max-width: 100%;
     height: auto;
   }
+
+  .filter-buttons {
+    margin-bottom: 20px;
+  }
+  .filter-buttons .btn {
+    background-color: $dark;
+    border-color: $mid;
+    color: $body-color;
+  }
+  .filter-buttons .btn.active {
+    background-color: $mid !important; 
+    border-color: $light !important;
+  }
+  .filter-buttons .btn:hover {
+    background-color: $primary !important; 
+    border-color: $light !important;
+  }
+
+.list-group-item{
+	background-color:   $mid !important;
+}
+
+
+
 @media (max-width: 600px) {
   .project {
     flex-direction: column;

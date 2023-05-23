@@ -1,0 +1,50 @@
+<div class="project" data-tags="{{ project.attributes }}">
+  <div class="project-details">
+  {%- assign date_format = site.minima.date_format | default: "%b %Y" -%}
+  <span class="post-meta">{{ project.date | date: date_format }}</span>
+
+    {% if project.pageHasContent %}
+    <h2><a  href="{{ project.url | relative_url }}">
+      {{ project.title | escape }}
+    </a></h2 >
+    {% else %}
+    <h2>{{ project.title | escape }}</h2>
+    {% endif %}
+
+    <div class="tags">
+      {% for tag in project.tags %}
+        <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    <p><h4>Summary:</h4> {{ project.summary | markdownify }}</p>
+
+    {%- if project.talk-venue  -%}
+    <p style="margin-top:.5cm;">
+      <h4>Presented at:</h4>
+      <ul style="list-style-type: '↪'">
+      {% for talk in project.talk-venue %}
+        <li>{{ talk }}</li>
+      {% endfor %}
+      </ul>
+    </p>
+    {%- endif -%}
+  {%- if project.file -%}
+  <h4>File: <a  href="{{ project.file}}">
+    ⭐"꙰"꙰"꙰"꙰"꙰"꙰"꙰"꙰⭐
+  </a></h4 >
+  {%- endif -%}
+  {%- if project.sketch-link -%}
+  <p style="margin-top:.3cm;"></p>
+  <h4>Link to sketch: <a  href="{{ project.sketch-link }}">
+    ⭐"꙰"꙰"꙰"꙰"꙰"꙰"꙰"꙰⭐
+  </a></h4 >
+  {%- endif -%}
+  </div>
+  {%- if project.image -%}
+  <div class="project-image">
+   <a href = "{{ project.url | relative_url }}"> <img src="{{ project.image }}" alt="{{ project.title }}" class="img-fluid" ></a>
+  </div>
+  {%- endif -%}
+
+ 
+</div>

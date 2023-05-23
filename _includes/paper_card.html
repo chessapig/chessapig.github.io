@@ -1,0 +1,31 @@
+<h2><a  href="{{ project.url | relative_url }}">
+  {{ project.paper-title | escape }}
+</a></h2>
+  <h5>
+    <p> {{ project.authors }} <em></em>
+      {%- if project.journal -%} 
+           &bull; <small>Published in</small> {{ project.journal }} 
+      {% endif %}
+      {%- if project.paper-file -%} 
+        &bull; <a href = "{{ project.paper-file }}">Paper </a>
+      {% endif %}
+      {%- if project.paper-year -%} 
+        &bull; {{ project.paper-year}} 
+      {% endif %}
+      {%- if project.arXiv -%} 
+      &bull; <a href = "{{project.arXiv}}">arXiv</a>
+      {% endif %}
+    </p>
+  </h5>
+<div class="project" data-tags="{{ project.attributes }}">
+  <div class="project-details">
+  <p><h4>Abstract:</h4> {{ project.paper-abstract | markdownify }}</p>
+</div>
+    {%- if project.image -%}
+      <div class="project-image">
+        <img src="{{ project.image }}" alt="{{ project.title }}" class="img-fluid" >
+      </div>
+      {%- endif -%}
+    
+  </div>
+  

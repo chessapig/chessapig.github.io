@@ -5,6 +5,9 @@ date:   2023-2-16 16:03:47 -0500
 categories: blog
 tags: [blog, code]
 summary: "a collection of interactive gizmos and gadgets for exploring hyperbolic spcae"
+
+published: false
+pageHasContent: true
 ---
 
 
