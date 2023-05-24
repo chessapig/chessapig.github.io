@@ -5,6 +5,19 @@ permalink: /
 show_sidebar: false
 ---
 
+
+  <style>
+    .multicolumn-list {
+      column-count: 3; /* Adjust the number of columns as needed */
+      column-gap: 1em; /* Adjust the gap between columns as needed */
+    }
+
+    .multicolumn-list li:before {
+      margin-right: 0.5em; /* Adjust the spacing between the bullet and list item as needed */
+    }
+
+  </style>
+
 <div class="row">
   <div class="col-md-4 mb-1">
     <div class="card">
@@ -35,17 +48,21 @@ show_sidebar: false
     <h1>Hello!</h1>
     <p>  I am a first year mathematics PhD student at UC Berkeley. I'm interested in physical mathematics, espically its intersections with geometry and topology.  I graduated from University of Maryland (UMD) with a degree in mathematics and physics<br/>
 	<h2>Math </h2>
-	<p>I am primarly a geometer. I'm most comfertable with complex manifolds, but I am slowly branching out to more algebraic and analytic flavors of geometry. To better specifh my intersts, here is a list of keywords which I know some things about, and wish to get to know much better</p>
-	
-	<p> 
-	<strong> ⦿ </strong>Gauge theory 	
-	<strong> ⦿ </strong> Moduli spaces 
-	<strong> ⦿ </strong> Higgs bundles
-	<strong> ⦿ </strong>Hyperkahler geometry
-	<strong> ⦿ </strong> integrable systems
-	<strong> ⦿ </strong> mirror symmetry
-	<strong> ⦿ </strong>supersymmetric/topological/conformal quantum field theories 
-	<strong> ⦿ </strong> a dabbling of string theory</p>
+	<p>Mathematically, I am primarly a geometer. I'm most comfertable with complex manifolds, but I am slowly branching out to more algebraic and analytic flavors of geometry. Physically, I like whatever it takes to give me my geometry. Here is a list of keywords which I know some things about, and wish to get to know much better:</p>
+
+
+<ul class="multicolumn-list">
+    <li>Gauge theory</li>
+    <li>Moduli spaces</li>
+    <li>Higgs bundles</li>
+    <li>Hyperkahler geometry</li>
+    <li>Integrable systems</li>
+    <li>Mirror symmetry</li>
+    <li>Supersymmetric QFTs</li>
+    <li>Topological QFTs</li>
+    <li>Conformal QFTs</li>
+    <li>A dabbling of string theory</li>
+  </ul>
 
 	<p>My previous research applied Higgs bundles to a condensed matter physics system. You can read about it  <a href="/paper/hyperbolic-band-theory">here</a>. To see other things I've thought a lot about, check out my past <a href="/talks">talks</a>. To see what I'm thinking about at this exact moment, you can peek inside my <a href="/writing/diary.html">math diary</a>.</p>
 	

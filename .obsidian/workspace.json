@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "writing/index.md",
+                "file": "index.md",
                 "mode": "source",
                 "source": false
               }
@@ -134,7 +134,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "writing/index.md",
+                "file": "index.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -151,7 +151,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "writing/index.md",
+                "file": "index.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -174,7 +174,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "writing/index.md"
+                "file": "index.md"
               }
             }
           }
@@ -197,6 +197,7 @@
   },
   "active": "13259d79999dc5f9",
   "lastOpenFiles": [
+    "writing/index.md",
     "writing/twitter.md",
     "_posts/code/2020-02-15-kam.md",
     "_posts/2021-09-25-hyperbolic-band-theory.md",
@@ -241,7 +242,6 @@
     "_posts/diary/2023-05-08-6.md",
     "_posts/diary/2023-05-13-9.md",
     "_posts/diary/2023-05-21-11.md",
-    "_posts/diary/2023-05-20-10.md",
-    "_posts/diary/2023-05-04-3.md"
+    "_posts/diary/2023-05-20-10.md"
   ]
 }
