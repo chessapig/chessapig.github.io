@@ -67,11 +67,22 @@
               <li class="nav-item {% if page.url == "/gallery" %}active{% endif %}">
                 <a class="nav-link" href="/gallery">Gallery</a>
               </li>
+              <li class="nav-item {% if page.url == "/code" %}active{% endif %}">
+                <a class="nav-link" href="/code">Code</a>
+              </li>
+              </ul>
+          </li>
+
+          <li class="nav-item dropdown ">
+            <a class="nav-link dropdown-toggle" href="/gallery" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Personal
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
               <li class="nav-item {% if page.url == "/blog" %}active{% endif %}">
                 <a class="nav-link" href="/blog">Blog</a>
               </li>
-              <li class="nav-item {% if page.url == "/code" %}active{% endif %}">
-                <a class="nav-link" href="/code">Code</a>
+              <li class="nav-item {% if page.url == "/writing/diary.html" %}active{% endif %}">
+                <a class="nav-link" href="/writing/diary.html">Math Diary</a>
               </li>
               </ul>
           </li>

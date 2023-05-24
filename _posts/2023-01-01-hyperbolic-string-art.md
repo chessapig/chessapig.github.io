@@ -25,7 +25,7 @@ pageHasContent: true
 ---
 
 
-For a frielndly introduction to string art, see [my twitter thread](https://twitter.com/chessapigbay/status/1584141465734635520).  This pge contians a collection of sketches of Hyperbolic string art. For a general audience introduciton to hyperbolic geometry and hyperbolic string art, see [my paper](/files/hyperbolic_string_art.pdf). This paper was accepted to Bridges 2023, but I wasn't able to make it that year.  While reading the paper, try playing along with the sketches below.
+For a frielndly introduction to string art, see [my twitter thread](https://twitter.com/chessapigbay/status/1584141465734635520).  This pge contians a collection of sketches of Hyperbolic string art. For a general audience introduciton to hyperbolic geometry and hyperbolic string art, see [my paper](/files/hyperbolic_string_art.pdf). This paper was accepted to Bridges 2023, but I wasn't able to make it that year.  While reading the paper, try playing along with the sketches below.  To play with string art in more granularity, see the [full sketch](/sketch/strings). 
 <script language="javascript" type="text/javascript" src="/sketch/libraries/p5.min.js"></script>
 <script language="javascript" type="text/javascript" src="/sketch/libraries/p5.gui.js"></script>
 <script language="javascript" type="text/javascript" src="/sketch/libraries/MyGUI/MyGUI.js"></script>
