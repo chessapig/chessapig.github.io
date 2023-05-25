@@ -44,6 +44,18 @@
             }
           },
           {
+            "id": "0de60d22e7925aeb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_posts/diary/2023-05-24-12.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
             "id": "c09f32982766fc16",
             "type": "leaf",
             "state": {
@@ -68,7 +80,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -113,6 +125,14 @@
               "type": "starred",
               "state": {}
             }
+          },
+          {
+            "id": "6f1757a390ffea9f",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
           }
         ]
       }
@@ -134,7 +154,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "index.md",
+                "file": "_posts/diary/2023-05-24-12.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -151,7 +171,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "index.md",
+                "file": "_posts/diary/2023-05-24-12.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -174,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "index.md"
+                "file": "_posts/diary/2023-05-24-12.md"
               }
             }
           }
@@ -195,8 +215,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "13259d79999dc5f9",
+  "active": "0de60d22e7925aeb",
   "lastOpenFiles": [
+    "_posts/diary/2023-05-21-11.md",
+    "_posts/diary/2023-05-24-12.md",
     "_site/assets/research/hyperbolic_crystal.png",
     "assets/research/hyperbolic_crystal.png",
     "_site/assets/research/output-onlinepngtools.png",
@@ -223,7 +245,6 @@
     "assets/polygons/toric.jpg",
     "_site/assets/polygons/polygon.jpg",
     "assets/polygons/polygon.jpg",
-    "_site/assets/polygons/star_quiver.png",
     "_site/assets/polygons",
     "assets/polygons",
     "assets/untitled folder",
@@ -241,7 +262,6 @@
     "_posts/diary/2023-05-09-7.md",
     "_posts/diary/2023-05-10-8.md",
     "_posts/diary/2023-05-08-6.md",
-    "_posts/diary/2023-05-13-9.md",
-    "_posts/diary/2023-05-21-11.md"
+    "_posts/diary/2023-05-13-9.md"
   ]
 }
