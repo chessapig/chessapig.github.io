@@ -74,6 +74,7 @@ function setup() {
 	setInterval(incrementTimer, timerUnit*1000);
 
 	resetGame();
+	bind();
 
 
 	amplitude = new p5.Amplitude();
