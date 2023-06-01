@@ -61,7 +61,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/code/2023-05-31-binary.md",
+                "file": "_posts/code/2020-02-15-kam.md",
                 "mode": "source",
                 "source": false
               }
@@ -154,7 +154,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/code/2023-05-31-binary.md",
+                "file": "_posts/code/2020-02-15-kam.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -171,7 +171,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/code/2023-05-31-binary.md",
+                "file": "_posts/code/2020-02-15-kam.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/code/2023-05-31-binary.md"
+                "file": "_posts/code/2020-02-15-kam.md"
               }
             }
           }
@@ -217,6 +217,7 @@
   },
   "active": "c09f32982766fc16",
   "lastOpenFiles": [
+    "_posts/code/2023-05-31-binary.md",
     "assets/images/binary.png",
     "assets/images/ .png",
     "_site/code/binary.html",
@@ -230,7 +231,6 @@
     "_site/code/Gemfile",
     "code/Gemfile",
     "_posts/diary/2023-05-24-12.md",
-    "_posts/code/2023-05-31-binary.md",
     "_site/code/Binary.html",
     "_posts/diary/2023-05-28-15.md",
     "_site/code/toric-copy.html",
@@ -240,7 +240,6 @@
     "_site/sketch/binary/Examples/triangle.gif",
     "_site/sketch/binary/Examples/starfish.gif",
     "_site/sketch/binary/Examples/squid.gif",
-    "_site/sketch/binary/Examples/polyp.gif",
     "_posts/diary/2023-05-20-10.md",
     "_posts/diary/2023-05-21-11.md",
     "_posts/diary/2023-05-26-13.md",
