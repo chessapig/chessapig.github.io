@@ -44,18 +44,6 @@
             }
           },
           {
-            "id": "0de60d22e7925aeb",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_posts/code/2023-05-31-binary.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "c09f32982766fc16",
             "type": "leaf",
             "state": {
@@ -80,7 +68,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -154,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/code/2023-05-31-binary.md",
+                "file": "index.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -171,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/code/2023-05-31-binary.md",
+                "file": "index.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/code/2023-05-31-binary.md"
+                "file": "index.md"
               }
             }
           }
@@ -215,10 +203,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "0de60d22e7925aeb",
+  "active": "13259d79999dc5f9",
   "lastOpenFiles": [
-    "_posts/code/2020-02-15-kam.md",
+    "_posts/code/2022-06-05-toric.md",
+    "_site/code/toric.html",
+    "_site/2022-06-05-toric.html",
+    "index.md",
     "_posts/code/2023-05-31-binary.md",
+    "_posts/code/2020-02-15-kam.md",
     "_posts/diary/2023-05-24-12.md",
     "assets/images/binary.png",
     "assets/images/ .png",
@@ -236,8 +228,6 @@
     "_posts/diary/2023-05-28-15.md",
     "_site/code/toric-copy.html",
     "_site/sketch/libraries/sound/soundfont-player.min.js",
-    "sketch/libraries/sound/soundfont-player.min.js",
-    "_site/sketch/libraries/sound/p5.sound copy.js",
     "_site/sketch/binary/Examples/triangle.gif",
     "_site/sketch/binary/Examples/starfish.gif",
     "_site/sketch/binary/Examples/squid.gif",
@@ -260,7 +250,6 @@
     "_site/writing/Untitled.md",
     "_posts/talks/2023-01-23-polygons.md",
     "code/toric.md",
-    "_site/code/toric.md",
-    "_posts/talks/2023-05-11-cortex.md"
+    "_site/code/toric.md"
   ]
 }

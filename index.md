@@ -46,9 +46,9 @@ show_sidebar: false
 
   <div class="col-md-8 mb-4">
     <h1>Hello!</h1>
-    <p>  I am a first year mathematics PhD student at UC Berkeley. I'm interested in physical mathematics, espically its intersections with geometry and topology.  I graduated from University of Maryland (UMD) with a degree in mathematics and physics<br/>
+    <p>  I am a first year mathematics PhD student at UC Berkeley. I'm interested in physical mathematics, especially its intersections with geometry and topology.  I graduated from University of Maryland (UMD) with a degree in mathematics and physics<br/>
 	<h2>Math </h2>
-	<p>Mathematically, I am primarly a geometer. I'm most comfertable with complex manifolds, but I am slowly branching out to more algebraic and analytic flavors of geometry. Physically, I like whatever it takes to give me my geometry. Here is a list of keywords which I know some things about, and wish to get to know much better:</p>
+	<p>Mathematically, I am primarily a geometer. I'm most comfortable with complex manifolds, but I am slowly branching out to more algebraic and analytic flavors of geometry. Physically, I like whatever it takes to give me my geometry. Here is a list of keywords which I know some things about, and wish to get to know much better:</p>
 
 
 <ul class="multicolumn-list">
