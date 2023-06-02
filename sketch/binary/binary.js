@@ -26,7 +26,7 @@ let twoPowerTimeDecayRate=0.9;
 let baseTextSize=64;
 let timer=0, timerUnit=.01;
 let gameEndTime;
-let isFirstTime=true;
+let isFirstTime=false;
 
 let time_spacing=100;
 let waitTime=700;
@@ -43,8 +43,9 @@ let keys_default = [71,70,68,83,65];
 var leadSound ="electric_bass_finger";
 var failSound = "woodblock";
 let chords = [
-	[0,4,7,11,14], //c9 major
-	[0,3,7,10,14] //c9 minot
+
+	[1,5,8,12,15], //c9 major
+	[1,4,8,11,15] //c9 minot
 	//[0,4,7,10,13] //c7 b9
 	]
 let baseNoteRange = [55,67]
@@ -74,7 +75,7 @@ function setup() {
 	setInterval(incrementTimer, timerUnit*1000);
 
 	resetGame();
-	bind();
+	//bind();
 
 
 	amplitude = new p5.Amplitude();
