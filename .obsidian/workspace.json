@@ -37,19 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/diary/2023-06-03-17.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "a792fd548b7dba25",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_posts/diary/2023-06-09-18.md",
+                "file": "_posts/diary/2023-06-12-20.md",
                 "mode": "source",
                 "source": false
               }
@@ -104,7 +92,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -133,7 +121,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "weyl",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -178,7 +166,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/diary/2023-06-09-18.md",
+                "file": "_posts/diary/2023-06-12-20.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -195,7 +183,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/diary/2023-06-09-18.md",
+                "file": "_posts/diary/2023-06-12-20.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -218,7 +206,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/diary/2023-06-09-18.md"
+                "file": "_posts/diary/2023-06-12-20.md"
               }
             }
           }
@@ -239,12 +227,23 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "a792fd548b7dba25",
+  "active": "13259d79999dc5f9",
   "lastOpenFiles": [
-    "_posts/diary/2023-06-03-17.md",
-    "_posts/diary/2023-06-09-18.md",
-    "diary/17.md",
+    "_posts/diary/2023-05-28-15.md",
     "_posts/diary/2023-05-29-16.md",
+    "_posts/diary/2023-06-03-17.md",
+    "diary/15.md",
+    "_posts/diary/2023-06-12-20.md",
+    "_posts/diary/2023-06-10-19.md",
+    "_posts/diary/2023-06-09-18.md",
+    "_posts/diary/2023-05-20-10.md",
+    "_posts/diary/2023-05-27-14.md",
+    "_posts/diary/2023-05-26-13.md",
+    "_posts/diary/2023-05-24-12.md",
+    "_posts/diary/2023-05-21-11.md",
+    "_posts/diary/2023-05-09-7.md",
+    "_posts/diary/2023-05-13-9.md",
+    "diary/17.md",
     "Untitled 2.md",
     "_posts/2023-02-01-Coloumb.md",
     "_posts/talks/2023-01-23-polygons.md",
@@ -253,22 +252,11 @@
     "Untitled.md",
     "diary/10.md",
     "Untitled 1.md",
-    "_posts/diary/2023-05-28-15.md",
-    "_posts/diary/2023-05-20-10.md",
-    "_posts/diary/2023-05-13-9.md",
     "_posts/diary/2023-05-10-8.md",
-    "_posts/diary/2023-05-09-7.md",
     "_posts/diary/2023-05-08-6.md",
     "_posts/diary/2023-05-07-5.md",
-    "_posts/diary/2023-05-06-4.md",
-    "_posts/diary/2023-05-04-3.md",
-    "_posts/diary/2023-05-02-2.md",
-    "_posts/diary/2023-05-01-1.md",
-    "_posts/diary/2023-05-21-11.md",
-    "_site/diary/10.md",
     "diary",
     "_site/diary/16.html",
-    "_posts/diary/2023-05-27-14.md",
     "_site/code/toric.html",
     "_site/2022-06-05-toric.html",
     "assets/images/binary.png",
