@@ -25,31 +25,31 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/talks/2023-01-23-polygons.md",
+                "file": "_posts/diary/2023-07-16-22.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "cec0f20866761a2d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_posts/diary/2023-08-29-23.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "13259d79999dc5f9",
+            "id": "817ff6bcfe91d9e6",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/diary/2023-06-12-20.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "3dac9d675fc68a21",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Untitled.md",
+                "file": "_posts/diary/2023-08-30-23.md",
                 "mode": "source",
                 "source": false
               }
@@ -92,7 +92,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -166,7 +166,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/diary/2023-06-12-20.md",
+                "file": "_posts/diary/2023-08-30-23.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -183,7 +183,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/diary/2023-06-12-20.md",
+                "file": "_posts/diary/2023-08-30-23.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -206,7 +206,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/diary/2023-06-12-20.md"
+                "file": "_posts/diary/2023-08-30-23.md"
               }
             }
           }
@@ -227,53 +227,53 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "13259d79999dc5f9",
+  "active": "817ff6bcfe91d9e6",
   "lastOpenFiles": [
-    "_posts/diary/2023-05-28-15.md",
-    "_posts/diary/2023-05-29-16.md",
-    "_posts/diary/2023-06-03-17.md",
-    "diary/15.md",
+    "_posts/diary/2023-07-08-21.md",
+    "_posts/diary/2023-07-16-22.md",
+    "_posts/diary/2023-08-29-23.md",
+    "_posts/diary/2023-05-27-14.md",
+    "_posts/diary/2023-05-20-10.md",
+    "_posts/diary/2023-05-09-7.md",
+    "_posts/diary/2023-05-01-1.md",
+    "_posts/diary/2023-08-30-23.md",
     "_posts/diary/2023-06-12-20.md",
     "_posts/diary/2023-06-10-19.md",
     "_posts/diary/2023-06-09-18.md",
-    "_posts/diary/2023-05-20-10.md",
-    "_posts/diary/2023-05-27-14.md",
-    "_posts/diary/2023-05-26-13.md",
+    "_posts/diary/2023-06-03-17.md",
     "_posts/diary/2023-05-24-12.md",
+    "_posts/diary/aaa.md",
+    "_site/diary/23.html",
+    "_site/diary/22.html",
+    "_site/diary/21.html",
+    "_site/diary/20.html",
+    "_site/diary/19.html",
+    "_site/diary/18.html",
+    "_site/diary/17.html",
+    "_site/diary/17.md",
+    "_site/diary/15.md",
+    "_site/Untitled.md",
+    "_site/Untitled 2.md",
+    "_site/Untitled 1.md",
+    "_site/Pasted image 20230716114153.png",
+    "_posts/diary/2023-05-29-16.md",
+    "_posts/diary/2023-05-28-15.md",
+    "_posts/diary/2023-05-26-13.md",
     "_posts/diary/2023-05-21-11.md",
-    "_posts/diary/2023-05-09-7.md",
     "_posts/diary/2023-05-13-9.md",
-    "diary/17.md",
-    "Untitled 2.md",
-    "_posts/2023-02-01-Coloumb.md",
-    "_posts/talks/2023-01-23-polygons.md",
-    "_posts/code/2020-02-15-kam.md",
-    "writing/twitter.md",
-    "Untitled.md",
-    "diary/10.md",
-    "Untitled 1.md",
-    "_posts/diary/2023-05-10-8.md",
-    "_posts/diary/2023-05-08-6.md",
-    "_posts/diary/2023-05-07-5.md",
+    "_posts/diary/2023-05-02-2.md",
+    "_posts/diary/2023-05-04-3.md",
+    "Pasted image 20230716114153.png",
     "diary",
     "_site/diary/16.html",
     "_site/code/toric.html",
-    "_site/2022-06-05-toric.html",
     "assets/images/binary.png",
     "assets/images/ .png",
-    "_site/code/binary.html",
-    "_site/code/biary.html",
     "_site/assets/images/binary.png",
     "_site/assets/images/Screen Shot 2023-05-31 at 11.34.02 PM.png",
     "assets/images/Screen Shot 2023-05-31 at 11.34.02 PM.png",
     "_site/assets/images/Screen Shot 2023-05-31 at 1.49.21 PM.png",
     "assets/images/Screen Shot 2023-05-31 at 1.49.21 PM.png",
-    "Gemfile",
-    "_site/code/Gemfile",
-    "code/Gemfile",
-    "_site/code/Binary.html",
-    "_site/sketch/binary/Examples/triangle.gif",
-    "_site/sketch/binary/Examples/starfish.gif",
-    "_site/sketch/binary/Examples/squid.gif"
+    "_site/sketch/binary/Examples/triangle.gif"
   ]
 }
