@@ -1,7 +1,7 @@
 ---
 layout: project 
 title:  "Chern-simons theory and the Jones polynomial"
-date:   2023-09-08 16:03:47 -0500
+date:   2023-10-19 16:03:47 -0500
 categories: talk
 tags: [talk]
 attributes: [seminar-talk]
