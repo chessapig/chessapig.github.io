@@ -49,8 +49,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/diary/2023-11-24-24.md",
-                "mode": "source",
+                "file": "_posts/diary/2023-11-20-24.md",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -142,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/diary/2023-11-24-24.md",
+                "file": "_posts/diary/2023-11-20-24.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -159,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/diary/2023-11-24-24.md",
+                "file": "_posts/diary/2023-11-20-24.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/diary/2023-11-24-24.md"
+                "file": "_posts/diary/2023-11-20-24.md"
               }
             }
           }
@@ -207,7 +207,7 @@
   "lastOpenFiles": [
     "_posts/talks/2023-10-12-TQFT-Jones.md",
     "_posts/talks/2023-11-15-Quantization.md",
-    "_posts/diary/2023-11-24-24.md",
+    "_posts/diary/2023-11-20-24.md",
     "_site/diary/24.html",
     "_site/diary/23-1.html",
     "_posts/diary/2023-08-30-23.md",
