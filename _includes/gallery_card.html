@@ -1,0 +1,140 @@
+<div class="gallery" data-tags="{{ project.attributes }}">
+
+  <div class="card mb-3">
+    <div class="card-header">
+        <h2>{% if project.pageHasContent %}
+          <h2><a href="{{ project.url | relative_url }}">{{ project.title | escape }}</a></h2>
+          {% else %}
+          <h2>{{ project.title | escape }}</h2>
+          {% endif %}
+      </h2>
+    </div>
+
+  
+ 
+
+  {%- if project.gallery-folder -%}
+    {%- assign image_folder = project.gallery-folder-%} 
+    {%- assign image_files = "" | split: "" -%} 
+
+    {%- for file in site.static_files -%}
+      {%- if file.path contains image_folder and file.path != image_folder -%}
+        {%- assign image_files = image_files | push: file.path -%}
+      {%- endif -%}
+    {%- endfor -%}
+    
+    {%- if image_files.size > 0 -%}
+  <div class="gallery-image">
+    <div id="carousel{{ forloop.index }}" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner" style="display: flex; align-items: center; height: 70%;">
+        {% for image in image_files %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+          <img src="{{ image }}" alt="{{ project.title }}" class="img-fluid carousel-image">
+        </div>
+        {% endfor %}
+      </div>
+      <a class="carousel-control-prev" href="#carousel{{ forloop.index }}" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carousel{{ forloop.index }}" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+
+        <!-- Indicators -->
+      <ol class="carousel-indicators">
+        {%- for image in image_files -%}
+          <li data-target="#carousel{{ forloop.parentloop.index }}" data-slide-to="{{ forloop.index0 }}" {% if forloop.first %}class="active"{% endif %}></li>
+        {%- endfor -%}
+      </ol>
+    </div>
+  </div>
+  {%- else -%}
+  {%- if project.image -%}
+  <div class="gallery-image">
+    <a href="{{ project.url | relative_url }}"><img src="{{ project.image }}" alt="{{ project.title }}" class="img-fluid"></a>
+  </div>
+  {%- endif -%}
+  {%- endif -%}
+  {%- endif -%}
+
+  <div class="gallery-caption">
+    {%- assign date_format = site.minima.date_format | default: "%b %Y" -%}
+    <span class="post-meta">{{ project.date | date: date_format }}</span>
+
+    {% if project.pageHasContent %}
+    <h2><a href="{{ project.url | relative_url }}">{{ project.title | escape }}</a></h2>
+    {% else %}
+    <h2>{{ project.title | escape }}</h2>
+    {% endif %}
+
+    <div class="tags">
+      {% for tag in project.tags %}
+        <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+
+    <p><h4>Hello!</h4> {{ project.summary | markdownify }}</p>
+
+    {%- if project.talk-venue  -%}
+    <p style="margin-top:.5cm;">
+      <h4>Presented at:</h4>
+      <ul style="list-style-type: '↪'">
+        {% for talk in project.talk-venue %}
+        <li>{{ talk }}</li>
+        {% endfor %}
+      </ul>
+    </p>
+    {%- endif -%}
+
+    {%- if project.file -%}
+    <h4> <a href="{{ project.file }}">Link to file</a></h4>
+    {%- endif -%}
+
+    {%- if project.sketch-link -%}
+    <p style="margin-top:.3cm;"></p>
+    <h4> <a href="{{ project.sketch-link }}">Link to sketch</a></h4>
+    {%- endif -%}
+  </div>
+</div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Check if the carousel element exists before adding event listeners
+      var carouselElement = document.getElementById("carousel{{ forloop.index }}");
+  
+      if (carouselElement) {
+        // Add event listener to carousel sliding event
+        $(carouselElement).on("slide.bs.carousel", function () {
+          // Get all images within the carousel
+          var images = document.querySelectorAll("#carousel{{ forloop.index }} .carousel-item img.carousel-image");
+          // Hide each image by setting opacity to 0
+          images.forEach(function (image) {
+            image.style.transition = "opacity 0.5s ease"; // Add transition for a smooth effect
+            image.style.opacity = 0;
+          });
+        });
+  
+        // Add event listener to carousel slid event
+        $(carouselElement).on("slid.bs.carousel", function () {
+          // Get the currently active image and set its opacity to 1
+          var activeImage = document.querySelector("#carousel{{ forloop.index }} .carousel-item.active img.carousel-image");
+          if (activeImage) {
+            activeImage.style.opacity = 1;
+          }
+        });
+      }
+    });
+  </script>
+
+<script>
+  // Prevent default behavior for carousel controls
+  document.getElementById("carousel{{ forloop.index }}").addEventListener("click", function(event) {
+    if (event.target.getAttribute("data-slide") === "prev" || event.target.getAttribute("data-slide") === "next") {
+      event.preventDefault();
+    }
+  });
+</script>
+  
+</div>

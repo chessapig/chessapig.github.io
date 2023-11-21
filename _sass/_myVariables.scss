@@ -50,6 +50,30 @@ $dropdown-link-hover-bg:  $dark;
 
 
 
+
+
+.gallery {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.gallery .gallery-image {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: $dark;
+  border: 2px solid $mid;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.gallery .gallery-caption {
+  flex: 1;
+  padding: 10px;
+}
+
+
 .project {
   display: flex;
   margin-bottom: 20px;

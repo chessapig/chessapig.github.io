@@ -21,7 +21,7 @@ show_sidebar: false
 <div class="row">
   <div class="col-md-4 mb-1">
     <div class="card">
-      <img class="card-img-top" src="/static/images/headshot.jpg"/>
+      <img class="card-img-top img-fluid"  src="/static/images/headshot.jpg"/>
       <div class="card-body">
         <div class="card-text">
           <i class="fas fa-user"></i> ekienzle[at]berkeley[dot]edu <br/>
@@ -51,20 +51,22 @@ show_sidebar: false
 	<p>Mathematically, I am primarily a geometer. I'm most comfortable with complex manifolds, but I am slowly branching out to more algebraic and analytic flavors of geometry. Physically, I like whatever it takes to give me my geometry. Here is a list of keywords which I know some things about, and wish to get to know much better:</p>
 
 
-<ul class="multicolumn-list">
+<ul class="multicolumn-list text-sm">
+    <li>Quantization</li>
+    <li>SUSY QFTs</li>
+    <li>Topological QFTs</li>
+    <li>Mirror symmetry</li>
+    <li>Integrable systems</li>
     <li>Gauge theory</li>
     <li>Moduli spaces</li>
     <li>Higgs bundles</li>
     <li>Hyperkahler geometry</li>
-    <li>Integrable systems</li>
-    <li>Mirror symmetry</li>
-    <li>Supersymmetric QFTs</li>
-    <li>Topological QFTs</li>
     <li>Conformal QFTs</li>
     <li>A dabbling of string theory</li>
   </ul>
 
-	<p>My previous research applied Higgs bundles to a condensed matter physics system. You can read about it  <a href="/paper/hyperbolic-band-theory">here</a>. To see other things I've thought a lot about, check out my past <a href="/talks">talks</a>. To see what I'm thinking about at this exact moment, you can peek inside my <a href="/writing/diary.html">math diary</a>.</p>
+	<p>My previous research applied Higgs bundles to a condensed matter physics system. You can read about it  <a href="/paper/hyperbolic-band-theory">here</a>. To see other things I've thought a lot about, check out my past <a href="/talks">talks</a>. 
+   <!--To see what I'm thinking about at this exact moment, you can peek inside my <a href="/writing/diary.html">math diary</a>.</p> -->
 	
     <h2>Art </h2>
     <p>I was drawn to geometry because my approach to math is very visual. I try to capture my images of mathematical objects using digital art, which you can check out in the <a href="/gallery">gallery</a>. I also enjoy creative coding, and my code sketches often have a mathematical component.  I talk about a few of my sketches in <a href="/code">code</a>. My favorite example is my explorations of <a href="/code/hyperbolic-string-art">hyperbolic string art</a>
