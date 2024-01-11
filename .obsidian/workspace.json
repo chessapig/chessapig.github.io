@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/talks/2020-11-01-mirror.md",
+                "file": "_posts/talks/2021-11-23-electromagnetism.md",
                 "mode": "source",
                 "source": false
               }
@@ -49,8 +49,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/diary/2023-11-20-24.md",
-                "mode": "preview",
+                "file": "_posts/diary/2023-07-08-21.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -68,7 +68,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -142,13 +142,13 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/diary/2023-11-20-24.md",
-                "collapseAll": false,
-                "extraContext": false,
+                "file": "_posts/talks/2021-11-23-electromagnetism.md",
+                "collapseAll": true,
+                "extraContext": true,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
-                "backlinkCollapsed": false,
+                "backlinkCollapsed": true,
                 "unlinkedCollapsed": true
               }
             }
@@ -159,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/diary/2023-11-20-24.md",
+                "file": "_posts/talks/2021-11-23-electromagnetism.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -182,16 +182,16 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/diary/2023-11-20-24.md"
+                "file": "_posts/talks/2021-11-23-electromagnetism.md"
               }
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -203,53 +203,52 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "71a82fb1fac9d135",
+  "active": "817ff6bcfe91d9e6",
   "lastOpenFiles": [
-    "_posts/talks/2023-10-12-TQFT-Jones.md",
-    "_posts/talks/2023-11-15-Quantization.md",
-    "_posts/diary/2023-11-20-24.md",
-    "_site/diary/24.html",
-    "_site/diary/23-1.html",
-    "_posts/diary/2023-08-30-23.md",
-    "_posts/diary/2023-11-21-24.md",
-    "_site/24.html",
-    "_posts/blog/2022-7-25-Toric.md",
-    "gallery/personal/cozy/cozy.md",
-    "gallery/personal/noodles/noodles.md",
-    "gallery/personal/noodles/noodles.jpg",
-    "gallery/personal/turtle/turtle.md",
-    "gallery/personal/ollie/ollie.md",
-    "gallery/personal/fuzzy/fuzzy.md",
-    "gallery/personal/fuzzy/fuzzy.jpg",
-    "gallery/personal/cozy/cozy.jpg",
-    "_site/gallery/personal/amber/amber.jpg",
-    "gallery/personal/amber/amber.md",
-    "_site/gallery/personal/amber.jpg",
-    "_site/gallery/personal/cozy/cozy.html",
-    "_site/gallery/personal/turtle/turtle.html",
-    "gallery/personal/turtle/turtle.jpg",
-    "_site/gallery/personal/noodles/noodles.html",
-    "gallery/personal/forest_heart.jpg",
-    "_site/gallery/personal/forest_heart.jpg",
-    "gallery/personal/forest_heart/forest_heart.md",
-    "_site/gallery/personal/forest_heart/forest_heart.html",
-    "_site/gallery/personal/forest_heart/forest_heart.jpg",
-    "_site/gallery/personal/turtle/turtle.jpg",
-    "_site/gallery/personal/turtle/ollie 4.html",
-    "_site/gallery/personal/turtle",
-    "_site/gallery/personal/cozy/ollie 3.html",
-    "_site/gallery/personal/amber/Amber.md",
-    "_site/gallery/personal/amber/Untitled.md",
-    "gallery/personal/Untitled.md",
-    "_site/gallery/personal/Untitled.md",
-    "_posts/talks/2022-11-04-stick-bombs.md",
-    "gallery/personal/ollie/fuzzy.md",
-    "gallery/thumbnails/fuzzy/fuzzy.md",
+    "_site/craft/index.html",
+    "_posts/crafts/2024-01-08-.md",
+    "_site/craft/soap-bubbles-copy.html",
+    "_posts/crafts/2024-01-07-soap bubbles copy.md",
+    "_site/craft/soap-bubbles.html",
+    "_posts/crafts/2024-01-07-soap bubbles.md",
+    "_site/craft/hyperbolic-origami-copy.html",
+    "_posts/crafts/2024-01-06-hyperbolic-origami copy.md",
+    "_site/craft/hyperbolic-origami.html",
+    "_posts/crafts/2024-01-06-hyperbolic-origami.md",
+    "_site/craft/curved-origami-copy.html",
+    "_posts/crafts/2024-01-05-curved-origami copy.md",
+    "_site/craft/curved-origami.html",
+    "_posts/crafts/2024-01-05-curved-origami.md",
+    "_site/craft/st.html",
+    "_posts/crafts/2024-01-05-st.md",
+    "_posts/crafts/2024-01-05-string-art copy.md",
+    "_site/craft/string-art-copy.html",
+    "_posts/crafts/2024-01-04-string-art copy.md",
+    "_posts/crafts/2024-01-04-string-art.md",
+    "_site/craft/string-art.html",
+    "_posts/crafts/2024-01-04-string art.md",
+    "_posts/crafts/2024-01-04-.md",
+    "_posts/crafts/2024-01-0.md",
+    "_posts/crafts/2024-01-03-hyperbolic-cardboard copy.md",
+    "_posts/crafts/2024-01-03-hyperbolic-cardboard.md",
+    "_posts/crafts/2024-01-02-weaving copy.md",
+    "_site/assets/crafts/weaving/everyone.jpeg",
+    "assets/crafts/weaving/everyone.jpeg",
+    "_site/assets/crafts/weaving/everyone 2.jpeg",
+    "assets/crafts/weaving/everyone 2.jpeg",
+    "_posts/crafts/2024-01-01-polyhera copy.md",
+    "_posts/crafts/2024-01-02-weaving.md",
     "_posts/talks/2023-01-23-polygons.md",
     "_posts/talks/2023-09-08-G-spaces.md",
-    "writing/twitter.md",
-    "_posts/code/2020-02-15-kam.md",
-    "_posts/talks/2020-11-01-mirror.md",
-    "_posts/diary/2023-06-10-19.md"
+    "_posts/talks/2023-05-11-cortex.md",
+    "_posts/crafts/2024-01-01-polyhera.md",
+    "_site/assets/crafts/polyhedra/dodecahedron.jpg",
+    "assets/crafts/polyhedra/dodecahedron.jpg",
+    "_posts/code/2022-06-05-toric.md",
+    "_posts/talks/2021-11-23-electromagnetism.md",
+    "_site/Pasted image 20231228123947.png",
+    "Pasted image 20231228123947.png",
+    "_site/Pasted image 20231228123929.png",
+    "Pasted image 20231228123929.png"
   ]
 }

@@ -14,7 +14,8 @@ file:
 talk-venue: UC Berkeley Many cheerful facts, fall 2022
 summary: Weave together 4 or 5 popsicle sticks in the right way, and you get a flat rigid pattern -- until you drop it. The fast-released elastic energy shoots apart the popsicle sticks, producing a *stick bomb*. Join us as we try and discover the mathematics behind stick bombs, what makes them stay together and what makes them fall apart. Working together in groups, we'll come up with Many of our own Cheerful Facts about tounge-depresser trajectiles :)
 pageHasContent: true
-gallery-folder: /gallery/images/gradient/
+gallery-title: Other art
+gallery-folder: /gallery/personal
 ---
 weave together 4 or 5 popsicle sticks in the right way, and you get a flat rigid pattern -- until you drop it. The fast-released elastic energy shoots apart the popsicle sticks, producing a *stick bomb*. This talk was almost entirely hands off, I split people into groups, gave them a bunch of popsicle sticks, and had them discover the mathematics behind stick bombs. I gave this activity to a room full of math grad students, and it totally killed. People were still discussing their ideas for days afterwards. There is a surprising amount of combinatorial depth contained in stick bombs. I don't know how deep the rabbit hole goes, but after an hour or two of playing around with sticks, you'll realize how very far you are from the bottom. 
 

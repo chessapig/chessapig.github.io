@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Thomas
-caption: Thomas the turtle likes to eat black holes
+title: Timmy
+caption: Timmy the turtle likes to eat black holes
 date:
 ---
