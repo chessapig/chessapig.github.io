@@ -11,7 +11,9 @@ show_sidebar: false
 <img src="/teaching/math_crafts/banner.jpg" alt=" the title of the course, Math crafts, covered with many mathematical objects" width="600" >
 </div>
 
-<br>
+
+*First class is Thursday, Jan. 18. To enroll, fill out [this google form](https://docs.google.com/forms/d/e/1FAIpQLSdIROsNysOGOeiu-48x5oVbe9Cg3ldDpfOiHlonrmNFrI2jdw/viewform?usp=sf_link) from your Berkeley email address.*
+
 <div class="card" >
     <h4 class="card-header">
         <a data-toggle="collapse" href="#collapse-1" aria-expanded="true" aria-controls="collapse-example" id="heading-example" class="d-block">
@@ -21,7 +23,9 @@ show_sidebar: false
     </h4>
     <div id="collapse-1" class="collapse hide" aria-labelledby="heading-example">
         <div class="card-body" markdown="1">
+<!---
 - *Course number:* Math 98, course # 18159 
+-->
 - *Facilitator:* Elliot Kienzle, Evans 1070. Please only contact me! use bCourses, or my email ekienzle@berkeley.edu
 - *Instructor of record:* David Nadler 
 - *Section:*  Evans 732, Thursdays 4-6 pm 

@@ -36,6 +36,10 @@ Bauhaus was a german (physical) art school that inspired a (metaphorical) school
 
 > I remember vividly the first day of the [Preliminary Course]. Josef Albers entered the room, carrying with him a bunch of newspapers. … [and] then addressed us … “Ladies and gentlemen, we are poor, not rich. We can't afford to waste materials or time. … All art starts with a material, and therefore we have first to investigate what our material can do. So, at the beginning we will experiment without aiming at making a product. At the moment we prefer cleverness to beauty. … Our studies should lead to constructive thinking. … I want you now to take the newspapers … and try to make something out of them that is more than you have now. I want you to respect the material and use it in a way that makes sense — preserve its inherent characteristics. If you can do without tools like knives and scissors, and without glue, [all] the better.”
 
+<div class="text-center">
+<img src="/assets/crafts/hyperbolic origami/albers_bauhaus_small.jpeg" alt="newspaper clipping of curved origami model from Bauhaus, 1920ss" width="300" >
+</div>
+
 I started class with this quote.  For more on the history of curved origami, see [Erik and Martin Demaine's webpage](https://erikdemaine.org/curved/history/)
 </div>
 </div>
