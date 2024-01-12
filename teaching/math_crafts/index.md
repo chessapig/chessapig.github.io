@@ -12,7 +12,7 @@ show_sidebar: false
 </div>
 
 
-*First class is Thursday, Jan. 18. To enroll, fill out [this google form](https://docs.google.com/forms/d/e/1FAIpQLSdIROsNysOGOeiu-48x5oVbe9Cg3ldDpfOiHlonrmNFrI2jdw/viewform?usp=sf_link) from your Berkeley email address.*
+*First class is Thursday, Jan. 18. To enroll, please fill out [this google form](https://docs.google.com/forms/d/e/1FAIpQLSdIROsNysOGOeiu-48x5oVbe9Cg3ldDpfOiHlonrmNFrI2jdw/viewform?usp=sf_link) before Wednsday evening, Jan. 17. Remember to use your Berkeley email address.*
 
 <div class="card" >
     <h4 class="card-header">
