@@ -11,6 +11,7 @@ show_sidebar: false
 <img src="/teaching/math_crafts/banner.jpg" alt=" the title of the course, Math crafts, covered with many mathematical objects" width="600" >
 </div>
 
+*This is a 1-unit course, meeting on Thursdays 4-6pm.*
 
 *First class is Thursday, Jan. 18. To enroll, please fill out [this google form](https://docs.google.com/forms/d/e/1FAIpQLSdIROsNysOGOeiu-48x5oVbe9Cg3ldDpfOiHlonrmNFrI2jdw/viewform?usp=sf_link) before Wednsday evening, Jan. 17. Remember to use your Berkeley email address.*
 
