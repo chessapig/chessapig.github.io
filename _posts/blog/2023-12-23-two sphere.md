@@ -1,9 +1,9 @@
 ---
 layout: blog
-title: Two-sphere boot camp
-date: 2023-5-13 16:03:47 -0500
+title: "Two-sphere boot camp"
+date: 2023-05-13 16:03:47 -0500
 categories: blog
-summary: (incomplete) Compendium of all known facts about the two-sphere
+summary: "(incomplete) Compendium of all known facts about the two-sphere"
 pageHasContent: true
 ---
 Mathematicians love examples. As a corollary of the [strong law of small numbers](https://en.wikipedia.org/wiki/Strong_law_of_small_numbers), there are not enough examples to go around! Many of the simplest example objects from different fields are in fact the same. This is certainly true in my field, geometry (broadly construed). The two-sphere $S^2$ is everyone's favorite little gem. Each facet of geometry views the two sphere in a special way, and it shines brilliant from all angles like a cut diamond. Confluences of different geometries on $S^2$ are prototypical of general theorems and philosophies. All this to say, $S^2$ is a prime specimen for geometers to examine.

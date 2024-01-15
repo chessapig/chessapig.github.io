@@ -21,7 +21,7 @@ weave together 4 or 5 popsicle sticks in the right way, and you get a flat rig
 
 <div centering>
 <video width="50%" preload muted autoplay controls>
-    <source src="/assets/images/exploding_sticks.mp4" type="video/mp4">
+    <source src="/assets/crafts/stick bombs/2D/exploding_sticks.mp4" type="video/mp4">
 </video></div>
 
 Here's a few of the leading questions I used to guide people along. A very important aspect of these questions is to figure out how to make them well defined and turn them into math.
