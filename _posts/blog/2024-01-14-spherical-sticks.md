@@ -6,7 +6,7 @@ categories: craft
 tags:
   - craft
   - blog
-summary: "Woven popsicle sticks store a large ammount of elastic energy, held together by only friction. When thrown, the sticks can exlposivly fly apart, creating a stick bomb. Must stick bombs lie in a plane? Could you weave sticks along the surface of a sphere, making a rigid object without glue or bindings? What if you drop it?"
+summary: "Woven popsicle sticks store a large amount of elastic energy, held together by only friction. When thrown, the sticks can explosively fly apart, creating a stick bomb. Must stick bombs lie in a plane? Could you weave sticks along the surface of a sphere, making a rigid object without glue or bindings? What if you drop it?"
 image: "/assets/crafts/stick bombs/3D/top down tetrahedron.jpeg"
 pageHasContent: true
 ---
