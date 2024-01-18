@@ -13,7 +13,7 @@ show_sidebar: false
 
 *This is a 1-unit course, meeting on Thursdays 4-6pm.*
 
-*First class is Thursday, Jan. 18. To enroll, please fill out [this google form](https://docs.google.com/forms/d/e/1FAIpQLSdIROsNysOGOeiu-48x5oVbe9Cg3ldDpfOiHlonrmNFrI2jdw/viewform?usp=sf_link) before Wednsday evening, Jan. 17. Remember to use your Berkeley email address.*
+*First class is Thursday, Jan. 18. To enroll, please fill out [this google form](https://docs.google.com/forms/d/e/1FAIpQLSdIROsNysOGOeiu-48x5oVbe9Cg3ldDpfOiHlonrmNFrI2jdw/viewform?usp=sf_link) before Wednsday evening, Jan. 24. Remember to use your Berkeley email address.*
 
 <div class="card" >
     <h4 class="card-header">
@@ -84,7 +84,16 @@ The last class of the semester will be show and tell. You will bring in all the 
 ## Weekly schedule
 Click on the the activity for worksheet with answers
 
-### Class 1, 1/18
+### Class 0, 1/18
+ {% for project in site.tags.math-crafts-class %}
+ {% if project.week == 0%}
+ {% include project_card.html %}
+ {% endif %}
+  {% endfor %}
+
+
+
+### Class 1, 1/25
  {% for project in site.tags.math-crafts-class %}
  {% if project.week == 1%}
  {% include project_card.html %}
@@ -92,7 +101,7 @@ Click on the the activity for worksheet with answers
   {% endfor %}
 
 
-### Class 2, 1/25
+### Class 2, 2/1
 
  {% for project in site.tags.math-crafts-class %}
  {% if project.week == 2%}
@@ -100,7 +109,7 @@ Click on the the activity for worksheet with answers
  {% endif %}
   {% endfor %}
 
-### Class 3, 2/1
+### Class 3, 2/8
 
  {% for project in site.tags.math-crafts-class %}
  {% if project.week == 3%}
@@ -108,7 +117,7 @@ Click on the the activity for worksheet with answers
  {% endif %}
   {% endfor %}
 
-### Class 4, 2/8
+### Class 4, 2/15
 
  {% for project in site.tags.math-crafts-class %}
  {% if project.week == 4%}
@@ -116,7 +125,7 @@ Click on the the activity for worksheet with answers
  {% endif %}
   {% endfor %}
 
-### Class 5, 2/15
+### Class 5, 2/22
 
 **Due:** Mini-project 1
 
@@ -126,7 +135,7 @@ Click on the the activity for worksheet with answers
  {% endif %}
   {% endfor %}
 
-### Class 6, 2/22
+### Class 6, 2/29
 
  {% for project in site.tags.math-crafts-class %}
  {% if project.week == 6%}
@@ -134,7 +143,7 @@ Click on the the activity for worksheet with answers
  {% endif %}
   {% endfor %} 
 
-### Class 7, 2/29
+### Class 7, 3/7
 
  {% for project in site.tags.math-crafts-class %}
  {% if project.week == 7%}
@@ -143,7 +152,7 @@ Click on the the activity for worksheet with answers
   {% endfor %} 
 
 
-### Class 8, 3/7
+### Class 8, 3/14
 
  {% for project in site.tags.math-crafts-class %}
  {% if project.week == 8%}
@@ -151,7 +160,7 @@ Click on the the activity for worksheet with answers
  {% endif %}
   {% endfor %} 
 
-### Class 9, 3/14
+### Class 9, 3/21
 
  {% for project in site.tags.math-crafts-class %}
  {% if project.week == 9%}
@@ -159,7 +168,7 @@ Click on the the activity for worksheet with answers
  {% endif %}
   {% endfor %} 
 
-### Class 10, 3/21
+### Class 10, 4/4
 **Due:** Mini-project 2
 
  {% for project in site.tags.math-crafts-class %}
@@ -168,7 +177,7 @@ Click on the the activity for worksheet with answers
  {% endif %}
   {% endfor %} 
 
-### Class 11, 4/4
+### Class 11, 4/11
 
  {% for project in site.tags.math-crafts-class %}
  {% if project.week == 11%}
@@ -176,7 +185,7 @@ Click on the the activity for worksheet with answers
  {% endif %}
   {% endfor %} 
 
-### Class 12, 4/11
+### Class 12, 4/18
 
  {% for project in site.tags.math-crafts-class %}
  {% if project.week == 12%}
@@ -184,7 +193,7 @@ Click on the the activity for worksheet with answers
  {% endif %}
   {% endfor %} 
 
-### Class 13, 4/18
+### Class 13, 4/25
 
  {% for project in site.tags.math-crafts-class %}
  {% if project.week == 13%}
@@ -192,7 +201,7 @@ Click on the the activity for worksheet with answers
  {% endif %}
   {% endfor %} 
 
-### Class 14, 4/25
+### Class 14, 5/01
 **Due:** Mini-project 3
 
 Show and tell! Bring all 3 of your mini projects to class, and show them off.
