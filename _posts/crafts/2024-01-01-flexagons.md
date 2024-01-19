@@ -102,6 +102,20 @@ Afterwards, give the students some time to mingle and look more closely at the o
 
 Then, bring the class together and do your own show and tell. Show off all the crafts for the coming semester, and say a bit about the math for each of them.
 
+<div class="card" >
+    <h4 class="card-header">
+        <a data-toggle="collapse" href="#collapse-2" aria-expanded="true" aria-controls="collapse-example" id="heading-example" class="d-block">
+            Pedagogical note
+        </a>
+    </h4>
+    <div id="collapse-2" class="collapse hide" aria-labelledby="heading-example">
+        <div class="card-body" markdown="1">
+
+Keep the show and tell snappy. It dragged on with only two groups, and people seemed to be getting tired. To much inactivity. 
+
+This part took the first hour.
+
+</div></div></div><br>
 ## Flexagons
 
 After the break, have the students apply their craft detective abilities. Can they repoduce a craft, using their observational detective skills?
@@ -116,3 +130,22 @@ If students get stuck, try these hints:
 3. How many triangles are in the hexaflexagon? The hexahexaflexagon?
 
 To learn more about hexaflexagons, the best place is [this video](https://www.youtube.com/watch?v=VIVIegSt81k&ab_channel=Vihart) by Vi Hart, and its followups. This is a founding classic in the genre of math youtube videos. 
+
+
+<div class="card" >
+    <h4 class="card-header">
+        <a data-toggle="collapse" href="#collapse-2" aria-expanded="true" aria-controls="collapse-example" id="heading-example" class="d-block">
+            <i class="fa fa-chevron-down pull-right"></i>
+            Pedagogical note
+        </a>
+    </h4>
+    <div id="collapse-2" class="collapse hide" aria-labelledby="heading-example">
+        <div class="card-body" markdown="1">
+
+Make sure you start by having people find the three sides. If not, they'll make the object without ever flexing it.
+
+Some people work on these very quietly-try to ensure they talk to tablemates when they get stuck. 
+
+It's quite hard to figure out the hexaflexagon. Some students took the whole hour to figure out the hexaflexagon. No-one figured out the hexahexaflexagon.
+
+</div></div></div><br>
