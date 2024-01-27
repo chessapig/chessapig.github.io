@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/crafts/2024-01-06-hyperbolic-origami.md",
+                "file": "_posts/crafts/2024-01-01-flexagons.md",
                 "mode": "source",
                 "source": true
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "localization",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -130,7 +130,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/crafts/2024-01-06-hyperbolic-origami.md",
+                "file": "_posts/crafts/2024-01-01-flexagons.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -147,7 +147,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/crafts/2024-01-06-hyperbolic-origami.md",
+                "file": "_posts/crafts/2024-01-01-flexagons.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +170,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/crafts/2024-01-06-hyperbolic-origami.md"
+                "file": "_posts/crafts/2024-01-01-flexagons.md"
               }
             }
           }
@@ -194,11 +194,27 @@
   },
   "active": "817ff6bcfe91d9e6",
   "lastOpenFiles": [
-    "_site/assets/crafts/flexagons/bridge.jpg",
-    "assets/crafts/flexagons/bridge.jpg",
-    "_site/assets/crafts/flexagons/The_Margaret_Hunt_Hill_Bridge.jpg",
+    "_site/assets/crafts/polyhedra/construction.jpg",
+    "assets/crafts/polyhedra/construction.jpg",
+    "_site/assets/crafts/polyhedra/templates/construction.jpg",
+    "assets/crafts/polyhedra/templates/construction.jpg",
+    "_site/assets/crafts/polyhedra/templates/hexagons.jpg",
+    "assets/crafts/polyhedra/templates/hexagons.jpg",
+    "_site/assets/crafts/polyhedra/templates/triangles.jpg",
+    "_site/assets/crafts/polyhedra/templates/squares.jpg",
+    "_site/assets/crafts/polyhedra/templates/polygons.svg",
+    "_site/assets/crafts/polyhedra/templates/pentagons.jpg",
+    "_site/assets/crafts/polyhedra/templates/hexagon.jpg",
+    "_site/assets/crafts/polyhedra/templates",
+    "assets/crafts/polyhedra/templates",
+    "assets/crafts/polyhedra/template",
+    "assets/crafts/polyhedra/untitled folder",
+    "_posts/crafts/2024-01-02-weaving.md",
+    "_posts/crafts/2024-01-10-Nets.md",
+    "_posts/crafts/2024-01-10-Monodromy.md",
+    "_posts/diary/2023-06-09-18.md",
+    "_posts/crafts/2024-01-06-hyperbolic-origami.md",
     "_site/assets/crafts/flexagons",
-    "assets/crafts/flexagons/The_Margaret_Hunt_Hill_Bridge.jpg",
     "assets/crafts/flexagons",
     "assets/crafts/untitled folder",
     "_site/craft/flexagons.html",
@@ -206,17 +222,6 @@
     "_site/craft/polyhera-copy.html",
     "_posts/crafts/2024-01-01-polyhera copy.md",
     "_site/assets/crafts/stick bombs/2D/exploding_sticks.mp4",
-    "assets/crafts/stick bombs/2D/exploding_sticks.mp4",
-    "assets/crafts/stick bombs/3D/pipe cleaner cube.jpeg.sb-c3bf9d79-UvzJWB",
-    "assets/crafts/stick bombs/3D/vertex pipe cleaner.jpeg.sb-c3bf9d79-qiypre",
-    "assets/crafts/stick bombs/3D/shadow.jpeg.sb-c3bf9d79-rZYJEU",
-    "_site/assets/crafts/stick bombs/3D/ICTS full.png",
-    "assets/crafts/stick bombs/3D/ICTS full.png",
-    "_site/assets/crafts/stick bombs/3D/Pasted image 20240114150938.png",
-    "assets/crafts/stick bombs/3D/Pasted image 20240114150938.png",
-    "_site/assets/crafts/stick bombs/3D/vertex.jpeg",
-    "_site/assets/crafts/stick bombs/3D/vertex pipe cleaner.jpeg",
-    "_site/assets/crafts/stick bombs/3D/top down tetrahedron.jpeg",
     "_posts/blog/2023-12-23-two sphere copy.md",
     "_posts/blog/2024-01-14-spherical-sticks.md",
     "_posts/blog/2024-01-14-spherical-sticksy.md",
@@ -225,20 +230,15 @@
     "_posts/crafts/2024-01-10-Gauss-Bonet.md",
     "_posts/crafts/2024-01-08-minimal surfaces.md",
     "_posts/crafts/2024-01-07-Plateaus law.md",
-    "_posts/crafts/2024-01-10-Monodromy.md",
     "_posts/crafts/2024-01-10-curvature from strips.md",
-    "_posts/crafts/2024-01-10-Nets.md",
     "_posts/crafts/2024-01-09-ruled surfaces.md",
     "_posts/crafts/2024-01-05-curved-origami.md",
-    "_posts/crafts/2024-01-06-hyperbolic-origami.md",
     "_posts/crafts/2024-01-04-string-art.md",
     "_posts/2023-02-01-Coloumb.md",
     "_posts/crafts/2024-01-03-hyperbolic-flexor.md",
-    "_posts/crafts/2024-01-02-weaving.md",
     "_posts/diary/2023-06-10-19.md",
     "visualization.md",
     "_posts/code/2022-06-05-toric.md",
-    "_posts/code/2021-10-12-diffeos.md",
-    "_posts/code/2023-05-31-binary.md"
+    "_posts/code/2021-10-12-diffeos.md"
   ]
 }
