@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/crafts/2024-01-01-flexagons.md",
+                "file": "teaching/math_crafts/index.md",
                 "mode": "source",
                 "source": true
               }
@@ -130,7 +130,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/crafts/2024-01-01-flexagons.md",
+                "file": "teaching/math_crafts/index.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -147,7 +147,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/crafts/2024-01-01-flexagons.md",
+                "file": "teaching/math_crafts/index.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +170,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/crafts/2024-01-01-flexagons.md"
+                "file": "teaching/math_crafts/index.md"
               }
             }
           }
@@ -194,22 +194,23 @@
   },
   "active": "817ff6bcfe91d9e6",
   "lastOpenFiles": [
-    "_site/assets/crafts/polyhedra/construction.jpg",
-    "assets/crafts/polyhedra/construction.jpg",
-    "_site/assets/crafts/polyhedra/templates/construction.jpg",
-    "assets/crafts/polyhedra/templates/construction.jpg",
-    "_site/assets/crafts/polyhedra/templates/hexagons.jpg",
-    "assets/crafts/polyhedra/templates/hexagons.jpg",
-    "_site/assets/crafts/polyhedra/templates/triangles.jpg",
-    "_site/assets/crafts/polyhedra/templates/squares.jpg",
-    "_site/assets/crafts/polyhedra/templates/polygons.svg",
-    "_site/assets/crafts/polyhedra/templates/pentagons.jpg",
-    "_site/assets/crafts/polyhedra/templates/hexagon.jpg",
+    "crafts.md",
+    "_posts/crafts/2024-01-02-weaving.md",
+    "_site/assets/crafts/weaving/result of pulling.jpeg",
+    "_site/assets/crafts/weaving/pulling step 2.jpeg",
+    "_site/assets/crafts/weaving/pulling step 1.jpeg",
+    "_site/assets/crafts/weaving/layer 3 twisting.jpeg",
+    "_site/assets/crafts/weaving/layer 3 progress.jpeg",
+    "_site/assets/crafts/weaving/layer 2.jpeg",
+    "_site/assets/crafts/weaving/layer 1.jpeg",
+    "_site/assets/crafts/weaving/final.jpeg",
+    "_site/assets/crafts/weaving/final 2.jpeg",
+    "_site/assets/crafts/weaving/7,3 shadow.jpeg",
+    "_posts/crafts/2024-01-01-flexagons.md",
     "_site/assets/crafts/polyhedra/templates",
     "assets/crafts/polyhedra/templates",
     "assets/crafts/polyhedra/template",
     "assets/crafts/polyhedra/untitled folder",
-    "_posts/crafts/2024-01-02-weaving.md",
     "_posts/crafts/2024-01-10-Nets.md",
     "_posts/crafts/2024-01-10-Monodromy.md",
     "_posts/diary/2023-06-09-18.md",
@@ -218,7 +219,6 @@
     "assets/crafts/flexagons",
     "assets/crafts/untitled folder",
     "_site/craft/flexagons.html",
-    "_posts/crafts/2024-01-01-flexagons.md",
     "_site/craft/polyhera-copy.html",
     "_posts/crafts/2024-01-01-polyhera copy.md",
     "_site/assets/crafts/stick bombs/2D/exploding_sticks.mp4",

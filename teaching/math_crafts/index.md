@@ -30,7 +30,7 @@ show_sidebar: false
 - *Facilitator:* Elliot Kienzle, Evans 1070. Please only contact me! use bCourses, or my email ekienzle@berkeley.edu
 - *Instructor of record:* David Nadler 
 - *Section:*  Evans 732, Thursdays 4-6 pm 
-- *Office Hours:* Evans 1070: ___ or by appointment. 
+- *Office Hours:* Evans 1070: 12:30-2 or by appointment. 
 </div>
 </div>
 </div>
