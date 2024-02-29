@@ -1,12 +1,12 @@
 ---
 layout: project
 title: Hyperbolic origami
-date: 2024-01-06 16:03:47 -0500
+date: 2024-01-05 16:03:47 -0500
 categories: craft
 tags:
   - craft
   - math-crafts-class
-week: 6
+week: 5
 image: /assets/crafts/hyperbolic origami/hypar.jpeg
 summary: "*Craft:* Create origami models of hyperbolic space.
 
@@ -16,7 +16,32 @@ pageHasContent: true
 ---
 # Summary
 
-Last class we examined shapes constructed out of creased and curved paper. Mathematically, we described these as *developable surfaces*, surfaces with gaussian curvature zero. Today, we (ahem) bend these rules, and make paper models which manifest nonzero gaussian curvature. We start with a simple origami model of a hyperbolic paraboloid, affectionately called a "hypar" by origamists. The same principle applied simple, circular creases creates a beautiful sculpture.
+Last class we introduced curvature of a curve in 2D, and described how to measure it quantitatively. This time, we use 2D curvature to define the curvature of a surface in 3D. This is called "Gaussian curvature", and it will be our primary way to understand curvature in this class.  We start with a simple origami model of a hyperbolic paraboloid, affectionately called a "hypar" by origamists. The same principle applied to simple, circular creases creates a beautiful sculpture.
+
+
+<div class="card" >
+    <h4 class="card-header">
+        <a data-toggle="collapse" href="#collapse-0" aria-expanded="true" aria-controls="collapse-example" id="heading-example" class="d-block">
+            <i class="fa fa-chevron-down pull-right"></i>
+             Materials and setup
+        </a>
+    </h4>
+    <div id="collapse-0" class="collapse show" aria-labelledby="heading-example">
+        <div class="card-body" markdown="1">
+### materials and setup
+Every student should have:
+- 1 box cutter. I found a pack of 24 on amazon for 10 dollars
+- 1-2 of each type of template (see below), 4 total. I used construction paper
+
+In total, for a class of 12, I printed 20 of each template.
+#### Templates
+[Circle template](/assets/crafts/hyperbolic origami/circle template.jpg)
+[square template](/assets/crafts/hyperbolic origami/hypar template.jpg)
+
+
+
+
+</div></div></div><br>
 
 # worksheet
 

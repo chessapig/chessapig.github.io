@@ -19,6 +19,16 @@ pageHasContent: true
 Last class we examined how different tilings can force nonzero curvature. Today we'll build a more robust model of a negatively curved surface using cardboard and tape. These make very nice twiddle toys, because the dihedreal angle between cardboard planes is very flexible. By placing many hyperbolic vertices together, we will see how the hyperbolic plane contorts itself in three dimensional space.
 
 
+# Activity
+
+## Part 1: drawing the hyperbolic plane
+
+From [Annie Perkins](https://arbitrarilyclose.com/2020/03/16/mathartchallenge-day-1-tons-of-triangles/): 
+**Question:** On the blackboard, draw as manny connected triangles as you can, with seven edges at each vertex.  What do you notice happens? Could you keep going forever?
+
+
+
+
 # Hyperbolic cardboard 
 
 I first saw this concept from [Daniel Piker's tweet](https://twitter.com/KangarooPhysics/status/1559961643903340545). Here is a single vertex with 8 squares:
