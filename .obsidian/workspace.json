@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2023-02-01-Coloumb.md",
+                "file": "_posts/crafts/2024-01-02-weaving.md",
                 "mode": "source",
                 "source": false
               }
@@ -25,21 +25,21 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/crafts/2024-01-01-polyhera.md",
+                "file": "_posts/diary/2024-03-02-27.md",
                 "mode": "source",
-                "source": true
+                "source": false
               }
             }
           },
           {
-            "id": "817ff6bcfe91d9e6",
+            "id": "dd2f8dc362ee3290",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/crafts/2024-01-06-curved-origami.md",
+                "file": "_posts/blog/2024-03-02-Fubini-Study.md",
                 "mode": "source",
-                "source": true
+                "source": false
               }
             }
           },
@@ -85,7 +85,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "localization",
+                "query": "tag:craft",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -130,7 +130,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/crafts/2024-01-06-curved-origami.md",
+                "file": "_posts/blog/2024-03-02-Fubini-Study.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -147,7 +147,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/crafts/2024-01-06-curved-origami.md",
+                "file": "_posts/blog/2024-03-02-Fubini-Study.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +170,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/crafts/2024-01-06-curved-origami.md"
+                "file": "_posts/blog/2024-03-02-Fubini-Study.md"
               }
             }
           }
@@ -179,8 +179,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -192,52 +191,52 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "817ff6bcfe91d9e6",
+  "active": "dd2f8dc362ee3290",
   "lastOpenFiles": [
-    "_posts/crafts/2024-01-05-hyperbolic-origami.md",
-    "assets/crafts/hyperbolic origami/hypar template.jpg",
-    "assets/crafts/hyperbolic origami/circle template.jpg",
-    "assets/crafts/hyperbolic origami/hypar pattern.jpeg",
-    "assets/crafts/hyperbolic origami/curved pattern.jpg",
-    "_posts/crafts/2024-01-07-Plateaus law.md",
-    "_posts/crafts/2024-01-04-string-art.md",
+    "_posts/blog/2023-12-23-two sphere.md",
+    "_posts/diary/2024-03-02-27.md",
+    "_posts/blog/2024-01-14-spherical-sticks.md",
+    "_posts/blog/2024-03-02-Fubini-Study.md",
+    "assets/images/ovals of cassini.png",
+    "_site/craft/Fubini-Study.html",
+    "_site/craft/spherical-sticks-1.html",
+    "_site/Fubini-Study.html",
     "_posts/crafts/2024-01-02-weaving.md",
-    "_posts/crafts/2024-01-06-curved-origami.md",
-    "teaching/math_crafts/index.md",
-    "blog.md",
-    "code.md",
-    "crafts.md",
-    "_posts/diary/2023-07-08-21.md",
-    "_posts/crafts/2024-01-10-curvature from strips.md",
-    "_posts/crafts/2024-01-10-Gauss-Bonet.md",
-    "_posts/crafts/2024-01-09-ruled surfaces.md",
+    "_posts/crafts/2024-01-05-hyperbolic-origami.md",
+    "_posts/crafts/2024-01-04-string-art.md",
     "_posts/crafts/2024-01-03-hyperbolic-flexor.md",
-    "_posts/diary/2023-05-20-10.md",
-    "_posts/diary/2023-05-21-11.md",
-    "_posts/diary/2023-05-24-12.md",
-    "_posts/diary/2023-05-26-13.md",
-    "_posts/diary/2023-05-28-15.md",
-    "_posts/diary/2023-05-27-14.md",
-    "_posts/diary/2023-05-29-16.md",
-    "_posts/diary/2023-06-03-17.md",
-    "_posts/diary/2023-06-09-18.md",
+    "_posts/diary/2023-12-28-26.md",
+    "_posts/diary/2023-05-06-4.md",
+    "assets/images/diary/fubini-study boot camp/affine coords.jpg",
+    "_site/assets/images/diary/fubini-study boot camp/sterographic details.jpg",
+    "_posts/crafts/2024-01-07-Plateaus law.md",
+    "_posts/diary/2023-07-08-21.md",
     "_posts/diary/2023-06-10-19.md",
-    "_posts/diary/2023-06-12-20.md",
-    "_site/assets/crafts/weaving/ruth.jpg",
-    "assets/crafts/weaving/ruth.jpg",
-    "_site/assets/crafts/weaving/2014.794_01_H02-Large-TIFF_4000-pixels-long-scaled.jpg",
-    "assets/crafts/weaving/2014.794_01_H02-Large-TIFF_4000-pixels-long-scaled.jpg",
-    "_site/assets/crafts/weaving/Ascending-and-Descending.jpeg",
-    "assets/crafts/weaving/Ascending-and-Descending.jpeg",
-    "_site/assets/crafts/polyhedra/templates",
-    "assets/crafts/polyhedra/templates",
-    "assets/crafts/polyhedra/template",
-    "assets/crafts/polyhedra/untitled folder",
-    "_site/assets/crafts/flexagons",
-    "assets/crafts/flexagons",
-    "assets/crafts/untitled folder",
-    "_site/craft/flexagons.html",
-    "_site/craft/polyhera-copy.html",
-    "_site/assets/crafts/stick bombs/2D/exploding_sticks.mp4"
+    "assets/colors/complex.jpg",
+    "assets/cortex/kazina.png",
+    "assets/cortex/math.png",
+    "assets/cortex/scaling.png",
+    "_posts/2023-02-01-Coloumb.md",
+    "assets/images/diary/fubini-study boot camp/sterographic.jpg",
+    "_site/assets/images/diary/fubini-study boot camp/toric coords.jpg",
+    "_site/assets/images/diary/fubini-study boot camp/sterographic details 1.jpg",
+    "_site/assets/images/diary/fubini-study boot camp",
+    "_site/assets/images/diary",
+    "assets/images/diary/fubini-study boot camp",
+    "assets/images/diary",
+    "_posts/crafts/2024-01-01-polyhera.md",
+    "_site/diary/27.html",
+    "_posts/diary/aaa.md",
+    "_site/diary/26-1.html",
+    "_posts/diary/2023-08-30-24.md",
+    "_posts/diary/2023-08-29-23.md",
+    "_posts/diary/2023-05-26-13.md",
+    "_posts/diary/2023-05-29-16.md",
+    "_posts/diary/2023-07-16-22.md",
+    "_posts/diary/2023-11-24-25.md",
+    "_posts/crafts/2024-01-08-minimal surfaces.md",
+    "_posts/crafts/2024-01-10-curvature from strips.md",
+    "_posts/crafts/2024-01-09-ruled surfaces.md",
+    "_site/assets/crafts/polyhedra/templates"
   ]
 }

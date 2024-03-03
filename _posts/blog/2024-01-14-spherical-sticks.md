@@ -45,7 +45,7 @@ Throw your woven sticks against a wall, and the weave explosively unravels. The 
 
 Now for today's question: *Must a stick bomb be planar?*  Can I make something like the ICTS model using stick bomb design principles?
 
-Perhaps counterintuitively, I don't see an issue with a non-planar stick bomb. Instead of weaving the sticks on a 2D plane, we can weave them along the surface of a sphere. Topologically the weaves are identical: A sphere with a point missing is topologically indistinguishable from a plane. The difference is geometric, the spacing between crossings and the length of sticks. The existence of non-plananr stick bombs is not up to math, but to physics: Could a spherical stick bomb still hold together under friction alone?
+Perhaps counterintuitively, I don't see an issue with a non-planar stick bomb. Instead of weaving the sticks on a 2D plane, we can weave them along the surface of a sphere. Topologically the weaves are identical: A sphere with a point missing is topologically indistinguishable from a plane. The difference is geometric, the spacing between crossings and the length of sticks. The existence of non-planar stick bombs is not up to math, but to physics: Could a spherical stick bomb still hold together under friction alone?
 
 
 
@@ -56,9 +56,9 @@ Perhaps counterintuitively, I don't see an issue with a non-planar stick bomb. I
 
 This is fairly large -- it has to be, or the sticks would snap (see the construction process below). Makes a good space helment.
 
-| <img src="/assets/crafts/stick bombs/3D/helmet.jpeg" alt="Elliot wearing the tetrahedron around his head" width="300"> |
-| -- |
-| I'm an astronaut | 
+| <img src="/assets/crafts/stick bombs/3D/helmet.jpeg" alt="Elliot wearing the tetrahedron around his head" width="300"> |     |
+| ---------------------------------------------------------------------------------------------------------------------- | --- |
+| I'm an astronaut                                                                                                       |     |
 
 ## The design
 My critter is a built from a tetrahedron. Each edge is made of two parallel sticks, and three edges are woven together at each vertex. The weave is based on the Kagome pattern. Here's one vertex, done in pipe cleaners:  You can see that the yellow edge is above the purple edge, the purple is above the red, and the red is above the yellow. The cyclical ordering ensures every edge is clamped above and below by another. Also, the crossings around every edge alternate over and under. I wrote a little about the mathematics of weaving and other pipe cleaning crafts [here](/craft/weaving).
