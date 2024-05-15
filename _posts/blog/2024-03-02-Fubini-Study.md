@@ -540,6 +540,7 @@ Therefore $\frac{i}{2} \mathrm{d} z \wedge \mathrm{d} \bar{z} = \mathrm{d} x \we
 
 
 
+
 Let us write $\omega_{FS}$ in the different coordinates. 
 
 **Projective coordinates:**
