@@ -46,41 +46,33 @@ show_sidebar: false
 
   <div class="col-md-8 mb-4">
     <h1>Hello!</h1>
-    <p>  I am a second year mathematics PhD student at UC Berkeley. I'm interested in physical mathematics, especially its intersections with geometry and topology.  I graduated from University of Maryland (UMD) with a degree in mathematics and physics<br/>
+    <p>  I am a third year mathematics PhD student at UC Berkeley, advised by Constantin Teleman. I'm interested in physical mathematics, especially its intersections with geometry and topology. <br/>
 	<h2>Math </h2>
-	<p>Mathematically, I am primarily a geometer. I'm most comfortable with complex manifolds, but I am slowly branching out to more algebraic and analytic flavors of geometry. Physically, I like whatever it takes to give me my geometry. Here is a list of keywords which I know some things about, and wish to get to know much better:</p>
+	<p> I like geometry in whatever form it may take. Right now I'm primarily a symplectic geometer. I'm currently studying symplectic ball packing through the lens of quantum mechanics. Here are some words which I think about a lot:
 
-
-<ul class="multicolumn-list text-sm">
-    <li>Quantization</li>
-    <li>SUSY QFTs</li>
-    <li>Topological QFTs</li>
-    <li>Mirror symmetry</li>
-    <li>Integrable systems</li>
-    <li>Gauge theory</li>
-    <li>Moduli spaces</li>
-    <li>Higgs bundles</li>
-    <li>Hyperkahler geometry</li>
-    <li>Conformal QFTs</li>
-    <li>A dabbling of string theory</li>
+<ul class="list text-sm">
+    <li>Symplectic ball-packing in dimensions >4</li>
+    <li>Spin c quantization</li>
+    <li>Uncertainty principles</li>
+    <li>Semiclassical analysis</li>
   </ul>
 
-	<p>My previous research applied Higgs bundles to a condensed matter physics system. You can read about it  <a href="/paper/hyperbolic-band-theory">here</a>. To see other things I've thought a lot about, check out my past <a href="/talks">talks</a>. 
+  and here's a smattering of topics which make me happy</p>
+
+<ul class="list card-columns" style="column-count: 2;">
+    <li>Symplectic style representation theory</li>
+    <li>Topological/Supersymmetric quantum field theories</li>
+    <li>Mirror symmetry (2D and 3D)</li>
+    <li>Integrable systems</li>
+    <li>Moduli spaces</li>
+    <li>Toric geometry</li>
+    <li>Symplectic style representation theory</li>
+    <li>Classical differential geometry (curves and surfaces)</li>
+  </ul>
+	<p>My previous research applied Higgs bundles to condensed matter physics. You can read about it  <a href="/paper/hyperbolic-band-theory">here</a>. To see other things I've thought about, check out my past <a href="/talks">talks</a>. 
    <!--To see what I'm thinking about at this exact moment, you can peek inside my <a href="/writing/diary.html">math diary</a>.</p> -->
-	
     <h2>Art </h2>
-    <p>I was drawn to geometry because my approach to math is very visual. I try to capture my images of mathematical objects using digital art, which you can check out in the <a href="/gallery">gallery</a>. I also enjoy creative coding, and my code sketches often have a mathematical component.  I talk about a few of my sketches in <a href="/code">code</a>. My favorite example is my explorations of <a href="/code/hyperbolic-string-art">hyperbolic string art</a>
+    <p> I think about math very visually (hence the geometry). I try to capture mathematical objects and the feelings they illicit using digital art, which you can check out in the <a href="/gallery">gallery</a>. I also enjoy creative coding, which often has a mathematical component. See some examples in <a href="/code">code</a>. My favorite example is my explorations of <a href="/code/hyperbolic-string-art">hyperbolic string art</a>
     
-    <!-- <h1>Other activities</h1>
-    <h2>MoMath </h2>
-    In the summer of 2022, I worked at the national meusuem of a
-    <h1>Hello, I'm Elliot!</h1>
-    <p>You'll probably get a pretty good sense of my interests from the content on this site, but just in case: I like math and physics. In fact, Right now I'm studying math and physics, and hopefully someday I'll know enough to study mathematical physics. My fav is differential geometry, which studies local propreties of curvey spaces, like a many-dimensional potato. I like how visual it is. Geometry is like the interpeter of the mathematical pantheon, all the other fields look to it for intuition. Not to mention, physics is a subfield of geometry ;). So many things, in physics or elsewise, have really beutiful geometric interpetations. I honestly believe anything in life is better with manifolds.
-      <br/>  <br/>
-    But I like other stuff too! I really enjoy earth/space sciences, so Astronomy, Geology, Atmospheric science, and espically Oceanography. For related reasons, I love marine bio, and all the friendly invertebrate it brings. Land mammals are overrated.
-      <br/>  <br/>
-    Recently (few months ago) I picked up art, thanks to an ipad and procreate, and have had lots of fun with that since.I posted some of my finished drawings at the <a href="/gallery">gallery</a>. I've also always been facinated by generative art, but I'm always turned away by my own biases against programming. But a couple weeks ago, I crossed the avivation barrier and have since managed to finish some things! You can check it out at the <a href="/gallery">gallery</a>, and there'll likely be more of that to come. Exciting times.  
-    </p>
-    <br/> -->
   <!-- </div>
 </div> -->

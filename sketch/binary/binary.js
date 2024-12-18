@@ -26,7 +26,7 @@ let twoPowerTimeDecayRate=0.9;
 let baseTextSize=64;
 let timer=0, timerUnit=.01;
 let gameEndTime;
-let isFirstTime=false``;
+let isFirstTime=false;
 
 let time_spacing=100;
 let waitTime=700;
