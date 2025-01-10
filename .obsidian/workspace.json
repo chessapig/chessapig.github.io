@@ -16,7 +16,9 @@
                 "file": "_posts/crafts/2024-01-02-weaving.md",
                 "mode": "source",
                 "source": false
-              }
+              },
+              "icon": "lucide-file",
+              "title": "2024-01-02-weaving"
             }
           },
           {
@@ -25,10 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/diary/2024-05-14-32.md",
+                "file": "_posts/2021-09-25-hyperbolic-band-theory.md",
                 "mode": "source",
                 "source": false
-              }
+              },
+              "icon": "lucide-file",
+              "title": "2021-09-25-hyperbolic-band-theory"
             }
           },
           {
@@ -40,7 +44,9 @@
                 "file": "_posts/diary/2023-05-02-2.md",
                 "mode": "source",
                 "source": false
-              }
+              },
+              "icon": "lucide-file",
+              "title": "2023-05-02-2"
             }
           }
         ],
@@ -64,7 +70,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
             }
           },
           {
@@ -79,7 +87,9 @@
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-search",
+              "title": "Search"
             }
           },
           {
@@ -87,7 +97,9 @@
             "type": "leaf",
             "state": {
               "type": "starred",
-              "state": {}
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Plugin no longer active"
             }
           },
           {
@@ -95,7 +107,9 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {}
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
             }
           }
         ]
@@ -118,7 +132,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/diary/2024-05-14-32.md",
+                "file": "_posts/2021-09-25-hyperbolic-band-theory.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -126,7 +140,9 @@
                 "searchQuery": "",
                 "backlinkCollapsed": true,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for 2021-09-25-hyperbolic-band-theory"
             }
           },
           {
@@ -135,10 +151,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/diary/2024-05-14-32.md",
+                "file": "_posts/2021-09-25-hyperbolic-band-theory.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from 2021-09-25-hyperbolic-band-theory"
             }
           },
           {
@@ -149,7 +167,9 @@
               "state": {
                 "sortOrder": "frequency",
                 "useHierarchy": true
-              }
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
             }
           },
           {
@@ -158,8 +178,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/diary/2024-05-14-32.md"
-              }
+                "file": "_posts/2021-09-25-hyperbolic-band-theory.md"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of 2021-09-25-hyperbolic-band-theory"
             }
           }
         ],
@@ -181,51 +203,51 @@
   },
   "active": "f56063d21c255229",
   "lastOpenFiles": [
-    "diary/31.md",
-    "_site/diary/31.md",
-    "_posts/diary/2024-05-14-32.md",
-    "_site/diary/32.html",
-    "_site/diary/31-1.html",
-    "_site/diary/31.html",
-    "_posts/diary/2024-05-13-31.md",
-    "_posts/diary/2024-05-12-30.md",
-    "_site/diary/29-1.html",
-    "_posts/diary/2023-05-24-12.md",
-    "_posts/diary/2023-05-26-13.md",
-    "_posts/diary/2023-05-10-8.md",
-    "_posts/diary/2023-05-13-9.md",
-    "_posts/diary/2023-05-20-10.md",
-    "_posts/diary/2023-05-21-11.md",
-    "_posts/diary/2023-06-03-17.md",
-    "diary/10.md",
-    "_site/diary/10.md",
-    "diary",
-    "_posts/diary/2023-05-28-15.md",
-    "_posts/diary/2023-05-27-14.md",
-    "_posts/diary/2023-04-30-0.md",
-    "_posts/diary/2023-05-02-2.md",
-    "_posts/diary/2024-05-11-29.md",
-    "_posts/diary/2024-05-10-28.md",
-    "_site/diary/30.html",
-    "_site/diary/29.html",
-    "_site/diary/28-1.html",
-    "_site/diary/28.html",
-    "_site/diary/27-1.html",
-    "_posts/diary/2024-03-02-27.md",
-    "_posts/diary/2023-12-28-26.md",
-    "_posts/diary/2023-11-24-25.md",
-    "_posts/diary/2023-05-01-1.md",
-    "_posts/diary/aaa.md",
-    "writing/diary.md",
-    "Pasted image 20230716114153.png",
-    "assets/images/ovals of cassini.png",
-    "assets/images/diary/fubini-study boot camp/affine coords.jpg",
-    "_site/assets/images/diary/fubini-study boot camp/sterographic details.jpg",
-    "assets/colors/complex.jpg",
-    "assets/cortex/kazina.png",
-    "assets/cortex/math.png",
-    "assets/cortex/scaling.png",
-    "assets/images/diary/fubini-study boot camp/sterographic.jpg",
-    "_site/assets/images/diary/fubini-study boot camp/toric coords.jpg"
+    "_site/sketch/IFS/index.html",
+    "sketch/IFS/index.html",
+    "_site/sketch/IFS/torus_ifs.js",
+    "sketch/IFS/torus_ifs.js",
+    "_site/sketch/IFS/ifs copy.js",
+    "sketch/IFS/ifs copy.js",
+    "_site/sketch/libraries/quaternion.min.js",
+    "_site/sketch/hopf/index.html",
+    "_site/sketch/hopf/hopf.js",
+    "_site/sketch/hopf",
+    "sketch/libraries/quaternion.min.js",
+    "_site/gallery/images/crystals/PNG/crystals8.PNG",
+    "_site/gallery/images/crystals/PNG/crystals4.PNG",
+    "_site/gallery/images/crystals/PNG/crystals2.PNG",
+    "_site/gallery/images/crystals/PNG/crystals7.PNG",
+    "_site/gallery/images/crystals/PNG/crystals6.PNG",
+    "_site/gallery/images/crystals/PNG/crystals5.PNG",
+    "_site/gallery/images/crystals/PNG/crystals3.PNG",
+    "_site/gallery/images/crystals/PNG/crystals1.PNG",
+    "gallery/images/crystals/PNG/crystals8.PNG",
+    "gallery/images/crystals/PNG/crystals7.PNG",
+    "_posts/talks/2024-09-16-Caratheodory.md",
+    "_posts/talks/2024-06-14-Manifesting.md",
+    "_posts/talks/2024-11-04-Quasihamiltonian.md",
+    "_posts/talks/2024-11-18-Kempf-ness.md",
+    "_posts/talks/2023-11-15-Quantization.md",
+    "_posts/talks/2023-10-12-TQFT-Jones.md",
+    "_posts/talks/2023-09-08-G-spaces.md",
+    "_posts/talks/2023-05-11-cortex.md",
+    "_posts/talks/2023-01-23-polygons.md",
+    "_posts/talks/2022-11-04-stick-bombs.md",
+    "_posts/talks/2022-03-12-enceladus.md",
+    "_posts/talks/2022-03-03-BPS.md",
+    "_posts/talks/2022-02-04-integrable.md",
+    "_posts/talks/2021-11-23-topological-recursion.md",
+    "_posts/talks/2021-11-23-electromagnetism.md",
+    "_posts/talks/2021-05-07-higgs-bundles-geometric-structures.md",
+    "_posts/talks/2021-05-05-cobordism.md",
+    "_posts/talks/2021-05-03-kahler-quantization.md",
+    "_posts/talks/2021-04-23-Kapustin-Witten.md",
+    "_posts/talks/2021-04-23-kapustin-witten.md",
+    "_posts/talks/2020-11-24-lie-theorem.md",
+    "_posts/talks/2020-11-01-mirror.md",
+    "_posts/talks/2020-11-23-riemann-roch.md",
+    "_posts/gallery/2021-10-12-Other-art.md",
+    "_posts/2023-02-01-Coloumb.md"
   ]
 }

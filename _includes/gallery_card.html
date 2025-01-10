@@ -3,186 +3,85 @@
   <div class="card mb-3">
     <div class="card-header">
       {% if project.gallery-title %}
-        <h2>{% if project.pageHasContent %}
-          <h2><a href="{{ project.url | relative_url }}">{{ project.gallery-title | escape }}</a></h2>
+        <h2>
+          {% if project.pageHasContent %}
+            <a href="{{ project.url | relative_url }}">{{ project.gallery-title | escape }}</a>
           {% else %}
-          <h2>{{ project.title | escape }}</h2>
+            {{ project.title | escape }}
           {% endif %}
-       </h2>
-       {% else %}
-        <h2>{% if project.pageHasContent %}
-          <h2><a href="{{ project.url | relative_url }}">{{ project.title | escape }}</a></h2>
+        </h2>
+      {% else %}
+        <h2>
+          {% if project.pageHasContent %}
+            <a href="{{ project.url | relative_url }}">{{ project.title | escape }}</a>
           {% else %}
-          <h2>{{ project.title | escape }}</h2>
+            {{ project.title | escape }}
           {% endif %}
-      </h2>
+        </h2>
       {% endif %}
     </div>
 
-  
-  <div class="card-body">
+    <div class="card-body">
+      {%- if project.gallery-folder -%}
+        {%- assign image_folder = project.gallery-folder -%}
+        {%- assign image_files = "" | split: "" -%}
 
-    {%- if project.gallery-folder -%}
-      {%- assign image_folder = project.gallery-folder-%} 
-      {%- assign image_files = "" | split: "" -%} 
+        {%- for file in site.static_files -%}
+          {%- if file.path contains image_folder and file.path != image_folder -%}
+            {%- assign image_files = image_files | push: file.path -%}
+          {%- endif -%}
+        {%- endfor -%}
 
-      {%- for file in site.static_files -%}
-        {%- if file.path contains image_folder and file.path != image_folder -%}
-          {%- assign image_files = image_files | push: file.path -%}
-        {%- endif -%}
-      {%- endfor -%}
-      
-      {%- if image_files.size > 0 -%}
-    <div class="gallery-image">
-      <div id="carousel{{ forloop.index }}" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner" style="display: flex; align-items: center; height: 70%;">
-          {% for image in image_files %}
-          <div class="carousel-item {% if forloop.first %}active{% endif %}">
-            <img src="{{ image }}" alt="{{ project.title }}" class="img-fluid carousel-image">
+        {%- if image_files.size > 0 -%}
+        <div class="gallery-image">
+          <!-- Fixed height for carousel -->
+          <div id="carousel{{ forloop.index }}" class="carousel slide" data-interval="false" style="max-width: 100%; max-height: 100%; overflow: hidden;">
+            <div class="carousel-inner" style="height: 100%; display: flex; align-items: center; justify-content: center;">
+              {% for image in image_files %}
+              <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <!-- Set max dimensions for the image and ensure no cropping -->
+                <img src="{{ image }}" alt="{{ project.title }}" 
+                     class="img-fluid carousel-image" 
+                     style="max-width: 100%; max-height: 100%; width: auto; height: auto;">
+              </div>
+              {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#carousel{{ forloop.index }}" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carousel{{ forloop.index }}" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+              {%- for image in image_files -%}
+                <li data-target="#carousel{{ forloop.parentloop.index }}" data-slide-to="{{ forloop.index0 }}" {% if forloop.first %}class="active"{% endif %}></li>
+              {%- endfor -%}
+            </ol>
           </div>
-          {% endfor %}
         </div>
-        <a class="carousel-control-prev" href="#carousel{{ forloop.index }}" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carousel{{ forloop.index }}" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
+        {%- else -%}
+        {%- if project.image -%}
+        <div class="gallery-image">
+          <a href="{{ project.url | relative_url }}"><img src="{{ project.image }}" alt="{{ project.title }}" class="img-fluid"></a>
+        </div>
+        {%- endif -%}
+        {%- endif -%}
+      {%- endif -%}
 
-          <!-- Indicators -->
-        <ol class="carousel-indicators">
-          {%- for image in image_files -%}
-            <li data-target="#carousel{{ forloop.parentloop.index }}" data-slide-to="{{ forloop.index0 }}" {% if forloop.first %}class="active"{% endif %}></li>
-          {%- endfor -%}
-        </ol>
+      <div class="gallery-caption">
+        {%- assign date_format = site.minima.date_format | default: "%b %Y" -%}
+        <span class="post-meta">{{ project.date | date: date_format }}</span>
+
+        {% if project.pageHasContent %}
+        <h2><a href="{{ project.url | relative_url }}">{{ project.title | escape }}</a></h2>
+        {% else %}
+        <h2>{{ project.title | escape }}</h2>
+        {% endif %}
       </div>
     </div>
-    {%- else -%}
-    {%- if project.image -%}
-    <div class="gallery-image">
-      <a href="{{ project.url | relative_url }}"><img src="{{ project.image }}" alt="{{ project.title }}" class="img-fluid"></a>
-    </div>
-    {%- endif -%}
-    {%- endif -%}
-    {%- endif -%}
-
-    <div class="gallery-caption">
-      {%- assign date_format = site.minima.date_format | default: "%b %Y" -%}
-      <span class="post-meta">{{ project.date | date: date_format }}</span>
-
-      {% if project.pageHasContent %}
-      <h2><a href="{{ project.url | relative_url }}">{{ project.title | escape }}</a></h2>
-      {% else %}
-      <h2>{{ project.title | escape }}</h2>
-      {% endif %}
-
-      <p id="currentCaption{{ forloop.index }}"></p>
-    </div>
   </div>
-</div>
-
-
-
-
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Check if the carousel element exists before adding event listeners
-      var carouselElement = document.getElementById("carousel{{ forloop.index }}");
-  
-      if (carouselElement) {
-        // Add event listener to carousel sliding event
-        $(carouselElement).on("slide.bs.carousel", function () {
-          // Get all images within the carousel
-          var images = document.querySelectorAll("#carousel{{ forloop.index }} .carousel-item img.carousel-image");
-          // Hide each image by setting opacity to 0
-          images.forEach(function (image) {
-            image.style.transition = "opacity 0.5s ease"; // Add transition for a smooth effect
-            image.style.opacity = 0;
-          });
-
-          // Update the caption dynamically, currently according to img.alt
-          var currentImageSource = $(this).find('.carousel-item.active img').attr('src');
-          var currentImageTitle = currentImageSource.replace(/\.[^/.]+$/, ""); // Remove file extension
-          var currentMarkdownPath = currentImageTitle+".md";
-
-          currentImageMd = fetchAndParseMarkdownSync(currentMarkdownPath);
-          console.log(currentImageMd)
-
-          if (currentImageMd && currentImageMd.caption) {
-            var currentCaption = currentImageMd.caption;
-            $('#currentCaption{{ forloop.index }}').text(currentCaption);
-          } else {
-            // Handle the case where the Markdown page or caption is not found
-            $('#currentCaption{{ forloop.index }}').text("No caption available");
-          }
-
-
-
-        });
-  
-        // Add event listener to carousel slid event
-        $(carouselElement).on("slid.bs.carousel", function () {
-          // Get the currently active image and set its opacity to 1
-          var activeImage = document.querySelector("#carousel{{ forloop.index }} .carousel-item.active img.carousel-image");
-          if (activeImage) {
-            activeImage.style.opacity = 1;
-          }
-        });
-        
-      }
-    });
-
-  
-  function fetchAndParseMarkdownSync(path) {
-  try {
-    var response = fetch(path);
-    if (!response.ok) {
-      throw new Error("Failed to fetch Markdown file");
-    }
-
-      var markdownContent = response.text();
-      return parseFrontMatter(markdownContent);
-    } catch (error) {
-      console.error("Error fetching or parsing the Markdown file:", error);
-      return null;
-    }
-  }
-
-  // Helper function to parse Front Matter from Markdown content
-  function parseFrontMatter(markdownContent) {
-    var metadata = null;
-
-    // Check if the content starts with '---' indicating the beginning of Front Matter
-    if (markdownContent.startsWith('---')) {
-      // Extract the Front Matter block
-      var frontMatter = markdownContent.match(/---([\s\S]*?)---/);
-
-      if (frontMatter && frontMatter[1]) {
-        // Parse the YAML Front Matter
-        try {
-          metadata = YAML.parse(frontMatter[1]);
-        } catch (error) {
-          console.error("Error parsing YAML Front Matter:", error);
-        }
-      }
-    }
-
-    return metadata;
-  }
-
-
-  </script>
-
-<script>
-  // Prevent default behavior for carousel controls
-  document.getElementById("carousel{{ forloop.index }}").addEventListener("click", function(event) {
-    if (event.target.getAttribute("data-slide") === "prev" || event.target.getAttribute("data-slide") === "next") {
-      event.preventDefault();
-    }
-  });
-</script>
-  
 </div>

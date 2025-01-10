@@ -4,6 +4,7 @@
     "cssclasses": "multitext",
     "tags": "tags",
     "talk-venue": "text",
-    "images": "multitext"
+    "images": "multitext",
+    "attributes": "multitext"
   }
 }

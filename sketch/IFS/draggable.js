@@ -1,7 +1,9 @@
 // Click and Drag an object
-// Daniel Shiffman <http://www.shiffman.net>
+// based on class by Daniel Shiffman <http://www.shiffman.net>
 
 class Draggable {
+
+
 	constructor(x, y) {
 		this.dragging = false; // Is the object being dragged?
 		this.rollover = false; // Is the mouse over the object?
@@ -20,18 +22,22 @@ class Draggable {
 	  	this.y = y;
 	  	this.radius=0.05;
     	this.angle=0; 
+		this.doHide=false;
 		  
 		this.selectRadius=this.radius;
 	  	this.offsetX = 0;
 		this.offsetY = 0;
 		this.magnitude=0.5;
 
+
 		reset();
 	}
   
   over() {
 	// Is mouse over object
-	this.mouse=getMouse(); //get mouse in coordinates [-1,1]^2
+	this.mouse=getCoords(mouseX,mouseY);
+	
+	; //get mouse in coordinates [-1,1]^2
 	if (dist(this.x,this.y,this.mouse.x,this.mouse.y)<this.selectRadius) {
 	  this.rollover = true;
 	} else {
@@ -40,6 +46,8 @@ class Draggable {
   }
   
   update() {
+	this.doHide=hidePoints; //gets hidepoints from main
+	this.dragMode=dragMode;
 	this.scrolling=false;
 	  this.selectRadius=this.radius*2;
 	  // Adjust location if being dragged
@@ -69,47 +77,48 @@ class Draggable {
 	  
   show() {
 	  
-	  
-	  let c;
-	if (this.dragging) {
-	   c=color(230, 237, 28);
-	} else if (this.rollover) {
-	   c=color(162, 232, 23);
-	} else {
-	   c=this.color;
-	}
-	  
-	  push();
-	  translate(this.x,this.y);
-	  scale(this.radius);
-	  
-	  let drawRad=sqrt(this.magnitude);
+	if(!this.doHide){
+		let c=this.color;
+		let bkg=color(BKG);
+		let frg=color("#FFFFFF");
+		if (this.dragging) {
+		c=lerpColor(c,bkg,0.3);
+		} else if (this.rollover) {
+		c=lerpColor(c,frg,0.6)
+		} 
+		
+		push();
+		translate(this.x,this.y);
+		scale(this.radius);
+		
+		let drawRad=sqrt(this.magnitude);
 
-	  if (this.dragging || this.rollover){
-		noStroke();
-		fill(BKG);
-		circle(0,0,1.2);
-	  }
-	  //fill in outside circle
-	  stroke(0);
-	  strokeWeight(0.08);
-	  fill(255);
-	  circle(0,0,1);
-	  
-	  //fill in inside circle
-	  fill(c)
-	  circle(0,0,drawRad);
-	  
-	  //draw line from outside to inside circle 
-	  //line(0,-drawRad/2,0,-1/2);
-	  
-	  //draw rotated line
-	  push();
-		  rotate(this.angle);
-		  line(0,0,0,-1/2);
-	  pop();
-  
-	  pop();
+		if (this.dragging || this.rollover){
+			noStroke();
+			fill(BKG);
+			circle(0,0,1.2);
+		}
+		//fill in outside circle
+		stroke(0);
+		strokeWeight(0.08);
+		fill(FRG);
+		circle(0,0,1);
+		
+		//fill in inside circle
+		fill(c)
+		circle(0,0,drawRad);
+		
+		//draw line from outside to inside circle 
+		//line(0,-drawRad/2,0,-1/2);
+		
+		//draw rotated line
+		push();
+			rotate(this.angle);
+			line(0,0,0,-1/2);
+		pop();
+	
+		pop();
+	}
   
   }
   
@@ -156,7 +165,17 @@ class Draggable {
   }
 	
   isOutsideScreen(){
-	  return (this.x)>width/height||(this.x)<-width/height||(this.y)>1||(this.y)<-1;
+	let outside=false;
+	//if beyond top left
+	let topLeft=getCoords(0,0);
+	let bottomRight=getCoords(width,height);
+	if(this.x<topLeft.x || this.y<topLeft.y){
+		outside=true;
+	} else if (this.x>bottomRight.x || this.y>bottomRight.y){
+		outside=true;
+	}
+
+	return outside;
   }
 	  
   constrainMagnitude(x){
