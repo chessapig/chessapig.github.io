@@ -4,9 +4,13 @@
   <span class="post-meta">{{ project.date | date: date_format }}</span>
 
     {% if project.pageHasContent %}
+
+    {% unless own_Page %}
     <h2><a  href="{{ project.url | relative_url }}">
       {{ project.title | escape }}
     </a></h2 >
+    {% endunless %}
+
     {% else %}
     <h2>{{ project.title | escape }}</h2>
     {% endif %}
@@ -29,8 +33,8 @@
     </p>
     {%- endif -%}
   {%- if project.file -%}
-  <h4> <a  href="{{ project.file}}">
-    Link to file
+  <h4> <a class="icon-link" href="{{ project.file}}">
+    🔗 Link to file
   </a></h4 >
   {%- endif -%}
   {%- if project.sketch-link -%}

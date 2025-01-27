@@ -13,9 +13,9 @@ pageHasContent: true
 
 On the [Illistrating math](https://illustratingmath.org/) discord server, there was discussion about a very dramatic model at [ICTS](https://www.icts.res.in/). 
 
-| <img src="/assets/crafts/stick bombs/3D/ICTS full.png" alt="Model of large, woven geodesic ball, hanging in a hallway" width="600"> |
-| -- |
-| Large woven Geodesic ball at ICTS| 
+| <img src="/assets/crafts/stick bombs/3D/ICTS full.png" alt="Model of large, woven geodesic ball, hanging in a hallway" width="600"> |     |
+| ----------------------------------------------------------------------------------------------------------------------------------- | --- |
+| Large woven Geodesic ball at ICTS                                                                                                   |     |
 
 
 It's made from bamboo slats, held together by zip ties

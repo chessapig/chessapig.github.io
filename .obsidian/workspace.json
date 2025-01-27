@@ -13,26 +13,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/crafts/2024-01-02-weaving.md",
+                "file": "_posts/2025-02-01-gauge.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2024-01-02-weaving"
+              "title": "2025-02-01-gauge"
             }
           },
           {
-            "id": "f56063d21c255229",
+            "id": "2c6c3b86f96e610e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/talks/2024-10-09-Caustics.md",
+                "file": "assets/images/teleman 2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2024-10-09-Caustics"
+              "title": "teleman 2"
             }
           },
           {
@@ -49,8 +49,7 @@
               "title": "2023-05-02-2"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -178,10 +177,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/talks/2024-10-09-Caustics.md"
+                "file": "_posts/2025-02-01-gauge.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of 2024-10-09-Caustics"
+              "title": "Outline of 2025-02-01-gauge"
             }
           }
         ],
@@ -202,53 +201,53 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "f56063d21c255229",
+  "active": "5004cc564f72d480",
   "lastOpenFiles": [
-    "_site/files/presentations_html/caustics/index.html",
-    "_site/files/presentations_html/caustics/assets/thumbnail.jpeg",
-    "_site/files/presentations_html/caustics/assets/player/waiting_bezel.png",
-    "_site/files/presentations_html/caustics/assets/player/spinner.png",
-    "_site/files/presentations_html/caustics/assets/player/pdfjs/web/cmaps/WP-Symbol.bcmap",
-    "_site/files/presentations_html/caustics/assets/player/pdfjs/web/cmaps/V.bcmap",
-    "_site/files/presentations_html/caustics/assets/player/pdfjs/web/cmaps/UniKS-UTF8-V.bcmap",
-    "_site/files/presentations_html/caustics/assets/player/pdfjs/web/cmaps/UniKS-UTF8-H.bcmap",
-    "_site/files/presentations_html/caustics/assets/player/pdfjs/web/cmaps/UniKS-UTF32-V.bcmap",
-    "_site/files/presentations_html/caustics/assets/player/pdfjs/web/cmaps/UniKS-UTF32-H.bcmap",
-    "_site/files/presentations_html/caustics/assets/player/pdfjs/web/cmaps/UniKS-UTF16-V.bcmap",
-    "_site/files/presentations_html/caustics/assets/player/pdfjs/web/cmaps/UniKS-UTF16-H.bcmap",
-    "_site/files/presentations_html/caustics/assets/player/pdfjs/web/cmaps/UniKS-UCS2-V.bcmap",
-    "_site/files/presentations_html/caustics/assets/player/pdfjs/web/cmaps/UniKS-UCS2-H.bcmap",
-    "_site/files/presentations_html/caustics/assets/player/kn-cloud_pd_help_btn-P@2x.png",
-    "_site/files/presentations_html/caustics/assets/player/kn-cloud_pd_help_btn-N@2x.png",
-    "_site/files/presentations_html/caustics/assets/player/kn-cloud_pd_help_btn-H@2x.png",
-    "_site/files/presentations_html/caustics/assets/player/close_p@2x.png",
-    "_site/files/presentations_html/caustics/assets/player/close_n@2x.png",
-    "_site/files/presentations_html/caustics/assets/player/close_hi@2x.png",
-    "_site/files/presentations_html/caustics/assets/FA122F5C-FB94-454E-8A17-42877C323144/thumbnail.jpeg",
-    "_posts/gallery/2021-10-12-Other-art.md",
-    "_posts/talks/2024-10-09-Caustics.md",
-    "_posts/talks/2024-09-16-Caratheodory.md",
-    "_posts/talks/2024-11-18-Kempf-ness.md",
-    "_posts/talks/2024-11-04-Quasihamiltonian.md",
-    "_posts/talks/2023-10-12-TQFT-Jones.md",
-    "_posts/talks/2021-04-23-Kapustin-Witten.md",
-    "_posts/talks/2022-03-03-BPS.md",
-    "_posts/talks/2022-11-04-stick-bombs.md",
-    "_posts/talks/2023-11-15-Quantization.md",
-    "_posts/talks/2023-09-08-G-spaces.md",
-    "_posts/talks/2024-06-14-Manifesting.md",
-    "_posts/talks/2023-05-11-cortex.md",
-    "_posts/talks/2023-01-23-polygons.md",
-    "_posts/2023-01-01-hyperbolic-string-art.md",
-    "_posts/2021-09-25-hyperbolic-band-theory.md",
+    "assets/images/teleman 3.md",
+    "_site/assets/images/teleman 3.md",
+    "_posts/2025-02-01-gauge.md",
+    "assets/images/teleman 2.md",
+    "_site/assets/images/teleman 2.md",
+    "assets/images/teleman 1.md",
+    "_site/assets/images/teleman 1.md",
+    "assets/images/teleman.md",
+    "_site/assets/images/teleman.md",
     "_posts/2023-02-01-Coloumb.md",
+    "_site/assets/images/teleman hiroglyphs.png",
+    "assets/images/teleman hiroglyphs.png",
+    "_site/assets/images/teleman hyroglyphs.png",
+    "assets/images/teleman hyroglyphs.png",
+    "_site/assets/images/Screenshot 2025-01-27 at 12.07.47 PM.png",
+    "assets/images/Screenshot 2025-01-27 at 12.07.47 PM.png",
+    "_site/teaching/TQFT-gauged.html",
+    "_posts/diary/2023-05-02-2.md",
+    "_site/assets/images/gauged_tqft.jpg",
+    "assets/images/gauged_tqft.jpg",
+    "_site/assets/images/3D copy.jpg",
+    "assets/images/3D copy.jpg",
+    "teaching/teaching.md",
+    "code.md",
+    "halloween.md",
+    "assets/images/halloween/horocycle.mp4",
+    "_site/assets/images/halloween/horocycle.mp4",
+    "_posts/blog/2024-01-14-spherical-sticks.md",
+    "_posts/blog/2024-03-02-Fubini-Study.md",
+    "_posts/code/2024-12-16-ifs.md",
+    "_posts/blog/2022-10-23-Colors.md",
+    "diary/10.md",
+    "diary/31.md",
+    "blog.md",
+    "crafts.md",
+    "_site/assets/images/halloween",
+    "assets/images/halloween",
+    "_posts/crafts/2024-01-02-weaving.md",
+    "index.md",
     "_posts/talks/2022-02-04-integrable.md",
-    "_posts/talks/2021-11-23-topological-recursion.md",
-    "_posts/talks/2021-11-23-electromagnetism.md",
-    "_posts/talks/2021-05-07-higgs-bundles-geometric-structures.md",
-    "_posts/talks/2022-03-12-enceladus.md",
-    "_posts/talks/2021-05-05-cobordism.md",
-    "_posts/talks/2021-05-03-kahler-quantization.md",
-    "_posts/talks/2021-04-23-kapustin-witten.md"
+    "_site/halloween.html",
+    "untitled folder",
+    "_site/talks copy.html",
+    "talks copy.md",
+    "_site/files/presentations_html/integrable/index.html",
+    "_site/files/presentations_html/integrable/assets/player/pdfjs/web/cmaps/WP-Symbol.bcmap"
   ]
 }

@@ -1,6 +1,9 @@
+
+{% unless own_Page %}
 <h2><a  href="{{ project.url | relative_url }}">
   {{ project.paper-title | escape }}
 </a></h2>
+{% endunless %}
   <h5>
     <p> {{ project.authors }} <em></em>
       {%- if project.journal -%} 
