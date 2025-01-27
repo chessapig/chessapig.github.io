@@ -29,8 +29,8 @@ Here are classes I've GSI's for (berkeley's name for teaching assistants).
 
 # Organization
 
-- Spring 2023: Organized a [Coloumb branch reading seminar](/teaching/Coloumb)
-
+- Spring 2023:  [Coloumb branch reading seminar](/teaching/Coloumb)
+- Spring 2025:  [reading group on TQFTs and gauge theory](/teaching/TQFT-gauged)
 
 # Mentoring
 Mentor for UC Berkeley directed reading program:
