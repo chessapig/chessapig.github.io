@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/talks/2024-10-14-Biran.md",
+                "file": "_posts/talks/2025-01-31-Ellipse-billiards.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2024-10-14-Biran"
+              "title": "2025-01-31-Ellipse-billiards"
             }
           },
           {
@@ -163,10 +163,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/talks/2024-10-14-Biran.md"
+                "file": "_posts/talks/2025-01-31-Ellipse-billiards.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of 2024-10-14-Biran"
+              "title": "Outline of 2025-01-31-Ellipse-billiards"
             }
           }
         ],
@@ -189,6 +189,8 @@
   },
   "active": "5004cc564f72d480",
   "lastOpenFiles": [
+    "_posts/talks/2024-11-18-Kempf-ness.md",
+    "_posts/talks/2024-10-14-Biran.md",
     "_site/files/presentations/thumbnails/biran.png",
     "files/presentations/thumbnails/biran.png",
     "_site/files/presentations/thumbnails/Screenshot 2025-02-01 at 1.43.20 AM.png",
@@ -205,7 +207,6 @@
     "files/notes/quasihamiltonian.pdf",
     "_site/talk/Biran.html",
     "_posts/talks/2024-09-16-Caratheodory.md",
-    "_posts/talks/2024-10-14-Biran.md",
     "_site/talk/Caratheodory-1.html",
     "_posts/talks/2024-11-04-Quasihamiltonian.md",
     "_posts/talks/2024-10-09-Caustics.md",
@@ -215,9 +216,7 @@
     "files/presentations/thumbnails/pascal_lines.png",
     "_site/assets/images/pascal_lines.png",
     "assets/images/pascal_lines.png",
-    "_site/assets/images/Screenshot 2025-01-31 at 6.59.57 PM.png",
     "_posts/talks/2024-11-18-Kempf-ness 1.md",
-    "_posts/talks/2024-11-18-Kempf-ness.md",
     "_posts/2025-02-01-gauge.md",
     "teaching/teaching.md",
     "assets/images/teleman 3.md",

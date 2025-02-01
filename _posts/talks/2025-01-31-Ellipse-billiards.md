@@ -11,7 +11,7 @@ attributes:
 image: /files/presentations/thumbnails/pascal_lines.png
 file: /files/presentations/ellipse_billiards.pdf
 talk-venue: UC Berkeley Many cheerful facts, spring 2025
-summary: "Imagine playing billiards on an elliptical table. Can you hit the ball so that its trajectory is a triangle? Can every triangle appear as a billiards trajectory in some ellipse? As of 2024, the answer is [Yes](https://arxiv.org/abs/2405.08922). The proof is a lovely tour of 18th century geometry, with a modern (1950's) twist. I'll prove this result, using a menagerie of facts about circles in and around ellipses.  Digressions include: The Poncelet Porism, Pascal's Hexagrammum mysticum, and Hartshorn's beautiful representation of the moduli space of charge 2 instatons with ellipses."
+summary: "Imagine playing billiards on an elliptical table. Can you hit the ball so that its trajectory is a triangle? Can every triangle appear as a billiards trajectory in some ellipse? As of 2024, the answer is [Yes](https://arxiv.org/abs/2405.08922). The proof is a lovely tour of 18th century geometry, with a modern (1950's) twist. I'll prove this result, using a menagerie of facts about circles in and around ellipses.  Digressions include: The Poncelet Porism, Pascal's Hexagrammum mysticum, and Hartshorn's beautiful representation of the moduli space of charge 2 instatons using poncelet ellipses"
 pageHasContent: true
 ---
 Some links:
