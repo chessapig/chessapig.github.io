@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/talks/2025-01-31-Ellipse-billiards.md",
+                "file": "_posts/2025-02-01-gauge.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-01-31-Ellipse-billiards"
+              "title": "2025-02-01-gauge"
             }
           },
           {
@@ -163,10 +163,10 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/talks/2025-01-31-Ellipse-billiards.md"
+                "file": "_posts/2025-02-01-gauge.md"
               },
               "icon": "lucide-list",
-              "title": "Outline of 2025-01-31-Ellipse-billiards"
+              "title": "Outline of 2025-02-01-gauge"
             }
           }
         ],
@@ -189,6 +189,11 @@
   },
   "active": "5004cc564f72d480",
   "lastOpenFiles": [
+    "_posts/talks/2025-01-31-Ellipse-billiards.md",
+    "_site/assets/images/ferns.png",
+    "assets/images/ferns.png",
+    "_site/assets/images/colored.png",
+    "assets/images/colored.png",
     "_posts/talks/2024-11-18-Kempf-ness.md",
     "_posts/talks/2024-10-14-Biran.md",
     "_site/files/presentations/thumbnails/biran.png",
@@ -210,12 +215,7 @@
     "_site/talk/Caratheodory-1.html",
     "_posts/talks/2024-11-04-Quasihamiltonian.md",
     "_posts/talks/2024-10-09-Caustics.md",
-    "_posts/talks/2025-01-31-Ellipse-billiards.md",
     "_posts/talks/2022-11-04-stick-bombs.md",
-    "_site/files/presentations/thumbnails/pascal_lines.png",
-    "files/presentations/thumbnails/pascal_lines.png",
-    "_site/assets/images/pascal_lines.png",
-    "assets/images/pascal_lines.png",
     "_posts/talks/2024-11-18-Kempf-ness 1.md",
     "_posts/2025-02-01-gauge.md",
     "teaching/teaching.md",
