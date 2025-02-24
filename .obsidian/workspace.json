@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/code/2024-12-16-ifs.md",
+                "file": "_posts/2025-02-01-gauge.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2024-12-16-ifs"
+              "title": "2025-02-01-gauge"
             }
           },
           {
@@ -205,6 +205,15 @@
   },
   "active": "188a9165c00118cd",
   "lastOpenFiles": [
+    "files/tqft_notes/langwen.pdf.md",
+    "_posts/2025-02-01-gauge.md",
+    "files/tqft_notes/langwen_annotated.pdf",
+    "files/tqft_notes/langwen annotated.pdf",
+    "files/tqft_notes/slides (annotated).pdf",
+    "files/tqft_notes/langwen.pdf",
+    "files/tqft_notes/slides.pdf",
+    "_posts/2023-02-01-Coloumb.md",
+    "_posts/code/2024-12-16-ifs.md",
     "_posts/talks/2024-06-14-Manifesting.md",
     "_posts/talks/2023-11-15-Quantization.md",
     "_posts/talks/2024-09-16-Caratheodory.md",
@@ -218,11 +227,6 @@
     "_site/files/presentations_html/visualization/assets/player/pdfjs/web/cmaps/WP-Symbol.bcmap",
     "_site/files/presentations_html/visualization/assets/player/pdfjs/web/cmaps/V.bcmap",
     "_site/files/presentations_html/visualization/assets/player/pdfjs/web/cmaps/UniKS-UTF8-V.bcmap",
-    "_site/files/presentations_html/visualization/assets/player/pdfjs/web/cmaps/UniKS-UTF8-H.bcmap",
-    "_site/files/presentations_html/visualization/assets/player/pdfjs/web/cmaps/UniKS-UTF32-V.bcmap",
-    "_site/files/presentations_html/visualization/assets/player/pdfjs/web/cmaps/UniKS-UTF32-H.bcmap",
-    "_site/files/presentations_html/visualization/assets/player/pdfjs/web/cmaps/UniKS-UTF16-V.bcmap",
-    "_site/files/presentations_html/visualization/assets/player/pdfjs/web/cmaps/UniKS-UTF16-H.bcmap",
     "_site/files/presentations_html/visualization/assets/player/kn-cloud_pd_help_btn-P@2x.png",
     "_site/files/presentations_html/visualization/assets/player/kn-cloud_pd_help_btn-N@2x.png",
     "_site/files/presentations_html/visualization/assets/player/kn-cloud_pd_help_btn-H@2x.png",
@@ -231,8 +235,6 @@
     "_site/files/presentations_html/visualization/assets/player/close_n@2x.png",
     "_site/files/presentations_html/visualization/assets/EE900D84-B696-45E4-A0EC-4417E76A7E97/thumbnail.jpeg",
     "_posts/talks/2025-01-31-Ellipse-billiards.md",
-    "_posts/2025-02-01-gauge.md",
-    "_posts/2023-02-01-Coloumb.md",
     "_posts/2023-01-01-hyperbolic-string-art.md",
     "_posts/talks/2020-11-24-lie-theorem.md",
     "_posts/crafts/2024-01-10-Monodromy.md",
@@ -248,8 +250,6 @@
     "teaching/teaching.md",
     "assets/images/teleman 3.md",
     "_site/assets/images/teleman 3.md",
-    "assets/images/teleman 2.md",
-    "_site/assets/images/teleman 2.md",
-    "assets/images/teleman 1.md"
+    "assets/images/teleman 2.md"
   ]
 }
