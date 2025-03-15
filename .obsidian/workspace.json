@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/talks/2025-02-09-Visualization-vistas.md",
+                "file": "_posts/talks/2025-02-27-Matrix-factorizations.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-02-09-Visualization-vistas"
+              "title": "2025-02-27-Matrix-factorizations"
             }
           },
           {
@@ -205,6 +205,16 @@
   },
   "active": "188a9165c00118cd",
   "lastOpenFiles": [
+    "files/presentations/thumbnails/matrix_factorizations.png",
+    "files/presentations/thumbnails/Screenshot 2025-03-14 at 11.40.05 PM.png",
+    "files/presentations/matrix_factorizations.pdf",
+    "files/presentations/matrix factorizations.pdf",
+    "_site/talks/Matrix-factorizations.html",
+    "_site/talks",
+    "_site/talk/Matrix-factorizations.html",
+    "_site/talk/Visualization-vistas-1.html",
+    "_posts/talks/2025-02-09-Visualization-vistas.md",
+    "_posts/talks/2025-02-27-Matrix-factorizations.md",
     "_posts/talks/2024-02-24-Abelian-CS.md",
     "_posts/talks/2024-06-14-Manifesting.md",
     "_site/files/presentations/thumbnails/abelian_CS.jpg",
@@ -217,8 +227,6 @@
     "_site/files/presentations/abelian_CS.pdf",
     "files/presentations/thumbnails/abelain_CS.jpg",
     "files/presentations/thumbnails/chern_simons_talk.jpg",
-    "files/presentations/abelian_CS.pdf",
-    "files/presentations/abelian chern simons copy.pdf",
     "_posts/talks/2023-10-12-TQFT-Jones.md",
     "_posts/talks/2023-11-15-Quantization.md",
     "_posts/talks/2025-01-31-Ellipse-billiards.md",
@@ -235,20 +243,13 @@
     "_posts/crafts/2024-01-10-Gauss-Bonet.md",
     "_posts/2025-02-01-gauge.md",
     "files/tqft_notes/langwen.pdf.md",
-    "files/tqft_notes/langwen_annotated.pdf",
-    "files/tqft_notes/langwen annotated.pdf",
-    "files/tqft_notes/slides (annotated).pdf",
-    "files/tqft_notes/langwen.pdf",
     "_posts/2023-02-01-Coloumb.md",
     "_posts/code/2024-12-16-ifs.md",
     "_posts/talks/2024-09-16-Caratheodory.md",
-    "_posts/talks/2025-02-09-Visualization-vistas.md",
     "_site/files/presentations_html/visualization/assets/thumbnail.jpeg",
     "_site/files/presentations_html/visualization/assets/player/waiting_bezel.png",
     "_site/files/presentations_html/visualization/assets/player/spinner.png",
     "_site/files/presentations_html/visualization/assets/player/kn-cloud_pd_help_btn-P@2x.png",
-    "_site/files/presentations_html/visualization/assets/player/kn-cloud_pd_help_btn-N@2x.png",
-    "_posts/2023-01-01-hyperbolic-string-art.md",
-    "_posts/talks/2020-11-24-lie-theorem.md"
+    "_posts/2023-01-01-hyperbolic-string-art.md"
   ]
 }
