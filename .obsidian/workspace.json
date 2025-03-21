@@ -13,12 +13,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2025-02-01-gauge.md",
+                "file": "_posts/talks/2025-03-19-Asymptotic-holomorphic.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-02-01-gauge"
+              "title": "2025-03-19-Asymptotic-holomorphic"
+            }
+          },
+          {
+            "id": "b47dd5ad9f1b30b2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "files/tqft_notes/seidel.pdf.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "seidel.pdf"
             }
           },
           {
@@ -27,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/talks/2025-02-27-Matrix-factorizations.md",
+                "file": "files/tqft_notes/extending_tqfts.pdf.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-02-27-Matrix-factorizations"
+              "title": "extending_tqfts.pdf"
             }
           },
           {
@@ -49,8 +63,7 @@
               "title": "2023-05-02-2"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -203,53 +216,53 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "188a9165c00118cd",
+  "active": "5004cc564f72d480",
   "lastOpenFiles": [
-    "files/presentations/thumbnails/matrix_factorizations.png",
-    "files/presentations/thumbnails/Screenshot 2025-03-14 at 11.40.05 PM.png",
-    "files/presentations/matrix_factorizations.pdf",
-    "files/presentations/matrix factorizations.pdf",
-    "_site/talks/Matrix-factorizations.html",
-    "_site/talks",
-    "_site/talk/Matrix-factorizations.html",
-    "_site/talk/Visualization-vistas-1.html",
-    "_posts/talks/2025-02-09-Visualization-vistas.md",
-    "_posts/talks/2025-02-27-Matrix-factorizations.md",
-    "_posts/talks/2024-02-24-Abelian-CS.md",
-    "_posts/talks/2024-06-14-Manifesting.md",
-    "_site/files/presentations/thumbnails/abelian_CS.jpg",
-    "files/presentations/thumbnails/abelian_CS.jpg",
-    "_site/talk/Abelian-CS.html",
-    "_site/files/tqft_notes/langwen_annotated.pdf",
-    "_site/files/tqft_notes/langwen.pdf.md",
-    "_site/files/tqft_notes/langwen.pdf",
-    "_site/files/presentations/thumbnails/abelain_CS.jpg",
-    "_site/files/presentations/abelian_CS.pdf",
-    "files/presentations/thumbnails/abelain_CS.jpg",
-    "files/presentations/thumbnails/chern_simons_talk.jpg",
-    "_posts/talks/2023-10-12-TQFT-Jones.md",
-    "_posts/talks/2023-11-15-Quantization.md",
-    "_posts/talks/2025-01-31-Ellipse-billiards.md",
+    "_posts/talks/2024-10-14-Biran.md",
+    "_posts/talks/2025-03-19-Asymptotic-holomorphic.md",
+    "_posts/talks/2025-03-11-Gromov-witten.md",
     "_posts/talks/2024-11-18-Kempf-ness.md",
+    "_posts/talks/2024-11-04-Quasihamiltonian.md",
+    "_posts/talks/2025-02-27-Matrix-factorizations.md",
+    "_posts/talks/2025-01-31-Ellipse-billiards.md",
+    "_posts/talks/2025-02-09-Visualization-vistas.md",
+    "_site/files/presentations/thumbnails/asymptotic_holomorphic.jpeg",
+    "files/presentations/thumbnails/asymptotic_holomorphic.jpeg",
+    "_site/files/presentations/thumbnails/IMG_435EE562908F-1.jpeg",
+    "files/presentations/thumbnails/IMG_435EE562908F-1.jpeg",
+    "_site/files/presentations/asymptotic_holomorphic.pdf",
+    "files/presentations/asymptotic_holomorphic.pdf",
+    "_site/files/presentations/asymptotic holomorphic techniques.pdf",
+    "files/presentations/asymptotic holomorphic techniques.pdf",
+    "_site/talks/Asymptotic-holomorphic.html",
+    "_site/talks/Gromov-witten-1.html",
+    "_posts/talks/2024-02-24-Abelian-CS.md",
+    "_posts/talks/2024-10-09-Caustics.md",
+    "_posts/2025-02-01-gauge.md",
+    "files/tqft_notes/seidel.pdf.md",
+    "_site/files/tqft_notes/seidel.pdf.md",
+    "_site/files/tqft_notes/seidel.png",
+    "files/tqft_notes/seidel.png",
+    "_site/files/tqft_notes/seidel.pdf",
+    "files/tqft_notes/seidel.pdf",
+    "_site/files/seidel.pdf",
+    "files/seidel.pdf",
+    "files/tqft_notes/extending_tqfts.pdf.md",
+    "_site/files/tqft_notes/extending_tqfts.pdf.md",
+    "_posts/talks/2023-10-12-TQFT-Jones.md",
+    "_site/files/presentations/thumbnails/seidel.png",
+    "_site/files/presentations/thumbnails/matrix_factorizations.png",
+    "files/presentations/thumbnails/seidel.png",
+    "files/presentations/thumbnails/Screenshot 2025-03-15 at 2.18.33 AM.png",
+    "_posts/talks/2024-06-14-Manifesting.md",
+    "_site/files/tqft_notes/langwen.pdf.md",
+    "_posts/talks/2023-11-15-Quantization.md",
     "_posts/code/2023-05-31-binary.md",
     "_posts/code/2022-06-05-toric.md",
     "_posts/blog/2022-10-23-Colors.md",
     "_posts/blog/2023-05-14-cortex.md",
     "_posts/blog/2023-02-16-Hyperbolic.md",
     "_posts/blog/2023-12-23-two sphere.md",
-    "_posts/crafts/2024-01-01-polyhera.md",
-    "_posts/crafts/2024-01-10-Nets.md",
-    "_posts/crafts/2024-01-10-Monodromy.md",
-    "_posts/crafts/2024-01-10-Gauss-Bonet.md",
-    "_posts/2025-02-01-gauge.md",
-    "files/tqft_notes/langwen.pdf.md",
-    "_posts/2023-02-01-Coloumb.md",
-    "_posts/code/2024-12-16-ifs.md",
-    "_posts/talks/2024-09-16-Caratheodory.md",
-    "_site/files/presentations_html/visualization/assets/thumbnail.jpeg",
-    "_site/files/presentations_html/visualization/assets/player/waiting_bezel.png",
-    "_site/files/presentations_html/visualization/assets/player/spinner.png",
-    "_site/files/presentations_html/visualization/assets/player/kn-cloud_pd_help_btn-P@2x.png",
-    "_posts/2023-01-01-hyperbolic-string-art.md"
+    "_posts/crafts/2024-01-01-polyhera.md"
   ]
 }
