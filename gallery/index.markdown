@@ -8,14 +8,14 @@ layout: default
 
   <div class="container">
 
-  <div class="d-flex flex-wrap justify-content-between align-items-center mb-2">
+  <div class="d-flex flex-wrap justify-content-between align-items-center mb-2 ml-3">
     <h1 class="mb-0">Gallery</h1>
     <div class="filter-buttons">
       <div class="btn-group" role="group">
         <button type="button" class="btn btn-primary mx-1" data-bs-toggle="button" data-filter="art">Art</button>
         <button type="button" class="btn btn-primary mx-1" data-bs-toggle="button" data-filter="craft">Crafts</button>
         <button type="button" class="btn btn-primary mx-1" data-bs-toggle="button" data-filter="talk">Slides</button>
-        <button type="button" class="btn btn-primary active mx-3" data-bs-toggle="button" data-filter="all">All</button>
+        <button type="button" class="btn btn-primary active ml-4 mr-3" data-bs-toggle="button" data-filter="all">All</button>
       </div>
     </div>
   </div>

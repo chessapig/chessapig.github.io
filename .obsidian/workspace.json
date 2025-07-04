@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/talks/2023-09-08-G-spaces.md",
+                "file": "_posts/crafts/2024-05-14-tensegrity.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "2023-09-08-G-spaces"
+              "title": "2024-05-14-tensegrity"
             }
           },
           {
@@ -205,6 +205,10 @@
   },
   "active": "b47dd5ad9f1b30b2",
   "lastOpenFiles": [
+    "_posts/crafts/2024-01-10-Nets.md",
+    "_posts/gallery/2024-10-31-Mathoween.md",
+    "_posts/gallery/2023-11-12-Mirror-symmetree.md",
+    "_posts/talks/2023-09-08-G-spaces.md",
     "_posts/crafts/2024-05-14-tensegrity.md",
     "_site/assets/crafts/tensegrity/blow.mp4",
     "assets/crafts/tensegrity/blow.mp4",
@@ -212,9 +216,6 @@
     "assets/crafts/tensegrity/drop.mp4",
     "_posts/blog/2024-03-02-Fubini-Study.md",
     "_posts/blog/2024-01-14-spherical-sticks.md",
-    "_posts/gallery/2024-10-31-Mathoween.md",
-    "_posts/gallery/2023-11-12-Mirror-symmetree.md",
-    "_posts/talks/2023-09-08-G-spaces.md",
     "_site/assets/gallery/reduction/red.jpg",
     "assets/gallery/reduction/red.jpg",
     "_site/assets/gallery/reduction/reduction.jpg",
