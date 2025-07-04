@@ -20,9 +20,9 @@ On the [Illistrating math](https://illustratingmath.org/) discord server, there 
 
 It's made from bamboo slats, held together by zip ties
 
-| <img src="/assets/crafts/stick bombs/3D/ICTS vertex.jpg" alt="Close up vertex of large woven ball" width="500"> |
-| -- |
-| Close up of a single vertex of the Geodesic ball at ICTS. (picture thanks to Katherine Strange)| 
+| <img src="/assets/crafts/stick bombs/3D/ICTS vertex.jpg" alt="Close up vertex of large woven ball" width="500"> |     |
+| --------------------------------------------------------------------------------------------------------------- | --- |
+| Close up of a single vertex of the Geodesic ball at ICTS. (picture thanks to Katherine Strange)                 |     |
 
 Do we need the zip ties? Perhaps we can weave the bamboo slats, held together by pure force of will.
 
@@ -146,7 +146,7 @@ Since the strings are holding things in place, its much easier to weave in the t
 
 **My main suggestion:** Pre-bend the sticks!
 
-I don't know to do that. One way is to build the thing and leave it overnight like I did, but thats the chicken and egg paradox. You're clever though, I'm sure you'll figure something out. 
+I don't know the best way to do that. One way is to build the thing and leave it overnight like I did, but thats the chicken and egg paradox. You're clever though, I'm sure you'll figure something out. 
 
 
 </div>

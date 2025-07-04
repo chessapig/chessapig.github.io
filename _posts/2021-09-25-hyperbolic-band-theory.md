@@ -26,7 +26,7 @@ journal: <a href="https://www.sciencedirect.com/science/article/pii/S00018708220
 paper-abstract: Hyperbolic lattices underlie a new form of quantum matter with potential applications to quantum computing and simulation and which, to date, have been engineered artificially. A corresponding hyperbolic band theory has emerged, extending 2-dimensional Euclidean band theory in a natural way to higher-genus configuration spaces. Attempts to develop the hyperbolic analogue of Bloch's theorem have revealed an intrinsic role for algebro-geometric moduli spaces, notably those of stable bundles on a curve. We expand this picture to include Higgs bundles, which enjoy natural interpretations in the context of band theory. First, their spectral data encodes a crystal lattice and momentum, providing a framework for symmetric hyperbolic crystals. Second, they act as a complex analogue of crystal momentum. As an application, we elicit a new perspective on Euclidean band theory. Finally, we speculate on potential interactions of hyperbolic band theory, facilitated by Higgs bundles, with other themes in mathematics and physics.
 pageHasContent: true
 gallery-title: Hyperbolic band theory
-gallery-folder: /gallery/images/crystals/JPEG/
+gallery-folder: /gallery/images/hyperbolic-band-theory/
 ---
 <style>
 img {
