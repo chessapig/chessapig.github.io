@@ -3,6 +3,11 @@ $font-size-base: 1.1rem !default;
 $headings-font-family: "Raleway", serif !default;
 $headings-font-weight: 600;
 
+$body-bg:          #2c2621;
+$body-color:       #e6cfb3;
+$dark:              lighten($body-bg, 10%);
+$mid:              lighten($body-bg, 40%);
+$light:             lighten($body-bg, 80%);
 
 @import "bootstrap/functions";
 @import "bootstrap/variables";
@@ -41,13 +46,12 @@ $back-secondary:      $black;
 $link-color:          #ea925c;
 $link-hover-color:    darken($link-color, 15%);
 $card-bg:               $body-bg;
-$card-border-color:     $light;
+$card-border-color:     $body-color;
 $card-cap-bg:           $dark;
 
 $dropdown-bg:          $body-bg;
 $dropdown-link-hover-color:         lighten($primary,10%);
 $dropdown-link-hover-bg:  $dark;
-
 
 
 

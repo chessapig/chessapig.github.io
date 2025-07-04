@@ -16,7 +16,7 @@ img {
 
 # Teaching
 
-Here Classes I've designed and taught myself. Click the link to see the course page
+Here are classes I've designed and taught myself. Click the link to see the course page
 - Spring 2024:  [Math crafts: How things curve](/teaching/math-crafts)
   - Hands-on introduction to curvature and creative mathematics. Each week, we'd build a arts and crafts project exploring curvature and its many manifestations.  
 - Fall 2021:  [MATH299G: Geometry in physics](/teaching/STIC)

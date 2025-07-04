@@ -36,8 +36,12 @@ img {
 }
 </style>
 
-For a gentle introduction to this project,  see my Twitter threads: [part 1](https://twitter.com/chessapigbay/status/1488375642391470081) and [part 2](https://twitter.com/chessapigbay/status/1489733324054704128)
-  
+- This work is joint with Steve Rayan, and was published in *Advances in mathematics*:
+[Hyperbolic Band Theory Through Higgs Bundles](https://www.sciencedirect.com/science/article/pii/S0001870822004819)
+- You can watch my MSRI talk about this project [here](https://www.msri.org/seminars/26865)
+  - Slides and artwork [here](/files/presentations/hyperbolic_band_theory.pdf)
+- For a gentle introduction, see my Twitter threads: [part 1](https://twitter.com/chessapigbay/status/1488375642391470081) and [part 2](https://twitter.com/chessapigbay/status/1489733324054704128)
+
 
   
 This project explores a bridge between algebraic geometry and condensed matter physics. On the physics end, we consider the quantum physics of hyperbolic crystals. Imagine an electron on a two-dimensional hyperbolic plane, evolving under a potential that is periodic under a set of hyperbolic translations. For example, Fig. 1 shows a regular hyperbolic crystal. The quantum properties come from the spectral theory of an associated periodic Schrodinger operator. We can understand the spectrum much better if we split it according to representations of the symmetries, a technique called *hyperbolic band theory*.

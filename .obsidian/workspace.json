@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/gallery/2023-11-12-Mirror-symmetree.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "2023-11-12-Mirror-symmetree"
+              "title": "README"
             }
           },
           {
@@ -27,26 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/blog/2024-01-14-spherical-sticks.md",
+                "file": "_posts/talks/2023-09-08-G-spaces.md",
                 "mode": "source",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "2024-01-14-spherical-sticks"
-            }
-          },
-          {
-            "id": "188a9165c00118cd",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "files/tqft_notes/extending_tqfts.pdf.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "extending_tqfts.pdf"
+              "title": "2023-09-08-G-spaces"
             }
           },
           {
@@ -63,7 +49,8 @@
               "title": "2023-05-02-2"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -216,53 +203,52 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "5004cc564f72d480",
+  "active": "b47dd5ad9f1b30b2",
   "lastOpenFiles": [
-    "_site/assets/images/symmetree/langlands.jpeg",
-    "assets/images/symmetree/langlands.jpeg",
-    "assets/images/symmetree/reduction.jpg.sb-0390ebe0-vOmiqO",
-    "_site/assets/images/symmetree/reduction.jpg",
-    "assets/images/symmetree/reduction.jpg",
-    "_site/assets/images/symmetree/dimensional reduction.jpg",
-    "assets/images/symmetree/dimensional reduction.jpg",
-    "assets/images/symmetree/4d_twist.jpg.sb-0390ebe0-CiuYbY",
-    "assets/images/symmetree/trunk.jpg.sb-0390ebe0-rmhiul",
-    "_site/assets/images/symmetree/trunk.jpg",
-    "assets/images/symmetree/trunk.jpg",
-    "_site/assets/images/symmetree/4d_twist.jpg",
-    "assets/images/symmetree/4d_twist.jpg",
-    "_site/assets/images/symmetree/4d_twist.jpeg",
-    "_posts/blog/2024-01-14-spherical-sticks.md",
-    "_posts/gallery/2023-11-12-Mirror-symmetree.md",
-    "files/tqft_notes/seidel.pdf.md",
-    "_site/assets/images/symmetree",
-    "assets/images/symmetree/F-yClNvacAAU_41.jpeg.crdownload",
-    "assets/images/symmetree",
-    "assets/images/untitled folder",
-    "_site/art/Mirror-symmetree.html",
-    "_site/2023-11-12-Mirror-symmetree.html",
-    "_posts/gallery/2021-10-12-animalie.md",
-    "gallery/images/symmetree/full copy.jpg.sb-0390ebe0-GTeh6R",
-    "_posts/gallery/Untitled.md",
-    "_posts/talks/2020-11-23-riemann-roch.md",
-    "_posts/talks/2020-11-01-mirror.md",
+    "_posts/crafts/2024-05-14-tensegrity.md",
+    "_site/assets/crafts/tensegrity/blow.mp4",
+    "assets/crafts/tensegrity/blow.mp4",
+    "_site/assets/crafts/tensegrity/drop.mp4",
+    "assets/crafts/tensegrity/drop.mp4",
     "_posts/blog/2024-03-02-Fubini-Study.md",
-    "_posts/talks/2020-11-24-lie-theorem.md",
-    "_posts/talks/2021-05-05-cobordism.md",
-    "gallery/personal/amber/amber.md",
-    "gallery/personal/cozy/cozy.md",
-    "gallery/personal/turtle/turtle.md",
-    "gallery/personal/ollie/ollie.md",
-    "gallery/personal/fuzzy/fuzzy.md",
-    "_posts/talks/2024-10-09-Caustics.md",
-    "_posts/talks/2024-09-16-Caratheodory.md",
-    "_posts/talks/2025-03-19-Asymptotic-holomorphic.md",
-    "_posts/talks/2024-11-18-Kempf-ness.md",
-    "_posts/talks/2022-03-12-enceladus.md",
+    "_posts/blog/2024-01-14-spherical-sticks.md",
+    "_posts/gallery/2024-10-31-Mathoween.md",
+    "_posts/gallery/2023-11-12-Mirror-symmetree.md",
+    "_posts/talks/2023-09-08-G-spaces.md",
+    "_site/assets/gallery/reduction/red.jpg",
+    "assets/gallery/reduction/red.jpg",
+    "_site/assets/gallery/reduction/reduction.jpg",
+    "assets/gallery/reduction/reduction.jpg",
+    "_site/assets/gallery/reduction/unlabeled.jpg",
+    "assets/gallery/reduction/unlabeled.jpg",
+    "_site/talk/G-spaces.html",
+    "_site/2023-09-08-G-spaces.html",
+    "_posts/diary/2023-05-02-2.md",
+    "assets/images/reduction.md",
+    "_site/assets/images/reduction.md",
+    "_site/assets/gallery/reduction/thumbnail.jpg",
+    "assets/gallery/reduction/thumbnail.jpg",
+    "assets/gallery/reduction/reduction copy.jpg.sb-0a2bae58-7hU0mI",
+    "_site/assets/gallery/reduction/reduction copy.jpg",
+    "assets/gallery/reduction/reduction copy.jpg",
+    "_site/assets/gallery/reduction",
+    "_site/assets/gallery",
+    "assets/gallery/reduction",
+    "_posts/talks/2023-05-11-cortex.md",
+    "_posts/talks/2025-03-11-Gromov-witten.md",
+    "_posts/talks/2021-04-23-Kapustin-Witten.md",
+    "_posts/gallery/2023.md",
+    "_posts/talks/2021-05-03-kahler-quantization.md",
     "_posts/talks/2022-02-04-integrable.md",
     "_posts/talks/2021-11-23-topological-recursion.md",
-    "_posts/talks/2021-11-23-electromagnetism.md",
-    "_posts/talks/2021-05-07-higgs-bundles-geometric-structures.md",
-    "_posts/2021-09-25-hyperbolic-band-theory.md"
+    "_posts/talks/2022-03-12-enceladus.md",
+    "_posts/talks/2024-11-18-Kempf-ness.md",
+    "_posts/talks/2024-11-04-Quasihamiltonian.md",
+    "_posts/talks/2024-10-14-Biran.md",
+    "_posts/talks/2025-03-19-Asymptotic-holomorphic.md",
+    "_posts/talks/2025-02-27-Matrix-factorizations.md",
+    "_posts/talks/2023-11-15-Quantization.md",
+    "_posts/crafts/2024-01-10-Gauss-Bonet.md",
+    "_posts/talks/2020-11-24-lie-theorem.md"
   ]
 }

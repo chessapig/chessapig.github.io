@@ -46,7 +46,7 @@ show_sidebar: false
 
   <div class="col-md-8 mb-4">
     <h1>Hello!</h1>
-    <p>  I am a third year mathematics PhD student at UC Berkeley, advised by Constantin Teleman. I'm interested in physical mathematics, especially its intersections with geometry and topology. <br/>
+    <p>  I'm Elliot Kienzle, a third year mathematics PhD student at UC Berkeley, advised by Constantin Teleman. I'm interested in physical mathematics, especially its intersections with geometry and topology. <br/>
 	<h2>Math </h2>
 	<p> I like geometry in whatever form it may take. Right now I'm primarily a symplectic geometer. I'm currently studying symplectic ball packing through the lens of quantum mechanics. Here are some words which I think about a lot:
   

@@ -28,7 +28,7 @@
   <body class="d-flex flex-column">
     <header>
       <nav class="navbar navbar-expand-md navbar-dark bg-gradient mb-5">
-      <a class="navbar-brand" href="/">Elliot Kienzle</i></a>
+      <a class="navbar-brand" href="/">Chessapig</i></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -38,6 +38,10 @@
 
           <li class="nav-item {% if page.url == "/about" %}active{% endif %}">
             <a class="nav-link" href="/">About <span class="sr-only">(current)</span></a>
+          </li>
+
+          <li class="nav-item {% if page.url == "/gallery" %}active{% endif %}">
+            <a class="nav-link" href="/gallery">Gallery <span class="sr-only">(current)</span></a>
           </li>
 
           <li class="nav-item dropdown ">
@@ -51,26 +55,15 @@
               <li class="nav-item {% if page.url == "/talks" %}active{% endif %}">
                 <a class="nav-link" href="/talks">Talks</a>
               </li>
-              </ul>
+              <li class="nav-item {% if page.url == "/teaching" %}active{% endif %}">
+                <a class="nav-link" href="/teaching">Teaching</a>
+              </li>
+            </ul>
           </li>
 
-          <li class="nav-item {% if page.url == "/about" %}active{% endif %}">
-            <a class="nav-link" href="/teaching">Teaching <span class="sr-only">(current)</span></a>
-          </li>
-
-
-          <li class="nav-item dropdown ">
-            <a class="nav-link dropdown-toggle" href="/gallery" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Artistic
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-              <li class="nav-item {% if page.url == "/gallery" %}active{% endif %}">
-                <a class="nav-link" href="/gallery">Gallery</a>
-              </li>
-              <li class="nav-item {% if page.url == "/code" %}active{% endif %}">
-                <a class="nav-link" href="/code">Code</a>
-              </li>
-              </ul>
+         
+          <li class="nav-item {% if page.url == "/code" %}active{% endif %}">
+            <a class="nav-link" href="/code">Code</a>
           </li>
 
           <li class="nav-item dropdown ">

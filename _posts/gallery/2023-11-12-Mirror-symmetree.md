@@ -6,29 +6,30 @@ categories: art
 tags:
   - gallery
   - blog
+  - art
 attributes: 
 image: /gallery/images/symmetree/thumbnail.jpg
 file: 
-summary: 'The mirror symme-tree is a portrait of the field of math known as mirror symmetry. In the search for a theory of everything, physicists discovered mirror symmetry which posits that two different physical theories are dual to one another. For mathematicians, this duality builds an unexpected bridge between unrelated fields of math. The mirror symme-tree illustrates the mathematical structures and relationships from the eponymous field. '
+summary: "The mirror symme-tree is a portrait of the field of math known as mirror symmetry. In the search for a theory of everything, physicists discovered mirror symmetry which posits that two different physical theories are dual to one another. For mathematicians, this duality builds an unexpected bridge between unrelated fields of math. The mirror symme-tree illustrates the mathematical structures and relationships from the eponymous field. "
 pageHasContent: true
 gallery-title: Mirror Symme-tree
 gallery-folder: /gallery/images/symmetree
 gallery-captions:
   - image: 1full
-    title: "The Mirror Symme-tree"
-    caption: "The full mirror symme-tree"
+    title: The Mirror Symme-tree
+    caption: The full mirror symme-tree
   - image: 2d
-    title: "2D mirror symmetry"
-    caption: 'A snapshot of $2D$ mirror symmetry, the classic type of mirror symmetry. The target is a Kahler manifold. On the A-side, we detect the symplectic structure, measured through the fukaya category. On the B-side, we detect the complex structure, measured through the derived category of coherent sheaves.'
+    title: 2D mirror symmetry
+    caption: A snapshot of $2D$ mirror symmetry, the classic type of mirror symmetry. The target is a Kahler manifold. On the A-side, we detect the symplectic structure, measured through the fukaya category. On the B-side, we detect the complex structure, measured through the derived category of coherent sheaves.
   - image: 3d
-    title: "3D mirror symmetry"
-    caption: 'A snapshot of 3D mirror symmetry. Now the target is a Hyperkahler manifold. Both the A and B side have boundary conditions which are holomorphic lagrangian submanifolds. The TQFT counts 3-manifolds stretching between the boundary conditions, satisfying certian equations. On the B-side, these maps are all constant. On the A-side, the maps solve the Feurter equations.'
+    title: 3D mirror symmetry
+    caption: A snapshot of 3D mirror symmetry. Now the target is a Hyperkahler manifold. Both the A and B side have boundary conditions which are holomorphic lagrangian submanifolds. The TQFT counts 3-manifolds stretching between the boundary conditions, satisfying certian equations. On the B-side, these maps are all constant. On the A-side, the maps solve the Feurter equations.
   - image: leafs
-    title: "The trunk of the mirror symme-tree"
-    caption: 'The underlying physical strucutre which mirror symmetry lives utop. This shows the cascade of boundary theories from the $4D, \mathcal{N}=4$ supersymmetric yang-mills, down from $4D$ to $3D$, $2D$, and $1D$ theories. each of these have an A and B model, counting maps into manifolds with different geometric structures. '
+    title: The trunk of the mirror symme-tree
+    caption: "The underlying physical strucutre which mirror symmetry lives utop. This shows the cascade of boundary theories from the $4D, \\mathcal{N}=4$ supersymmetric yang-mills, down from $4D$ to $3D$, $2D$, and $1D$ theories. each of these have an A and B model, counting maps into manifolds with different geometric structures. "
   - image: shadow
-    title: "The dimensional reduction shadow"
-    caption: "Dimensionally reducing by $S^1$, the tree has a shadow. Each branch of the tree becomes a new TQFT one dimension lower. Here, symplectic duality relates sheaves living utop the higgs and coloumb branches of the theory. The sheaves are represented by the snake critters."
+    title: The dimensional reduction shadow
+    caption: Dimensionally reducing by $S^1$, the tree has a shadow. Each branch of the tree becomes a new TQFT one dimension lower. Here, symplectic duality relates sheaves living utop the higgs and coloumb branches of the theory. The sheaves are represented by the snake critters.
 ---
 Math lives atop a scaffolding of physics. Physicists organize the world into a hierarchy of quantum field theories, which I conceive as a great tree. Mathematical critters populate the branches, reflecting the structures and symmetries of the underlying physics. There is a mysterious duality between the wide-spreading branches,  hinting at an unexpected kinship between critters living in disparate areas of math.  Welcome to the mirror symme-tree.
 
