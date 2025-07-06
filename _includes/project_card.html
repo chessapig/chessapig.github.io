@@ -17,7 +17,11 @@
 
     <div class="tags">
       {% for tag in project.tags %}
-        <span class="tag">{{ tag }}</span>
+        {% if tag == "math-crafts-class" %}
+          <span class="tag"><a href="/teaching/math-crafts" >Math Crafts Class</a></span>
+        {% else %}
+          <span class="tag">{{ tag }}</span>
+        {% endif %}
       {% endfor %}
     </div>
     <p><h4>Summary:</h4> {{ project.summary | markdownify }}</p>

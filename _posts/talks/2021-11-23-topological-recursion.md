@@ -16,5 +16,5 @@ talk-venue: <a href="https://www.youtube.com/watch?v=5AqN2fjE1Ko"> UMD RIT in ge
 summary: How do rainbows relate to quantum gravity, random matricies, and WKB analysis? Im glad you asked. These all have underlying recursive formula, based on cutting up riemann surfaces into pairs of pants. These various types of 'topological recursion' were unified by Eynard and Orantin, relating each recursive structure to a spectral curve of a simple polynomial.
 pageHasContent: false
 gallery-title: Topological recursion
-gallery-folder: /gallery/images/topologicalrecursion
+gallery-folder: /assets/gallery/topologicalrecursion
 ---

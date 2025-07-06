@@ -16,7 +16,10 @@ gallery-folder: /assets/images/halloween/gallery
 gallery-captions:
   - image: 1horus
     title: "2024: The Horuse"
-    caption: Is it a horse? Or is it a torus?
+    caption: |
+      Is it a horse? Or is it a torus?
+      
+      Catch the special appearence of drew, dressed as Micheal Kielstra, and Micheal Keelstra, dressed as Micheal Kielstra. (I was in the front of the horuse and not able to see, so I had no idea we got photobombed until seeing the picture a couple days later)
   - image: 2skeleton
     title: "2024: The Horuse skeleton"
     caption: The horuse skeleton was an innovative construction, a torus woven out of plastic tubing, held together by friction.

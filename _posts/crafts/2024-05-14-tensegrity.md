@@ -13,7 +13,7 @@ gallery-title: Pool noodle tensegrity
 gallery-folder: /assets/crafts/tensegrity/gallery
 gallery-captions:
 ---
-This shape is fun because it can fold flat! See in the gallery below. The folding mechanism is the same as one of those origami boxes.  Here's a video of me dropping the tensegrity from the second story:
+This shape is fun because it can fold flat! See in the gallery below. The folding mechanism is the same as one of those [origami boxes](https://www.youtube.com/watch?v=4Uun0xtEAPo&ab_channel=OrigamiEasy).  Here's a video of me dropping the tensegrity from the second story:
 <div class="text-center mb-4">
 <video class="img-fluid"
 		style="max-height: 90vh; width: auto;"

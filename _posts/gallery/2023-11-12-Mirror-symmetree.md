@@ -8,12 +8,12 @@ tags:
   - blog
   - art
 attributes: 
-image: /gallery/images/symmetree/thumbnail.jpg
+image: /assets/gallery/symmetree/thumbnail.jpg
 file: 
 summary: "The mirror symme-tree is a portrait of the field of math known as mirror symmetry. In the search for a theory of everything, physicists discovered mirror symmetry which posits that two different physical theories are dual to one another. For mathematicians, this duality builds an unexpected bridge between unrelated fields of math. The mirror symme-tree illustrates the mathematical structures and relationships from the eponymous field. "
 pageHasContent: true
 gallery-title: Mirror Symme-tree
-gallery-folder: /gallery/images/symmetree
+gallery-folder: /assets/gallery/symmetree
 gallery-captions:
   - image: 1full
     title: The Mirror Symme-tree
@@ -33,7 +33,7 @@ gallery-captions:
 ---
 Math lives atop a scaffolding of physics. Physicists organize the world into a hierarchy of quantum field theories, which I conceive as a great tree. Mathematical critters populate the branches, reflecting the structures and symmetries of the underlying physics. There is a mysterious duality between the wide-spreading branches,  hinting at an unexpected kinship between critters living in disparate areas of math.  Welcome to the mirror symme-tree.
 
-| <img src="/gallery/images/symmetree/1full.jpg" alt="Large vibrant tree, full of arrows and critters. There are many signs with math words on them" width="700"> |
+| <img src="/assets/gallery/symmetree/1full.jpg" alt="Large vibrant tree, full of arrows and critters. There are many signs with math words on them" width="700"> |
 | -- |
 | The mirror symme-tree | 
 
@@ -58,7 +58,7 @@ There are two ways to make a theory topological, the A and [B twists](https://ww
 
 Consider a 2-dimensional universe. In an A-twisted theory, the fields are valued in a symplectic manifold (see [my thread on twitter](https://x.com/chessapigbay/status/1702889486567514280)), and the partition function counts J-holomorphic curves, 2-dimensional soap films stretching across our symplectic manifold. In contrast, the fields in a B-twisted theory are valued in a complex manifold, and the partition function measures its topology (hodge theory).  Can we use physics to help compute these numbers?
 
-| <img src="/gallery/images/symmetree/2d.jpg" alt="Subslice of the tree, titled 2D mirror symmetry. Has two branches, which both exapnd from a central trunk and embed into a clump of leaves. The branches are labeled by the A and B twist, and contain sings saying, fukaya and categorey of coherent sheaves respectivly." width="700"> |
+| <img src="/assets/gallery/symmetree/2d.jpg" alt="Subslice of the tree, titled 2D mirror symmetry. Has two branches, which both exapnd from a central trunk and embed into a clump of leaves. The branches are labeled by the A and B twist, and contain sings saying, fukaya and categorey of coherent sheaves respectivly." width="700"> |
 | -- |
 | the 2D section of the mirror symme-tree. Notice how the "A-model" branch maps into "holomorphic curves" living in a symplectic manifold (the blob of leaves) | 
 
@@ -67,7 +67,7 @@ Yes we can, and it's a bombshell. Mirror symmetry says that every A-twisted theo
 
 **☡ Warning ☡:** the "2D" in 2D mirror symmetry is about the dimension of the spacetime, not the auxiliary symplectic manifold. The theory is  2 dimensional because it probes the manifold of fields with a 2 dimensional curve. Similarly, 3D mirror symmetry studies special 3D sub-manifolds.
 
-| <img src="/gallery/images/symmetree/3d.jpg" alt="Subslice of the tree, titled 3D mirror symmetry. Has two branches, which both exapnd from a central trunk and embed into a clump of leaves. The branches are labeled by the A and B twist. this time, the central blob has mushroom shapes labeled 'holomorphic lagrangians' " width="700"> |
+| <img src="/assets/gallery/symmetree/3d.jpg" alt="Subslice of the tree, titled 3D mirror symmetry. Has two branches, which both exapnd from a central trunk and embed into a clump of leaves. The branches are labeled by the A and B twist. this time, the central blob has mushroom shapes labeled 'holomorphic lagrangians' " width="700"> |
 | -- |
 | the 3D section of mirror symmetry. Note that now the A-model maps into "Feuter". This describes the special 3D submanifolds of interest.  | 
 
@@ -83,7 +83,7 @@ Each dimension up has its own A and B twists, which count maps of spacetime into
 - 2D quantum field theories map into Kahler manifolds (both symplectic, Riemannian, and complex)
 - 3D quantum field theories map into hyperKahler manifolds (which are based on the  quaternions)
 
-| <img src="/gallery/images/symmetree/leafs.jpg" alt="Tree with branches and leaves but no critters living utop" width="400"> |
+| <img src="/assets/gallery/symmetree/leafs.jpg" alt="Tree with branches and leaves but no critters living utop" width="400"> |
 | -- |
 | Utop the central trunk, there are branches at each dimension for A and B twists. Each dimension has its own target manifold, the blob of leaves in the center of the tree. As we move up the tree, the geometric structure on the target leaves gets more and more complicated. In 1 dimension, the A and B twists target different manifolds from eachother. | 
 
@@ -95,7 +95,7 @@ The partition function is more than just a number, for It encodes information of
 
 For example, remember how the 2D A-twist counts maps into a symplectic manifold? The full information counts maps with specified boundary conditions. In a symplectic manifold, the correct boundaries of a J-holomorphic curve are nice sub-manifold called Lagrangians. The category associated to this quantum field theory is called the Fukaya category, and it counts strips between two specified Lagrangians.  
 
-| <img src="/gallery/images/symmetree/2d.jpg" alt="Subslice of the tree, titled 2D mirror symmetry. Has two branches, which both exapnd from a central trunk and embed into a clump of leaves. The branches are labeled by the A and B twist, and contain sings saying, fukaya and categorey of coherent sheaves respectivly." width="700"> |
+| <img src="/assets/gallery/symmetree/2d.jpg" alt="Subslice of the tree, titled 2D mirror symmetry. Has two branches, which both exapnd from a central trunk and embed into a clump of leaves. The branches are labeled by the A and B twist, and contain sings saying, fukaya and categorey of coherent sheaves respectivly." width="700"> |
 | -- |
 | 2D mirror symmetry again. The Lagrangians or coherent sheaves are rendered as mushrooms living on the tree. After all, they are boundary conditions. The A and B models are sigma models, mapping the central 2D trunk into the bulk of a symplectic manifold. The branches themselves splay out in a 2D way into the leaves, ending on the mushroom boundaries. On the B-side, the branches converge in a point. On the A-side, an inchworm stretches a 2D web between the two boundary conditions. This is the 'strings' of string theory, stretching between two Lagrangain branes. | 
 
@@ -110,7 +110,7 @@ We can reduce dimension in another way, wrapping one direction into a vanishingl
 
 If we probe a 3D theory with little vortices (the acorns), and send them down to the shadow, it quantizes the manifolds defining the theory. Mirror symmetry manifests as an equivalence of the categories of these quantizations (See [this paper](https://arxiv.org/abs/1603.08382)).  These little snakes hail from from geometric representation theory. They represent sheaves living on the shadows of two manifolds associated to a 3D theory. These manifolds are called the Higgs and Coloumb branch. 3D mirror symmetry predicts these manifolds are dual to one another, a strange relationship called symplectic duality. All this is a 2D shadow of true 3D mirror symmetry. 
 
-| <img src="/gallery/images/symmetree/shadow.jpg" alt="Shadow of the symme-tree. On the left, the higgs branch. On the right, the coloumb branch. These are related by deformation quantization and symplectic duality. utop the shadow lives a number of snake creatures" width="600"> |
+| <img src="/assets/gallery/symmetree/shadow.jpg" alt="Shadow of the symme-tree. On the left, the higgs branch. On the right, the coloumb branch. These are related by deformation quantization and symplectic duality. utop the shadow lives a number of snake creatures" width="600"> |
 | -- |
 | The 2D shadow of 3D mirror symmetry.  | 
 

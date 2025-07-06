@@ -6,13 +6,32 @@ categories: craft
 tags:
   - craft
   - math-crafts-class
+  - gallery
 week: 5
-image: /assets/crafts/hyperbolic origami/hypar.jpeg
+image: /assets/crafts/hyperbolic origami/gallery/thumbnail.jpg
 summary: "*Craft:* Create origami models of hyperbolic space.
 
 
 *Math:* examine how to approximate negative curvature using zero-curvature paper. Understand negative curvature as an excess of space, and as a deficet of angles."
 pageHasContent: true
+gallery-title: Hyperbolic origami
+gallery-folder: /assets/crafts/hyperbolic origami/gallery
+gallery-captions:
+  - image: hypar
+    title: "folded hyperbolic paraboloid"
+    caption: "A hyperbolic paraboloid, folded from a square. This is a classic bit of origami, helped along with some pre-creasing. For details on its construction, see the page above."
+  - image: hycircle1
+    title: "The hycircle"
+    caption: |
+      By accordian folding along circular creases, the paper forms into a pringle shape. Cutting out the center results in a organic form that contorts around itself. This is only possible with pre-creasing, see text for details. 
+  - image: hycircle2
+    title: "The hycircle"
+    caption: |
+      With tigher spacing of creases, the resulting creased form curves more tightly
+  - image: hyheart
+    title: "A hyperbolic heart"
+    caption: |
+      Accordian folding parralel creases can make any shape hyperbolic. Here, the technique is applied to a heart shape. The places where the boundary curves more tightly are more contorted in 3 dimensional space. For more complicated shapes, more of the middle needs to be removed for the shape to be able to become itself.
 ---
 # Summary
 
@@ -48,12 +67,12 @@ In total, for a class of 12, I printed 20 of each template.
 
 <div class="card" >
     <h4 class="card-header">
-        <a data-toggle="collapse" href="#collapse-8" aria-expanded="true" aria-controls="collapse-example" id="heading-example" class="d-block">
+        <a data-toggle="collapse" href="#collapse-01" aria-expanded="true" aria-controls="collapse-example" id="heading-example" class="d-block">
             <i class="fa fa-chevron-down pull-right"></i>
             History of curved origami
         </a>
     </h4>
-    <div id="collapse-8" class="collapse show" aria-labelledby="heading-example">
+    <div id="collapse-01" class="collapse show" aria-labelledby="heading-example">
         <div class="card-body" markdown="1">
 Though origami is an old art, it is rare to have written sources of origami patterns from long ago. Most sources are not much older than the 1980s, when a modern origami renaissance was spurred by mathematical design principles. People just didn't right down very much. The two models above are the exception which proves the rule. Both the hypar and the curved sculpture have sources dating back to a paper study class taught at Bauhaus in 1927-1928. 
 
@@ -78,16 +97,16 @@ Fold the hyperbolic paraboloid in the handout. (courtesy of Thomas Hull's book *
 [Link to Handout](/assets/crafts/hyperbolic origami/hypar handout.pdf)
 
 
-**Question:** squint your eyes, think about the surface approximated by the corrugated, folded paper. What is the gaussian curvature at the center? What about at another point?
+**Question 1:** squint your eyes, think about the surface approximated by the corrugated, folded paper. What is the gaussian curvature at the center? What about at another point?
 
 <div class="card" >
     <h4 class="card-header">
-        <a data-toggle="collapse" href="#collapse-1" aria-expanded="true" aria-controls="collapse-example" id="heading-example" class="d-block">
+        <a data-toggle="collapse" href="#collapse-02" aria-expanded="true" aria-controls="collapse-example" id="heading-example" class="d-block">
             <i class="fa fa-chevron-down pull-right"></i>
             Answer
         </a>
     </h4>
-    <div id="collapse-1" class="collapse hide" aria-labelledby="heading-example">
+    <div id="collapse-02" class="collapse hide" aria-labelledby="heading-example">
         <div class="card-body" markdown="1">
 The surface looks an awful lot like a hyperbolic paraboloid, the graph $z= x^2 + y^2$. This is the shape of a saddle or a Pringle. In particular,  the principal directions of the center point follow the diagonals of the paper. One diagonal has positive curvature, the other has negative curvature. So, the gaussian curvature is negative. Around any other point, the gaussian curvature is also negative. 
 
@@ -102,7 +121,7 @@ The surface looks an awful lot like a hyperbolic paraboloid, the graph $z= x^2 +
 
 
 
-**Question:** This shape is close to something called a hyperbolic paraboloid.  This is named after two shapes: the *parabola* and the *hyperbola* (shown below). Can you find two hidden parabolas inside the origami you just made? Can you find a hyperbola?
+**Question 2:** This shape is close to something called a hyperbolic paraboloid.  This is named after two shapes: the *parabola* and the *hyperbola* (shown below). Can you find two hidden parabolas inside the origami you just made? Can you find a hyperbola?
 
 <div class="text-center">
 <img src="/assets/crafts/hyperbolic origami/hyperbola vs parabola.png" alt="paper model of octahedron" height="300" >
@@ -111,12 +130,12 @@ The surface looks an awful lot like a hyperbolic paraboloid, the graph $z= x^2 +
 
 <div class="card" >
     <h4 class="card-header">
-        <a data-toggle="collapse" href="#collapse-1" aria-expanded="true" aria-controls="collapse-example" id="heading-example" class="d-block">
+        <a data-toggle="collapse" href="#collapse-03" aria-expanded="true" aria-controls="collapse-example" id="heading-example" class="d-block">
             <i class="fa fa-chevron-down pull-right"></i>
             Answer
         </a>
     </h4>
-    <div id="collapse-1" class="collapse hide" aria-labelledby="heading-example">
+    <div id="collapse-03" class="collapse hide" aria-labelledby="heading-example">
         <div class="card-body" markdown="1">
  *Pedagogical note:* Some people may get stuck here. Once everyone has constructed the hyperbolas, bring the class together and discuss.
  
@@ -127,7 +146,7 @@ To see the hyperbola, imagine an island shaped like the hyperbolic paraboloid. T
 
 
 
-**Question: a** Last class, we saw that a sheet of paper, no matter how it is bent or folded, always has zero gaussian curvature. Yet, we have made something with nonzero gaussian curvature. How is this possible? What changed? (This is a subtle question. Talk about it a few minutes before moving on.)
+**Question: 2a** Last class, we saw that a sheet of paper, no matter how it is bent or folded, always has zero gaussian curvature. Yet, we have made something with nonzero gaussian curvature. How is this possible? What changed? (This is a subtle question. Talk about it a few minutes before moving on.)
 
 <div class="card" >
     <h4 class="card-header">
@@ -144,7 +163,7 @@ When we made the zero curvature statement, we assumed that the paper did not rip
 </div>
 <br>
 
-**Question: b**  Fold the hypar to its most extreme position, bringing its tips together. Are the paper faces flat? Are there any parts of the hypar where the paper looks particularly bent out of shape? What about in less extreme positions?
+**Question: 2b**  Fold the hypar to its most extreme position, bringing its tips together. Are the paper faces flat? Are there any parts of the hypar where the paper looks particularly bent out of shape? What about in less extreme positions?
 
 <div class="card" >
     <h4 class="card-header">

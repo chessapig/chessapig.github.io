@@ -6,6 +6,7 @@
 
 <div class="gallery" data-tags="{{ project.attributes }}" style="display: flex; flex-direction: column; align-items: center;">
 
+
 {%- if project.gallery-folder -%}
   {%- assign image_folder = project.gallery-folder -%}
   {%- assign image_files = "" | split: "" -%}
@@ -18,12 +19,49 @@
     {%- endif -%}
   {%- endfor -%}
 
-  {%- if image_files.size > 0 -%}
+
+  {% assign captioned_images = "" | split: "" %}
+  {% assign uncaptioned_images = "" | split: "" %}
+
+  {%- for caption in project.gallery-captions -%}
+    {% assign found = "" %}
+    {% for image in image_files %}
+      {% assign basename = image | split: "/" | last | split: "." | first %}
+      {% if basename == caption.image %}
+        {% assign found = image %}
+      {% endif %}
+    {% endfor %}
+    {% if found != "" %}
+      {% assign captioned_images = captioned_images | push: found %}
+    {% endif %}
+  {% endfor %}
+
+
+
+  {%- for image in image_files -%}
+    {% assign basename = image | split: "/" | last | split: "." | first %}
+    {% assign is_captioned = false %}
+    {% for caption in project.gallery-captions %}
+      {% if caption.image == basename %}
+        {% assign is_captioned = true %}
+      {% endif %}
+    {% endfor %}
+    {% unless is_captioned %}
+      {% assign uncaptioned_images = uncaptioned_images | push: image %}
+    {% endunless %}
+  {% endfor %}
+
+  {% assign ordered_images = captioned_images | concat: uncaptioned_images %}
+
+  <script> console.log({{ ordered_images |jsonify }})</script>
+
+
+  {%- if ordered_images.size > 0 -%}
   <div class="gallery-image">
 
       <div id="carousel" class="carousel slide" data-interval="false" style="max-width: 100%; max-height: 100%; overflow: hidden;">
         <div class="carousel-inner" style="height: 75vh">
-          {% for image in image_files %}
+          {% for image in ordered_images %}
           <div class="carousel-item {% if forloop.first %}active{% endif %}" data-caption-id="caption-{{ forloop.index0 }}"
               style="aspect-ratio: 16 / 9; height: auto"> 
             <!-- Set max dimensions for the image and ensure no cropping -->
@@ -44,7 +82,7 @@
 
         <!-- Indicators -->
         <ol class="carousel-indicators">
-          {%- for image in image_files -%}
+          {%- for image in ordered_images -%}
             <li data-target="#carousel{{ forloop.parentloop.index }}" data-slide-to="{{ forloop.index0 }}" {% if forloop.first %}class="active"{% endif %}></li>
           {%- endfor -%}
         </ol>
@@ -56,18 +94,15 @@
 <!-- Captions Section -->
 <div id="carousel-captions" class="mt-3">
   
-  {% for image in image_files %}
- 
-  {% assign filename = image %}
-  {% assign imagePath = filename | split: '.' | first %}
-  {% assign imageName = imagePath | split: '/' | last %}
 
   
-
+  
+  {% for image in ordered_images %}
+  {% assign basename = image | split: "/" | last | split: "." | first %}
 
   <div class="carousel-caption-text" id="caption-{{ forloop.index0 }}" style="{% unless forloop.first %}display:none;{% endunless %}">
     {% for caption in project.gallery-captions %}
-    {%- if imageName contains caption.image -%}
+    {%- if basename == caption.image -%}
     <div style="display: flex; justify-content: center; align-items: center;" class = "mb-0">
       <h3>{{ caption.title }}</h3>
     </div>
