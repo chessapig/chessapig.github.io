@@ -13,12 +13,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/crafts/2024-01-05-hyperbolic-origami.md",
+                "file": "_posts/talks/2024-10-09-Caustics.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "2024-01-05-hyperbolic-origami"
+              "title": "2024-10-09-Caustics"
+            }
+          },
+          {
+            "id": "f772a17130f9efdd",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_posts/gallery/2021-08-29-banner.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "2021-08-29-banner"
             }
           },
           {
@@ -27,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/diary/2023-05-02-2.md",
+                "file": "_posts/crafts/2025-02-16-torus-collection.md",
                 "mode": "source",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "2023-05-02-2"
+              "title": "2025-02-16-torus-collection"
             }
           }
         ]
@@ -190,50 +204,51 @@
   },
   "active": "b47dd5ad9f1b30b2",
   "lastOpenFiles": [
-    "_posts/crafts/2024-01-06-curved-origami.md",
-    "_posts/crafts/2024-01-05-hyperbolic-origami.md",
+    "_site/assets/gallery/caustics/table.jpeg",
+    "assets/gallery/caustics/table.jpeg",
+    "assets/gallery/caustics/threeDimensionalTable.jpeg.sb-0a2bae58-L6aj5x",
+    "_site/assets/gallery/caustics/threeDimensionalTable.jpeg",
+    "assets/gallery/caustics/threeDimensionalTable.jpeg",
+    "_site/assets/gallery/caustics/string1.jpeg",
+    "assets/gallery/caustics/string1.jpeg",
+    "_posts/gallery/2021-08-29-banner.md",
+    "_posts/talks/2024-10-09-Caustics.md",
+    "_site/assets/gallery/caustics/gallery/threeDimensional.jpeg",
+    "assets/gallery/caustics/gallery/threeDimensional.jpeg",
+    "_site/assets/gallery/caustics/gallery/3D.jpeg",
+    "assets/gallery/caustics/gallery/3D.jpeg",
+    "_site/assets/gallery/caustics/gallery/string2.jpeg",
+    "_site/talk/Caustics.html",
+    "_site/2024-10-09-Caustics.html",
+    "_posts/crafts/2025-02-16-torus-collection.md",
+    "_posts/diary/2023-05-02-2.md",
+    "_site/assets/gallery/caustics/gallery/swallowtail.mp4",
+    "_site/assets/gallery/caustics/gallery/hyperbolic_umbilic.mp4",
+    "_site/assets/gallery/caustics/gallery/elliptic_umbilic.mp4",
+    "_site/assets/gallery/caustics/gallery",
+    "assets/gallery/caustics/gallery/elliptic_umbilic.mp4",
+    "assets/gallery/caustics/gallery/swallowtail.mp4",
+    "assets/gallery/caustics/gallery/hyperbolic_umbilic.mp4",
+    "_posts/crafts/2024-01-01-polyhera.md",
+    "_posts/gallery/2021-10-12-animalie.md",
+    "_posts/gallery/2024-10-31-Mathoween.md",
+    "_posts/crafts/2024-09-14-paper-strips.md",
     "_posts/crafts/2024-01-03-hyperbolic-flexor.md",
-    "_posts/crafts/2024-01-02-weaving.md",
-    "_site/assets/crafts/flexors/gallery/thumbnail.jpg",
-    "assets/crafts/flexors/gallery/thumbnail.jpg",
-    "_site/assets/crafts/hyperbolic origami/gallery/thumbnail.jpg",
-    "assets/crafts/hyperbolic origami/gallery/thumbnail.jpg",
-    "_site/craft/hyperbolic-origami.html",
-    "assets/crafts/hyperbolic origami/gallery/thumbnail.jpeg.sb-0a2bae58-hiqsOf",
-    "_site/assets/crafts/hyperbolic origami/gallery/thumbnail.jpeg",
-    "assets/crafts/hyperbolic origami/gallery/thumbnail.jpeg",
-    "assets/crafts/hyperbolic origami/gallery/hypar copy.jpeg.sb-0a2bae58-UkBKvx",
-    "_site/assets/crafts/hyperbolic origami/gallery/hypar copy.jpeg",
-    "assets/crafts/hyperbolic origami/gallery/hypar copy.jpeg",
-    "_site/assets/crafts/hyperbolic origami/gallery/hyheart.jpeg",
-    "assets/crafts/hyperbolic origami/gallery/hyheart.jpeg",
-    "assets/crafts/hyperbolic origami/gallery/IMG_2114.jpeg.sb-0a2bae58-bo9Mhh",
-    "_site/2024-01-05-hyperbolic-origami.html",
-    "assets/crafts/hyperbolic origami/gallery/IMG_2102.jpeg.sb-0a2bae58-9siSdV",
-    "assets/crafts/hyperbolic origami/gallery/IMG_2122.jpeg.sb-0a2bae58-Hq7Uy4",
-    "_site/assets/crafts/hyperbolic origami/gallery",
-    "assets/crafts/hyperbolic origami/gallery/IMG_2111.jpeg.sb-0a2bae58-uazS4A",
-    "assets/crafts/hyperbolic origami/gallery",
-    "_posts/crafts/2024-01-04-string-art.md",
-    "_posts/gallery/2021-08-05-misc.md",
+    "_posts/crafts/2024-01-10-curvature from strips.md",
+    "_posts/crafts/2024-05-14-tensegrity.md",
+    "_posts/gallery/2021-05-05-bott.md",
+    "_posts/2023-01-01-hyperbolic-string-art.md",
+    "_posts/gallery/Untitled.md",
+    "_posts/2021-09-25-hyperbolic-band-theory.md",
     "_posts/gallery/2023-05-05-symplectic-city.md",
     "_posts/gallery/2023-11-12-Mirror-symmetree.md",
-    "_posts/crafts/2024-01-01-polyhera.md",
-    "_posts/crafts/2024-05-14-tensegrity.md",
+    "_posts/talks/2025-02-09-Visualization-vistas.md",
+    "_posts/crafts/2024-01-05-hyperbolic-origami.md",
+    "_posts/crafts/2024-01-06-curved-origami.md",
+    "_posts/crafts/2024-01-02-weaving.md",
+    "_posts/crafts/2024-01-04-string-art.md",
+    "_posts/gallery/2021-08-05-misc.md",
     "_posts/crafts/2024-01-01-flexagons.md",
-    "_posts/crafts/2024-01-10-Nets.md",
-    "_posts/gallery/2024-10-31-Mathoween.md",
-    "_posts/gallery/2021-10-12-animalie.md",
-    "_posts/talks/2022-02-04-integrable.md",
-    "_posts/gallery/2021-05-05-bott.md",
-    "_posts/gallery/2021-07-05-gradient.md",
-    "_posts/gallery/2021-08-29-banner.md",
-    "_posts/talks/2021-05-05-cobordism.md",
-    "_posts/2021-09-25-hyperbolic-band-theory.md",
-    "_posts/talks/2021-11-23-topological-recursion.md",
-    "_posts/gallery/2025-01-12-stacks.md",
-    "_posts/talks/2021-04-23-Kapustin-Witten.md",
-    "_posts/talks/2021-05-07-higgs-bundles-geometric-structures.md",
-    "_posts/talks/2021-05-03-kahler-quantization.md"
+    "_posts/crafts/2024-01-10-Nets.md"
   ]
 }

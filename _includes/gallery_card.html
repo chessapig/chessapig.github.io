@@ -62,11 +62,22 @@
       <div id="carousel" class="carousel slide" data-interval="false" style="max-width: 100%; max-height: 100%; overflow: hidden;">
         <div class="carousel-inner" style="height: 75vh">
           {% for image in ordered_images %}
+          {% assign ending = image  | split: "." | last %}
           <div class="carousel-item {% if forloop.first %}active{% endif %}" data-caption-id="caption-{{ forloop.index0 }}"
               style="aspect-ratio: 16 / 9; height: auto"> 
             <!-- Set max dimensions for the image and ensure no cropping -->
-            <img src="{{ image }}" alt="{{ project.title }}"  loading="eager"
+             {% if ending == "mp4" %}
+              <video class="img-fluid"
+                  style="max-width: 100%; max-height: 100%; object-fit: contain; "
+                  preload 
+                  muted 
+                  controls>
+                  <source src="{{ image }}" type="video/mp4"/>
+              </video>
+            {% else %}
+              <img src="{{ image }}" alt="{{ project.title }}"  loading="eager"
                   style="max-width: 100%; max-height: 100%; object-fit: contain; ">
+            {% endif %}
           </div>
           
           {% endfor %}
