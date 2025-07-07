@@ -17,8 +17,14 @@ img {
 # Teaching
 
 Here are classes I've designed and taught myself. Click the link to see the course page
+
+<div class="text-center"> 
+		<a href="/teaching/math-crafts">
+	    <img src="/teaching/math_crafts/banner.jpg" alt="Poster for math crafts " width="400" > </a>
+	</div>
 - Spring 2024:  [Math crafts: How things curve](/teaching/math-crafts)
   - Hands-on introduction to curvature and creative mathematics. Each week, we'd build a arts and crafts project exploring curvature and its many manifestations.  
+    
 - Fall 2021:  [MATH299G: Geometry in physics](/teaching/STIC)
   - Seminar style to differential forms and geometry, and their role in physics. Focused on the differential forms interpretation of maxwells equations, and the sympelctic geometry formulation of symplectic geometry.
 
@@ -30,12 +36,17 @@ Here are classes I've GSI's for (berkeley's name for teaching assistants).
 # Organization
 
 - Spring 2023:  [Coloumb branch reading seminar](/teaching/Coloumb)
+- Spring 2024: The Chern-simonar (Parallel learning seminar to the [Complex chern simons seminar](https://math.berkeley.edu/~teleman/classes/CSseminar.html))
+- Fall 2024: Student symplectic seminar
 - Spring 2025:  [reading group on TQFTs and gauge theory](/teaching/TQFT-gauged)
+- Summer 2025: Student symplectic seminar, the summer sessions
 
 # Mentoring
 Mentor for UC Berkeley directed reading program:
-- Fall 2022: Introduction to mirror symmetry
-- Fall 2023: Connections, curvature, charecteristic classes (Following [Tu Differential geometry](https://link.springer.com/book/10.1007/978-3-319-55084-8))
+- Fall 2022: Introduction to mirror symmetry, with Michelle
+- Fall 2023: Connections, curvature, charecteristic classes (Following [Tu Differential geometry](https://link.springer.com/book/10.1007/978-3-319-55084-8)), with Jackson
+- Fall 2024: [Iterated function systems](/code/ifs), with Tobin. 
+- Spring 2025: Rethinking axioms for Euclidean geometry, with Marc
 
 # Outreach
 
