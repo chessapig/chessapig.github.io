@@ -53,7 +53,6 @@
 
   {% assign ordered_images = captioned_images | concat: uncaptioned_images %}
 
-  <script> console.log({{ ordered_images |jsonify }})</script>
 
 
   {%- if ordered_images.size > 0 -%}
@@ -62,8 +61,9 @@
       <div id="carousel" class="carousel slide" data-interval="false" style="max-width: 100%; max-height: 100%; overflow: hidden;">
         <div class="carousel-inner" style="height: 75vh">
           {% for image in ordered_images %}
+          {% assign basename = image | split: "/" | last | split: "." | first %}
           {% assign ending = image  | split: "." | last %}
-          <div class="carousel-item {% if forloop.first %}active{% endif %}" data-caption-id="caption-{{ forloop.index0 }}"
+          <div class="carousel-item {% if forloop.first %}active{% endif %}" data-name="{{ basename }}" data-caption-id="caption-{{ forloop.index0 }}"
               style="aspect-ratio: 16 / 9; height: auto"> 
             <!-- Set max dimensions for the image and ensure no cropping -->
              {% if ending == "mp4" %}
@@ -128,14 +128,13 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const carousel = document.getElementById('carousel');
+    const $carousel = $('#carousel');
     const captionElements = document.querySelectorAll('.carousel-caption-text');
 
-    $('#carousel').on('slid.bs.carousel', function () {
-      // Find the active carousel item
-      const activeItem = carousel.querySelector('.carousel-item.active');
-      //console.log(activeItem)
-      const captionId = activeItem.getAttribute('data-caption-id');
+    $carousel.on('slid.bs.carousel', function () {
+      // ✅ Use .find() instead of querySelector
+      const $activeItem = $carousel.find('.carousel-item.active');
+      const captionId = $activeItem.data('caption-id'); // jQuery's .data() reads data- attributes
 
       // Hide all captions
       captionElements.forEach(el => el.style.display = 'none');
@@ -146,7 +145,40 @@
         caption.style.display = 'block';
       }
 
-      //console.log("Active caption switched to:", captionId);
+      // Optional debug:
+      // console.log("Active caption switched to:", captionId);
     });
+
+      // Jump to named slide from URL
+    var match = window.location.hash.match(/slide=([\w-]+)/);
+    if (match) {
+      var name = match[1];
+      var $targetSlide = $carousel.find('.carousel-item[data-name="' + name + '"]');
+      if ($targetSlide.length) {
+        var index = $targetSlide.index();
+        $carousel.carousel(index);
+      }
+
+      // 🔽 Smooth scroll to the carousel
+      const scrollTarget = document.getElementById('gallery');
+      if (scrollTarget) {
+        setTimeout(() => {
+          scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 300); // Delay ensures carousel has updated
+      }
+    }
+
+    
+      
+    // Update URL hash on slide change
+    $carousel.on('slid.bs.carousel', function (e) {
+      var name = $(e.relatedTarget).data('name');
+      if (name) {
+        history.replaceState(null, null, '#slide=' + name);
+      }
+      console.log(name);
+    });
+
+
   });
 </script>

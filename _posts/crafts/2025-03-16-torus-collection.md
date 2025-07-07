@@ -1,13 +1,13 @@
 ---
 layout: project
 title: My Torus collection
-date: 2025-02-16 16:03:47 -0500
+date: 2025-03-16 16:03:47 -0500
 categories: craft
 tags:
   - craft
   - gallery
 image: 
-summary: I quite like a good torus. Here is a collection of tori which I have procoured or made.
+summary: I quite like a good torus. Here is a collection of tori which I have procured or fashioned.
 pageHasContent: true
 gallery-title: Torus collection
 gallery-folder: /assets/crafts/tori/gallery
@@ -37,11 +37,11 @@ gallery-captions:
     caption: |
       A bracelet I found in the thrift store. It's made of 100 metal rings, each interlocking with every other ring. Topologically, the rings are all fibers of the Hopf fibration. If you hold all the rings together, they form a filled torus.
   - image: woven
-    title: "paper woven torus"
+    title: "Paper woven torus"
     caption: |
       Successful paper torus, woven out of many circles. This weaving pattern is not topopolgically regular. The blank spaces on the inside and outside of the wheel are 4-sided, while on the front and back they are only 2 sided. Also, the paper doesn't conform to the surface of the torus like one might want. Still, its nice and quite studry. This is the prototype for the PVC construction of the skeleton of my Halloween costume, see next picture. 
   - image: horuse
-    title: "horuse skeleton"
+    title: "Horuse skeleton"
     caption: |
       This is the skeleton of my [horuse costume](/fun/Mathoween). This torus is made of PVC wrapped into tubes, woven into one-another. It's very sturdy, and can roll around like a wheel. I'm very proud.
 ---

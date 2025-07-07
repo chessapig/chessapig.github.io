@@ -19,7 +19,7 @@ gallery-captions:
   - image: ball
     title: "Woven sphere"
     caption: |
-      Made out of 12 loops of paper. The underlying topology is similar to that of my woven icosahedron model from [weaving pipe cleaners](/craft/weaving), which consists of 6 woven circles. Here, each circle is replaced with 2 parralel strips. I'm pretty sure the resulting polyhedron is the rectified [chamfered Dodecahedron](https://en.wikipedia.org/wiki/Chamfered_dodecahedron). This has:
+      Made out of 12 loops of paper. The underlying topology is similar to that of my woven icosahedron model from [weaving pipe cleaners](/craft/weaving#slide=spheres), which consists of 6 woven circles. Here, each circle is replaced with 2 parallel strips. I'm pretty sure the resulting polyhedron is the rectified [chamfered Dodecahedron](https://en.wikipedia.org/wiki/Chamfered_dodecahedron). This has:
       - 120 verticies
       - 122 faces
       - 240 edges
@@ -34,5 +34,5 @@ gallery-captions:
   - image: wheel
     title: "Paper wheel"
     caption: |
-      Successful paper torus, woven out of many circles. This one is not topopolgically regular. The blank spaces on the inside and outside of the wheel are 4-sided, while on the front and back they are only 2 sided. Also, the paper doesn't conform to the surface of the torus like one might want. Still, its nice and quite studry. This is the prototype for the PVC construction of the skeleton of my Halloween costume, the [horuse](/fun/Mathoween)
+      My first successful paper torus, woven out of many circles. This one is not topologically regular. The blank spaces on the inside and outside of the wheel are 4-sided, while on the front and back they are only 2 sided. Also, the paper doesn't conform to the surface of the torus like one might want. Still, its nice and quite sturdy. This is the prototype for the PVC construction of the skeleton of my Halloween costume, the [horuse](/fun/Mathoween#slide=horuse)
 ---

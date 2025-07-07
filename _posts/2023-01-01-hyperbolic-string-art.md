@@ -64,7 +64,7 @@ gallery-captions:
   - image: pulsing
     title: 
     caption: |
-      We can also get nice caustics by changing the boundary. Here the boundary is an epicycloid, traced by a circle rolling inside another circle. The map is a time-varying rotation. If the boundary were a circle, the caustic would simply be another circle. The unsusal boundary gives beautiful caustics.
+      We can also get nice caustics by changing the boundary. Here the boundary is an epicycloid, traced by a circle rolling inside another circle. The map is a time-varying rotation. If the boundary were a circle, the caustic would simply be another circle. The unusual boundary gives beautiful caustics.
   - image: swoop
     title: Hyperbolic string art
     caption: |
@@ -80,7 +80,9 @@ gallery-captions:
   - image: comparison
     title: The hyperbolic plane
     caption: |
-      Now we take a leap of insight, and treat the inside of the circle as the hyperbolic plane. Symmetries of the hyperbolic plane act on the boundary circle through mobius transforms. We think of the "strings" in string art as geodesics through the hyperbolic plane, rendered in the Klien model. If instead we switch to the Poincare disc model, the geodesics become semicircles which meet the boundary circle orthogonally. There is a unique such geodesic connecting any two points on the boundary circle. This gives us a new way to render strings in string art. 
+      Now we take a leap of insight, and treat the inside of the circle as the hyperbolic plane. Symmetries of the hyperbolic plane act on the boundary circle through mobius transforms. We think of the "strings" in string art as geodesics through the hyperbolic plane, rendered in the Klein model. If instead we switch to the Poincare disc model, the geodesics become semicircles which meet the boundary circle orthogonally. There is a unique such geodesic connecting any two points on the boundary circle. This gives us a new way to render strings in string art. 
+      
+      We can visualize the symmetries of the hyperbolic plane in this picture geometrically. Here's a [video](https://www.youtube.com/watch?v=0z1fIsUNhO4&ab_channel=djxatlanta) showing how the mobius transformations acting on the complex plane arise from the Riemann sphere. The symmetries of the hyperbolic plane are Mobius transforms which fix the unit circle. On the unit circle, these act by the mobius transforms described above. On the interior, the preserve the stucture of the hyperbolic plane.
       
       Here is the mobius transform string art shown in both methods, with straight lines (left) and with circular arcs (right). Notice how the caustic in the Poincare model (right) is a circle?
   - image: elliptic
@@ -94,11 +96,11 @@ gallery-captions:
   - image: table
     title: Mobius transform table
     caption: |
-      This table explains the string art for different classes of mobius transforms. The types of mobius transforms correspond to the number of fixed poins on the circle. The elliptic transforms come from hyperbolic rotations, while the hyperbolic transforms come from hyperbolic translations. The envelopes look like circles in the Poincare projection. Their corresponding shapes in the hyperbolic plane are explained in my [paper](/files/hyperbolic_string_art.pdf)
+      This table explains the string art for different classes of mobius transforms. The types of mobius transforms correspond to the number of fixed poins on the circle. The elliptic transforms arise from rotations of the hyperbolic plane, while the hyperbolic transforms arise from translations of the hyperbolic plane. The envelopes look like circles in the Poincare projection. Their corresponding shapes in the hyperbolic plane are explained in my [paper](/files/hyperbolic_string_art.pdf)
   - image: reflection
     title: Reflection
     caption: |
-      String art for a reflection of the circle. This is also a type of mobius trasform.
+      String art for a reflection of the circle. This is also a type of mobius transform.
   - image: human_fractal
     title: Fractal string art
     caption: |

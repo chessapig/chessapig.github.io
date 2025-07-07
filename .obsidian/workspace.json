@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/talks/2024-10-09-Caustics.md",
+                "file": "writing/index.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "2024-10-09-Caustics"
+              "title": "index"
             }
           },
           {
@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/gallery/2021-08-29-banner.md",
+                "file": "_posts/blog/2024-03-02-Fubini-Study.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "2021-08-29-banner"
+              "title": "2024-03-02-Fubini-Study"
             }
           },
           {
@@ -41,15 +41,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/crafts/2025-02-16-torus-collection.md",
+                "file": "_posts/blog/2024-12-25-baubles.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "2025-02-16-torus-collection"
+              "title": "2024-12-25-baubles"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -202,53 +203,53 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "b47dd5ad9f1b30b2",
+  "active": "71a82fb1fac9d135",
   "lastOpenFiles": [
-    "_site/assets/gallery/caustics/table.jpeg",
-    "assets/gallery/caustics/table.jpeg",
-    "assets/gallery/caustics/threeDimensionalTable.jpeg.sb-0a2bae58-L6aj5x",
-    "_site/assets/gallery/caustics/threeDimensionalTable.jpeg",
-    "assets/gallery/caustics/threeDimensionalTable.jpeg",
-    "_site/assets/gallery/caustics/string1.jpeg",
-    "assets/gallery/caustics/string1.jpeg",
-    "_posts/gallery/2021-08-29-banner.md",
-    "_posts/talks/2024-10-09-Caustics.md",
-    "_site/assets/gallery/caustics/gallery/threeDimensional.jpeg",
-    "assets/gallery/caustics/gallery/threeDimensional.jpeg",
-    "_site/assets/gallery/caustics/gallery/3D.jpeg",
-    "assets/gallery/caustics/gallery/3D.jpeg",
-    "_site/assets/gallery/caustics/gallery/string2.jpeg",
-    "_site/talk/Caustics.html",
-    "_site/2024-10-09-Caustics.html",
-    "_posts/crafts/2025-02-16-torus-collection.md",
-    "_posts/diary/2023-05-02-2.md",
-    "_site/assets/gallery/caustics/gallery/swallowtail.mp4",
-    "_site/assets/gallery/caustics/gallery/hyperbolic_umbilic.mp4",
-    "_site/assets/gallery/caustics/gallery/elliptic_umbilic.mp4",
-    "_site/assets/gallery/caustics/gallery",
-    "assets/gallery/caustics/gallery/elliptic_umbilic.mp4",
-    "assets/gallery/caustics/gallery/swallowtail.mp4",
-    "assets/gallery/caustics/gallery/hyperbolic_umbilic.mp4",
-    "_posts/crafts/2024-01-01-polyhera.md",
-    "_posts/gallery/2021-10-12-animalie.md",
-    "_posts/gallery/2024-10-31-Mathoween.md",
-    "_posts/crafts/2024-09-14-paper-strips.md",
-    "_posts/crafts/2024-01-03-hyperbolic-flexor.md",
-    "_posts/crafts/2024-01-10-curvature from strips.md",
-    "_posts/crafts/2024-05-14-tensegrity.md",
-    "_posts/gallery/2021-05-05-bott.md",
+    "_site/assets/crafts/baubles/gallery/twisty.mp4",
+    "assets/crafts/baubles/gallery/twisty.mp4",
+    "_site/assets/crafts/baubles/paraboloid.jpg",
+    "assets/crafts/baubles/paraboloid.jpg",
+    "_site/assets/crafts/baubles/thumbnail.jpg",
+    "assets/crafts/baubles/thumbnail.jpg",
+    "_site/craft/baubles.html",
+    "_site/2024-12-25-baubles.html",
+    "_site/assets/crafts/baubles/diagram3.jpg",
+    "assets/crafts/baubles/diagram3.jpg",
+    "assets/crafts/baubles/regulus.jpg.sb-0a2bae58-8WTBvk",
+    "_site/assets/crafts/baubles/regulus.jpg",
+    "assets/crafts/baubles/regulus.jpg",
+    "_site/assets/crafts/baubles/diagram2.jpg",
+    "assets/crafts/baubles/diagram2.jpg",
+    "assets/crafts/baubles/regulus.JPG.sb-0a2bae58-0uuhUR",
+    "_posts/blog/2024-03-02-Fubini-Study.md",
+    "_posts/blog/2024-12-25-baubles.md",
     "_posts/2023-01-01-hyperbolic-string-art.md",
-    "_posts/gallery/Untitled.md",
-    "_posts/2021-09-25-hyperbolic-band-theory.md",
-    "_posts/gallery/2023-05-05-symplectic-city.md",
-    "_posts/gallery/2023-11-12-Mirror-symmetree.md",
-    "_posts/talks/2025-02-09-Visualization-vistas.md",
-    "_posts/crafts/2024-01-05-hyperbolic-origami.md",
-    "_posts/crafts/2024-01-06-curved-origami.md",
+    "_posts/code/2022-06-05-toric.md",
+    "_site/assets/crafts/baubles/four-strings.js",
+    "assets/crafts/baubles/four-strings.js",
+    "_site/assets/crafts/baubles/strings.js",
+    "assets/crafts/baubles/strings.js",
+    "_posts/gallery/2021-08-29-banner.md",
+    "_site/assets/crafts/baubles/four-string.js",
+    "_posts/blog/2023-12-23-two sphere.md",
+    "_posts/blog/2023-05-14-cortex.md",
+    "_posts/blog/2023-02-16-Hyperbolic.md",
+    "_posts/blog/2022-10-23-Colors.md",
+    "_posts/crafts/2024-01-01-polyhera.md",
     "_posts/crafts/2024-01-02-weaving.md",
-    "_posts/crafts/2024-01-04-string-art.md",
-    "_posts/gallery/2021-08-05-misc.md",
-    "_posts/crafts/2024-01-01-flexagons.md",
-    "_posts/crafts/2024-01-10-Nets.md"
+    "_posts/crafts/2024-01-06-curved-origami.md",
+    "_posts/blog/2024-01-14-spherical-sticks.md",
+    "_posts/crafts/2024-09-14-paper-strips.md",
+    "_posts/crafts/2025-03-16-torus-collection.md",
+    "_posts/crafts/Untitled.md",
+    "_posts/crafts/2024-01-03-hyperbolic-flexor.md",
+    "_posts/talks/2024-10-09-Caustics.md",
+    "_posts/gallery/2023-11-12-Mirror-symmetree.md",
+    "_posts/gallery/2025-01-12-stacks.md",
+    "_posts/gallery/2024-10-31-Mathoween.md",
+    "_posts/crafts/2024-01-07-Plateaus law.md",
+    "_posts/code/2023-05-31-binary.md",
+    "_posts/crafts/2024-01-10-Gauss-Bonet.md",
+    "writing/index.md"
   ]
 }

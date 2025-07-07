@@ -27,6 +27,6 @@ list_title: Projects
 
 <hr class="mine">
 <h1 class="mt-4 mb-4">Informal writing</h1>
-- I write math threads on Twitter. [Here are some old threads of mine](/writing/twitter).
+- I used to write math threads on Twitter. [Here are some old threads of mine](/writing/twitter).
 - I sometimes upload things to my [blog](/blog), which are generally less polished than my twitter threads.
-- I've recently started a [math diary](/writing/diary.html), where I write about things I learn about that given day. This is entirely unpolished and unedited, but is perhaps of interest to someone. 
+-  A while ago I had a [math diary](/writing/diary.html), where I wrote random unpolished which I learned about. Maybe someday I'll start it up again. 

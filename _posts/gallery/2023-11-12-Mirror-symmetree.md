@@ -30,6 +30,9 @@ gallery-captions:
   - image: shadow
     title: The dimensional reduction shadow
     caption: Dimensionally reducing by $S^1$, the tree has a shadow. Each branch of the tree becomes a new TQFT one dimension lower. Here, symplectic duality relates sheaves living utop the higgs and coloumb branches of the theory. The sheaves are represented by the snake critters.
+  - image: painting
+    title: Me and my painting
+    caption: I got this painting professionally printed for the [SUMM art show](https://seattlemathmuseum.org/events/intersection-exhibition-mar-3-apr-25-25). This was the first time something of mine became real, physical art. 
 ---
 Math lives atop a scaffolding of physics. Physicists organize the world into a hierarchy of quantum field theories, which I conceive as a great tree. Mathematical critters populate the branches, reflecting the structures and symmetries of the underlying physics. There is a mysterious duality between the wide-spreading branches,  hinting at an unexpected kinship between critters living in disparate areas of math.  Welcome to the mirror symme-tree.
 

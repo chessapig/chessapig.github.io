@@ -31,9 +31,15 @@ gallery-captions:
     caption: |
       I put a few flexors together to form a small segment of the hyperbolic plane.
   - image: hanging
-    title: "many flexors, one plane"
+    title: "Many flexors, one plane"
     caption: |
       My entire class put their flexors together into one large model of the hyperbolic plane. It hangs above my desk in my office.
+  - image: discrete
+    title: "A discrete hyperbolic surface"
+    caption: |
+      Another mechagnism for forcing negative curvature. Imagine a grid of sticks, all rigid and the same length, with four sticks meeting at each joint. Constrain each joint so that the four sticks lie in the plain (I did this using the weird cardboard tubes). This forces the net of sticks to approximate a constant negative curvature surface.  
+      
+      This construction is called, creativly, a discrete surface with constant negative gaussian curvature. I learned about these from the paper [Discrete surfaces with constant negative gaussian curvature and the Hirota equattion](https://projecteuclid.org/journals/journal-of-differential-geometry/volume-43/issue-3/Discrete-surfaces-with-constant-negative-Gaussian-curvature-and-the-Hirota/10.4310/jdg/1214458324.full) by Alexander Bobenko and Ulrich Pinkall. This description of discrete negative curvature surfacecs is nice, because it inherets a discrete version of the integrable structure of continious constant negative curvature surfaces.
 ---
 
 # summary
