@@ -14,12 +14,24 @@ pageHasContent: true
 gallery-title: Mathoween
 gallery-folder: /assets/gallery/halloween/gallery
 gallery-captions:
+  - image: mobius
+    title: "2025:  Mobius dick"
+    caption: |
+      The great non-orientable white whale.
+  - image: bootstrapping
+    title: "2025:  Elliptic bootstrapping"
+    caption: |
+      Lifting my sobolev spaces up by their bootstraps
+  - image: jellyfish
+    title: "2025:  Jellyfish"
+    caption: |
+      I retrofitted my bootstrapping frame into a jellyfish for trick-o-treating
   - image: horuse
     title: "2024: The Horuse"
     caption: |
       Is it a horse? Or is it a torus?
       
-      This costume won second place. Catch the special appearence of drew, dressed as Micheal Kielstra, and Micheal Keelstra, dressed as Micheal Kielstra. (I was in the front of the horuse and not able to see, so I had no idea we got photobombed until seeing the picture a couple days later)
+      This costume won second place. Catch the special appearance of Charlotte, dressed as Micheal Kielstra, and Micheal Kielstra, dressed as Micheal Kielstra. (I was in the front of the horuse and not able to see, so I had no idea we got photobombed until seeing the picture a couple days later)
   - image: skeleton
     title: "2024: The Horuse skeleton"
     caption: The horuse skeleton was an innovative construction, a torus woven out of plastic tubing, held together by friction.

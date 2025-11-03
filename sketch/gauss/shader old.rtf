@@ -1,0 +1,114 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2818
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww28600\viewh14760\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+```\
+let fragCurvature = `#version 300 es\
+\
+precision mediump float;\
+\
+  \
+\
+uniform sampler2D depthTex;\
+\
+uniform sampler2D normalTex;\
+\
+uniform vec2 u_resolution; // width and height of normalTex\
+\
+  \
+\
+in vec2 vTexCoord;\
+\
+in vec3 vNormal; // Interpolated normal\
+\
+  \
+\
+out vec4 fragColor; // Output color\
+\
+  \
+\
+float linearizeDepth(float d, float near, float far) \{\
+\
+float z = d * 2.0 - 1.0; // Back to NDC space [-1,1]\
+\
+return (2.0 * near * far) / (far + near - z * (far - near));\
+\
+\}\
+\
+  \
+\
+void main() \{\
+\
+vec3 color = texture(normalTex, vTexCoord).rgb;\
+\
+if(color == vec3(0.0,0.0,0.))\{ //only apply when the screen isnt black\
+\
+fragColor = vec4(0.,0.,0.,1.);\
+\
+\} else \{\
+\
+  \
+\
+float rawDepth = texture(depthTex, vTexCoord).r;\
+\
+float depth = linearizeDepth(rawDepth, 0.1, 100.0);\
+\
+  \
+\
+vec3 normal = normalize(vNormal);\
+\
+//vec3 normal = color*2.0 - 1.0;\
+\
+// vec2 texel = 1.0 / u_resolution;\
+\
+// vec3 normalYP = texture(normalTex, vTexCoord + vec2(0.0, texel.y)).rgb * 2.0 - 1.0;\
+\
+// vec3 normalYM = texture(normalTex, vTexCoord - vec2(0.0, texel.y)).rgb * 2.0 - 1.0;\
+\
+// vec3 normalXP = texture(normalTex, vTexCoord + vec2(texel.x, 0.0)).rgb * 2.0 - 1.0;\
+\
+// vec3 normalXM = texture(normalTex, vTexCoord - vec2(texel.x, 0.0)).rgb * 2.0 - 1.0;\
+\
+  \
+\
+// vec3 dNdx = (normalXP - normalXM)/(2.0 * texel.x) / depth;\
+\
+// vec3 dNdy = (normalYP - normalYM)/(2.0 * texel.y) / depth;\
+\
+  \
+  \
+\
+// Screen-space partial derivatives of the normal\
+\
+vec3 dNdx = dFdx(normal);\
+\
+vec3 dNdy = dFdy(normal);\
+\
+  \
+  \
+  \
+\
+// Visualize derivative x-component for debugging (can visualize others too)\
+\
+//fragColor = vec4(dNdx*100.*dist, 1.0);\
+\
+  \
+\
+vec3 color = normal * 0.5 + 0.5;\
+\
+//fragColor = vec4(color*linearDepth/10., 1.0);\
+\
+fragColor = vec4(color, 1.0);\
+\
+  \
+\
+//fragColor = vec4(vec3(linearDepth/10.),1.0);\
+\
+\}\
+\
+\}`;\
+```}

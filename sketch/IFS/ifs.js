@@ -20,18 +20,23 @@ let hidePoints=false;
 let dragMode=true;
 
 function setup() {
-	createCanvas(windowWidth, windowHeight);
+	let elem = document.getElementById(parent);
+	boundingRect = elem.getBoundingClientRect()
+	console.log(boundingRect);
+	canvas=createCanvas(boundingRect.width, windowHeight*0.8);
+	canvas.parent(parent);
 	colorMode(RGB,100)
+
 	
 	
-	fractalPts = [new Draggable(-0.75,-0.5),
-				  new Draggable(0.75,-0.5),
-				  new Draggable(0,-0.7990381056)];
+	fractalPts = [new Draggable(-0.75,0),
+				  new Draggable(1.75,0),
+				  new Draggable(0,-1)];
 	
 	for(let i=0;i<fractalPts.length;i++){
 		let pt=fractalPts[i]
 		pt.angle=floor(random(0,PI/2)*8)/8-PI/4;
-		pt.color=color(colors[i]);
+		pt.color=color(lerpColor(colors[i],color(FRG),0.3));
 		pt.magnitude=random(0.4,0.7);
 	}
 	
@@ -72,10 +77,10 @@ function draw() {
 
 	
 	if(scheduleReset){
-		strokeWeight(0.005);
+		strokeWeight(0.01);
 		ptsPerThisFrame=ptsPerThisFrame/5;
 	} else {
-		strokeWeight(0.001);
+		strokeWeight(0.002);
 	}
 	
 	stroke(FRG);
@@ -95,7 +100,7 @@ function draw() {
 			if(j>fractalDepth){
 				col=lerpColor(col, control.color, colorRatio);
 				stroke(col);
-				circle(-pt.x,-pt.y,0);
+				point(-pt.x,-pt.y);
 			}
 					
 		}
