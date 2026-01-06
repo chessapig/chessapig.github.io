@@ -17,6 +17,7 @@ function setup() {
 
 	for(let i=0;i<numZeros;i++){
 		zeros[i]=new Draggable(random(-1,1),random(-1,1));
+        
 	}
 }   
 
