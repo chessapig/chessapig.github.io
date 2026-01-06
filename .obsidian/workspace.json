@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/blog/2024-12-25-baubles.md",
+                "file": "_posts/talks/2024-10-14-Biran.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2024-12-25-baubles"
+              "title": "2024-10-14-Biran"
             }
           }
         ],
@@ -99,8 +99,8 @@
             "state": {
               "type": "starred",
               "state": {},
-              "icon": "lucide-file",
-              "title": "Plugin no longer active"
+              "icon": "lucide-ghost",
+              "title": "starred"
             }
           },
           {
@@ -195,6 +195,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "bases:Create new base": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
@@ -205,22 +206,24 @@
   },
   "active": "71a82fb1fac9d135",
   "lastOpenFiles": [
+    "sketch/pencil/pencil.js",
+    "sketch/pencil/index.html",
+    "sketch/pencil/draggable.js",
+    "sketch/pencil",
+    "sketch/cubics/pencil.js",
+    "sketch/cubics/index.html",
+    "sketch/cubics/draggable.js",
+    "sketch/cubics",
+    "sketch/pencil of cubics/pencil.js",
+    "sketch/pencil of cubics/draggable.js",
+    "sketch/Plurisubharmonic/index copy.html",
+    "_posts/blog/2024-12-25-baubles.md",
     "_site/assets/crafts/tori/gallery/clay.jpeg",
     "assets/crafts/tori/gallery/clay.jpeg",
     "_site/assets/crafts/tori/gallery/real balanced.jpeg",
     "assets/crafts/tori/gallery/real balanced.jpeg",
     "sketch/gauss/reference/escher.jpg",
     "sketch/gauss/reference/escher.jpeg",
-    "_site/sketch/gauss/shader old.rtf",
-    "sketch/gauss/shader old.rtf",
-    "_site/sketch/gauss/models/bean.obj",
-    "sketch/gauss/models/bean.obj",
-    "_site/sketch/gauss/models/chicago bean.obj",
-    "sketch/gauss/models/chicago bean.obj",
-    "sketch/gauss/models/source/chicago bean.obj",
-    "_site/sketch/gauss/models/source/chicago bean.zip",
-    "_site/sketch/gauss/models/source",
-    "_site/sketch/gauss/models/chicago-bean.zip",
     "_site/sketch/gauss/reference/raindrop.jpg",
     "_site/sketch/gauss/reference/lagrangian.jpg",
     "sketch/gauss/reference/raindrop.jpg",
@@ -236,11 +239,9 @@
     "_posts/gallery/2021-05-05-bott.md",
     "_posts/gallery/2021-07-05-gradient.md",
     "_posts/crafts/2024-05-14-tensegrity.md",
-    "teaching/math_crafts/banner.jpg",
     "talks.md",
     "_posts/crafts/2024-01-03-hyperbolic-flexor.md",
     "_posts/crafts/2024-01-10-Nets.md",
-    "_posts/blog/2024-12-25-baubles.md",
     "_posts/blog/2024-03-02-Fubini-Study.md",
     "_posts/2023-01-01-hyperbolic-string-art.md",
     "_posts/code/2022-06-05-toric.md",

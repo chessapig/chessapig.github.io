@@ -58,8 +58,8 @@ function draw() {
 	push();
 
 	changeCoords();
-	imageMode(CENTER) 
-	//image(levelSets,0,0,2,2);
+	//imageMode(CENTER) 
+	image(levelSets,0,0,2,2);
 	
 	
 
