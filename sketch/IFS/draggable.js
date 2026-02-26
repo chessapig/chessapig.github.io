@@ -37,7 +37,7 @@ class Draggable {
 	// Is mouse over object
 	this.mouse=getCoords(mouseX,mouseY);
 	
-	; //get mouse in coordinates [-1,1]^2
+	 //get mouse in coordinates [-1,1]^2
 	if (dist(this.x,this.y,this.mouse.x,this.mouse.y)<this.selectRadius) {
 	  this.rollover = true;
 	} else {

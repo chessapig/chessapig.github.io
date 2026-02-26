@@ -22,7 +22,7 @@ let dragMode=true;
 function setup() {
 	let elem = document.getElementById(parent);
 	boundingRect = elem.getBoundingClientRect()
-	console.log(boundingRect);
+	//console.log(boundingRect);
 	canvas=createCanvas(boundingRect.width, windowHeight*0.8);
 	canvas.parent(parent);
 	colorMode(RGB,100)

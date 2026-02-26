@@ -3,12 +3,6 @@ $font-size-base: 1.1rem !default;
 $headings-font-family: "Raleway", serif !default;
 $headings-font-weight: 600;
 
-$body-bg:          #2c2621;
-$body-color:       #e6cfb3;
-$dark:              lighten($body-bg, 10%);
-$mid:              lighten($body-bg, 40%);
-$light:             lighten($body-bg, 80%);
-
 @import "bootstrap/functions";
 @import "bootstrap/variables";
 
@@ -163,3 +157,193 @@ hr.mine {
   border-top: 1px solid lighten($body-bg,30%);
 }
 
+
+///Light mode
+$light-body-bg:       $body-color;
+$light-body-color:    $body-bg;
+
+$light-primary: #368722;
+$light-secondary: #8B1313; 
+
+body.light-page {
+  background-color: $light-body-bg;
+  color: $light-body-color;
+}
+
+/* Header / Navbar */
+body.light-page header,
+body.light-page .navbar {
+  background-color: $light-body-bg !important;
+  border-bottom: 0px ;
+}
+
+/* Navbar links */
+body.light-page .navbar a,
+body.light-page header a {
+  color: $light !important;
+}
+
+body.light-page .navbar a:hover {
+  color: $light-secondary !important;
+}
+
+body.light-page h1 {
+  color: $light-primary !important;
+}
+
+body.light-page h2, 
+body.light-page h3, 
+body.light-page h4 {
+  color: $light-secondary !important;
+}
+
+body.light-page .navbar {
+  background-color: $light-body-bg !important;
+  background-image: linear-gradient(
+    180deg,
+    $light-body-color,
+    $light-body-bg
+  ) !important;
+}
+
+.light-page {
+
+
+  // Card variables for light-page
+  $card-bg: $light-body-bg;
+  $card-color: $light-body-color;
+  $card-border-color: $light-body-color;
+  $card-border-radius: 0.75rem;
+  $card-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.1);
+
+  // Apply to cards inside .light-page
+  .card {
+    background-color: $card-bg;
+    color: $card-color;
+    border: 3px solid $card-border-color;
+    border-radius: $card-border-radius;
+    box-shadow: $card-shadow;
+  }
+
+  // Optional: card headers
+  .card-title {
+    color: $card-color;
+  }
+
+  // Optional: form labels inside cards
+  .card label {
+    color: $card-color;
+  }
+
+  /* Range slider track and thumb */
+  input[type="range"] {
+    -webkit-appearance: none;  // remove default style
+    width: 100%;
+    height: 10px;
+    background: $light-body-bg; // track fill color
+    border: 2px solid $light-body-color; // track border (fallback)
+    border-radius: 5px;
+    outline: none;
+  }
+
+  /* Chrome / Safari track */
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 10px;
+    background: $light-body-bg;      // track fill
+    border: 2px solid $light-body-color; // track border
+    border-radius: 5px;
+  }
+
+  /* Chrome / Safari thumb */
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: $light-primary;      // thumb fill
+    border: 2px solid $light-body-color; // thumb border
+    cursor: pointer;
+    margin-top: -7px; /* align thumb with track */
+  }
+
+  /* Firefox track */
+  input[type="range"]::-moz-range-track {
+    height: 10px;
+    background: $light-body-bg;      // track fill
+    border: 2px solid $light-body-color; // track border
+    border-radius: 5px;
+  }
+
+  /* Firefox thumb */
+  input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: $light-primary;      // thumb fill
+    border: 0px solid $light-body-color; // thumb border
+    cursor: pointer;
+  }
+}
+
+  .form-select {
+    background-color: $light-body-bg;
+    color: $light-body-color;
+    border: 2px solid $light-body-color; // thumb border
+
+  }
+
+ /* Custom switch css */.light-page {
+  /* Make the container flex for vertical alignment */
+  .form-check {
+    display: flex;
+    align-items: center;      // vertical center of switch + label
+    justify-content: flex-start; // switch + label aligned left
+  }
+
+  /* Space between switch and label */
+  .form-check-label {
+    margin-left: 0.5rem;
+    color: $light-body-color;
+    font-weight: 500;
+    position: relative;
+    top: 4px;
+  }
+
+  /* Fake switch track */
+  .form-check-input {
+    width: 40px;
+    height: 20px;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: $light-body-bg;
+    border: 2px solid $light-body-color;
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.2s;
+    flex-shrink: 0;  // prevents shrinking in flex container
+  }
+
+  /* Switch ON state */
+  .form-check-input:checked {
+    background-color: $light-primary;
+  }
+
+  /* Switch thumb */
+  .form-check-input::after {
+    content: "";
+    width: 16px;
+    height: 16px;
+    background-color: $light-body-color;
+    border-radius: 50%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    transition: left 0.2s;
+  }
+
+  /* Move thumb when checked */
+  .form-check-input:checked::after {
+    left: 22px;
+  }
+}
