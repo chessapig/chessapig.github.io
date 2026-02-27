@@ -4,7 +4,10 @@ const PRIMARY = "hsl(0, 76%, 31%)";
 const SECONDARY =  "hsl(108, 60%, 33%)";
 const TERTIARY =  "hsla(34, 78%, 40%, 1.00)";
 
-const MODES = ["TORIC","REAL", "REAL3D", "STELLAR","STELLAR3D"];
+const PROJECTION_MODES = ["REAL", "REAL3D","TORIC", "STELLAR","STELLAR3D"];
+const POINT_MODES = ["random","starscape"];
+const STARSCAPE_DISPLAY_MODES = ["uniform","discriminant","supremum"];
+
 
 //Parent in file is "ifs_sketch"
 let parent = "CP2_sketch";
@@ -21,7 +24,9 @@ const defaultUIState = {
 	realCoefs: true,
 	degree: 3,
 	enableRealCurve: false,
-	displayMode: MODES[0]
+	projectionMode: PROJECTION_MODES[0],
+	symmetrize: false,
+	pointMode: POINT_MODES[0]
 };
 
 const uiState = defaultUIState;
@@ -37,7 +42,7 @@ function setup() {
 	 //holds all the selectors and triangle
 	ui = new graphicsWindow(canvasSize, {x:-2, y:-1, width:2, canvasMode: P2D});
 
-	let sideLen = 1.9
+	let sideLen = 1.85
 	let vertShift = 0.1;
 	let triVertices = [
 		createVector(-0.5, -sqrt(3) / 6-vertShift).mult(sideLen),
@@ -46,18 +51,20 @@ function setup() {
 	];
 	ui.triCoord = new TriangleCoords(triVertices);
 	ui.selectors = new SelectorArray(ui.triCoord,degree,{real:true});
-	//ui.selectors.doSymmetrize=true;
+	ui.selectors.doSymmetrize=defaultUIState.symmetrize;
 		
 	//holds all the rendering for the curve.
 	r = new pointSystem(canvasSize, {
 		x:0, y:-1, width:2, 
 		canvasMode: WEBGL, 
-		mode:MODES[0],
+		projectionMode:defaultUIState.projectionMode,
+		pointMode: defaultUIState.pointMode,
 		triCoord: ui.triCoord,
 		selectors: ui.selectors
 	})
 
 	setupUI();
+
 }
 
 function setupUI(){
@@ -65,28 +72,23 @@ function setupUI(){
 	const realCoefs = document.getElementById('realCoefs');
 	const degreeSlider = document.getElementById('degreeSlider');
 	const enableRealCurve = document.getElementById('realCurve');
-	const displayMode = document.getElementById('displayMode');
+	const projectionMode = document.getElementById('projectionMode');
+	const symmetrize = document.getElementById('symmetrize');
+	const pointMode = document.getElementById('pointMode');
+
 
 	realCoefs.checked = defaultUIState.realCoefs;
 	degreeSlider.value = defaultUIState.degree;
 	enableRealCurve.checked = defaultUIState.enableRealCurve;
-	displayMode.value = defaultUIState.displayMode;
+	projectionMode.value = defaultUIState.projectionMode;
+	symmetrize.value = defaultUIState.symmetrize;
+	pointMode.value = defaultUIState.pointMode;
 
 	// Real coefficients checkbox
 	realCoefs.addEventListener("change", function() {
 		uiState.realCoefs = this.checked;
 
-		// Show/hide real curve checkbox
-		document.getElementById("realCurveContainer").style.display =
-			uiState.realCoefs ? "block" : "none";
-
-		// If disabled, uncheck real curve
-		if (!uiState.realCoefs) {
-			document.getElementById("realCurve").checked = false;
-			uiState.enableRealCurve=false;
-			r.enableRealCurve = uiState.enableRealCurve;
-	 		r.scheduleReset=true;
-		}
+		disableRealCheckbox(!uiState.realCoefs);
 	});
 
 	// Update state when controls change
@@ -108,14 +110,39 @@ function setupUI(){
 	 	r.scheduleReset=true;
 	});
 
-	displayMode.addEventListener('change', () => {
-		uiState.displayMode = displayMode.value;
-		r.setMode(uiState.displayMode)
+	projectionMode.addEventListener('change', () => {
+		uiState.projectionMode = projectionMode.value;
+		r.setProjectionMode(uiState.projectionMode)
 	});
 
-	
+	symmetrize.addEventListener('change', () => {
+		uiState.symmetrize = symmetrize.checked;
+		ui.selectors.doSymmetrize=uiState.symmetrize;
+	});
+
+	pointMode.addEventListener('change', () => {
+		uiState.pointMode = pointMode.value;
+		r.setPointMode(uiState.pointMode)
+		disableRealCheckbox(uiState.pointMode=="starscape");
+
+	});
+
 }
 
+function disableRealCheckbox(doDisable){
+	let isDisabled = uiState.realCoefs && uiState.pointMode!="starscape";
+	// Show/hide real curve checkbox
+	document.getElementById("realCurveContainer").style.display =
+		isDisabled?   "block" : "none";
+
+	// If disabled, uncheck real curve
+	if (doDisable) {
+		document.getElementById("realCurve").checked = false;
+		uiState.enableRealCurve=false;
+		r.enableRealCurve = uiState.enableRealCurve;
+		r.scheduleReset=true;
+	}
+}
 
 
 function draw() {
@@ -254,7 +281,8 @@ class pointSystem extends graphicsWindow{
 	//options:
 	// x, y, width , canvasMode
 	// selectors (class SelectorArray)
-    // mode: "REAL", "REAL3D", "STELLAR" "STELLAR3D", "TORIC"
+    // projectionMode: "REAL", "REAL3D", "STELLAR" "STELLAR3D", "TORIC"
+	// pointMode: "random", "starscape"
 	constructor(pixels, options) { 
 		super(pixels, options);
 
@@ -264,7 +292,12 @@ class pointSystem extends graphicsWindow{
 		this.scheduleReset=false;
 		this.zoom=1;
 		
-		this.mode =  options.mode;
+		this.projectionMode =  options.projectionMode;
+		if(options.pointMode){
+			this.pointMode =  options.pointMode;
+		} else {
+			this.pointMode = "random"
+		}
 		this.doCameraControl = false;
 		this.triCoord=options.triCoord;
 
@@ -274,7 +307,6 @@ class pointSystem extends graphicsWindow{
 		this.camVelocity=createVector(0,0);
 		this.camSensitivity=1/100;
 		this.camDrag=0.95;
-
 		this.setupMode();
 	}
 
@@ -287,6 +319,17 @@ class pointSystem extends graphicsWindow{
 		this.g.clear();
 		this.numPts=0;
 		this.scheduleReset=false;
+		this.clearGridTape();
+	}
+
+	clearGridTape(){
+		this.gridState={
+				tape:[0,0,0,0,0,0],
+				base:1
+			}
+		if(this.real){
+			this.gridState.tape=[0,0,0]
+		}
 	}
 
 	render(){
@@ -344,27 +387,34 @@ class pointSystem extends graphicsWindow{
 		this.renderCurveDecor();
 	}
 
-	setMode(mode){
-		this.mode=mode;
-		//this.g.clear();
+	setProjectionMode(mode){
+		this.projectionMode=mode;
 		this.scheduleReset=true;
 		this.g.resetMatrix();
 		this.transformCoords();
 		this.setupMode();
 	}
 
+	setPointMode(mode){
+		this.pointMode=mode;
+		this.setupMode();
+		this.scheduleReset=true;
+	}
+
+
+
 	//set default parameters per mode, and do any other sorting out we need.
 	setupMode(){
 	this.camVelocity=createVector(0,0);
 	this.maxPts=40000;
-	this.maxPtsPerFame=5000;
+	this.maxPtsPerFrame=5000;
 	this.doCameraControl=false;
 	this.pan.doPan=false;
 	this.fine={size: 0.2, color: color(FRG)};
 	this.pointStyle=this.fine;
 	this.realPointStyle={size: 5,color: color(TERTIARY)};
-	this.coarse={size: 2, color: color(0,255)};
-	switch(this.mode){
+	this.coarse={size: 2, color: color(FRG)};
+	switch(this.projectionMode){
 		case "REAL": //x1,x2
 			this.pan.doPan=true;
 			this.g.scale(0.3);
@@ -379,29 +429,39 @@ class pointSystem extends graphicsWindow{
 		case "STELLAR":
 			this.doCameraControl=true;
 			this.g.scale(0.7);
-			this.maxPtsPerFame=2000;
+			this.maxPtsPerFrame=2000;
 			break;
 
 		case "STELLAR3D": case "STELLAR3DLine":
-			this.fine={size: 0.1, color: color(0,255)};
-			this.coarse={size: 2, color: color(0,255)};
+			this.fine={size: 0.1, color: color(FRG)};
+			this.coarse={size: 2, color: color(FRG)};
 			this.lineLen=0.003;
 			this.doCameraControl=true;
 			this.maxPts=20000;
-			this.maxPtsPerFame=2000;
+			this.maxPtsPerFrame=2000;
 			break;
 
 		case "TORIC": //requires specifying triCoords
 			this.pan.doPan=true;
 			break;
 		}	
+
+	switch(this.pointMode){
+		case "random":
+			break;
+
+		case "starscape":
+			this.clearGridTape();
+			this.maxPtsPerFrame=500;
+			break;
+	}
 	}
 
 	renderCurveDecor(){
 		let layer= this.g || window;
 		layer.push();
 		layer.strokeWeight(4);
-		switch(this.mode){
+		switch(this.projectionMode){
 			case "REAL":
 				break;
 
@@ -435,6 +495,7 @@ class pointSystem extends graphicsWindow{
 				break;
 
 			case "TORIC": //requires specifying triCoords
+				layer.stroke(FRG);
 				this.triCoord.draw(layer);
 				break;
 		}	
@@ -442,38 +503,47 @@ class pointSystem extends graphicsWindow{
 	}
 
 	drawCurve(){
-		// let options={
-		// 	real:false,
-		// 	iterations:100
-		// }
-		// let points = CP2Point.makeGrid(4,options);
-		// let style={
-		// 	size: 10,
-		// 	color: color(0),
-		// 	mode: "sup"
-		// }
-		// for(let dualPoint of points){
-		// 	dualPoint.setStyle(style);
-		// 	let l = CP2Line.dualLine(dualPoint);
-		// 	let intersects = this.curve.intersect(l,options)
-		// 	for (let p of intersects) {
-		// 		p.style=l.style;
-		// 		p.render(this)
-		// 	}
-		// }
-		// return; //ignore everything below
-		
-		
-		let ptsPerFrame = this.maxPtsPerFame/pow(r.curve.degree,1.5);
-		if (this.numPts < this.maxPts) {
-			let pointPortion = (this.maxPts - this.numPts) / this.maxPts; //progress bar from 1 to 0
-			let numNewPoints = constrain(map(pow(pointPortion, 2), 1, 0, 1.5, 0), 0, 1) * ptsPerFrame;
-			this.numPts += numNewPoints;
-			this.drawPtsOnCurve(numNewPoints);
-			if(this.enableRealCurve){
-				this.drawPtsOnCurve(200,{real: true});
-			}
-			
+		let ptsPerFrame;
+		switch(this.pointMode){
+			case "random":
+				ptsPerFrame = this.maxPtsPerFrame/pow(r.curve.degree,1.5);
+				if (this.numPts < this.maxPts) {
+					let pointPortion = (this.maxPts - this.numPts) / this.maxPts; //progress bar from 1 to 0
+					let numNewPoints = constrain(map(pow(pointPortion, 2), 1, 0, 1.5, 0), 0, 1) * ptsPerFrame;
+					this.numPts += numNewPoints;
+					this.drawPtsOnCurve(numNewPoints);
+					if(this.enableRealCurve){
+						this.drawPtsOnCurve(200,{real: true});
+					}
+				}
+			break;
+
+			case "starscape":
+				let numNewPoints = this.maxPtsPerFrame/pow(r.curve.degree,1.5);
+				let style={
+					size: 2,
+					color: color(FRG),
+					pointMode: "sup"
+				}
+				if(this.scheduleReset){
+					numNewPoints = pow(6,3.5);
+				}
+				if (this.numPts < this.maxPts) {
+					let points = getGridPoints(this.gridState,numNewPoints).points
+					
+					for(let dualPoint of points){
+						dualPoint.setStyle(style);
+						let l = CP2Line.dualLine(dualPoint);
+						let intersects = this.curve.intersect(l,this.options)
+						for (let p of intersects) {
+							p.style=l.style;
+							p.render(this)
+						}
+					}
+
+					this.numPts += numNewPoints;
+				}
+			break;
 		}
 	}
 

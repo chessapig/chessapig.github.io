@@ -59,15 +59,20 @@ class CP2Point {
     //set the style options
     setStyle(newStyle){
         this.style.color=newStyle.color;
-        this.style.size=newStyle.size;
-        switch(newStyle.mode){
+        let ratio;
+        switch(newStyle.pointMode){
             case "discriminant":
-                //my discrimnant is b^2/4ac 
-                let discriminant = this.z1.copy().mult(this.z1).div(this.z0.copy().mult(this.z1).mult(4));
+                //this discrimnant is b^2/4ac 
+                //let discriminant = this.z1.copy().mult(this.z1).div(this.z0.copy().mult(this.z1).mult(4));
                 //discriminant.sub(1); //measure how close the ratio is 1
 
+                let discriminant = this.z1.copy().mult(this.z1).sub(this.z0.copy().mult(this.z1).mult(4));
+
                 let norm=discriminant.abs();
-                this.style.size *= newStyle.size/(norm+0.1);
+                 ratio = 2/(sqrt(norm+1))
+                 console.log(ratio);
+                this.style.size = newStyle.size*ratio;
+                this.style.color = lerpColor(color(TERTIARY),newStyle.color,ratio/2)
                 break;
 
             case "sup":
@@ -75,7 +80,9 @@ class CP2Point {
                 for(let z of this.p){
                     norms.push(z.abs());
                 }
-                this.style.size = newStyle.size/(max(norms)+0.1);
+                ratio = 3/(0.1+pow((max(norms)),1.7))
+                this.style.color = lerpColor(color(TERTIARY),newStyle.color,max(norms)/3)
+                this.style.size = newStyle.size*ratio;
                 break;
         }
     }
@@ -83,7 +90,7 @@ class CP2Point {
     //draw the curve "curve" in graphics window "ctx"
     // ----- options -----
     // CP2Curve curve
-    // mode: "REAL", "REAL3D", "STELLAR" "STELLAR3D", "TORIC"
+    // projectionMode: "REAL", "REAL3D", "STELLAR" "STELLAR3D", "TORIC"
     // triCoords 
     // ctx, p5.graphics object
     render(r){
@@ -92,7 +99,7 @@ class CP2Point {
         let coords;
         ctx.stroke(style.color);
 		ctx.strokeWeight(style.size);
-        switch(r.mode){
+        switch(r.projectionMode){
             case "REAL":
                 coords = this.getAffine();
                 ctx.point(coords[0].x,coords[1].x);
@@ -101,8 +108,11 @@ class CP2Point {
             case "REAL3D": //x1,y1,x2
                 
                 coords = this.getAffine();
-                let abs2=pow(coords[0].y,2)+pow(coords[1].y,2);
-                let pointPos=createVector(coords[0].x,coords[1].x,pow(coords[0].y,2)+pow(coords[1].y,2));
+                //let abs2=pow(coords[0].y,2)+pow(coords[1].y,2);
+                let pointPos=createVector(
+                    coords[0].x,
+                    coords[1].x,
+                    pow(coords[0].y,2)+pow(coords[1].y,2));
                 //ctx.stroke(lerpColor(style.color,color(255),pow(coords[0].y,2)+pow(coords[1].y,2)))
                 ctx.point(pointPos.x,pointPos.y,pointPos.z);
                 break;
@@ -199,65 +209,76 @@ class CP2Point {
         
     }
 
+}
 
-
-    //produces a grid of points inside of CP^2
-    //in projective coordinates, these are of the form (z0,z1,z2) where zk = ak + i bk
-    // ak,bk drawn from the range [-]
-    static makeGrid(gridSize,options={}){
-        const EPS = 1e-7; //epsilon to squiggle thing around
-        let base = gridSize;
-        let numCoords = 6;
-        if(options.real){
-            numCoords=3; //life is easier if im real
+//produces a grid of points inside of CP^2
+//in projective coordinates, these are of the form (z0,z1,z2) where zk = ak + i bk
+// ak,bk drawn from the range [-]
+//get # grid points , starting at state. filling sequence is ticker tape, skipping already checked boxes.
+// state: 
+// tape ([*,...,*])
+// base (current level of filling)
+function getGridPoints(state,numPts){
+    let points=[]
+    let len = state.tape.length;
+    let addedPoints=0;
+    let allowEndLoop=false;
+    while(addedPoints<numPts || !allowEndLoop){
+        
+        let t = incrementTickerTape(state,0).tape;
+         if(max(t)==state.base-1){ //only include points which start at base
+            points.push(getPointFromTape(state));
+            allowEndLoop=true;
         }
-
-        //ticker tape algorithm: loops throguh all numbers [0,...,0] to [n,...,n] for base n
-        //initialize coordinates to all zero
-        let tape = [];
-        for(let i=0;i<numCoords;i++){
-            tape.push(0);
-        }
-        incrementTickerTape(tape,0,base); //make sure i dont have 0 in my grid
-
-        let points=[]
-        for(let i=0; i<pow(base,numCoords);i++){
-            let t = incrementTickerTape(tape,0,base);
-            if(t){
-                let coords = t.map(x => x-(base-1)/2);
-                if(coords.length==3){
-                    coords[0]+=EPS;
-                    points.push(new CP2Point(coords));
-                } else {
-                    let z0 = new Complex(coords[0]+EPS,coords[1])
-                    let z1 = new Complex(coords[2],coords[3])
-                    let z2 = new Complex(coords[4]-EPS,coords[5])
-                    points.push(new CP2Point([z0,z1,z2]))
-                }
-            }
-        }
-
-        return points;
+        addedPoints+=1;
     }
+    
+    return {
+        points: points,
+        state: state
+    };
 }
 
 //iterative function which increments ticker tape
 // tape is array of numbers [*,...,*]
 // position is the position you want to increment
 // base is the base of the ticker tape
-function incrementTickerTape(tape, position, base){
+function incrementTickerTape(state, position){
+    let tape=state.tape;
+    let base=state.base;
     if(tape[position]<base-1){
         tape[position]+=1;
-        return tape;
+        return state;
     } else {
         if(position<tape.length-1){
             tape[position]=0;
-            return incrementTickerTape(tape,position+1,base);
+            return incrementTickerTape(state,position+1);
         } else {
-            return false;
+            //if i overflow, reset and increase the base
+            for(let i =0; i<tape.length; i++){
+                state.tape[i] = 0
+            }
+            state.tape[0]=state.base;
+            state.base+=1;
+            return state;
         }
-        
     }
+}
+
+function getPointFromTape(state){
+    const EPS = 1e-7; //epsilon to squiggle thing around
+    let coords = state.tape.map(x => x-(state.base-1)/2);
+    let p;
+    if(coords.length==3){
+        coords[0]+=EPS;
+        p=new CP2Point(coords);
+    } else {
+        let z0 = new Complex(coords[0]+EPS,coords[1])
+        let z1 = new Complex(coords[2],coords[3]-EPS)
+        let z2 = new Complex(coords[4]-EPS,coords[5])
+        p= new CP2Point([z0,z1,z2]);
+    }
+    return p;
 }
 
 //class for line in projective space
@@ -433,6 +454,9 @@ class CP2Curve {
         iterations:100,
         tolerance: 1e-5}) 
     {
+        if(this.isZero()){
+            return [l.implicit()];
+        }
         let line = l.paramertize();
         let poly = new Polynomial([0]); //restriction of defining polynomial of curve to line
         for (let xPow = 0; xPow <= this.degree; xPow++) {
