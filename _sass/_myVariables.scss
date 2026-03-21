@@ -164,11 +164,15 @@ $light-body-color:    $body-bg;
 
 $light-primary: #368722;
 $light-secondary: #8B1313; 
+$light-link-color: #5a438c;
+$link-hover-color:    lighten($link-color, 15%);
 
 body.light-page {
   background-color: $light-body-bg;
   color: $light-body-color;
 }
+
+
 
 /* Header / Navbar */
 body.light-page header,
@@ -177,10 +181,19 @@ body.light-page .navbar {
   border-bottom: 0px ;
 }
 
+/* all links in light mode */
+body.light-page a {
+  color: $light-link-color !important;  /* pick something visible */
+}
+body.light-page a.hover {
+  color: $link-hover-color !important;  /* pick something visible */
+}
+
+
+
 /* Navbar links */
-body.light-page .navbar a,
-body.light-page header a {
-  color: $light !important;
+body.light-page .navbar a {
+  color: $light ! important ;
 }
 
 body.light-page .navbar a:hover {

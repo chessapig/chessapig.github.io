@@ -140,6 +140,7 @@ void main() {
 let layer;
 let toggle=0;
 let refs = [
+  'me.jpg',
   'orb.jpeg',
   'mySphere.jpg',
   'headlight.jpg',
@@ -180,7 +181,7 @@ function setup() {
     //colorChannels: 3,       // RGB, no alpha needed for normals
     depth: true             // optional, if you're using depth
   });
-  c
+  
 	layer3D = createFramebuffer();
   refLayer = createFramebuffer();
 
@@ -251,7 +252,7 @@ function draw() {
  lookupShader.setUniform('doNormal', doNormal);
 
 	layer3D.begin();
-	background(100);
+	background(255);
   shader(lookupShader);
   drawGeometry();
 	layer3D.end();
@@ -270,14 +271,14 @@ function draw() {
   //scale(0.3);
   //image(imageLayer,0,0)
   if(!doNormal){
-    // push();
-    // texture(imageLayer);
-    // //translate(imageLayer.width/2,imageLayer.height/2);
-    // //translate(imageLayer.width/2,imageLayer.height/2);
-    // translate(-width/4,-height/4);
-    // scale(0.3);
-    // plane(300, 300);
-    // pop();
+    push();
+    texture(imageLayer);
+    //translate(imageLayer.width/2,imageLayer.height/2);
+    //translate(imageLayer.width/2,imageLayer.height/2);
+    translate(-width/4,-height/4);
+    scale(0.3);
+    plane(300, 300);
+    pop();
   }
 }
 
@@ -286,10 +287,10 @@ function draw() {
 function drawGeometry(){
   //noStroke();
   scale(100);
-  //rotateZ(frameCount*0.005);
-  //rotateX(PI/3);
+  rotateZ(frameCount*0.02)
+  rotateX(PI*0.3);
   orbitControl();
-  torus(1,0.5,30,30);
+  torus(1,0.5,100,100);
   //model(tube.model);
   //renderWireframe(tube.wireframe);
 }

@@ -1,12 +1,35 @@
-//class of a point in CP2
-class CP2Point {
-    //store a point in projective coordinates as a triple of complex numbers
+//class of point in CPn
+class CPNPoint{
+    //store a point in projective coordinates as a N+1 complex numbers
     constructor(values) {
         this.set(values);
+        this.N = values.length-1;
         this.style={
-            size: 5,
+            size: 1.2,
             color: color(0)
         }
+    }
+
+    set(values){
+        this.p=values.map(c => Complex.complexify(c));
+        return this;
+    }
+
+    copy(){
+        let copyValues = this.p.map(c => c.copy());
+        return new CPNPoint(copyValues);
+    }
+
+    static randPoint(N,{real= false}={}) {
+        let values=[];
+        for(let n=0;n<=N;n++){
+            let newValue = Complex.randNormal();
+            if(real){
+                newValue=newValue.x;
+            } 
+            values.push(newValue);
+        }
+        return new CPNPoint(values);
     }
 
     display() {
@@ -21,22 +44,26 @@ class CP2Point {
         return str;
     }
 
-    //get affine coordinates for slice [1,z1,z2]
+    //returns hermitian dot product between points in CP2
+    dot(p2){
+        let p1 = this.copy();
+        let output = Complex.zero();
+        for(let i=0;i<=this.N;i++){
+            output.add(p2.p[i].copy().conj().mult(p1.p[i]))
+        }
+        return output;
+    }
+
+
+    //get affine coordinates for slice [1,z1,...]
     getAffine() {
-        return [this.z1.copy().div(this.z0), this.z2.copy().div(this.z0)];
-    }
-
-    getBarycentric() {
-        return this.p.map(c => c.abs2());
-    }
-
-    getSqrtBarycentric() {
-        return this.p.map(c => c.abs());
-    }
-
-    //get coordinates on C^*...
-    getAmoeba() {
-        return createVector(log(this.z0.abs2()), log(this.z1.abs2()));
+        let coords=[];
+        let z0 = this.p[0];
+        for(let i = 1;i<=this.N;i++){
+            let z = this.p[i]
+            coords.push(z.copy().div(z0));
+        }
+        return coords;
     }
 
     getStellar() {
@@ -47,13 +74,37 @@ class CP2Point {
     //converts stellar coordinates to points on boundary of sphere in 3d
     getSpherical() {
         let roots = this.getStellar();
-        let spherePts = [];
-        for (let r of roots) {
+        let spherePts = roots.map(r => {
             let K = 1 + r.abs2();
-            let sphereVec = createVector(2 * r.x / K, 2 * r.y / K, 1 - 2 / K);
-            spherePts.push(sphereVec);
-        }
+            return createVector(2 * r.x / K, 2 * r.y / K, 1 - 2 / K);
+        });
         return spherePts;
+    }
+
+    getNormSq() {
+        return this.p.map(c => c.abs2());
+    }
+
+}
+
+//class of a point in CP2
+class CP2Point extends CPNPoint {
+    //store a point in projective coordinates as a triple of complex numbers
+    constructor(values) {
+        super([values[0],values[1],values[2]]); //only send 3 vlaues 
+    }
+
+    set(values){
+        super.set(values);
+        this.z0 = this.p[0];
+        this.z1 = this.p[1];
+        this.z2 = this.p[2];
+        return this;
+    }
+
+    copy(){
+        let copyValues = this.p.map(c => c.copy());
+        return new CP2Point(copyValues);
     }
 
     //set the style options
@@ -70,7 +121,6 @@ class CP2Point {
 
                 let norm=discriminant.abs();
                  ratio = 2/(sqrt(norm+1))
-                 console.log(ratio);
                 this.style.size = newStyle.size*ratio;
                 this.style.color = lerpColor(color(TERTIARY),newStyle.color,ratio/2)
                 break;
@@ -138,38 +188,14 @@ class CP2Point {
                 
             case "TORIC": //requires specifying triCoords
                 
-                let bary = this.getBarycentric();
+                let bary = this.getNormSq();
                 let screen = r.triCoord.barycentricToScreen(bary);
                 ctx.point(screen.x,screen.y);
                 break;
         }
     }
 
-    set(values){
-        this.p=values.map(c => Complex.complexify(c));
-        this.z0 = this.p[0];
-        this.z1 = this.p[1];
-        this.z2 = this.p[2];
-        return this;
-    }
-
-    copy(){
-        let copyValues = [];
-        for(let v of this.p){
-            copyValues.push(v.copy());
-        }
-        return new CP2Point(copyValues);
-    }
-
-    //returns hermitian dot product between points in CP2
-    dot(p2){
-        let p1 = this.copy();
-        let output = Complex.zero();
-        for(let i=0;i<3;i++){
-            output.add(p2.p[i].copy().conj().mult(p1.p[i]))
-        }
-        return output;
-    }
+    
 
     static cross(p1, p2) {
         return new CP2Point([
@@ -192,94 +218,31 @@ class CP2Point {
         
     }
 
-    static randPoint({real= false}={}) {
-        if(!real){
-            return new CP2Point([
-                Complex.randNormal(),
-                Complex.randNormal(),
-                Complex.randNormal(),
-            ])
+    //if options.real=true, return point on RP2
+    //if options.seed, produce deteriminstic random point.
+    static randPoint(options={}) {
+        let z0,z1,z2;
+        if(options.seed){
+            z0=Complex.randNormal({seed: 3*options.seed});
+            z1=Complex.randNormal({seed: 3*options.seed+1});
+            z2=Complex.randNormal({seed: 3*options.seed+2});
         } else {
-            return new CP2Point([
-                Complex.randNormal().x,
-                Complex.randNormal().x,
-                Complex.randNormal().x,
-            ])
+            z0=Complex.randNormal();
+            z1=Complex.randNormal();
+            z2=Complex.randNormal();
         }
-        
-    }
 
-}
-
-//produces a grid of points inside of CP^2
-//in projective coordinates, these are of the form (z0,z1,z2) where zk = ak + i bk
-// ak,bk drawn from the range [-]
-//get # grid points , starting at state. filling sequence is ticker tape, skipping already checked boxes.
-// state: 
-// tape ([*,...,*])
-// base (current level of filling)
-function getGridPoints(state,numPts){
-    let points=[]
-    let len = state.tape.length;
-    let addedPoints=0;
-    let allowEndLoop=false;
-    while(addedPoints<numPts || !allowEndLoop){
-        
-        let t = incrementTickerTape(state,0).tape;
-         if(max(t)==state.base-1){ //only include points which start at base
-            points.push(getPointFromTape(state));
-            allowEndLoop=true;
+        if(options.real){ //take real parts to get gaussian distributed point on RP2
+            z0=z0.x;
+            z1=z1.x;
+            z2=z2.x
         }
-        addedPoints+=1;
-    }
-    
-    return {
-        points: points,
-        state: state
-    };
-}
 
-//iterative function which increments ticker tape
-// tape is array of numbers [*,...,*]
-// position is the position you want to increment
-// base is the base of the ticker tape
-function incrementTickerTape(state, position){
-    let tape=state.tape;
-    let base=state.base;
-    if(tape[position]<base-1){
-        tape[position]+=1;
-        return state;
-    } else {
-        if(position<tape.length-1){
-            tape[position]=0;
-            return incrementTickerTape(state,position+1);
-        } else {
-            //if i overflow, reset and increase the base
-            for(let i =0; i<tape.length; i++){
-                state.tape[i] = 0
-            }
-            state.tape[0]=state.base;
-            state.base+=1;
-            return state;
-        }
+        return new CP2Point([z0,z1,z2]);
     }
 }
 
-function getPointFromTape(state){
-    const EPS = 1e-7; //epsilon to squiggle thing around
-    let coords = state.tape.map(x => x-(state.base-1)/2);
-    let p;
-    if(coords.length==3){
-        coords[0]+=EPS;
-        p=new CP2Point(coords);
-    } else {
-        let z0 = new Complex(coords[0]+EPS,coords[1])
-        let z1 = new Complex(coords[2],coords[3]-EPS)
-        let z2 = new Complex(coords[4]-EPS,coords[5])
-        p= new CP2Point([z0,z1,z2]);
-    }
-    return p;
-}
+
 
 //class for line in projective space
 class CP2Line {
@@ -346,11 +309,17 @@ class CP2Line {
     static randLine(options) {
         
        //return CP2Line.dualLine(CP2Point.randPoint(options),options);
-       
-        return new CP2Line(
-            CP2Point.randPoint(options),
-            CP2Point.randPoint(options)
-        )
+       let p1,p2; 
+       if(options.seed){
+            options.seed=options.seed*2;
+            p1 = CP2Point.randPoint(options);
+            options.seed+=1;
+            p2 = CP2Point.randPoint(options);
+        } else {
+            p1 = CP2Point.randPoint(options);
+            p2 = CP2Point.randPoint(options);
+        }
+        return new CP2Line(p1,p2);
     }
 
     //returns the dual line to a point in CP^2
@@ -367,86 +336,170 @@ class CP2Line {
     }
 }
 
-//class for curve in projective space
-class CP2Curve {
-    //define a curve implicitly by its polynomial (thoght of as a homogenous polynomial)
-    //coefs is of the form  
-    //[ [ 1   , x     , x^2   , x^3] , 
-    //  [ y   , xy    , x^2 y ] , 
-    //  [ y^2 , y^2 x], 
-    //  [ y^3] 
-    // ]
-    constructor(coefs) {
-        //this.degree = coefs[0].length - 1;
-        this.coefs = [];
-        for (let xPow = 0; xPow <= degree; xPow++) {
-            let xCoefs = [];
-            for (let yPow = 0; yPow <= degree - xPow; yPow++) {
-                let c = coefs[xPow][yPow]
-                if (c) {
-                    xCoefs[yPow] = Complex.complexify(c);
-                } else {
-                    xCoefs[yPow] = Complex.zero();
-                }
-            }
-            this.coefs.push(xCoefs);
-        }
+class CP2Curve{
+    constructor(data=[]) {
+        this.monomials = [];
+        this.didUpdate=false;
 
-        //this.degree = degree;
-    }
-
-    //set coefficents 
-    //returns true if one of the coefficents changed, false otherwise
-    setCoefs(coefs){
-        let didSet = false;
-        this.degree = coefs[0].length-1;
-        if(!this.coefs){ //if its my first time...
-            this.coefs = [];
-            didSet=true;
+        // CASE 0: empty input
+        if(data.length==0){
+            this.monomials=[];
         } 
-        if(this.degree < this.coefs[0].length-1){
-            didSet=true;
+
+        // CASE 1: list of monomials
+        else if (data.length && data[0].xDeg !== undefined) {
+
+            this.monomials = data.map(m => ({
+                xDeg: m.xDeg,
+                yDeg: m.yDeg,
+                c: Complex.complexify(m.c)
+            }));
+
+            this.degree = 0;
+
+            for (let m of this.monomials) {
+                this.degree = max(this.degree, m.xDeg + m.yDeg);
+            }
+
         }
 
-        let newCoefs=[];
-        for (let xPow = 0; xPow <= this.degree; xPow++) {
-            let xCoefs = [];
-            for (let yPow = 0; yPow <= this.degree - xPow; yPow++) {
-                let c = coefs[xPow][yPow]
-                if (!c) { //if c wasnt defined, set it to zero
-                    c = Complex.zero();
-                } 
-                if(xPow< this.coefs.length && yPow < this.coefs[xPow].length){
-                    //if this array element does exist alread, just update the complex number
-                    xCoefs[yPow] = this.coefs[xPow][yPow];
-                    didSet= didSet || xCoefs[yPow].set(Complex.complexify(c));
-                } else {
-                    //otherwise, make new complex number 
-                    xCoefs[yPow] = Complex.complexify(c);
-                    didSet=true;
+        // CASE 2: triangular coefficient array
+        else {
+
+            this.degree = data[0].length - 1;
+
+            for (let xDeg = 0; xDeg <= this.degree; xDeg++) {
+                for (let yDeg = 0; yDeg <= this.degree - xDeg; yDeg++) {
+
+                    let c = data[xDeg][yDeg];
+
+                    if (c) {
+                        this.monomials.push({
+                            xDeg: xDeg,
+                            yDeg: yDeg,
+                            c: Complex.complexify(c)
+                        });
+                    }
+
                 }
             }
-            newCoefs.push(xCoefs);
+
         }
-        this.coefs= newCoefs;
-        return didSet;
+
+        
     }
 
-    //evaluate at a point in CP2
+
+    //sets the x,y degree monomial. n is object {xDeg, yDeg, c} for c a complex number
+    //returns true if i changed something, false if not.
+    setMonomial(n){
+        n.c = Complex.complexify(n.c);
+        for(let m of this.monomials){
+            if(m.xDeg == n.xDeg && m.yDeg==n.yDeg){
+                if(!m.c.equals(n.c)){
+                    m.c=n.c;
+                    return true; //i DID modify the monomial
+                } else {
+                    return false; //i failed to modify the monomial
+                }
+            }
+        }
+        //if i didnt see any monomials, add myself to the list
+        if(!n.c.isZero()){
+            this.monomials.push(n);
+            this.sortMonomials();
+            return true; //if i added a whole new monomial, that WASNT ZERO, then i successfuly changed the coefficent
+        }
+        this.getDegree();
+        return false;
+    }
+
+    //sort monomials and prune those with coeffenct zero
+    sortMonomials(){
+        this.monomials = this.monomials.filter(m => !m.c.isZero());
+        this.monomials.sort((a,b) => {
+
+            let degA = a.xDeg + a.yDeg;
+            let degB = b.xDeg + b.yDeg;
+
+            if (degA !== degB) return degA - degB;
+            if (a.xDeg !== b.xDeg) return a.xDeg - b.xDeg;
+
+            return a.yDeg - b.yDeg;
+        });
+    }
+
+    display(){
+        this.sortMonomials(); //ensures monomials are sorted, and that there are no zero coeffs
+        let string = "" 
+        for(let i = 0 ;i < this.monomials.length; i++){
+            let m = this.monomials[i];
+            let monomialStr = "";
+            if(!m.c.isZero()){
+                if(m.c.isReal()){
+                    let realDisplay =  m.c.display();
+                    if(m.xDeg==0 && m.yDeg==0){
+                        monomialStr += realDisplay;
+                    } else if (realDisplay=="1"){
+                        monomialStr+=""; //dont put anything
+                    } else if( realDisplay == "-1"){
+                        monomialStr+="-" //only put a minus sign!
+                    } else {
+                        monomialStr +=realDisplay;
+                    }
+                } else {
+                    monomialStr += "("+ m.c.display() + ")";
+                }
+                //monomialStr += " \\cdot ";
+                if(m.xDeg>0){
+                    monomialStr += "x";
+                    if(m.xDeg > 1){
+                        monomialStr+= "^" + str(m.xDeg);
+                    }
+                }
+                if(m.yDeg>0){
+                    monomialStr += "y";
+                    if(m.yDeg > 1){
+                        monomialStr+= "^" + str(m.yDeg);
+                    }
+                }
+                if(i!= this.monomials.length-1){
+                    monomialStr+=" + "
+                }
+            }
+            string+=monomialStr;
+        } 
+
+        if(string==""){ 
+            return "0"
+        }
+        return string;
+    }
+
+    getDegree(){
+        this.degree = 0;
+
+        for (let m of this.monomials) {
+            this.degree = max(this.degree, m.xDeg + m.yDeg);
+        }
+
+        return this.degree;
+    }
+
     eval(pt) {
         let output = Complex.zero();
-        for (let xPow = 0; xPow <= this.degree; xPow++) {
-            for (let yPow = 0; yPow <= this.degree - xPow; yPow++) {
-                let zPow = this.degree - xPow - yPow;
-                let c = this.coefs[xPow][yPow]
-                let monomial = Complex.pow(pt.z1, xPow).mult(Complex.pow(pt.z2, yPow)).mult(Complex.pow(pt.z0, zPow))
-                output.add(monomial.mult(c))
-            }
+        for (let m of this.monomials) {
+            let zDeg = this.degree - m.xDeg - m.yDeg;
+            let monomial =
+                Complex.pow(pt.z1, m.xDeg)
+                .mult(Complex.pow(pt.z2, m.yDeg))
+                .mult(Complex.pow(pt.z0, zDeg));
+            output.add(monomial.mult(m.c));
         }
         return output;
     }
 
-    //intersect with CP2 Line l. 
+        //intersect with CP2 Line l. 
     // returns array of CP2Points with length degree
     //options:
     intersect(l,options={
@@ -459,19 +512,21 @@ class CP2Curve {
         }
         let line = l.paramertize();
         let poly = new Polynomial([0]); //restriction of defining polynomial of curve to line
-        for (let xPow = 0; xPow <= this.degree; xPow++) {
-            for (let yPow = 0; yPow <= this.degree - xPow; yPow++) {
-                let zPow = this.degree - xPow - yPow;
-                let c= this.coefs[xPow][yPow];
-                if(options.real){
-                    c=c.x;
-                }
-                let monomial = new Polynomial([c]); //coefficent of this monomial
-                monomial.mult(Polynomial.pow(line[0], xPow))
-                monomial.mult(Polynomial.pow(line[1], yPow))
-                monomial.mult(Polynomial.pow(line[2], zPow))
-                poly.add(monomial)
+        for (let m of this.monomials) {
+            let zDeg = this.degree - m.xDeg - m.yDeg;
+
+            let c = m.c;
+            if (options.real) {
+                c = c.x;
             }
+
+            let monomial = new Polynomial([c]);
+
+            monomial.mult(Polynomial.pow(line[0], m.xDeg))
+            monomial.mult(Polynomial.pow(line[1], m.yDeg))
+            monomial.mult(Polynomial.pow(line[2], zDeg))
+
+            poly.add(monomial);
         }
 
         //loose tolerance, but lots of iterations
@@ -492,17 +547,8 @@ class CP2Curve {
        // points.map( p => p.style=this.style)
         return points;
     }
-    
 
-    isZero() {
-        let isZero = true;
-        for (let coefColumn of this.coefs) {
-            for (let c of coefColumn) {
-                if (!c.isZero()) {
-                    isZero = false;
-                }
-            }
-        }
-        return isZero;
+    isZero(){
+        return this.monomials.length === 0;
     }
 }

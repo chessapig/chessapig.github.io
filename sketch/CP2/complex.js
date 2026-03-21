@@ -10,6 +10,10 @@ class Complex {
 		return abs(this.x) < eps && abs(this.y) < eps
 	}
 
+	isReal(eps = 1e-6) {
+		return abs(this.y) < eps;
+	}
+
 	display() {
 		let numDigits = 2;
 		let eps = 0.00001;
@@ -136,6 +140,10 @@ class Complex {
 		return this;
 	}
 
+	equals(z){
+		return this.x==z.x && this.y==z.y;
+	}
+
 	static pow(z, n) {
 		let rad = pow(z.abs(), n);
 		let angle = z.theta() * n;
@@ -145,6 +153,10 @@ class Complex {
 
 	static polar(r, theta) {
 		return new Complex(r * cos(theta), r * sin(theta));
+	}
+
+	static exp(z){
+		return Complex.polar(exp(z.x), z.y);
 	}
 
 	static complexify(z) {
@@ -170,10 +182,100 @@ class Complex {
 		return new Complex(0, 1)
 	}
 
-	static randNormal(){ //box muller method for random gaussian
-		 let r = sqrt(-2*log(random()));
-	    let theta = TWO_PI*random();
+	//box muller method for random gaussian
+	//if i plug in {seed: n} with integer n, then it returns a deteriminestic random normal.
+	static randNormal(options={}){ 
+		let rand1, rand2;
+		if(options.seed){
+			rand1 = hashFloat(2*options.seed);
+			rand2 = hashFloat(2*options.seed+1);
+		} else {
+			rand1 = random();
+			rand2 = random();
+		}
+		let r = sqrt(-2*log(rand1));
+	    let theta = TWO_PI*rand2;
 	    return Complex.polar(r,theta);
 	}
+}
 
+function hashFloat(seed) {
+	let x = seed | 0;
+
+	x ^= x >>> 16;
+	x = Math.imul(x, 0x7feb352d);
+	x ^= x >>> 15;
+	x = Math.imul(x, 0x846ca68b);
+	x ^= x >>> 16;
+
+	return (x >>> 0) / 4294967296;
+}
+
+
+//chatGPT implemented quaternions 
+class Quaternion {
+	constructor(w, x, y, z) {
+		this.w = w; this.x = x; this.y = y; this.z = z;
+	}
+
+	static identity() {
+		return new Quaternion(1,0,0,0);
+	}
+
+	static fromAxisAngle(axis, angle) {
+		let h = angle/2, s = sin(h);
+		return new Quaternion(cos(h), axis.x*s, axis.y*s, axis.z*s);
+	}
+
+	mult(q) {
+		return new Quaternion(
+			this.w*q.w - this.x*q.x - this.y*q.y - this.z*q.z,
+			this.w*q.x + this.x*q.w + this.y*q.z - this.z*q.y,
+			this.w*q.y - this.x*q.z + this.y*q.w + this.z*q.x,
+			this.w*q.z + this.x*q.y - this.y*q.x + this.z*q.w
+		);
+	}
+
+	normalize() {
+		let m = sqrt(this.w*this.w + this.x*this.x + this.y*this.y + this.z*this.z);
+		this.w/=m; this.x/=m; this.y/=m; this.z/=m;
+		return this;
+	}
+
+	static slerp(q1, q2, t) {
+		let cosT = q1.w*q2.w + q1.x*q2.x + q1.y*q2.y + q1.z*q2.z;
+		if (abs(cosT) >= 1.0) return q1;
+
+		let half = acos(cosT);
+		let sinH = sqrt(1 - cosT*cosT);
+
+		if (abs(sinH) < 1e-3) {
+			return new Quaternion(
+				(q1.w+q2.w)/2,
+				(q1.x+q2.x)/2,
+				(q1.y+q2.y)/2,
+				(q1.z+q2.z)/2
+			);
+		}
+
+		let a = sin((1-t)*half)/sinH;
+		let b = sin(t*half)/sinH;
+
+		return new Quaternion(
+			q1.w*a + q2.w*b,
+			q1.x*a + q2.x*b,
+			q1.y*a + q2.y*b,
+			q1.z*a + q2.z*b
+		);
+	}
+
+	toMatrix() {
+		let {w,x,y,z} = this;
+		return [
+			1-2*y*y-2*z*z, 2*x*y-2*z*w,   2*x*z+2*y*w,   0,
+			2*x*y+2*z*w,   1-2*x*x-2*z*z, 2*y*z-2*x*w,   0,
+			2*x*z-2*y*w,   2*y*z+2*x*w,   1-2*x*x-2*y*y, 0,
+			0,0,0,1
+		];
+	}
 }

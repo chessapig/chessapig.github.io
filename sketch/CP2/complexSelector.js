@@ -1,36 +1,178 @@
 
 
+//stores the information of position,  mouse interaction. 
+class Selector{
+    constructor(options){
+        const defaults = {
+            x: 0,
+            y: 0,
+			radius: 0.1,
+            selectRadius: 0.1
+		};
 
+		Object.assign(this, defaults, options); 
 
-class ComplexSelector {
-
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-
-        this.dragging = false; // Is the object being dragged?
         this.rollover = false; // Is the mouse over the object?
         this.isPressed = false; //Did we just click and drag this selector?
         this.scrolling = false;
-        this.scrollMode = "scale"; //"scale" or "angle"
-        this.enabled = false;
-        this.justEnabled = false;
-
-        this.mouse = createVector(0, 0);
-        this.radius = 0.12;
         this.hidden = false;
+    } 
 
-        this.selectRadius = this.radius * 2;
-        this.offset = createVector(0, 0);
+    // Is mouse over object (stored in the rollover condition)
+    over() {
+        this.rollover =
+        dist(this.x,this.y,this.mouse.x,this.mouse.y) < this.selectRadius;
+    }
 
-        this.magnitude = 0.5;
-        this.angle = PI/2;
+    update(mouse){
+        this.mouse = mouse;
+        this.over();
 
-        this.activeColor = color(SECONDARY);
-        this.neutralColor = color(FRG);
-        this.noColor = color(BKG);
+        if(this.isPressed){
+            this.onUpdate();
+        }
+    }
 
-        this.type="complex"
+    onUpdate(){ //default behievor is to just move the selector
+        this.x = this.mouse.x + this.offset.x;
+        this.y = this.mouse.y + this.offset.y;
+    }
+
+    pressed() {
+        // Did I click on the object?
+        if (this.rollover && !this.hidden) {
+            this.isPressed = true;
+            this.offset = createVector(this.x - this.mouse.x, this.y - this.mouse.y);
+            
+            this.onPressed();
+        }
+    }
+
+    onPressed(){} //modify in lower classes to do extra things when button is pressed
+
+    released(){
+        this.onReleased();
+        this.isPressed = false;
+    }
+
+    onReleased(){} //modify in lower classes to do extra things when button is released
+
+    // scroll hook
+    //return true if scroll was recognized, false otherwise
+    scroll(delta){
+        if(this.rollover && !this.hidden){
+            if (delta != 0) {
+                this.scrolling=true;
+                return this.onScroll(delta);
+            } else {
+                this.scrolling=false;
+            }
+
+            return true;
+        }
+        return false
+    }
+
+    onScroll(delta){}   // subclasses override
+
+    isUpdating(){
+        return this.isPressed || this.scrolling
+    }
+
+    draw(ctx){ //default draw (modify in lower classes)
+        ctx.push();
+        ctx.stroke(0);
+        ctx.strokeWeight(this.radius);
+        ctx.fill(0);
+        ctx.circle(this.x,this.y,0.1);
+        ctx.pop();
+    }
+
+}
+
+class ComplexSelector extends Selector{
+    constructor(options){
+        super(options); //contains x,y,radius,selectraidus
+
+        const defaults = { //additional parameters
+            enabled: false,
+            magnitude: 0.5,
+            angle: 0,
+            scrollMode: "SCALE", //"scale" or "angle"
+            activeColor: color(SECONDARY),
+            neutralColor: color(FRG),
+            noColor: color(BKG),
+            
+		};
+        this.defaults=defaults;
+		Object.assign(this, defaults, options); 
+
+        
+        this.justEnabled=false; 
+        this.type="COMPLEX"; //just in case i wanna check
+    }
+
+    onPressed(){
+        if(!this.enabled){
+            this.justEnabled = true;
+        }
+
+        this.enabled = true;
+        this.startAngle = this.angle;
+    }
+    
+    onReleased(){
+        this.over();
+        if (this.isPressed && this.rollover) {
+            if (!this.justEnabled) {
+                this.enabled = false; //only turn of if i didnt just enable this controller
+            } else {
+                //if i just click a point, set it to default value
+                this.magnitude = this.defaults.magnitude ;
+                this.angle = this.defaults.angle ;
+            }
+        }
+        this.isPressed = false;
+        this.justEnabled = false;
+    }
+
+    onUpdate(){
+        let p1 = createVector(this.x,this.y);
+        let angleVector = p1.copy().sub(this.mouse);
+        let p2 = this.mouse.copy().add(this.offset);
+        this.magnitude =  p1.sub(p2).mag();
+        this.constrainMagnitude();
+
+        this.angle =
+            this.startAngle +
+            angleVector.heading() -
+            this.offset.heading();
+    }
+    
+    onScroll(delta){
+        if(!this.enabled){
+            this.scrolling=false;
+            return false;
+        }
+
+        
+        switch(this.scrollMode){
+            case "SCALE":
+                this.magnitude += delta / 1000;
+                this.constrainMagnitude();
+                break;
+
+            case "ANGLE":
+                this.angle += TWO_PI * delta / 1000;
+                this.angle = (this.angle + TWO_PI) % TWO_PI
+                break;
+        }
+       
+        return true;
+    }
+
+    constrainMagnitude(){
+        this.magnitude=constrain(this.magnitude,0.,0.99)
     }
 
     //copy parameters from another selector
@@ -38,49 +180,6 @@ class ComplexSelector {
         this.magnitude = selector.magnitude;
         this.angle = selector.angle;
         this.enabled = selector.enabled;
-        this.justEnabled = selector.justEnabled;
-    }
-
-    getComplex() {
-        if (!this.enabled) {
-            return Complex.zero();
-        }
-        return Complex.polar(pow(20, this.magnitude) - 1, this.angle - HALF_PI);
-    }
-
-    // Is mouse over object (stored in the rollover condition)
-    over() {
-        this.mouse
-        if (dist(this.x, this.y, this.mouse.x, this.mouse.y) < this.selectRadius) {
-            this.rollover = true;
-        } else {
-            this.rollover = false;
-        }
-    }
-
-    //returns true if this selector is currently changing parameters
-    isUpdating(){
-        return this.isPressed || this.scrolling
-    }
-
-    //update the mouse position when i call update...
-    //mouse is a p5Vector object
-    update(mouse) {
-        this.mouse=mouse;
-        this.scrolling = false;
-
-        this.over();
-
-        if (this.isPressed) {
-            let p1 = createVector(this.x, this.y);
-            let angleVector = p1.copy().sub(this.mouse);
-            let p2 = this.mouse.copy().add(this.offset);
-            p1.sub(p2); //p1 contians difference vector from starting point
-
-            this.angle = this.startAngle + angleVector.heading() - this.offset.heading();
-            this.magnitude = p1.mag();
-            this.constrainMagnitude();
-        }
     }
 
     draw(graphics) {
@@ -90,12 +189,11 @@ class ComplexSelector {
         ctx.translate(this.x, this.y);
         ctx.scale(this.radius);
 
-       
-
-        if (this.hidden) {
+        if (this.hidden) { //if hidden do nothing
+            ctx.pop();
             return false;
         }
-        if (!this.enabled) {
+        if (!this.enabled) { //if not enabled then drwa a small dot
             ctx.noStroke();
             ctx.fill(this.noColor);
             ctx.circle(0,0,1);
@@ -112,21 +210,15 @@ class ComplexSelector {
             fillColor = lerpColor(this.activeColor, this.noColor, 0.6)
         }
 
-      
+        let drawRad = sqrt(this.magnitude); //set area proportional to size
 
-        let drawRad = sqrt(this.magnitude);
-
-        if (this.dragging || this.rollover) {
+        if (this.isPressed || this.rollover) { //small outer ring
             ctx.noStroke();
             ctx.fill(fillColor);
             ctx.circle(0, 0, 1.2);
         }
         //fill in outside circle
-        ctx.stroke(this.noColor);
-        ctx.strokeWeight(0.08);
-        if(ctx._renderer.isP3D){ //IF WEBGLMODE: Change stroke weight
-            ctx.strokeWeight(8); 
-        }
+        ctx.noStroke();
         ctx.fill(this.noColor);
         ctx.circle(0, 0, 1);
 
@@ -138,94 +230,52 @@ class ComplexSelector {
         //line(0,-drawRad/2,0,-1/2);
 
         //draw rotated line
+         ctx.strokeWeight(2);
         ctx.stroke(this.neutralColor)
-        ctx.rotate(this.angle);
+        ctx.rotate(this.angle+PI/2);
         ctx.line(0, 0, 0, -1 / 2);
 
         ctx.pop();
 
     }
 
-    pressed() {
-        // Did I click on the object?
-        if (dist(this.x, this.y, this.mouse.x, this.mouse.y) < this.selectRadius && !this.hidden) {
-            if (!this.enabled) {
-                this.justEnabled = true;
-            }
-            this.enabled = true;
-            this.isPressed = true;
-            this.startAngle = this.angle;
-            this.offset = createVector(this.x - this.mouse.x, this.y - this.mouse.y);
-        }
+    //converts from value stored to real number
+    magnitudeToValue(x){ //send [-1,1] to [-infty,infty] in symmetric way
+        return tan(x*PI/2)/2;
     }
 
-    released() {
-        if (this.isPressed && dist(this.x, this.y, this.mouse.x, this.mouse.y) < this.radius) {
-            if (!this.justEnabled) {
-                this.enabled = false; //only turn of if i didnt just enable this controller
-            } else {
-                //if i just click a point, set it to default value
-                this.magnitude = 0.5;
-                this.angle = PI/2;
-            }
-        }
-        this.isPressed = false;
-        this.justEnabled = false;
-
-    }
-
-    scroll(delta) {
-        if (this.rollover && this.enabled && !this.hidden) {
-            if (delta != 0) {
-                if (this.scrollMode == "scale") {
-                    this.magnitude += delta / 1000;
-                    this.constrainMagnitude();
-                } else if (this.scrollMode == "angle") {
-                    this.angle += TWO_PI * delta / 1000;
-                    this.angle = (this.angle + TWO_PI) % TWO_PI
-                }
-
-                this.scrolling = true;
-            }
-        } else {
-            this.scrolling = false;
-        }
-    }
-
-    constrainMagnitude() {
-        this.magnitude = constrain(this.magnitude, 0.0, 0.99);
-    }
-
-    toggleSelectorType(){
-        let real = new RealSelector(this.x,this.y);
-        real.magnitude=this.magnitude;
-        real.constrainMagnitude();
-        real.enabled=this.enabled;
-       
-        return real;
-    }
-
-}
-
-
-class RealSelector extends ComplexSelector{
-    constructor(x,y){
-        super(x,y);
-        this.type="real"
-        this.negColor= color(PRIMARY);
-        this.posColor = color(SECONDARY);
-        this.neutralColor = color(FRG);
-        this.noColor = color(BKG);
-    }
-
-     getComplex() {
+    //return value of selector. In this case a complex number.
+    value(){
         if (!this.enabled) {
             return Complex.zero();
         }
-        return new Complex(tan(this.magnitude*PI/2*0.9),0); //output real part
+        return Complex.polar(this.magnitudeToValue(this.magnitude), this.angle);
     }
-    
-     draw(graphics) {
+
+    //set selector type. Options are "COMPLEX" and "REAL"
+    setSelectorType(type){
+        switch(type){
+            case "COMPLEX":
+                return this;
+            case "REAL":
+                let real = new RealSelector(this); //send all values over!
+                return real;
+        }
+    }
+}
+
+//the only difference is in the way that i display the real selector, and that i output a real number.
+class RealSelector extends ComplexSelector{
+    constructor(options){
+        super(options);
+        const defaults = { //additional parameters
+            posColor: color(SECONDARY),
+            negColor: color(TERTIARY),
+        };
+        Object.assign(this, defaults, options); 
+
+    }
+    draw(graphics) {
         const ctx = graphics || window;
         ctx.push();
         ctx.translate(this.x, this.y);
@@ -242,281 +292,119 @@ class RealSelector extends ComplexSelector{
             ctx.pop();
             return false;
         }
-
-      
-        
         ctx.fill(this.noColor);
         ctx.circle(0,0,1);
       
-        if(this.magnitude>=0){
+        let value = this.value();
+        let radius = constrain(abs(value),0,1);
+        if(value>=0){
             ctx.fill(this.posColor);
         } else {
             ctx.fill(this.negColor);
         }
         ctx.noStroke();
-        ctx.circle(0,0,abs(this.magnitude));
+        ctx.circle(0,0,radius);
 
         if (this.isPressed || this.rollover) {
             ctx.stroke(this.neutralColor);
-            ctx.strokeWeight(0.1);
+            ctx.strokeWeight(2);
             ctx.noFill();
             ctx.circle(0,0,1);
         }
         ctx.pop();
     }
 
-    constrainMagnitude() {
-        this.magnitude = constrain(this.magnitude, -1, 1);
+    constrainMagnitude(){
+        this.magnitude=constrain(this.magnitude,-1,1)
     }
 
-    //update the mouse position when i call update...
-    //mouse is a p5Vector object
-    update(mouse) {
-        this.mouse=mouse;
-        this.scrolling = false;
-        this.over();
-
-        if (this.isPressed) {
-            let p1 = createVector(this.x, this.y);
-            let p2 = this.mouse.copy().add(this.offset);
-            p1.sub(p2); //p1 contians difference vector from starting point
-
-            this.magnitude = -3*p1.y; //set to y coordinate
-            this.constrainMagnitude();
+     onUpdate(){
+        let p1 = createVector(this.x,this.y);
+        let p2 = this.mouse.copy().add(this.offset);
+        this.magnitude =  -p1.sub(p2).y;
+        this.constrainMagnitude();
+    }
+    
+    onScroll(delta){
+        if(!this.enabled){
+            this.scrolling=false;
+            return false;
         }
+
+        this.magnitude += delta / 1000;
+        this.constrainMagnitude();
+        return true;
+    }
+    
+    //return value of selector
+    value(){
+        if(this.enabled){
+            return this.magnitudeToValue(this.magnitude);
+        }
+        return 0;
+       
     }
 
-     toggleSelectorType(){
-        let complex = new ComplexSelector(this.x,this.y);
-        complex.magnitude=this.magnitude;
-        complex.angle=PI/2;
-        complex.enabled=this.enabled;
-        return complex;
+    //set selector type. Options are "COMPLEX" and "REAL"
+    setSelectorType(type){
+        switch(type){
+            case "REAL":
+                return this;
+            case "COMPLEX":
+                let complex = new ComplexSelector(this);
+                complex.magnitude=abs(this.magnitude);
+                if(this.magnitude>=0){
+                    complex.angle=0;
+                } else {
+                    complex.angle=PI;
+                }
+                
+                return complex;
+        }
     }
 }
 
+class ComplexDragger extends Selector {
 
-//class to store array of selectors
-class SelectorArray {
-    constructor(triCoord,degree,{real=false}){
-        this.triCoord=triCoord;
-        this.degree=degree;
-        this.real=real;
-        
-        this.arr = this.createTriangleArray(triCoord,degree);
-        this.generateList()
-
-        this.hidden=false;
-        this.doSymmetrize=false;
+    constructor(x,y, options = {}) {
+        super({
+            x: x,
+            y: y,
+            radius: 0.1,
+            selectRadius: 0.2,
+            ...options
+        });
     }
 
-    draw(graphics){
-        for(let s of this.list){
-            s.draw(graphics);
-        }
+    // dragging behavior
+    onUpdate(){
+        this.x = constrain(this.mouse.x + this.offset.x,-1,1);
+        this.y = constrain(this.mouse.y + this.offset.y,-1,1);
     }
 
-    generateList(){
-        this.list = []
-        for (let list of this.arr) {
-            for (let selector of list) {
-                 this.list.push(selector);
-            }
-        }   
+    draw(ctx){
+
+        ctx.push();
+        ctx.stroke(0);
+        ctx.strokeWeight(2);
+
+        if (this.isPressed) {
+            ctx.fill(230, 237, 28);
+        } 
+        else if (this.rollover) {
+            ctx.fill(162, 232, 23);
+        } 
+        else {
+            ctx.fill(44, 125, 21);
+        }
+
+        ctx.circle(this.x, this.y, this.radius);
+        ctx.pop();
     }
 
-    setDegree(degree){
-        if(degree==this.degree){
-            return //dont do anything if i didnt change the degree.
-        }
-       
 
-        let newSelectors = [];
-        for (let xPow = 0; xPow <= degree; xPow++) {
-            let selectorColumn = [];
-            for (let yPow = 0; yPow <= degree - xPow; yPow++) {
-                let zPow = degree - xPow - yPow
-                let position = this.triCoord.barycentricToScreen([xPow, yPow, zPow]);
-                if(xPow< this.arr.length && yPow < this.arr[xPow].length){
-                    let currentSelector = this.arr[xPow][yPow];
-                    currentSelector.x=position.x;
-                    currentSelector.y=position.y;
-                    selectorColumn[yPow] = currentSelector;
-                } else {
-                    if(this.real){
-                        selectorColumn[yPow] =  new RealSelector(position.x, position.y);
-                    } else {
-                       selectorColumn[yPow] =  new ComplexSelector(position.x, position.y);
-                    }
-                    
-                }
-            } 
-            newSelectors[xPow] = selectorColumn;
-        }
-        newSelectors[degree][0].enabled=true;
-        newSelectors[0][degree].enabled=true;
-        for(let i=1;i<degree;i++){
-            let edges  = [ newSelectors[i][0],newSelectors[0][i] ];
-            for(let s of edges){
-                if(s.getComplex().equals(Complex.one())){
-                    s.enabled=false;
-                }
-            }
-        }
-        
-
-        this.degree=degree;
-        this.arr = newSelectors;
-        this.generateList();
+    value(){
+        return new Complex(this.x, this.y);
     }
 
-    // options.real for real nodes.
-    createTriangleArray(triCoord, degree){
-        let selectors = [];
-        for (let xPow = 0; xPow <= degree; xPow++) {
-            let selectorColumn = [];
-            for (let yPow = 0; yPow <= degree - xPow; yPow++) {
-                let zPow = degree - xPow - yPow
-                let position = triCoord.barycentricToScreen([xPow, yPow, zPow]);
-                let newSelector;
-                if(this.real){
-                    newSelector = new RealSelector(position.x, position.y);
-                } else {
-                    newSelector = new ComplexSelector(position.x, position.y);
-                }
-                newSelector.hidden=this.hidden;
-                selectorColumn.push(newSelector);
-            }
-            selectors.push(selectorColumn);
-        }
-        selectors[0][0].enabled = true;
-        selectors[degree][0].enabled = true;
-        selectors[0][degree].enabled = true;
-        return selectors;  
-    }
-
-    //get CP2Curve class from the selector
-    curve() {
-        return new CP2Curve(this.getCoefs(),this.degree);
-    }
-
-    getCoefs(){
-        let coefs = [];
-        for (let i = 0; i < this.arr.length; i++) {
-            let coefColumn = [];
-            for (let j = 0; j < this.arr[i].length; j++) {
-                coefColumn.push(this.arr[i][j].getComplex());
-            }
-            coefs.push(coefColumn);
-        }
-        return coefs;
-    }
-
-    symmetrize(){
-        for (let xPow = 0; xPow <= this.degree; xPow++) {
-            for (let yPow = 0; yPow <= this.degree - xPow; yPow++) {
-                let zPow = this.degree - xPow - yPow
-                let selector = this.arr[xPow][yPow];
-                if (selector.isUpdating()) {
-                    //this.arr[yPow][xPow].copyParameters(selector);
-
-                    this.arr[yPow][zPow].copyParameters(selector);
-                    //this.arr[zPow][yPow].copyParameters(selector);
-
-                    this.arr[zPow][xPow].copyParameters(selector);
-                    //this.arr[xPow][zPow].copyParameters(selector);
-                }
-            }
-        }
-    }
-
-    isUpdating(){ //checks if any selectors are updating
-        let isUpdating=false;
-        for (let s of this.list) {
-            isUpdating = isUpdating || s.isUpdating();
-        }
-        return isUpdating;
-    }
-
-    anyRollover(){
-        let anyRollover=false;
-        for (let s of this.list) {
-            let selectorRollover= s.rollover && s.enabled && !s.hidden
-            anyRollover = anyRollover || selectorRollover;
-        }
-        return anyRollover;
-    }
-
-    // ------- UI interactions -------
-    update(mouse){
-        if(this.doSymmetrize){
-            this.symmetrize();
-        }
-
-        let mouseVect = createVector(mouse.x,mouse.y); //turn mouse into p5Vector object
-        for (let s of this.list) {
-            s.update(mouseVect);
-        }
-
-        
-    }
-
-    released(){
-        for (let s of this.list) {
-            s.released();
-        }
-    }
-
-    pressed(){
-        for (let s of this.list) {
-            s.pressed();
-        }
-    }
-
-    scroll(delta){
-        for (let s of this.list) {
-            s.scroll(delta);
-        }
-    }
-
-    setScrollMode(mode){
-        for (let s of this.list) {
-            s.scrollMode = mode;
-        }
-    }
-
-    toggleHidden(){
-        this.hidden=!this.hidden;
-        for (let s of this.list) {
-            s.hidden = this.hidden;
-        }
-    }
-
-    setRealMode(real){
-        this.real=real;
-        for (let xPow = 0; xPow <= this.degree; xPow++) {
-            for (let yPow = 0; yPow <= this.degree - xPow; yPow++) {
-                let s = this.arr[xPow][yPow]
-                if(s.type=="real" && !this.real) { 
-                    s=s.toggleSelectorType();
-                } else if (s.type=="complex" && this.real){
-                    s=s.toggleSelectorType();
-                }
-                this.arr[xPow][yPow] =s
-            }
-        }
-        this.generateList();
-    }
-        
-
-
-    toggleSelectorType(){
-        this.real=!this.real;
-        for (let xPow = 0; xPow <= this.degree; xPow++) {
-            for (let yPow = 0; yPow <= this.degree - xPow; yPow++) {
-                this.arr[xPow][yPow] = this.arr[xPow][yPow].toggleSelectorType();
-            }
-        }
-        this.generateList();
-    }
 }
