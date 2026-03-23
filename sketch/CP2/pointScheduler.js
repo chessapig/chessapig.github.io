@@ -51,7 +51,8 @@
 
 	next(options={}) {
 		let n = this.pointsThisFrame();
-		return this.generate(n, options);
+		this.points = this.generate(n, options) //stores last generated points
+		return this.points;
 	}
 }
 
@@ -133,7 +134,7 @@ class Projection {
 		if(r.camera){
 			zoom = r.camera.zoomLevel();
 		}
-		r.g.strokeWeight(p.style.size);
+		r.g.strokeWeight(p.style.size*zoom);
 		this.plotPoint(p,r);
 		r.g.pop();
 	}
@@ -216,6 +217,7 @@ class PointRenderer extends GraphicsWindow2DCamera{
 			this.reset();
 		}
 
+		super.render();
 		
 		let pointStyle;
 		if (this.doClearPoints) { //CORSE points
@@ -226,6 +228,7 @@ class PointRenderer extends GraphicsWindow2DCamera{
 		}
 
 		let pts = this.scheduler.next({style: pointStyle});
+
 		for(let p of pts){
 			this.projection.renderPoint(p,this);
 		}

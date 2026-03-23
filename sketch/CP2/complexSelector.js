@@ -24,13 +24,16 @@ class Selector{
         dist(this.x,this.y,this.mouse.x,this.mouse.y) < this.selectRadius;
     }
 
+    //returns true if updated
     update(mouse){
         this.mouse = mouse;
         this.over();
 
         if(this.isPressed){
             this.onUpdate();
+            return true;
         }
+        return false;
     }
 
     onUpdate(){ //default behievor is to just move the selector
@@ -367,19 +370,28 @@ class RealSelector extends ComplexSelector{
 class ComplexDragger extends Selector {
 
     constructor(x,y, options = {}) {
-        super({
+        const defaults = {
             x: x,
             y: y,
-            radius: 0.1,
-            selectRadius: 0.2,
-            ...options
-        });
+			radius: 0.1,
+            selectRadius: 0.1,
+            doConstrain: false
+		};
+		options=Object.assign({}, defaults, options); 
+
+        super(options);
     }
 
     // dragging behavior
     onUpdate(){
-        this.x = constrain(this.mouse.x + this.offset.x,-1,1);
-        this.y = constrain(this.mouse.y + this.offset.y,-1,1);
+        if(this.doConstrain){
+            this.x = constrain(this.mouse.x + this.offset.x,-1,1);
+            this.y = constrain(this.mouse.y + this.offset.y,-1,1);
+        } else {
+            this.x = this.mouse.x + this.offset.x;
+            this.y = this.mouse.y + this.offset.y;
+        }
+        
     }
 
     draw(ctx){
@@ -401,6 +413,7 @@ class ComplexDragger extends Selector {
         ctx.circle(this.x, this.y, this.radius);
         ctx.pop();
     }
+    
 
 
     value(){

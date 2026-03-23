@@ -4,7 +4,9 @@ class EllipticCurve {
 		const defaults = {
 			tau: Complex.i(),
 			thetaResolution: 3, //number of terms used in theta expansion
-			level: 3 //degree of line bundle over elliptic curve (for use of canonical theta functions)
+			level: 3, //degree of line bundle over elliptic curve (for use of canonical theta functions)
+			torsion: 5, //for when i mess wth torsion...
+			didUpdate: false
 		};
 
 		Object.assign(this, defaults, options);
@@ -59,100 +61,269 @@ class EllipticCurve {
 		}
 		return points;
 	}
-
-
 }
 
-class EllipticCurveRenderer extends pointSystem{
+//UI for editing elliptic curve
+//stores elliptic curve, and a complex dragg selector.
+class EllipticCurveUI extends PointRenderer{
 	constructor(options={}){
+		const defaults = {
+			ellipticCurve: new EllipticCurve()
+		};
+		options = Object.assign({}, defaults, options);
 		super(options);
 
-		let sideLen = 1.85
-		let vertShift = 0.1;
-		let triVertices = [
-			createVector(-0.5, -sqrt(3) / 6 - vertShift).mult(sideLen),
-			createVector(0.5, -sqrt(3) / 6 - vertShift).mult(sideLen),
-			createVector(0, sqrt(3) / 3 - vertShift).mult(sideLen)
-		];
+		let torsionScheduler = new EllipticTorsionScheduler({
+			ellipticCurve: this.ellipticCurve,
+		});
+		this.scheduler = torsionScheduler;
+		
+		let ellipticTorsionProjection = new EllipticTorsionProjection({
+			ellipticCurve: this.ellipticCurve
+		})
+		this.projection = ellipticTorsionProjection;
 
+		this.selectors=[new ComplexDragger(0,1)]; 
+		this.camera.y=-1;
+	}
+
+	update(){
+		super.update();
+		let value = this.selectors[0].value();
+		if(!this.ellipticCurve.tau.equals(value)){
+			this.ellipticCurve.tau = value;
+			this.ellipticCurve.didUpdate=true;
+			return true;
+		}
+		this.ellipticCurve.didUpdate=false;
+		return false;
+	}
+}
+
+class EllipticCurveRenderer extends PointRenderer{
+	constructor(E,options){
+		super(options)
+		this.ellipticCurve = E;
+		this.scheduler = new EllipticTorsionScheduler({ ellipticCurve: E});
+		this.projection = new EllipticCPnProjection({ellipticCurve: E, N:2})
+	}
+
+	update(){
+		super.update();
+		this.doClearPoints = this.doClearPoints || this.ellipticCurve.didUpdate;
+	}
+}
+
+
+
+//produces numbers in [0,size-1]^d;
+class GridScheduler extends PointScheduler{
+	constructor(options){
+		super(options);
 		const defaults = {
-			triCoord: new TriangleCoords(triVertices),
-			ellipticCurve: new EllipticCurve(),
-			pointMode: "random"
+			dimension: 2,
+			size: 10
 		};
+		Object.assign(this, defaults, options);
+		this.setGridSize(this.size);
+	}
 
+	setGridSize(size){
+		this.size = size;
+		this.maxTotal = pow(this.size, this.dimension);
+		this.currentGridPoint =  0;
+		this.delta = randCoprime(this.maxTotal);
+	}
+
+	//samples from 0 to n^d, then writes this as a number in base n.
+	generate(newPoints,options){
+		let points = [];
+		for (let i = 0; i < newPoints; i++) {
+			this.currentGridPoint = (this.currentGridPoint + this.delta) % this.maxTotal
+			let baseSequence = convertToBase(this.currentGridPoint,this.size,this.dimension);
+			let p = this.getPointFromBaseSequence(baseSequence);
+			points.push(p);
+		}
+		return points;
+	}
+
+	getPointFromBaseSequence(baseSequence,options){
+		return {
+			grid: baseSequence,
+			gridSize: this.size, //store the size of grid in the point
+			style: stylizeGridPoint(baseSequence,options)}
+		};
+	
+
+	stylizeGridPoint(baseSequence,options={}){
+		let scaleFactor=100;
+		let style = {size:min(scaleFactor/this.size,4), color: color(FRG)}
+		if(options.style){
+			stlye = {size: min(options.style.size *scaleFactor/this.size,4)   ,  color: color(FRG)}
+		}
+		return style;
+	}
+}
+
+class EllipticTorsionScheduler extends GridScheduler{
+	constructor(options={}){ //stores the elliptic curve, and the number of torsion points.
+		const defaults = {
+			ellipticCurve: new EllipticCurve()
+		};
+		options = Object.assign({}, defaults, options);
+		super({dimension: 2 , size: options.ellipticCurve.torsion});
 		Object.assign(this, defaults, options);
 	}
 
-	//draw torison points
-	 drawCurve(){
-		super.drawCurve();
-		if(this.pointMode=="torsion"){
-			this.scheduleReset=true;
-			let E = this.ellipticCurve;
-			let torsionPts = E.torsionPoints(50);
-			for(let z of torsionPts){
-				let CP2Pt = new CP2Point(E.kodaira(z).p);
-				CP2Pt.render(this);
-			}
-		}
-	 }
+	reset(){
+		super.reset();
+		this.setGridSize(this.ellipticCurve.torsion);
+	}
+	
+	getPointFromBaseSequence(baseSequence,options){
+		let tau = this.ellipticCurve.tau.copy();
+		let x = baseSequence[0] / this.size;
+		let y = baseSequence[1] / this.size;
+		let c = tau.mult(y).add(Complex.one().mult(x));
+		return {c:c,
+				ellipticCurve: this.ellipticCurve,
+		 		style: this.stylizeGridPoint(baseSequence,options) }
 
-	ptsPerFrame(){
-		return 4000;
 	}
 
-	drawPtsOnCurve(numPts){
-		if(this.pointMode=="random") {
-			for(let i=0;i<numPts;i++){
-				let  E = this.ellipticCurve;
-				let randPt = E.randPoint(); 
-				let CP2Pt = new CP2Point(E.kodaira(randPt).p);
-				CP2Pt.render(this);
+	
+
+	update(){
+		if(this.ellipticCurve.didUpdate){
+			this.reset();
+		}
+		return super.update() || this.ellipticCurve.didUpdate;
+	}
+}
+
+
+class EllipticTorsionProjection extends Projection{
+	constructor(options){ 
+		super(options);
+		const defaults = {
+			ellipticCurve: new EllipticCurve()
+		};
+		Object.assign(this, defaults, options);
+	}
+
+	//takes a point p of the form {c,size,ellipticCurve} where c is complex number
+	plotPoint(p,r){
+		let c = p.c;
+		r.g.point(c.x,c.y);
+	}
+
+	renderDecor(r) {
+		let w = r.g
+		
+		//draw axes with fundamental domain
+		w.push();
+		w.noFill();
+		w.strokeWeight(2);
+		w.line(-100,0,100,0); //x axis
+		w.line(0,0,0,200); // y axis
+		w.line(0.5,sqrt(3)/2,0.5,200);  //right boundary
+		w.line(-0.5,sqrt(3)/2,-0.5,200);  //left boundary
+		w.arc(0,0,2,2,PI/3,2*PI/3)
+		
+
+		//draw fundamental cell of elliptic curve
+		w.strokeWeight(1);
+		let tau = this.ellipticCurve.tau;
+		w.line(0,0,1,0);
+		w.line(0,0,tau.x,tau.y);
+		w.line(tau.x+1,tau.y,tau.x,tau.y);
+		w.line(tau.x+1,tau.y,1,0);
+
+		w.pop();
+	}
+}
+
+//projects an elliptic curve into projective space
+class EllipticCPnProjection extends Projection{
+	constructor(options){
+		super(options);
+		const defaults = {
+			N: 2
+		};
+		Object.assign(this, defaults, options);
+
+		//computes barycentric coordinates for specifically the simplex mapped to the roots of unity
+		this.vertices = new Array(this.N+1);
+		for(let i=0; i<=this.N;i++){
+			let theta = TWO_PI*i/(this.N+1);
+			this.vertices[i] = createVector(cos(theta),sin(theta));
+		}
+
+	}
+
+	//takes a point p of the form {c,ellipticCurve} where c is complex number
+	plotPoint(p,r){
+		let curve = p.ellipticCurve;
+		curve.level = this.N+1
+		let pt = curve.kodaira(p.c); // get point in CPN
+		
+		//get the norm squared while avoiding huge numbers:
+		let values = pt.p.map(z => z.abs());  //FIRST take the absolute value
+		values = values.map(x => pow(x,2)); //then square
+		let sum = values.reduce((partialSum, a) => partialSum + a, 0); //find the total
+		values = values.map(x => x/sum)// normalize
+		
+
+		
+		let plotPoint = createVector(0,0);
+		for(let i = 0; i<=this.N; i++){
+			plotPoint.add(this.vertices[i].copy().mult(values[i]));
+		}
+		r.g.point(plotPoint.x,plotPoint.y)
+	}
+
+	renderDecor(r) {
+		let N = this.vertices.length;
+		for(let i=0;i<N; i++){
+			for(let j=0;j<i;j++){
+				r.g.line( this.vertices[i].x,this.vertices[i].y,this.vertices[j].x,this.vertices[j].y)
 			}
+			
 		}
 	}
 }
 
-//UI for editing ellptic curve
-class EllipticCurveUI extends GraphicsWindow2DCamera{
-	constructor(ellipticCurve,options={}){
-		super(options);
-		this.ellipticCurve=ellipticCurve;
-		this.selectors=[new ComplexDragger(0,0)]; 
-	}
 
-	updateCurve(){
-		let value = this.selectors[0].value();
-		value.add(new Complex(0,1));
-		if(!this.ellipticCurve.tau.equals(value)){
-			this.ellipticCurve.tau = value;
-			return true;
-		}
-		return false;
-		
-	}
 
-	//draw things to this pane
-	render(){
-		
-		let ctx = this.g || window;
-		ctx.clear();
-		this.drawAxes(ctx);
-		super.render();
-	}
 
-	drawAxes(ctx){
-		ctx.push();
-		ctx.translate(0,-1);
-		ctx.noFill();
-		ctx.strokeWeight(2);
-		ctx.line(-1,0,1,0); //x axis
-		ctx.line(0,0,0,2); // y axis
-		ctx.line(0.5,sqrt(3)/2,0.5,2);  //right boundary
-		ctx.line(-0.5,sqrt(3)/2,-0.5,2);  //left boundary
-		ctx.arc(0,0,2,2,PI/3,2*PI/3)
-		ctx.pop();
-	}
-	
+//////////////////
+// HELPER FUNCTIONS 
+/////////////////
+
+//adds two arrays, interpreting them as vectors
+function addVector(a,b){
+    return a.map((e,i) => e + b[i]);
+}
+
+function randCoprime(n) {
+  while (true) {
+    let a = floor(random() * n);
+    if (gcd(a, n) === 1) return a;
+  }
+}
+
+//returns an array of the number k in base n , with d digets
+//written in reverse order: 106 written as [6,0,1]
+function convertToBase(k,n,d) {
+  let digits =  new Array(d).fill(0);
+  for(let i=0;i<d;i++){
+	digits[i] = k % n;
+	k = floor(k / n);
+  }
+  return digits;
+}
+
+function gcd(a, b) {
+  while (b) [a, b] = [b, a % b];
+  return a;
 }

@@ -17,9 +17,8 @@ class GraphicsWindow {
 			width: 2,
 			canvasMode: WEBGL
 		};
-
 		Object.assign(this, defaults, options);
-
+		
 		this.g = createGraphics(this.pixels, this.pixels, this.canvasMode);
 		this.transformCoords()
 
@@ -101,11 +100,13 @@ class GraphicsWindow {
 	dragged(mouseX,mouseY,pmouseX,pmouseY){} //hook for sublcasses.
 
 	update() {
+		let didUpdate=false;
 		let mouse = this.mouse();
 		mouse = createVector(mouse.x, mouse.y)
 		for (let s of this.selectors) {
-			s.update(mouse);
+			didUpdate = didUpdate || s.update(mouse);
 		}
+		return didUpdate;
 	}
 
 	render() {
@@ -117,7 +118,7 @@ class GraphicsWindow {
 
 //graphics window with 2D camera 
 class GraphicsWindow2DCamera extends GraphicsWindow{
-	constructor(options) {
+	constructor(options={}) {
 		//add the defaults to the options BEFORE. calling super
 		const defaults = {
 			camEnabled: true,
@@ -151,8 +152,7 @@ class GraphicsWindow2DCamera extends GraphicsWindow{
 	//return wether or not the camera updated.
 	update(){
 		this.transformCoords(); //retransform coords every update
-		super.update();
-		return this.camera.update();
+		return super.update() || this.camera.update();;
 	}
 
 	dragged(mouseX,mouseY,pmouseX,pmouseY){
