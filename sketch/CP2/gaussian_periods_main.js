@@ -45,7 +45,6 @@ function setup() {
 	});
 
 	
-
 	windows = [gaussianUI,gaussianRender];
 }
 
@@ -324,21 +323,18 @@ class GaussianPeriodRenderer extends PointRenderer {
 		super(options);
 		this.scheduler = new GaussianPeriodScheduler(options);
 
-		this.fineStyle = {
-			size: min(1000 / sqrt(this.scheduler.n), 10),
-			color: color(this.FRG)
-		}
-		this.coarseStyle = { size: max(3, this.fineStyle.size), color: color(this.FRG) }
 		this.camera.zoom = log(0.25);
+		this.update();
 	}
 
 	update(){
 		super.update();
+		let size = 10/max(pow(this.scheduler.n,0.5)/100);
 		this.fineStyle = {
-			size: min(500 / sqrt(this.scheduler.n), 3),
+			size: min(size, 10),
 			color: color(this.FRG)
 		}
-		this.coarseStyle = { size: max(3, this.fineStyle.size), color: color(this.FRG) }
+		this.coarseStyle = { size: max(10, this.fineStyle.size), color: color(this.FRG) }
 	}
 	
 

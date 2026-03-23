@@ -69,24 +69,9 @@ function setup() {
 	
 	windows=[curveUI, curveRender];
 
-	//noLoop();
-	let E = new EllipticCurve({
-		tau: new Complex(sqrt(3)/2,0.4), 
-		level: 3,
-		thetaResolution: 3,
-	});
-
-	ellipticUI = new  EllipticCurveUI(E, {pixels: canvasSize, x:-2, y:-1, width:2})
-	ellipticRender = new EllipticCurveRenderer({
-		pixels: canvasSize, 
-		x:0, y:-1, width:2, 
-		ui: ellipticUI,
-		projectionMode:defaultUIState.projectionMode,
-		pointMode: "torsion",
-		ellipticCurve: E
-	})
-	//windows=[ellipticUI, ellipticRender];
 	setupUI();
+
+
 }
 
 function setupUI(){
