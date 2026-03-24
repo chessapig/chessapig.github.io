@@ -4,7 +4,7 @@ const PRIMARY = "hsl(0, 76%, 31%)";
 const SECONDARY =  "hsl(108, 60%, 33%)";
 const TERTIARY =  "hsla(34, 78%, 40%, 1.00)";
 
-const PROJECTION_MODES = ["REAL", "REAL_TORIC","TORIC", "STELLAR","STELLAR3D"];
+const PROJECTION_MODES = ["REAL", "REAL_3D", "REAL_TORIC","TORIC","TORIC_3D", "STELLAR","STELLAR3D"];
 const POINT_MODES = ["random","starscape"];
 const STARSCAPE_DISPLAY_MODES = ["uniform","discriminant","supremum"];
 
@@ -102,12 +102,20 @@ function setProjection(render, mode, options){
 			render.projection = new CP2RealProjection();
 			break;
 
+		case "REAL_3D":
+			render.projection = new CP23DProjection(options);
+			break;
+
 		case "REAL_TORIC":
 			render.projection = new realToricProjection(options);
 			break;
 
 		case "TORIC":
 			render.projection = new toricProjection(options);
+			break;
+
+		case "TORIC_3D":
+			render.projection = new toric3DProjection(options);
 			break;
 	}
 	render.projection.setup(render,{currentProjectionMode: render.projectionMode});

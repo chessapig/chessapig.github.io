@@ -235,6 +235,32 @@ class CP2RealProjection extends Projection{
 }
 
 //projects CP2 onto R2 by taking real parts, and using barycentric coordinates (setting x+y+z=1)
+class CP23DProjection extends Projection{
+	constructor(options){
+		super();
+		this.triCoord=options.triCoord;
+		
+	}
+
+	setup(r,options){
+		r.g.ortho();
+		let newCam = new Camera3D();
+		if(options.currentProjectionMode=="REAL"){ //only reset the camera if the other setting is not toric
+			newCam.x= r.camera.x;
+			newCam.y=r.camera.y;
+			newCam.zoom=r.camera.zoom;
+		}
+		r.camera=newCam;
+	}
+
+	//takes CP2Point r
+	plotPoint(pt, r) {
+		let affineCoords = pt.getAffine();
+		r.g.point(affineCoords[0].x, affineCoords[1].x, affineCoords[0].y);
+	}
+}
+
+//projects CP2 onto R2 by taking real parts, and using barycentric coordinates (setting x+y+z=1)
 class realToricProjection extends Projection{
 	constructor(options){
 		super();
@@ -249,8 +275,8 @@ class realToricProjection extends Projection{
 
 	//takes CP2Point r
 	plotPoint(pt, r) {
-		let realCoords = pt.p.map(z => z.x);
-		let coords = this.triCoord.barycentricToScreen(realCoords);
+		let affineCoords = pt.getAffine();
+		let coords = this.triCoord.barycentricToScreen([1,affineCoords[0].x,affineCoords[1].x]);
 		r.g.point(coords.x, coords.y);
 	}
 
@@ -302,6 +328,56 @@ class toricProjection extends Projection{
 		g.pop();
 	}
 }
+
+class toric3DProjection extends toricProjection{
+	constructor(options){
+		super(options);
+	}
+
+	setup(r,options){
+		r.g.ortho();
+		let newCam = new Camera3D();
+		if(options.currentProjectionMode=="REAL_TORIC" || options.currentProjectionMode=="TORIC"){ //only reset the camera if the other setting is not toric
+			newCam.x= r.camera.x;
+			newCam.y=r.camera.y;
+			newCam.zoom=r.camera.zoom;
+		}
+		r.camera=newCam;
+	}
+
+
+	plotPoint(pt, r) {
+		let coords = this.triCoord.barycentricToScreen(pt.getNormSq());
+		let affine = pt.getAffine();
+		r.g.point(coords.x, coords.y, affine[0].arg()/TWO_PI); //z coordinate is phase
+	}
+}
+
+//projection of what it would look like if you stood at zero and looked at your point (geodesic)
+class POVProjection extends Projection{
+	constructor(options){
+		super(options);
+	}
+
+	setup(r,options){
+		r.g.ortho();
+		let newCam = new Camera3D();
+		if(options.currentProjectionMode=="REAL_TORIC" || options.currentProjectionMode=="TORIC"){ //only reset the camera if the other setting is not toric
+			newCam.x= r.camera.x;
+			newCam.y=r.camera.y;
+			newCam.zoom=r.camera.zoom;
+		}
+		r.camera=newCam;
+	}
+
+
+	plotPoint(pt, r) {
+		let affine = pt.getAffine();
+		let S3 = [affine[0].x,affine[0].y,affine[1].x,affine[1].y];
+		r.g.point(coords.x, coords.y, affine[0].arg()/TWO_PI); //z coordinate is phase
+	}
+}
+
 
 class StellarProjection {
 	setup(r) {

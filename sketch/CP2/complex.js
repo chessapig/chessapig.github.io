@@ -20,8 +20,8 @@ class Complex {
 		let doPlus = true;
 
 		let realPart, imagPart;
-		if (this.x - int(this.x) == 0) {
-			realPart = str(this.x);
+		if (abs(this.x - int(this.x)) < eps) {
+			realPart = int(this.x);
 		} else {
 			realPart = nf(this.x, 1, numDigits);
 		}
@@ -138,6 +138,10 @@ class Complex {
 		this.x = c.x;
 		this.y = c.y;
 		return this;
+	}
+
+	arg(){
+		return atan2(this.y,this.x);
 	}
 
 	equals(z){
