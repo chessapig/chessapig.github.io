@@ -329,9 +329,9 @@ class GaussianPeriodRenderer extends PointRenderer {
 
 	update(){
 		super.update();
-		let size = 10/max(pow(this.scheduler.n,0.5)/100);
+		let size = 20/max(pow(this.scheduler.n,0.5)/100);
 		this.fineStyle = {
-			size: min(size, 10),
+			size: min(size,15),
 			color: color(this.FRG)
 		}
 		this.coarseStyle = { size: max(10, this.fineStyle.size), color: color(this.FRG) }
