@@ -83,7 +83,11 @@ class EllipticCurveUI extends PointRenderer{
 		})
 		this.projection = ellipticTorsionProjection;
 
-		this.selectors=[new ComplexDragger(0,1)]; 
+		this.selectors=[new ComplexDragger(0,1,{
+			doConstrain: true,
+			xRange: [-10,10],
+			yRange: [0,10]
+		})]; 
 		this.camera.y=-1;
 	}
 

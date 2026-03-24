@@ -117,7 +117,7 @@ class GraphicsWindow {
 }
 
 //graphics window with 2D camera 
-class GraphicsWindow2DCamera extends GraphicsWindow{
+class GraphicsWindowCamera extends GraphicsWindow{
 	constructor(options={}) {
 		//add the defaults to the options BEFORE. calling super
 		const defaults = {
@@ -136,6 +136,12 @@ class GraphicsWindow2DCamera extends GraphicsWindow{
 		let zoom = this.camera.zoomLevel();
 		this.g.scale(zoom);
 		this.g.translate(this.camera.x / zoom, this.camera.y / zoom)
+
+		if(this.camera instanceof Camera3D){
+			// apply rotation (orbit-style)
+			this.g.rotateX(this.camera.pitch);
+			this.g.rotateY(this.camera.yaw);
+		}
 	}
 
 	//take old screen to local, then remap it with new variables
@@ -180,14 +186,18 @@ class GraphicsWindow2DCamera extends GraphicsWindow{
 }
 
 class Camera2D {
-	constructor() {
-		this.x = 0;
-		this.dx=0;
-		this.y = 0;
-		this.dy = 0;
-		this.zoom = 0;
-		this.dZoom = 0;
-		this.drag = 0.9;
+	constructor(options) {
+		const defaults = {
+			x :  0,
+			dx : 0,
+			y  : 0,
+			dy : 0,
+			zoom : 0,
+			dZoom : 0,
+			drag : 0.9,
+		};
+
+		Object.assign(this, defaults, options);
 	}
 
 	//returns true is camera updated, false otherwise
@@ -263,41 +273,29 @@ class Camera2D {
 	zoomLevel(zoom=this.zoom){
 		return exp(zoom);
 	}
-}
 
-
-class GraphicsWindow3DCamera extends GraphicsWindow2DCamera {
-	constructor(options) {
-		const defaults = {
-			camEnabled: true,
-			camera: new Camera3D()
-		};
-		options = Object.assign({}, defaults, options);
-		super(options);
-	}
-
-	cameraTransform() {
-		super.cameraTransform();
-
-		// apply rotation (orbit-style)
-		this.g.rotateX(this.camera.pitch);
-		this.g.rotateY(this.camera.yaw);
-	}
-
-	setDragMode(mode){
-		this.camera.dragMode = mode;
+	getCameraWithDimension(d){
+		if(d===2){
+			return this;
+		} else if(d===3){
+			return new Camera3D({x: this.x, y:this.y, zoom:this.zoom})
+		}
 	}
 }
+
 
 class Camera3D extends Camera2D {
-	constructor() {
-		super();
+	constructor(options) {
+		super(options);
 
 		// NEW: rotation (orbit camera)
-		this.yaw = 0;     this.dYaw = 0;
-		this.pitch = 0;   this.dPitch = 0;
+		const defaults = {
+			yaw: 0,     dYaw: 0,
+			pitch: 0,  dPitch: 0,
+			dragMode: "ROTATE"//options: "ROTATE" or "PAN"
+		};
+		Object.assign(this, defaults, options);
 
-		this.dragMode= "ROTATE" //options: "ROTATE" or "PAN"
 	}
 
 	update() {
@@ -346,5 +344,13 @@ class Camera3D extends Camera2D {
 				this.dy = dy ;
 		}
 	
+	}
+
+	getCameraWithDimension(d){
+		if(d===3){
+			return this;
+		} else if(d===2){
+			return new Camera2D({x: this.x, y:this.y, zoom:this.zoom})
+		}
 	}
 }

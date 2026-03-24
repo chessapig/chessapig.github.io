@@ -4,7 +4,7 @@ const PRIMARY = "hsl(0, 76%, 31%)";
 const SECONDARY =  "hsl(108, 60%, 33%)";
 const TERTIARY =  "hsla(34, 78%, 40%, 1.00)";
 
-const PROJECTION_MODES = ["REAL", "REAL3D","TORIC", "STELLAR","STELLAR3D"];
+const PROJECTION_MODES = ["REAL", "REAL_TORIC","TORIC", "STELLAR","STELLAR3D"];
 const POINT_MODES = ["random","starscape"];
 const STARSCAPE_DISPLAY_MODES = ["uniform","discriminant","supremum"];
 
@@ -27,7 +27,7 @@ const defaultUIState = {
 	realCoefs: true,
 	degree: 3,
 	enableRealCurve: false,
-	projectionMode: "REAL",
+	projectionMode: PROJECTION_MODES[0],
 	symmetrize: false,
 	pointMode: POINT_MODES[0]
 };
@@ -48,34 +48,76 @@ function setup() {
 		x:-2, y:-1, width:2, canvasMode: WEBGL,
 		degree:3
 	})
-	//noLoop();
-
-
-	//holds all the rendering for the curve.
-	// r = new pointSystem( {
-	// 	pixels: canvasSize,
-	// 	x:0, y:-1, width:2, 
-	// 	canvasMode: WEBGL, 
-	// 	projectionMode:defaultUIState.projectionMode,
-	// 	pointMode: defaultUIState.pointMode,
-	// 	ui: curveUI, ///CP2CurveSelectorUI object
-	// })
 
 	curveRender = new CurveRenderer(curveUI.curve,{
 		pixels: canvasSize,
-	 	x:0, y:-1, width:2, 
-		projectionMode:"REAL"
+	 	x:0, y:-1, width:2,
+		projectionMode:defaultUIState.projectionMode
 	});
-	
+
 	windows=[curveUI, curveRender];
 
 	setupUI();
+}
 
 
+function draw() {
+	scale(height / 2, -height / 2, height / 2) //recale to a box [-1,1]times [-1,1]
+	background(BKG);
+	
+	for(let w of windows){
+		w.update();
+		w.render();
+		w.draw();
+	}
+
+	katex.render(curveUI.curve.display(), document.getElementById("curveEquation"));
+
+	
+	// ellitpicUI.render();
+	// ellitpicUI.draw();
+
+	//draw point renderer
+	// r.render(); //draw points to internal image
+	// r.draw();
+
+	if(HDRender){
+		HDRender.render();
+		HDRender.draw();
+
+		console.log(HDRender.numPts/HDRender.maxPts);
+
+		if(HDRender.numPts>= HDRender.maxPts){
+			print("done rendering");
+			save(HDRender.g,"HD_Render.jpg");
+			noLoop();
+		}
+	}
+}
+
+
+function setProjection(render, mode, options){
+	switch(mode){
+		case "REAL":
+			render.projection = new CP2RealProjection();
+			break;
+
+		case "REAL_TORIC":
+			render.projection = new realToricProjection(options);
+			break;
+
+		case "TORIC":
+			render.projection = new toricProjection(options);
+			break;
+	}
+	render.projection.setup(render,{currentProjectionMode: render.projectionMode});
+	render.projectionMode=mode;
+	render.reset();
 }
 
 function setupUI(){
 	// Left panel controls
+	const inputCoefs = document.getElementById('inputCoefs');
 	const realCoefs = document.getElementById('realCoefs');
 	const degreeSlider = document.getElementById('degreeSlider');
 	const enableRealCurve = document.getElementById('realCurve');
@@ -90,6 +132,13 @@ function setupUI(){
 	projectionMode.value = defaultUIState.projectionMode;
 	symmetrize.value = defaultUIState.symmetrize;
 	pointMode.value = defaultUIState.pointMode;
+
+	//input for your own curve form
+	// inputCoefs.addEventListener('change', () => {
+	// 		curveUI.curve.parseFromString(inputCoefs.value)
+	// 		console.log(curveUI.curve.display());
+	// 		console.log("change)"+inputCoefs.value);
+	// 	});
 
 	// Real coefficients checkbox
 	realCoefs.addEventListener("change", function() {
@@ -123,8 +172,7 @@ function setupUI(){
 
 	projectionMode.addEventListener('change', () => {
 		uiState.projectionMode = projectionMode.value;
-		curveRender.setProjectionMode(uiState.projectionMode);
-		ellipticRender.setProjectionMode(uiState.projectionMode);
+		setProjection(curveRender,uiState.projectionMode,{triCoord: curveUI.triCoord});
 	});
 
 	symmetrize.addEventListener('change', () => {
@@ -157,46 +205,11 @@ function disableRealCheckbox(doDisable){
 }
 
 
-function draw() {
-	scale(height / 2, -height / 2, height / 2) //recale to a box [-1,1]times [-1,1]
-	background(BKG);
-	
-	for(let w of windows){
-		w.update();
-		w.render();
-		w.draw();
-	}
-
-	
-	// ellitpicUI.render();
-	// ellitpicUI.draw();
-
-	//draw point renderer
-	// r.render(); //draw points to internal image
-	// r.draw();
-
-	if(HDRender){
-		HDRender.render();
-		HDRender.draw();
-
-		console.log(HDRender.numPts/HDRender.maxPts);
-
-		if(HDRender.numPts>= HDRender.maxPts){
-			print("done rendering");
-			save(HDRender.g,"HD_Render.jpg");
-			noLoop();
-		}
-	}
-
-	//r.ellipticCurve.tau=new Complex(r.mouse().x,r.mouse().y);
-	//r.scheduleReset=true;
-}
-
 
 function keyPressed() {
     if (keyCode === SHIFT) {
 		curveUI.setScrollMode("ANGLE");
-		curveRender.setDragMode("PAN");
+		curveRender.camera.dragMode  =  "PAN";
     } else if (key == "r"){
 		HDRender = r.hDRender(2000);
 	}
@@ -205,7 +218,7 @@ function keyPressed() {
 function keyReleased() {
     if (keyCode === SHIFT) {
 		curveUI.setScrollMode("SCALE");
-		curveRender.setDragMode("ROTATE");
+		curveRender.camera.dragMode  = "ROTATE";
     }
 }
 

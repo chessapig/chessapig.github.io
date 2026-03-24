@@ -223,350 +223,461 @@ class CP2CurveSelectorUI extends GraphicsWindow {
 
 }
 
+class CP2RealProjection extends Projection{
+	setup(r) {
+		r.camera = new Camera2D({zoom: log(0.5)})
+	}
 
-// ============================== curve renderer ================
-class pointSystem extends GraphicsWindow2DCamera {
-	//options:
-	// x, y, width , canvasMode
-	// selectors (class SelectorArray)
-	// projectionMode: "REAL", "REAL3D", "STELLAR" "STELLAR3D", "TORIC"
-	// pointMode: "random", "starscape"
-	// doBackground: true/ false
-	constructor( options = {}) {
-		super(options);
+	plotPoint(p, r) {
+		let coords = p.getAffine();
+		r.g.point(coords[0].x, coords[1].x);
+	}
+}
 
+//projects CP2 onto R2 by taking real parts, and using barycentric coordinates (setting x+y+z=1)
+class realToricProjection extends Projection{
+	constructor(options){
+		super();
+		this.triCoord=options.triCoord;
+	}
+
+	setup(r,options){
+		if(options.currentProjectionMode!="TORIC"){ //only reset the camera if the other setting is not toric
+			r.camera = new Camera2D();
+		}
+	}
+
+	//takes CP2Point r
+	plotPoint(pt, r) {
+		let realCoords = pt.p.map(z => z.x);
+		let coords = this.triCoord.barycentricToScreen(realCoords);
+		r.g.point(coords.x, coords.y);
+	}
+
+	renderDecor(r) {
+		let g = r.g;
+		g.push();
+		g.stroke(r.FRG);
+		g.strokeWeight(2);
+		
+		//draw lines extending through all the verticies
+		let vs = this.triCoord.vertices;
+		let numVs=vs.length;
+		for(let i=0; i<numVs;i++){
+			let iNext = (i+1)%numVs;
+			let delta = vs[i].copy().sub(vs[iNext]).mult(10);
+			let p0 = vs[i].copy().add(delta);
+			let p1 = vs[i].copy().sub(delta);
+			g.line(p0.x,p0.y,p1.x,p1.y);
+		}
+
+		g.pop();
+	}
+}
+
+class toricProjection extends Projection{
+	constructor(options){
+		super();
+		this.triCoord=options.triCoord;
+	}
+
+	setup(r,options){
+		if(options.currentProjectionMode!="REAL_TORIC"){ //only reset the camera if the other setting is not toric
+			r.camera = new Camera2D();
+		}
+	}
+
+
+	plotPoint(pt, r) {
+		let coords = this.triCoord.barycentricToScreen(pt.getNormSq());
+		r.g.point(coords.x, coords.y);
+	}
+
+	renderDecor(r) {
+		let g = r.g;
+		g.push();
+		g.stroke(r.FRG);
+		g.strokeWeight(2);
+		this.triCoord.draw(g);
+		g.pop();
+	}
+}
+
+class StellarProjection {
+	setup(r) {
+		r.doCameraControl = true;
+		r.g.scale(0.7);
+	}
+
+	renderPoint(p, r) {
+		for (let c of p.getSpherical()) {
+			r.g.point(c.x, c.y, c.z);
+		}
+	}
+
+	renderDecor(r) {
+		let g = r.g;
+		g.noStroke();
+		g.fill(r.BKG);
+		g.sphere(0.99);
+	}
+}
+
+class CurveRenderer extends PointRenderer{
+	constructor(curve,options){
 		const defaults = {
-			doBackground: false,
-			doCameraControl: false,
-			pan: { doPan: false, dx: 0, dy: 0, active: false, dZoom: 0, zoom: 1 },
-			camVelocity: createVector(0, 0),
-			camSensitivity: 1 / 100,
-			camDrag: 0.95,
-			scheduleReset: false,
-			numPts: 0, //this should always be 0 tbh...
-			pointMode: "random",
-			pointAddingSpeed: "slow", //slow / fast
-			BKG: BKG,
-			FRG: FRG,
-			PRIMARY: PRIMARY,
-			SECONDARY: SECONDARY,
-			TERTIARY: TERTIARY,
-			triCoord: options.ui.triCoord, //BE CAREFUL ABOUT THIS i dont always wanna pass in a tricoord!!!!!
+			scheduler: new RandomCP2CurveScheudler(curve),
+			projection: new CP2RealProjection(),
 		};
-
-		Object.assign(this, defaults, options);
-
-		this.setupMode();
-		this.reset();
+		options = Object.assign({}, defaults, options);
+		super(options);
 	}
-
-	//make a new graphicswindow with an HD render
-	hDRender(width) {
-		let hD = new this.constructor(width, {
-			x: 0, y: -1, width: 0.5,
-			selectors: this.selectors,
-			projectionMode: this.projectionMode,
-			pointMode: this.pointMode,
-			pointAddingSpeed: "fast",
-			triCoord: this.triCoord,
-			doBackground: true,
-			BKG: 255,
-			FRG: 0
-		});
-		hD.maxPts = 800000;
-		hD.fine = { size: 0.5, color: color(0, 255) };
-
-		return hD;
-	}
+}
 
 
-	reset() {
-		if (this.doBackground) {
-			this.g.background(this.BKG);
-		} else {
-			this.g.clear();
-		}
-		this.numPts = 0;
-		this.scheduleReset = false;
-		this.clearGridTape();
-	}
+// // ============================== curve renderer ================
+// class pointSystem extends GraphicsWindow2DCamera {
+// 	//options:
+// 	// x, y, width , canvasMode
+// 	// selectors (class SelectorArray)
+// 	// projectionMode: "REAL", "REAL3D", "STELLAR" "STELLAR3D", "TORIC"
+// 	// pointMode: "random", "starscape"
+// 	// doBackground: true/ false
+// 	constructor( options = {}) {
+// 		super(options);
 
-	clearGridTape() {
-		this.gridState = {
-			tape: [0, 0, 0, 0, 0, 0],
-			base: 1
-		}
-		if (this.real) {
-			this.gridState.tape = [0, 0, 0]
-		}
-	}
+// 		const defaults = {
+// 			doBackground: false,
+// 			doCameraControl: false,
+// 			pan: { doPan: false, dx: 0, dy: 0, active: false, dZoom: 0, zoom: 1 },
+// 			camVelocity: createVector(0, 0),
+// 			camSensitivity: 1 / 100,
+// 			camDrag: 0.95,
+// 			scheduleReset: false,
+// 			numPts: 0, //this should always be 0 tbh...
+// 			pointMode: "random",
+// 			pointAddingSpeed: "slow", //slow / fast
+// 			BKG: BKG,
+// 			FRG: FRG,
+// 			PRIMARY: PRIMARY,
+// 			SECONDARY: SECONDARY,
+// 			TERTIARY: TERTIARY,
+// 			triCoord: options.ui.triCoord, //BE CAREFUL ABOUT THIS i dont always wanna pass in a tricoord!!!!!
+// 		};
 
-	update(){
-		let didUpdateCamera = super.update();
-		if(didUpdateCamera){
-			this.scheduleReset=true;
-		}
-	}
+// 		Object.assign(this, defaults, options);
 
-	render() {
-		if (this.scheduleReset) {
-			this.reset();
-		}
-		let doClearPts = this.ui.updateCurve(); //if I updated the curve, then clear the poits.
-		if (this.doCameraControl) {
-			let isCamMove = this.camVelocity.magSq() > 1e-4
-			doClearPts = doClearPts || isCamMove //if move, then clear
-			if (!isCamMove) {
-				this.camVelocity.x = 0;
-				this.camVelocity.y = 0;
-			}
-		}
-		if (this.pan.doPan) {
-			let isPan = (this.pan.dx * this.pan.dx + this.pan.dy * this.pan.dy) > 1e-5;
-			let isZoom = this.pan.dZoom * this.pan.dZoom > 1e-6;
-			doClearPts = doClearPts || isPan || isZoom;
-			if (!isPan) {
-				this.pan.dx = 0;
-				this.pan.dy = 0;
-			}
-			if (!isZoom) {
-				this.pan.dZoom = 0;
-			}
+// 		this.setupMode();
+// 		this.reset();
+// 	}
 
-		}
+// 	//make a new graphicswindow with an HD render
+// 	hDRender(width) {
+// 		let hD = new this.constructor(width, {
+// 			x: 0, y: -1, width: 0.5,
+// 			selectors: this.selectors,
+// 			projectionMode: this.projectionMode,
+// 			pointMode: this.pointMode,
+// 			pointAddingSpeed: "fast",
+// 			triCoord: this.triCoord,
+// 			doBackground: true,
+// 			BKG: 255,
+// 			FRG: 0
+// 		});
+// 		hD.maxPts = 800000;
+// 		hD.fine = { size: 0.5, color: color(0, 255) };
 
-		if (doClearPts) { //CORSE points
-			this.pointStyle = this.coarse;
-			this.scheduleReset = true; //cause reset next frame
-		} else { //FINE points
-			this.pointStyle = this.fine;
-		}
-		if (r.doCameraControl) {
-			this.g.rotateX(this.camVelocity.x);
-			this.g.rotateY(this.camVelocity.y);
-		}
-		if (this.pan.doPan) {
-			this.pan.zoom += this.pan.dZoom;
-			let zoomLevel = exp(this.pan.zoom - 1);
-			this.g.translate(this.pan.dx / zoomLevel, this.pan.dy / zoomLevel)
-			this.g.scale(1 + this.pan.dZoom);
-		}
-		this.camVelocity.mult(this.camDrag);
-		this.pan.dZoom *= this.camDrag;
-		this.pan.dx *= this.camDrag;
-		this.pan.dy *= this.camDrag;
+// 		return hD;
+// 	}
 
 
-		this.drawCurve();
-		this.renderCurveDecor();
-	}
+// 	reset() {
+// 		if (this.doBackground) {
+// 			this.g.background(this.BKG);
+// 		} else {
+// 			this.g.clear();
+// 		}
+// 		this.numPts = 0;
+// 		this.scheduleReset = false;
+// 		this.clearGridTape();
+// 	}
 
-	setProjectionMode(mode) {
-		this.projectionMode = mode;
-		this.scheduleReset = true;
-		this.g.resetMatrix();
-		this.transformCoords();
-		this.setupMode();
-	}
+// 	clearGridTape() {
+// 		this.gridState = {
+// 			tape: [0, 0, 0, 0, 0, 0],
+// 			base: 1
+// 		}
+// 		if (this.real) {
+// 			this.gridState.tape = [0, 0, 0]
+// 		}
+// 	}
 
-	setPointMode(mode) {
-		this.pointMode = mode;
-		this.setupMode();
-		this.scheduleReset = true;
-	}
+// 	update(){
+// 		let didUpdateCamera = super.update();
+// 		if(didUpdateCamera){
+// 			this.scheduleReset=true;
+// 		}
+// 	}
+
+// 	render() {
+// 		if (this.scheduleReset) {
+// 			this.reset();
+// 		}
+// 		let doClearPts = this.ui.updateCurve(); //if I updated the curve, then clear the poits.
+// 		if (this.doCameraControl) {
+// 			let isCamMove = this.camVelocity.magSq() > 1e-4
+// 			doClearPts = doClearPts || isCamMove //if move, then clear
+// 			if (!isCamMove) {
+// 				this.camVelocity.x = 0;
+// 				this.camVelocity.y = 0;
+// 			}
+// 		}
+// 		if (this.pan.doPan) {
+// 			let isPan = (this.pan.dx * this.pan.dx + this.pan.dy * this.pan.dy) > 1e-5;
+// 			let isZoom = this.pan.dZoom * this.pan.dZoom > 1e-6;
+// 			doClearPts = doClearPts || isPan || isZoom;
+// 			if (!isPan) {
+// 				this.pan.dx = 0;
+// 				this.pan.dy = 0;
+// 			}
+// 			if (!isZoom) {
+// 				this.pan.dZoom = 0;
+// 			}
+
+// 		}
+
+// 		if (doClearPts) { //CORSE points
+// 			this.pointStyle = this.coarse;
+// 			this.scheduleReset = true; //cause reset next frame
+// 		} else { //FINE points
+// 			this.pointStyle = this.fine;
+// 		}
+// 		if (r.doCameraControl) {
+// 			this.g.rotateX(this.camVelocity.x);
+// 			this.g.rotateY(this.camVelocity.y);
+// 		}
+// 		if (this.pan.doPan) {
+// 			this.pan.zoom += this.pan.dZoom;
+// 			let zoomLevel = exp(this.pan.zoom - 1);
+// 			this.g.translate(this.pan.dx / zoomLevel, this.pan.dy / zoomLevel)
+// 			this.g.scale(1 + this.pan.dZoom);
+// 		}
+// 		this.camVelocity.mult(this.camDrag);
+// 		this.pan.dZoom *= this.camDrag;
+// 		this.pan.dx *= this.camDrag;
+// 		this.pan.dy *= this.camDrag;
 
 
-	//set default parameters per mode, and do any other sorting out we need.
-	setupMode() {
-		this.camVelocity = createVector(0, 0);
-		this.maxPts = 40000;
-		this.maxPtsPerFrame = 5000;
-		this.doCameraControl = false;
-		this.pan.doPan = false;
-		this.realPointStyle = { size: 5, color: color(this.TERTIARY) };
-		this.coarse = { size: 2, color: color(this.FRG) };
-		this.fine = { size: 0.2, color: color(this.FRG) };
-		this.pointStyle = this.fine;
-		switch (this.projectionMode) {
-			case "REAL": //x1,x2
-				this.pan.doPan = true;
-				this.g.scale(0.3);
-				break;
+// 		this.drawCurve();
+// 		this.renderCurveDecor();
+// 	}
 
-			case "REAL3D": //x1,x2,norm squared of imaginary part
-				this.doCameraControl = true;
-				this.pan.doPan = true;
-				this.g.ortho();
-				break;
+// 	setProjectionMode(mode) {
+// 		this.projectionMode = mode;
+// 		this.scheduleReset = true;
+// 		this.g.resetMatrix();
+// 		this.transformCoords();
+// 		this.setupMode();
+// 	}
 
-			case "STELLAR":
-				this.doCameraControl = true;
-				this.g.scale(0.7);
-				this.maxPtsPerFrame = 2000;
-				break;
+// 	setPointMode(mode) {
+// 		this.pointMode = mode;
+// 		this.setupMode();
+// 		this.scheduleReset = true;
+// 	}
 
-			case "STELLAR3D": case "STELLAR3DLine":
-				this.fine = { size: 0.1, color: color(this.FRG) };
-				this.coarse = { size: 2, color: color(this.FRG) };
-				this.lineLen = 0.003;
-				this.doCameraControl = true;
-				this.maxPts = 20000;
-				this.maxPtsPerFrame = 2000;
-				break;
 
-			case "TORIC": //requires specifying triCoords
-				this.pan.doPan = true;
-				break;
-		}
+// 	//set default parameters per mode, and do any other sorting out we need.
+// 	setupMode() {
+// 		this.camVelocity = createVector(0, 0);
+// 		this.maxPts = 40000;
+// 		this.maxPtsPerFrame = 5000;
+// 		this.doCameraControl = false;
+// 		this.pan.doPan = false;
+// 		this.realPointStyle = { size: 5, color: color(this.TERTIARY) };
+// 		this.coarse = { size: 2, color: color(this.FRG) };
+// 		this.fine = { size: 0.2, color: color(this.FRG) };
+// 		this.pointStyle = this.fine;
+// 		switch (this.projectionMode) {
+// 			case "REAL": //x1,x2
+// 				this.pan.doPan = true;
+// 				this.g.scale(0.3);
+// 				break;
 
-		switch (this.pointMode) {
-			case "random":
-				break;
+// 			case "REAL3D": //x1,x2,norm squared of imaginary part
+// 				this.doCameraControl = true;
+// 				this.pan.doPan = true;
+// 				this.g.ortho();
+// 				break;
 
-			case "starscape":
-				this.clearGridTape();
-				this.maxPtsPerFrame = 500;
-				break;
-		}
-	}
+// 			case "STELLAR":
+// 				this.doCameraControl = true;
+// 				this.g.scale(0.7);
+// 				this.maxPtsPerFrame = 2000;
+// 				break;
 
-	renderCurveDecor() {
-		let layer = this.g || window;
-		layer.push();
-		layer.strokeWeight(4);
-		switch (this.projectionMode) {
-			case "REAL":
-				break;
+// 			case "STELLAR3D": case "STELLAR3DLine":
+// 				this.fine = { size: 0.1, color: color(this.FRG) };
+// 				this.coarse = { size: 2, color: color(this.FRG) };
+// 				this.lineLen = 0.003;
+// 				this.doCameraControl = true;
+// 				this.maxPts = 20000;
+// 				this.maxPtsPerFrame = 2000;
+// 				break;
 
-			case "REAL3D": //x1,y1,x2
-				break;
+// 			case "TORIC": //requires specifying triCoords
+// 				this.pan.doPan = true;
+// 				break;
+// 		}
 
-			case "STELLAR":
-				layer.noStroke();
-				layer.fill(this.BKG);
-				let sphereRad = 0.99;
-				layer.sphere(sphereRad);
-				layer.noFill();
-				layer.stroke(this.FRG);
-				layer.strokeWeight(2);
+// 		switch (this.pointMode) {
+// 			case "random":
+// 				break;
 
-				//DRAW REFRENCE CIRCLES
-				// let circleRad=1;
-				// layer.rotateX(PI/4);
-				// layer.rotateY(PI/4);
-				// layer.circle(0,0,2*circleRad,100)
-				// layer.rotateX(PI/2);
-				// layer.circle(0,0,2*circleRad)
-				// layer.rotateY(PI/2);
-				// layer.circle(0,0,2*circleRad)
-				break;
+// 			case "starscape":
+// 				this.clearGridTape();
+// 				this.maxPtsPerFrame = 500;
+// 				break;
+// 		}
+// 	}
 
-			case "STELLAR3D": case "STELLAR3DLine":
-				layer.noStroke();
-				layer.fill(color("hsla(0, 36%, 47%, 1.00)"));
-				layer.sphere(0.04);
-				break;
+// 	renderCurveDecor() {
+// 		let layer = this.g || window;
+// 		layer.push();
+// 		layer.strokeWeight(4);
+// 		switch (this.projectionMode) {
+// 			case "REAL":
+// 				break;
 
-			case "TORIC": //requires specifying triCoords
-				layer.stroke(this.FRG);
-				this.triCoord.draw(layer);
-				break;
-		}
-		layer.pop();
-	}
+// 			case "REAL3D": //x1,y1,x2
+// 				break;
 
-	//this is really janky im so grrrrrrrr
-	ptsPerFrame(){
-		return this.maxPtsPerFrame / pow(this.ui.curve.getDegree(), 1.5);
-	}
+// 			case "STELLAR":
+// 				layer.noStroke();
+// 				layer.fill(this.BKG);
+// 				let sphereRad = 0.99;
+// 				layer.sphere(sphereRad);
+// 				layer.noFill();
+// 				layer.stroke(this.FRG);
+// 				layer.strokeWeight(2);
 
-	drawCurve() {
-		let ptsPerFrame;
-		switch (this.pointMode) {
-			case "random":
-				ptsPerFrame = this.ptsPerFrame();
-				if (this.numPts <= this.maxPts) {
-					let numNewPoints = 0;
-					if (this.pointAddingSpeed == "slow") {
-						let pointPortion = (this.maxPts - this.numPts) / this.maxPts; //progress bar from 1 to 0
-						numNewPoints = constrain(map(pow(pointPortion, 2), 1, 0, 1.5, 0), 0, 1) * ptsPerFrame;
-					} else if (this.pointAddingSpeed == "fast") {
-						numNewPoints = ptsPerFrame;
+// 				//DRAW REFRENCE CIRCLES
+// 				// let circleRad=1;
+// 				// layer.rotateX(PI/4);
+// 				// layer.rotateY(PI/4);
+// 				// layer.circle(0,0,2*circleRad,100)
+// 				// layer.rotateX(PI/2);
+// 				// layer.circle(0,0,2*circleRad)
+// 				// layer.rotateY(PI/2);
+// 				// layer.circle(0,0,2*circleRad)
+// 				break;
 
-					}
-					this.numPts += numNewPoints;
-					this.drawPtsOnCurve(numNewPoints);
-					if (this.enableRealCurve) {
-						this.drawPtsOnCurve(200, { real: true });
-					}
-				}
-				break;
+// 			case "STELLAR3D": case "STELLAR3DLine":
+// 				layer.noStroke();
+// 				layer.fill(color("hsla(0, 36%, 47%, 1.00)"));
+// 				layer.sphere(0.04);
+// 				break;
+
+// 			case "TORIC": //requires specifying triCoords
+// 				layer.stroke(this.FRG);
+// 				this.triCoord.draw(layer);
+// 				break;
+// 		}
+// 		layer.pop();
+// 	}
+
+// 	//this is really janky im so grrrrrrrr
+// 	ptsPerFrame(){
+// 		return this.maxPtsPerFrame / pow(this.ui.curve.getDegree(), 1.5);
+// 	}
+
+// 	drawCurve() {
+// 		let ptsPerFrame;
+// 		switch (this.pointMode) {
+// 			case "random":
+// 				ptsPerFrame = this.ptsPerFrame();
+// 				if (this.numPts <= this.maxPts) {
+// 					let numNewPoints = 0;
+// 					if (this.pointAddingSpeed == "slow") {
+// 						let pointPortion = (this.maxPts - this.numPts) / this.maxPts; //progress bar from 1 to 0
+// 						numNewPoints = constrain(map(pow(pointPortion, 2), 1, 0, 1.5, 0), 0, 1) * ptsPerFrame;
+// 					} else if (this.pointAddingSpeed == "fast") {
+// 						numNewPoints = ptsPerFrame;
+
+// 					}
+// 					this.numPts += numNewPoints;
+// 					this.drawPtsOnCurve(numNewPoints);
+// 					if (this.enableRealCurve) {
+// 						this.drawPtsOnCurve(200, { real: true });
+// 					}
+// 				}
+// 				break;
 
 				
 
-			case "starscape":
-				let numNewPoints = this.maxPtsPerFrame / pow(this.ui.curve.getDegree(), 1.5);
-				let style = {
-					size: 2,
-					color: color(this.FRG),
-					pointMode: "sup"
-				}
-				if (this.scheduleReset) {
-					numNewPoints = pow(6, 3.5);
-				}
-				if (this.numPts < this.maxPts) {
-					let points = getGridPoints(this.gridState, numNewPoints).points
+// 			case "starscape":
+// 				let numNewPoints = this.maxPtsPerFrame / pow(this.ui.curve.getDegree(), 1.5);
+// 				let style = {
+// 					size: 2,
+// 					color: color(this.FRG),
+// 					pointMode: "sup"
+// 				}
+// 				if (this.scheduleReset) {
+// 					numNewPoints = pow(6, 3.5);
+// 				}
+// 				if (this.numPts < this.maxPts) {
+// 					let points = getGridPoints(this.gridState, numNewPoints).points
 
-					for (let dualPoint of points) {
-						dualPoint.setStyle(style);
-						let l = CP2Line.dualLine(dualPoint);
-						let intersects = this.curve.intersect(l, this.options)
-						for (let p of intersects) {
-							p.style = l.style;
-							p.render(this)
-						}
-					}
+// 					for (let dualPoint of points) {
+// 						dualPoint.setStyle(style);
+// 						let l = CP2Line.dualLine(dualPoint);
+// 						let intersects = this.curve.intersect(l, this.options)
+// 						for (let p of intersects) {
+// 							p.style = l.style;
+// 							p.render(this)
+// 						}
+// 					}
 
-					this.numPts += numNewPoints;
-				}
-				break;
-		}
-	}
+// 					this.numPts += numNewPoints;
+// 				}
+// 				break;
+// 		}
+// 	}
 
-	drawPtsOnCurve(numPts, options = { real: false }) {
-		let layer = this.g || window;
-		layer.push();
-		let style;
-		if (options.real) {
-			style = this.realPointStyle;
-		} else {
-			style = this.pointStyle;
-		}
+// 	drawPtsOnCurve(numPts, options = { real: false }) {
+// 		let layer = this.g || window;
+// 		layer.push();
+// 		let style;
+// 		if (options.real) {
+// 			style = this.realPointStyle;
+// 		} else {
+// 			style = this.pointStyle;
+// 		}
 
 
-		if (this.ui.curve.isZero()) {
-			for (let i = 0; i < numPts; i++) {
-				let p = CP2Point.randPoint(options)
-				p.style = style
-				p.render(this);
-			}
-		} else {
-			for (let i = 0; i < numPts; i++) {
-				let l = CP2Line.randLine(options);
-				//let l = CP2Line.dualLine(CP2Point.randPoint(options),options);
-				let intersects = this.ui.curve.intersect(l, options)
-				if (l.style) {
-					style = l.style;
-				}
-				for (let p of intersects) {
-					p.style = style;
-					p.render(this)
-				}
-			}
-		}
-		layer.pop();
-	}
+// 		if (this.ui.curve.isZero()) {
+// 			for (let i = 0; i < numPts; i++) {
+// 				let p = CP2Point.randPoint(options)
+// 				p.style = style
+// 				p.render(this);
+// 			}
+// 		} else {
+// 			for (let i = 0; i < numPts; i++) {
+// 				let l = CP2Line.randLine(options);
+// 				//let l = CP2Line.dualLine(CP2Point.randPoint(options),options);
+// 				let intersects = this.ui.curve.intersect(l, options)
+// 				if (l.style) {
+// 					style = l.style;
+// 				}
+// 				for (let p of intersects) {
+// 					p.style = style;
+// 					p.render(this)
+// 				}
+// 			}
+// 		}
+// 		layer.pop();
+// 	}
 
-}
+// }
 
 

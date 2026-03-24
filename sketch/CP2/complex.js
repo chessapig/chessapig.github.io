@@ -15,7 +15,7 @@ class Complex {
 	}
 
 	display() {
-		let numDigits = 2;
+		let numDigits = 1;
 		let eps = 0.00001;
 		let doPlus = true;
 

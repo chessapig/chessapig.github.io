@@ -244,7 +244,7 @@ class ComplexSelector extends Selector{
 
     //converts from value stored to real number
     magnitudeToValue(x){ //send [-1,1] to [-infty,infty] in symmetric way
-        return tan(x*PI/2)/2;
+        return tan(x*PI/2);
     }
 
     //return value of selector. In this case a complex number.
@@ -299,7 +299,7 @@ class RealSelector extends ComplexSelector{
         ctx.circle(0,0,1);
       
         let value = this.value();
-        let radius = constrain(abs(value),0,1);
+        let radius = constrain(abs(value)/2,0,1);
         if(value>=0){
             ctx.fill(this.posColor);
         } else {
@@ -318,7 +318,8 @@ class RealSelector extends ComplexSelector{
     }
 
     constrainMagnitude(){
-        this.magnitude=constrain(this.magnitude,-1,1)
+        let limit=0.99;
+        this.magnitude=constrain(this.magnitude,-limit,limit)
     }
 
      onUpdate(){
@@ -375,7 +376,9 @@ class ComplexDragger extends Selector {
             y: y,
 			radius: 0.1,
             selectRadius: 0.1,
-            doConstrain: false
+            doConstrain: false,
+            xRange: [-1,1],
+            yRange: [-1,1]
 		};
 		options=Object.assign({}, defaults, options); 
 
@@ -385,8 +388,8 @@ class ComplexDragger extends Selector {
     // dragging behavior
     onUpdate(){
         if(this.doConstrain){
-            this.x = constrain(this.mouse.x + this.offset.x,-1,1);
-            this.y = constrain(this.mouse.y + this.offset.y,-1,1);
+            this.x = constrain(this.mouse.x + this.offset.x,this.xRange[0],this.xRange[1]);
+            this.y = constrain(this.mouse.y + this.offset.y,this.yRange[0],this.yRange[1]);
         } else {
             this.x = this.mouse.x + this.offset.x;
             this.y = this.mouse.y + this.offset.y;

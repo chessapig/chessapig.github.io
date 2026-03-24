@@ -37,6 +37,7 @@ function setup() {
 
 	E = new EllipticCurve({
 		torsion: sliderTorsion.value(),
+		thetaResolution: 3,
 	});
 
 	ellipticUI = new EllipticCurveUI({

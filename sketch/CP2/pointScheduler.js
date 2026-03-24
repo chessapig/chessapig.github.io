@@ -150,39 +150,9 @@ class Projection {
 	};
 }
 
-class CP2RealProjection extends Projection{
-	setup(r) {
-		r.camera.zoom=log(0.5);
-	}
-
-	plotPoint(p, r) {
-		let coords = p.getAffine();
-		r.g.point(coords[0].x, coords[1].x);
-	}
-}
-
-class StellarProjection {
-	setup(r) {
-		r.doCameraControl = true;
-		r.g.scale(0.7);
-	}
-
-	renderPoint(p, r) {
-		for (let c of p.getSpherical()) {
-			r.g.point(c.x, c.y, c.z);
-		}
-	}
-
-	renderDecor(r) {
-		let g = r.g;
-		g.noStroke();
-		g.fill(r.BKG);
-		g.sphere(0.99);
-	}
-}
 
 
-class PointRenderer extends GraphicsWindow2DCamera{
+class PointRenderer extends GraphicsWindowCamera{
 	constructor(options){
 		super(options);
 		//this.curve=curve;
@@ -254,17 +224,6 @@ class PointRenderer extends GraphicsWindow2DCamera{
 	setScheduler(s) {
 		this.scheduler = s;
 		this.reset();
-	}
-}
-
-class CurveRenderer extends PointRenderer{
-	constructor(curve,options){
-		const defaults = {
-			scheduler: new RandomCP2CurveScheudler(curve),
-			projection: new CP2RealProjection(),
-		};
-		options = Object.assign({}, defaults, options);
-		super(options);
 	}
 }
 
