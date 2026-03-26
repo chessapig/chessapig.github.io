@@ -69,7 +69,15 @@ class GraphicsWindow {
 
 	
 	mouse() {
-		return this.screenToLocal(mouseX, mouseY);
+        let mx = mouseX;
+        let my = mouseY;
+
+        if (touches.length > 0) {
+            mx = touches[0].x;
+            my = touches[0].y;
+        }
+
+        return this.screenToLocal(mx, my);
 	}
 
 	pressed() {

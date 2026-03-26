@@ -175,14 +175,6 @@ function saveTemplate(){
 }
 
 
-////////////////////////
-// Dial class
-////////////////////////
-function dial(){
-
-}
-
-
 
 ////////////////////////
 // Helper functions
@@ -302,4 +294,25 @@ function mouseDragged() {
 		w.dragged(mouseX, mouseY, pmouseX, pmouseY);
 	}
 
+}
+
+function touchStarted() {
+	for (let w of windows) {
+		 w.pressed();
+	}
+	return false; // prevent scrolling
+}
+
+function touchEnded() {
+	for (let w of windows) {
+		 w.released();
+	}
+	return false; // prevent scrolling
+}
+
+function touchMoved() {
+	for (let w of windows) {
+		w.dragged(mouseX, mouseY, pmouseX, pmouseY);
+	}
+	return false; // prevent scrolling
 }
