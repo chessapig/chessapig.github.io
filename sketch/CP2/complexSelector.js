@@ -90,7 +90,6 @@ class Selector{
         ctx.circle(this.x,this.y,0.1);
         ctx.pop();
     }
-
 }
 
 class ComplexSelector extends Selector{
