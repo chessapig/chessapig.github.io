@@ -5,9 +5,12 @@
 		const defaults = {
 			maxPerFrame: 1000,
 			maxTotal: 40000,
-			style: {size: 1 , color: color(0) }
+			style: {size: 1 , color: color(0) },
+			doStorePoints: false,
 		};
 	Object.assign(this, defaults, options);
+
+	this.points=[];
 
 	this.numPoints = 0;
 	}
@@ -34,6 +37,7 @@
 
 	reset() {
 		this.numPoints = 0;
+		this.points=[];
 	}
 
 	//returns wether or not the scheduler updated.
@@ -51,8 +55,11 @@
 
 	next(options={}) {
 		let n = this.pointsThisFrame();
-		this.points = this.generate(n, options) //stores last generated points
-		return this.points;
+		this.nextPoints = this.generate(n, options) //stores last generated points
+		if(this.savePoints){
+			this.points.append(this.doStorePoints);
+		}
+		return this.nextPoints;
 	}
 }
 
@@ -109,15 +116,6 @@ class RandomCP2CurveScheudler extends PointScheduler {
 		return points;
 	}
 
-	next(options={}) {
-		let n = this.pointsThisFrame();
-		if(!n && n!=0){
-			console.log("WARNING: number of poitns this frame not defined");
-			n=100;
-		}
-		return this.generate(n, options);
-	}
-
 	update(){
 		return this.curve.didUpdate;
 	}
@@ -139,8 +137,21 @@ class Projection {
 		r.g.pop();
 	}
 
+	getPointCoord(p){
+		return [p.x,p.y];
+	}
+
 	plotPoint(p,r){
-		r.g.point(p.x,p.y);
+		let coords = this.getPointCoord(p);
+		if(!coords[2]){
+			coords[2]=0;
+		}
+		if(coords[0].length){ // if it is an array of arrays
+			for(let c of coords){
+				r.g.point(c[0],c[1],c[2]);
+			}
+		}
+		r.g.point(coords[0],coords[1],coords[2]);
 	}
 
 	renderDecor(r) {}
@@ -224,6 +235,13 @@ class PointRenderer extends GraphicsWindowCamera{
 	setScheduler(s) {
 		this.scheduler = s;
 		this.reset();
+	}
+
+	//converts this.scheduler.points to a pointcloud via projection, then saves as svg.
+	exportPoints(){
+		let points = this.scheduler.points;
+		let coords = points.map(pt => this.projection.getPointCoord(pt)); //This will break if i return array of poitns. but thats okay
+		console.log(coords);
 	}
 }
 

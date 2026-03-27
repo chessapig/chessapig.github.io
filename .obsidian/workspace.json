@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/code/2026-03-25-remainder.md",
+                "file": "_posts/code/2026-03-25-sun-dial.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "2026-03-25-remainder"
+              "title": "2026-03-25-sun-dial"
             }
           },
           {
@@ -191,6 +191,7 @@
   },
   "active": "b47dd5ad9f1b30b2",
   "lastOpenFiles": [
+    "_site/code/sun-dial.html",
     "_site/assets/images/CRT_clock.png",
     "assets/images/CRT_clock.png",
     "_site/assets/images/Screenshot 2026-03-26 at 4.06.08 AM.png",
@@ -199,7 +200,7 @@
     "assets/Screenshot 2026-03-26 at 4.06.08 AM.png",
     "_layouts/Screenshot 2026-03-26 at 4.06.08 AM.png",
     "_posts/code/2026-03-21-gaussian.md",
-    "_posts/code/2026-03-25-remainder.md",
+    "_posts/code/2026-03-25-sun-dial.md",
     "writing/index.md",
     "_site/sketch/remainder/dial.js",
     "sketch/remainder/dial.js",
@@ -223,7 +224,6 @@
     "_site/assets/crafts/tori/gallery/clay.jpeg",
     "assets/crafts/tori/gallery/clay.jpeg",
     "_site/assets/crafts/tori/gallery/real balanced.jpeg",
-    "assets/crafts/tori/gallery/real balanced.jpeg",
     "_posts/crafts/2025-03-16-torus-collection.md",
     "_posts/crafts/2024-09-14-paper-strips.md",
     "_posts/crafts/2024-01-10-Monodromy.md",

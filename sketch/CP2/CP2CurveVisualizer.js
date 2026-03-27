@@ -228,10 +228,11 @@ class CP2RealProjection extends Projection{
 		r.camera = new Camera2D({zoom: log(0.5)})
 	}
 
-	plotPoint(p, r) {
-		let coords = p.getAffine();
-		r.g.point(coords[0].x, coords[1].x);
+	getPointCoord(pt){
+		let affineCoords = pt.getAffine();
+		return [affineCoords[0].x, affineCoords[1].x];
 	}
+
 }
 
 //projects CP2 onto R2 by taking real parts, and using barycentric coordinates (setting x+y+z=1)
@@ -253,11 +254,11 @@ class CP23DProjection extends Projection{
 		r.camera=newCam;
 	}
 
-	//takes CP2Point r
-	plotPoint(pt, r) {
+	getPointCoord(pt){
 		let affineCoords = pt.getAffine();
-		r.g.point(affineCoords[0].x, affineCoords[1].x, affineCoords[0].y);
+		return [affineCoords[0].x, affineCoords[1].x, affineCoords[0].y];
 	}
+
 }
 
 //projects CP2 onto R2 by taking real parts, and using barycentric coordinates (setting x+y+z=1)
@@ -273,11 +274,10 @@ class realToricProjection extends Projection{
 		}
 	}
 
-	//takes CP2Point r
-	plotPoint(pt, r) {
+	getPointCoord(pt){
 		let affineCoords = pt.getAffine();
 		let coords = this.triCoord.barycentricToScreen([1,affineCoords[0].x,affineCoords[1].x]);
-		r.g.point(coords.x, coords.y);
+		return [coords.x, coords.y];
 	}
 
 	renderDecor(r) {
@@ -314,9 +314,9 @@ class toricProjection extends Projection{
 	}
 
 
-	plotPoint(pt, r) {
+	getPointCoord(pt){
 		let coords = this.triCoord.barycentricToScreen(pt.getNormSq());
-		r.g.point(coords.x, coords.y);
+		return [coords.x, coords.y];
 	}
 
 	renderDecor(r) {
@@ -345,12 +345,12 @@ class toric3DProjection extends toricProjection{
 		r.camera=newCam;
 	}
 
-
-	plotPoint(pt, r) {
+	getPointCoord(pt){
 		let coords = this.triCoord.barycentricToScreen(pt.getNormSq());
 		let affine = pt.getAffine();
-		r.g.point(coords.x, coords.y, affine[0].arg()/TWO_PI); //z coordinate is phase
+		return [coords.x, coords.y, affine[0].arg()/TWO_PI]; //z coordinate is phase
 	}
+
 }
 
 //projection of what it would look like if you stood at zero and looked at your point (geodesic)
