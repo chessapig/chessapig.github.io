@@ -1,0 +1,333 @@
+---
+layout: project
+title: Curved origami and tangent developables
+date: 2026-02-16 16:03:47 -0500
+categories: craft
+tags:
+  - craft
+  - ihp
+image: /assets/crafts/tangent/gallery/tangent_developable.jpeg
+summary: A summary of 
+pageHasContent: true
+---
+
+# Developable surfaces
+
+A piece of paper is a is a surprisingly rigid material. Though paper may bend as much as it likes, It cannot stretch. The fibers can't slide past one another. The material properties of paper ensure that it conforms to a a surface in $\RR^3$ where the lengths and angles along the surface are the same as those on the flat plane. In the language of differential geometry, the surface of a bent sheet of paper is "isometric" to the flat plane. A sphere has a different metric then the plane, its curvature distorting lengths and angles, so it cannot be formed from paper without stretching or folding.
+
+Despite these metric restrictions, paper can fold into some beautifully curvy shapes. Which shapes is paper allowed to make?
+<div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
+  <img src="/assets/crafts/tangent/gallery/tesselation.jpeg" alt="Curved crease origami model of a hyperbolic plane" class="card-img-top" >
+
+  <div class="card-body text-center">
+    <h5 class="card-title"> A curved crease hyperbolic origami tessellation</h5>
+    <p class="card-text"> With Mrinal Dhume
+    </p>
+  </div>
+</div>
+
+The answer comes from curvature. Through a point on our surface, we can look at cross sections of the surface through a plane orthogonal through the surface. Find the plane which achieves the maximum and minimum of the curvature of the cross sections. The values of these two curvatures are the "principle curvatures" at that point. For example, when the surface is a flat plane, all principle curvatures are zero and the gaussian curvature is zero. For a cylinder, the direction of maximal curvature is a circular section of the cylinder, which has positive curvature. The direction of minimal angle is a line parallel to the axis of the cylinder, which has zero curvature. The product of these is zero, so a cylinder has zero gaussian curvature at every point. 
+
+<div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
+  <img src="/assets/crafts/tangent/gaussian.jpeg" alt="A cylidner with pencil marks on it. Along the axis, a line with labeled curvature 0. Along the circular crossection, a line with labeled curvature > 0. The text says gaussian curature equals zero " class="card-img-top" >
+
+  <div class="card-body text-center">
+    <p class="card-text"> The gaussian curvature of a cylinder is zero
+    </p>
+  </div>
+</div>
+
+We see that a cylinder rolled out of paper has gaussian curvature zero. In fact, any surface made with paper has gaussian curvature zero, and any surface with gaussian curvature zero can be assembled from paper. This is the content of Gauss's *Theorem Egregium* (the wonderful theorem). Mathematically, two surfaces are isometric if and only if their gaussian curvatures are the same. This is striking, because the particular values of the principle curvatures can differ between two isometric surfaces, but their product is constant. (Compare the cylinder to the plane.)
+
+You've applied the theorem Egregium if you've ever eaten a particularly floppy new york slice pizza.  To stop the pizza from dropping, you fold the pizza in half. This forces one of the principle curvatures to be nonzero. The Pizza, starting as a flat surface, must have gaussian curvature zero. So, the direction parallel to the pizza must have curvature zero, else the pizza would stretch and distort. This stops the pizza from drooping!
+
+Surfaces with gaussian curvature zero are called *Developable surfaces*. I imagine this is because they can be "developed", rolled out of flat sheets. This is a very efficient way to manufacture three dimensional curved objects. I'd like to tell you about this sculpture showing an interesting developable surface. It's about three feet across, quite sturdy, and quick to make.  
+
+<div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
+  <img src="/assets/crafts/tangent/gallery/tangent_developable.jpeg" alt="A 3 foot paper sculpture. The paper is folded along a helix shape, with a single crease in the middle, and stitches running down the main axis." class="card-img-top" >
+
+  <div class="card-body text-center">
+	  <h5 class="card-title">  A developable surface</h5>
+  </div>
+</div>
+
+This is quite a complicated developable surface. Let's start with an example which is easier to analyze, which you can make yourself. 
+
+## The Vesica Piscis
+
+The Vesica Piscis is a shaped formed from two circles of equal radius, each passing through the other's center. It is the second shape you make in sacred geometry (Or, as I prefer, [cursed geometry](/craft/pointless)), and it makes a beautiful origami. I learned about this model from the bridges paper, [Folding the Vesica Piscis](https://archive.bridgesmathart.org/2018/bridges2018-535.pdf) by Klara Mundilova and Tony Wills 
+
+<div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
+  
+  <div class="d-flex">
+    
+    <div class="w-50 d-flex align-items-center justify-content-center">
+      <img src="/assets/crafts/tangent/vesica.jpeg"
+           alt="Two circles, each passing through the others center"
+           class="img-fluid">
+    </div>
+    
+    <div class="w-50 d-flex align-items-center justify-content-center">
+      <img src="/assets/crafts/tangent/venus.jpeg"
+           alt="a folded origami vesica piscis. It forms a moon-like shape."
+           class="img-fluid">
+    </div>
+
+  </div>
+
+  <div class="card-body text-center">
+    <h5 class="card-title">Folding a Vesica Piscis</h5>
+    <p class="card-text"> The left side is a folding pattern, which folds into the right side.
+    </p>
+  </div>
+</div>
+
+<div class="card" >
+    <h4 class="card-header">
+        <a aria-expanded="true"  id="heading-example" class="d-block">
+            Make it yourself
+        </a>
+    </h4>
+    <div aria-labelledby="heading-example">
+<div class="card-body" markdown="1">
+
+- Make the fold pattern. You can either use a compass, or print the [template](/assets/crafts/tangent/vesica_template.jpeg). I recommend using cardstock. 
+- Cut out the lines on the exterior of the Vesica. You should get this (ignore the marked lines)
+<div class="card my-4 shadow-sm" style="max-width: 300px; margin: auto;">
+<img src="/assets/crafts/tangent/vesica_flat.jpeg" alt="A vesica pisces shape (Two intersecting cirrcles) cut out of paper" class="card-img-top" >
+</div>
+- Score the inner circular arcs. It's easiest to go over the arcs with a ball-point pen and a heavy hand. 
+-  fold both circular arcs, each as mountain folds.  This is the result:
+<div class="card my-4 shadow-sm" style="max-width: 300px; margin: auto;">
+<img src="/assets/crafts/tangent/vesica_folded.jpeg" alt="a folded diuble horn shape, made from the vesica piscis" class="card-img-top" >
+</div>
+
+The folded Vesica Pisces is made from three developable patches, connected along the folds of the origami. Try moving the two "horns" close or far, and see how the Vesica actuates.
+	
+</div></div></div><br>
+
+## Classifying developable surfaces
+
+Every non-creased point of a curved origami model must have gaussian curvature zero. In particular, there is some direction through a point with curvature zero, the "principle direction". Moving along these directions defines a curve on the curved origami model. It turns out, this is a line in three dimensional space. These are called "lines of ruling", because you can lie a ruler along the surface (see figure below). Any developable surface is swept out by these lines of ruling, so is a "ruled surface"
+
+<div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
+  
+  <div class="d-flex">
+    
+    <div class="w-50 d-flex align-items-center justify-content-center">
+      <img src="/assets/crafts/tangent/ruler_on.jpeg"
+           alt="A developable surface with a ruler tangent to a point. This ruler does lie along the surface."
+           class="img-fluid">
+    </div>
+    
+    <div class="w-50 d-flex align-items-center justify-content-center">
+      <img src="/assets/crafts/tangent/ruler_off.jpeg"
+           alt="A developable surface with a ruler tangent to a point. This ruler does  NOTlie along the surface."
+           class="img-fluid">
+    </div>
+
+  </div>
+
+  <div class="card-body text-center">
+    <h5 class="card-title">Developable surfaces are ruled. </h5>
+    <p class="card-text"> On the left, a ruler following a line of ruling of a developable surface. The ruler lies everywhere on the surface. On the right, the ruler does not follow a line of ruling, and does not lie along the surface.
+    </p>
+  </div>
+</div>
+
+There are 3 types of developable surfaces, classified by their lines of ruling. A curved origami model consists of patches taken from one of these three models. 
+
+1. **Cylinder:** All lines of ruling are parallel.
+2. **Cone**: All lines of ruling, extended into space, meet at a point. 
+3. **Tangent devlopable:** All lines of ruling are tangent to a curve in three dimensional space.
+
+Let's classify the pieces of the Vesica Piscis into these three parts. First, we need to figure out the lines of ruling. My favorite trick is to use shadows. Illuminate the curved origami with parallel light rays, for example from direct sunlight. The parts of the surface pointing towards the light are illuminated, and those pointing away are in shadow. So, the line between light and shadow occurs where the surface has normal pointing orthogonal to the light. Along a line of ruling, the normal vectors are constant. Therefore, the line between light and shadow will lie exactly along a line of ruling. (Note: This does not apply to cast shadows.)
+
+<div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
+  <img src="/assets/crafts/tangent/ruling_shadow.jpeg" alt="A piece of a developable surface, with part illuminated and part in shadow. The line between them is labeled as the line of ruling" class="card-img-top" >
+
+  <div class="card-body text-center">
+	  <p class="card-text"> A shadow on a developable surface shows the line of ruling.
+    </p>
+  </div>
+</div>
+
+Here's are the lines of ruling on the Vesica pisces, folded and laying flat. Instead of measuring all the lines of ruling, I used the analytic solution from [Folding the Vesica Piscis](https://archive.bridgesmathart.org/2018/bridges2018-535.pdf).  They are simple to describe in the flattened version (right picture below). On the intersection of the two circles, the lines of ruling are horizontal. Everywhere else, the lines of ruling are radial from the of the Vesica Piscis 
+
+<div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
+
+  <div class="d-flex">
+    
+    <div class="w-50 d-flex align-items-center justify-content-center">
+      <img src="/assets/crafts/tangent/vesica_folded.jpeg"
+           alt="folded vescia piscis, decorated with lines."
+           class="img-fluid">
+    </div>
+    
+    <div class="w-50 d-flex align-items-center justify-content-center">
+      <img src="/assets/crafts/tangent/vesica_flat.jpeg"
+           alt="flattened version of vesica piscis template , decorated with lines"
+           class="img-fluid">
+    </div>
+
+  </div>
+
+  <div class="card-body text-center">
+    <h5 class="card-title"> Lines of ruling on folded Vesica Piscis </h5>
+    <p class="card-text"> On the left, a folded Vesica Piscis with its lines of ruling. On the right, an unfolded Vesica Piscis with the same lines of ruling unfolded.
+    </p>
+  </div>
+</div>
+
+
+To visualize the lines of ruling, we can tape physical sticks to the origami model along the lines of ruling. Here, I unfolded the Vesica Piscis, and extended the ruling lines from the outside circle to their common meeting point at the center. When folded, the ruling lines still extend past the bounds of the curved origami. The lines of ruling for each half still all meet at one half in the folded Vesica Piscis. This shows that the top and bottom of the folded vesica piscis are pieces of **cones**.
+
+<div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
+
+  <div class="d-flex">
+    
+    <div class="w-50 d-flex align-items-center justify-content-center">
+      <img src="/assets/crafts/tangent/vesica_rulings_folded.jpeg"
+           alt="vesica piscis template, with ruling lines extended to the center using toothpicks"
+           class="img-fluid">
+    </div>
+    
+    <div class="w-50 d-flex align-items-center justify-content-center">
+      <img src="/assets/crafts/tangent/vesica_rulings.jpeg"
+           alt="vesica piscis folded, with ruling lines extended using toothpicks. Each half clamshell has its lines of ruling, these toothpicks, all pointing at a single point. "
+           class="img-fluid">
+    </div>
+
+  </div>
+
+  <div class="card-body text-center">
+    <h5 class="card-title">Extending lines of ruling </h5>
+    <p class="card-text"> <b>Left</b>: the folded vesica pisces, with lines of ruling extended. The lines of ruling meet at points, meaning the surface is a portion of a cone. 
+    
+    <b>Right</b>: An unfolded Vesica Pisces, with extended lines of ruling all meeting in the center.  
+    </p>
+  </div>
+</div>
+
+In contrast, the lines of ruling in the overlapping portion of the Vesica Piscis are all parralel, forming a  **Cylinder**. Note that the base of the cylinder is not a circle. The Vesica piscis shows two of the three types of developable surfaces. The missing type, tangent developables, are the weirdest.
+
+# Tangent developable
+The tangent developable of a curve looks like some sort of helix spiraling around that curve.
+
+<div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
+
+  <div class="d-flex">
+    
+    <div class="w-30 d-flex align-items-center justify-content-center">
+      <img src="/assets/crafts/tangent/tangent_flat.jpeg"
+           alt="A spiral cut out of paper. The tangents from the inside of the spiral are drawn on the outside"
+           class="img-fluid">
+    </div>
+    
+    <div class="w-70 d-flex align-items-center justify-content-center">
+      <img src="/assets/crafts/tangent/tangent_folded.jpeg"
+           alt="The same spiral from before, pulled tight into a helix.  "
+           class="img-fluid">
+    </div>
+
+  </div>
+
+  <div class="card-body text-center">
+    <h5 class="card-title">A tangent developable</h5>
+    <p class="card-text">Starting with a spiral cut from paper and pulling tight twists the paper into a helix shape. This is a tangent developable of the central curve. Here is the <a href="/assets/crafts/tangent/developable_template.svg">Template</a>
+    </p>
+  </div>
+</div>
+
+I've been searching for a curved crease origami piece showing off tangent developable. For a long time, my best bet was above. This is rather contrived, forcing the rulings by scoring or precreasing the paper. The paper itself should force the lines of ruling...
+
+### Tangent developable of the helix
+At the [IHP semester in math illustration](/ihp), Chaim Goodman-Strauss showed me a way to make the tangent developable of a helix. Start by cutting two copies of an annulus out of paper, and cut a slit in both. Tape the inside circles of each annulus together (Picture 1 below). Then, pass a coffee stirrer through the hole and tape it tangent to the inside curve, along the inside and the outside (picture 2 below). Repeat with many such coffee sticks, evenly spaced around the annulus. Make sure that you don't attach the two ends of the annulus together again with the sticks.
+
+
+
+<div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
+
+	<img src="/assets/crafts/tangent/annulus_diagram_1.jpeg"
+           alt="a diagram showing two sheets of a slit annulus taped along their inside circle" class="card-img-top" >
+
+    <img src="/assets/crafts/tangent/annulus_diagram_2.jpeg"
+           alt="On top of the last diagram, there is a stick passing throwugh the hole, taped in both ends" class="card-img-top" >
+
+  <div class="card-body text-center">
+    <p class="card-text">Instructions for making a helix tangent developable.
+    </p>
+  </div>
+</div>
+
+After attaching all your sticks, you should end up with a device like this:
+
+<div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
+  <img src="/assets/crafts/tangent/gallery/helicoid.jpeg" alt="A small piece of a helix, made in paper supported by popsicle sticks. It is bathed in sunlight, casting a circular shadow" class="card-img-top" >
+
+  <div class="card-body text-center">
+	  <p class="card-text"> A tangent developable of a helix
+    </p>
+  </div>
+</div>
+
+The coffee stirrers force the lines of curvature to be tangent to the inside curve. No matter what, the surface is a tangent developable for the inside curve. But, the inside curve isn't fixed, and the helix can be stretched out and contracted. It's a fun toy. Here's a couple of the above helix, chained together into a longer helix:
+
+<div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
+	<div centering>
+	<video class="w-100" preload muted controls>
+	    <source src="/assets/crafts/tangent/gallery/helicoid.mp4" type="video/mp4"/>
+	</video></div>
+
+  <div class="card-body text-center">
+	  <p class="card-text"> A family of tangent developable, from the same sheet of paper
+    </p>
+  </div>
+</div>
+
+## The cubic discriminant locus
+
+I spent much of my semester in the shape mines, sitting on the floor of the common area, making shapes out of paper.  This is the best place in the institute to spy on people.  Pierre Arnoux, Stepan Paul, and Adrien (???last name) were trying to visualize the discriminant locus in the space of cubic equations. A cubic of the form $x^3 + a x^2 + bx + c$ is defined by a point $(a,b,c)\in \RR^3$. The discriminant locus is the set of cubics with a double real root, which is some surface in $\RR^3$. Here's some facts about the discriminant locus:
+- The discriminant locus certainly contains the cubics with a triple real root. These take the form $(x+t)^3 = x^3 + 3 t x^2 + 3 t^2 x + t^3$.  In $\RR^3$, the cubics with triple root trace out the *twisted cubic curve* $\gamma(t) = (3t,3 t^2,t^3)$.
+- If a polynomial has double root at $t$, then it belongs to a family $(x+t)^2 (x+t+a) = (x+t)^3 + a (x+2t + t^2)$.  In the space of coefficients, such a polynomial lies on the line passing through $\gamma(t)$ with slope $(1,2t,t^2)$. This slope is exactly $\gamma'(t)/3$, so the polynomial lies on the tangent line to $\gamma$ at $t$.
+
+All together, the space of cubics with double real roots is the union of all tangent lines to the twisted cubic $\gamma$. The discriminant locus is a tangent developable!
+
+This gives the opportunity for folding the discriminant locus out of paper. Their scheme was very similar to Chaim's helicoid. Start with two sheets of paper, with a curve cut out of both, and tape the sides together. Then, after bending the curve into the shape of the twisted cubic in $\RR^3$, the paper would form the tangent developable. One sheet forms the forward tangents, and the other the backward tangents. The math comes from computing the curve in $\RR^2$ that correctly develops into $\RR^3$, to get the exact twisted cubic curve.
+
+I didn't want to do math, I just wanted a tangent developable. So I made my own rendition of the tangent developable of the twisted cubic, where I freehanded everything. Here's a paper test of something which looked... close enough. When i bend the flat, paired paper into 3D, the two sheets pop apart and trace a fun form. 
+
+<div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
+  <img src="/assets/crafts/tangent/tangent_template.jpeg" alt="a lune out of paper. There are two layers, taped along a central curve." class="card-img-top" >
+
+  <div class="card-body text-center">
+	  <p class="card-text"> flat template for tangent developable.
+    </p>
+  </div>
+</div>
+
+For [drawing club](...),  I wanted a large mathematical object for people to draw. So I scaled this idea up. I went to the art store, and bought a huge cutting matt out of 3mm thick cardboard. This had heft, but could still flex. Then, I folded it in half, cut something like the curve above into each half, and taped them together. I bought some brass tube which I could bend into shape, and traced out some roughly helical shape. Finally, i fed the brass rod between the two sheets of my paper. It immediately popped into 3D, forming a reasonably sturdy shape whose central spine conformed to the curve of the brass rod. It's such a fast way to make a big three dimensional sculpture! This one is 3 feet to the side. I sewed the rod in with the paper, which make it sturdier and look cooler, but you don't have to.
+
+<div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
+  <img src="/assets/crafts/tangent/developable_big.jpeg" alt="A large curving tangent developable, lounging on the couch" class="card-img-top" >
+
+  <div class="card-body text-center">
+	  <h5 class="card-title"> A "tangent developable" (which is not tangent) </h5>
+  </div>
+</div>
+
+The issue is, this isn't a tangent developable of the spine curve.  Check the shadows on some of the other pictures, they don't meet the spine at tangents. It surely is the tangent developable of something, because its not a cone or a cylinder, but I don't know the curve it's tangent to. I guess that's what I get for guessing. Let me explain the math I skimped out on
+
+## A curvature criterion
+
+The thing my model got wrong is the dihedral angle. Look down the spine of the curve, tangent to a point. From this perspective, the spine looks like it stops and turns around, forming a cusp. If my surface was a tangent developable, then the projection of the surface would be the union of tangents of this cusp. In particular, the angle in this projection is zero. This is the dihedreal angle between the sheets of paper meeting at the sheet. In a tangent developable, the cross section of the surface around the spine looks like a cusp.
+
+Looking at my sculpture down the spine, I can see that the dihedreal angle is not zero. The cross section of my sculpture looks like a wedge, not a cusp. So it's not a tangent devlopable of the spine. Where did I go wrong?
+
+The answer is in the paper [more on paperfolding](https://www.jstor.org/stable/2589583) by Tabachnikov and Fuchs. Though short, its the most convincing differential geometric analysis of curved crease origami that I know of.  Let $\Gamma : [0,1] \to \RR^2$ be a plane curve, the crease of the curved crease origami.  Suppose that the curve is creased, sending $\Gamma$ to a space curve $\gamma : [0,1] \to \RR^3$, with fold angle along the curve given by $\alpha(t)$. Then, we relate the curvature $k(t)$ of $\gamma(t)$ to the curvature $K(t)$ of $\Gamma(t)$ with the formula:
+
+$$k(t) = K(t) \cos(\alpha(t))$$
+
+as you fold a crease (increase $\alpha$) the curvature of the crease through space must decrease. In fact, if $\gamma$ is any space curve with curvature $k(t) \leq K(t)$ less than the plane curve $\Gamma$, then we can solve for a fold angle $\alpha$. There is an incredible amount of flexibility in arranging a curved crease fold in $\RR^3$. Tabachnikov and Fuchs state their results for folding along a crease, but the math is identical as our setup, with two sheets of paper stacked and taped to form a form a fold. In this setting, the plane curve $\Gamma$ is the outline cut out of the paper, and the space curve $\gamma$ is the metal rod which you conform around the paper.
+
+Now let's specialize to tangent developable, which have zero dihedral angle $\alpha(t)=0$. This implies $k(t)=K(t)$ so the space curve $\gamma$ must have the same curvature function as the plane curve $\Gamma$. There is always flexibility in choosing the torsion function of $\gamma$. Any paper model can form many tangent developables, like we saw with the helicoid. If we want the tangent developable of a specific space curve $\gamma$ (Say, the twisted cubic), then $\Gamma$ is determined. First compute the curvature function $k(t)$ for $\gamma$, then  integrate this in the plane to find the curve $\Gamma$ with curvature $k(t)$. 
