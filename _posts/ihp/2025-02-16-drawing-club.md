@@ -17,6 +17,12 @@ gallery-captions:
   - image: exquisite
     title: An Exquisite Topological Corpse
     caption: Each person draws a square, first drawing the lines, then filling with a soapy film. Togehter, they build an exquisitly topological surface. This piece was displayed at the Maison Poincare art show following the trimester at IHP. For more information, see the week on [Seifert surfaces](/drawing-club/seifert)
+  - image: spheres
+    title: Spheres
+    caption: How do you draw a sphere? Where is its equator? where is its pole? From the week on [spheres](/drawing-club/spheres). <br> Photo credit Edmund Harris
+  - image: tori
+    title: Tori
+    caption: How do you draw a torus? What does it's hole look like? There are many ways to draw the same topological object. From the week on [worms](/drawing-club/worms). <br> Photo credit Edmund Harris
   - image: worm
     title: Worms
     caption: An examination on the mathematics and philosophy of drawing worms. I guess. See the week on [worms](/drawing-club/worms)
@@ -32,7 +38,7 @@ Each class, we started with a gesture drawing session. Sabetta ran around the ro
 
   <div class="card-body text-center">
     <h5 class="card-title"> Gesture drawings</h5>
-	<p class="card-text"> By Alba Málaga    </p>
+	<p class="card-text"> By Rebecca Field  (photo credit Edmund Harris) </p>
   </div>
 </div>
 

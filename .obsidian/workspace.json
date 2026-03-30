@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/ihp/2025-02-16-drawing-club.md",
+                "file": "_posts/ihp/drawing-club/2026-02-02-spheres.md",
                 "mode": "source",
-                "source": true
+                "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-02-16-drawing-club"
+              "title": "2026-02-02-spheres"
             }
           },
           {
@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/ihp/drawing-club/2026-02-02-spheres.md",
+                "file": "_posts/ihp/2025-02-16-drawing-club.md",
                 "mode": "source",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "2026-02-02-spheres"
+              "title": "2025-02-16-drawing-club"
             }
           },
           {
@@ -63,7 +63,8 @@
               "title": "2026-03-23-shading"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -207,40 +208,41 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "b47dd5ad9f1b30b2",
+  "active": "3ba06c06354eaf4c",
   "lastOpenFiles": [
+    "_site/drawing-club.html",
+    "_site/2025-02-16-drawing-club.html",
+    "_site/assets/drawing-club/gallery/tori.jpeg",
+    "assets/drawing-club/gallery/tori.jpeg",
+    "_site/assets/drawing-club/gallery/spheres.jpeg",
+    "assets/drawing-club/gallery/spheres.jpeg",
+    "_site/assets/drawing-club/gallery/Poincare-Drawing-Club-7119.jpeg",
+    "_site/assets/drawing-club/gallery/Poincare-Drawing-Club-7117.jpeg",
+    "assets/drawing-club/gallery/Poincare-Drawing-Club-7117.jpeg",
+    "assets/drawing-club/gallery/Poincare-Drawing-Club-7119.jpeg",
+    "_posts/ihp/drawing-club/2026-02-09-worms.md",
+    "_posts/ihp/drawing-club/2026-03-16-clay.md",
+    "_posts/ihp/2025-02-16-drawing-club.md",
+    "_posts/ihp/drawing-club/2026-03-02-humanizing.md",
     "_posts/ihp/drawing-club/2026-02-23-seifert.md",
-    "_site/assets/drawing-club/seifert/truchet_small.jpeg",
-    "assets/drawing-club/seifert/truchet_small.jpeg",
-    "_site/assets/drawing-club/seifert/truchet.jpeg",
-    "assets/drawing-club/seifert/truchet.jpeg",
-    "_site/assets/drawing-club/seifert/truchet.jpg",
-    "assets/drawing-club/seifert/truchet.jpg",
-    "_site/assets/drawing-club/seifert/square.png",
-    "assets/drawing-club/seifert/square.png",
+    "_posts/ihp/drawing-club/2026-03-09-composition.md",
+    "_site/assets/drawing-club/human/emma.jpeg",
+    "assets/drawing-club/human/emma.jpeg",
     "_posts/ihp/drawing-club/2026-02-02-spheres.md",
     "_posts/ihp/drawing-club/2026-01-26-sketching.md",
-    "_posts/ihp/drawing-club/2026-03-09-composition.md",
     "_posts/ihp/drawing-club/2026-03-23-shading.md",
-    "_posts/ihp/2025-02-16-drawing-club.md",
-    "_site/assets/drawing-club/gallery/thumbnail.jpg",
-    "assets/drawing-club/gallery/thumbnail.jpg",
-    "_posts/2021-09-25-hyperbolic-band-theory.md",
-    "assets/drawing-club/gallery/untitled folder",
-    "_site/drawing-club.html",
-    "_posts/ihp/2025-02-02-tangent.md",
     "_posts/ihp/drawing-club/2026-03-29-outside.md",
+    "_posts/2021-09-25-hyperbolic-band-theory.md",
+    "_posts/ihp/2025-02-02-tangent.md",
+    "assets/drawing-club/worm/example2.jpeg.sb-8894d8c1-9Ds1Ea",
+    "assets/drawing-club/gallery/untitled folder",
     "_site/drawing-club/outside.html",
     "_site/drawing-club/shading.html",
     "_site/drawing-club/clay.html",
-    "_posts/ihp/drawing-club/2026-03-16-clay.md",
     "_site/drawing-club/composition.html",
     "_site/drawing-club/humanizing.html",
-    "_posts/ihp/drawing-club/2026-03-02-humanizing.md",
     "_site/drawing-club/seifert.html",
     "_site/drawing-club/worms.html",
-    "_posts/ihp/drawing-club/2026-02-09-worms.md",
-    "_site/drawing-club/spheres.html",
     "_posts/2023-01-01-hyperbolic-string-art.md",
     "_posts/ihp/drawing-club/Untitled.md",
     "_posts/ihp/drawing-club/2026-02-16-composition.md",
