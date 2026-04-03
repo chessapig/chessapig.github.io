@@ -7,9 +7,11 @@ tags:
   - gallery
   - blog
   - art
-attributes: 
+  - talk
+attributes:
 image: /assets/gallery/symmetree/thumbnail.jpg
-file: 
+talk-venue: <a href="https://www.youtube.com/watch?v=kqOqRiOsXdo"> Berkeley - UIUC 3D mirror symmetry seminar </a>
+file: /files/presentations/3d_mirror_symmetry.pdf
 summary: "The mirror symme-tree is a portrait of the field of math known as mirror symmetry. In the search for a theory of everything, physicists discovered mirror symmetry which posits that two different physical theories are dual to one another. For mathematicians, this duality builds an unexpected bridge between unrelated fields of math. The mirror symme-tree illustrates the mathematical structures and relationships from the eponymous field. "
 pageHasContent: true
 gallery-title: Mirror Symme-tree
@@ -32,8 +34,12 @@ gallery-captions:
     caption: Dimensionally reducing by $S^1$, the tree has a shadow. Each branch of the tree becomes a new TQFT one dimension lower. Here, symplectic duality relates sheaves living utop the higgs and coloumb branches of the theory. The sheaves are represented by the snake critters.
   - image: painting
     title: Me and my painting
-    caption: I got this painting professionally printed for the [SUMM art show](https://seattlemathmuseum.org/events/intersection-exhibition-mar-3-apr-25-25). This was the first time something of mine became real, physical art. 
+    caption: I got this painting professionally printed for the [SUMM art show](https://seattlemathmuseum.org/events/intersection-exhibition-mar-3-apr-25-25). This was the first time something of mine became real, physical art.
 ---
+*For an in-depth mathematical description of this image and 3D mirror symmetry, see my [notes](/files/presentations/3d_mirror_symmetry.pdf) and the video of [my talk](https://www.youtube.com/watch?v=kqOqRiOsXdo)* 
+
+https://www.youtube.com/watch?v=kqOqRiOsXdo
+
 Math lives atop a scaffolding of physics. Physicists organize the world into a hierarchy of quantum field theories, which I conceive as a great tree. Mathematical critters populate the branches, reflecting the structures and symmetries of the underlying physics. There is a mysterious duality between the wide-spreading branches,  hinting at an unexpected kinship between critters living in disparate areas of math.  Welcome to the mirror symme-tree.
 
 | <img src="/assets/gallery/symmetree/1full.jpg" alt="Large vibrant tree, full of arrows and critters. There are many signs with math words on them" width="700"> |

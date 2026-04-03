@@ -2,17 +2,18 @@
 layout: project
 title: Drawing club
 date: 2026-01-26 16:03:47 -0500
-categories: 
+categories:
 tags:
   - drawing
+  - art
   - gallery
   - ihp
-image: /assets/drawing-club/seifert/exquisite_topology.jpeg
-file: /assets/drawing-club/all_worksheets.pdf
+image: /assets/ihp/drawing-club/seifert/exquisite_topology.jpeg
+file: /assets/ihp/drawing-club/all_worksheets.pdf
 summary: I ran a mathematical drawing class over the trimester. Click to see the activities for each week. I've linked a compilation of all the worksheets from the trimester.
 pageHasContent: true
 gallery-title: Drawing club
-gallery-folder: /assets/drawing-club/gallery/
+gallery-folder: /assets/ihp/drawing-club/gallery/
 gallery-captions:
   - image: exquisite
     title: An Exquisite Topological Corpse
@@ -34,7 +35,7 @@ gallery-captions:
 Each class, we started with a gesture drawing session. Sabetta ran around the room making silly poses, and we had 30 seconds to draw them. It loosened up our hands, and forced us to draw what we see instead of what we imagine. This might have been the best part of drawing club. 
 
 <div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
-  <img src="/assets/drawing-club/gesture.jpeg" alt="many quickly drawn figures, in various poses, filling the page" class="card-img-top" >
+  <img src="/assets/ihp/drawing-club/gesture.jpeg" alt="many quickly drawn figures, in various poses, filling the page" class="card-img-top" >
 
   <div class="card-body text-center">
     <h5 class="card-title"> Gesture drawings</h5>

@@ -96,7 +96,7 @@ class GraphicsWindow {
 	scroll(delta) {
 		let didScroll=false;
 		for (let s of this.selectors) {
-			didScroll  = didScroll || s.scroll(delta);
+			didScroll  =  s.scroll(delta) || didScroll;
 		}
 		return didScroll;
 	}
@@ -221,13 +221,16 @@ class Dial extends Selector{
             angle: 0,
             innerRadius: this.radius/2,
             outerRadius: this.radius,
+            innerSelectRadius: this.radius/2,
+            outerSelectRadius: this.radius,
             arrowLength: this.radius+0.1,
             doArrow: true,
             doPrintMode: false,
             doOutsideLabel: true,
             doInsideLabel: true,
+            innerNumber: 5,  //number of ticks on the inside
             outerNumber: 35, //number of ticks on the outside
-			innerNumber: 5,  //number of ticks on the inside
+            centerLabel: 35,
             activeColor: color(0),
             noColor: color(120),
             neutralColor: color(255),
@@ -243,7 +246,7 @@ class Dial extends Selector{
     // Is mouse over object (stored in the rollover condition)
     over() {
         let d =  dist(this.x,this.y,this.mouse.x,this.mouse.y);
-        this.rollover = d < this.outerRadius && d > this.innerRadius ;
+        this.rollover = d < this.outerSelectRadius && d > this.innerSelectRadius ;
     }
     
     onReleased(){
@@ -304,16 +307,19 @@ class Dial extends Selector{
             let textSize= min(0.2*this.outerRadius,0.5*TWO_PI*this.outerRadius/this.outerNumber);
             textSize = min(textSize,0.1);
             ctx.textSize(textSize);
-            let middleRadius= map(0.8,0,1,this.innerRadius,this.outerRadius);
+            let middleRadius= map(0.9,0,1,this.innerRadius,this.outerRadius);
             for(let i=0;i<this.outerNumber; i++){
                 ctx.line(0, middleRadius, 0, this.outerRadius);
-                if(this.doOutsideLabel){
+                if(this.doOutsideLabel ){
                     ctx.push();
                         ctx.noStroke();
-                        ctx.translate(0,this.outerRadius);
-                        ctx.translate(textSize/2,textSize/2);
-                        ctx.rotate(-0.2*textSize*TWO_PI);
-                        ctx.translate(-textSize/2,-textSize);
+                        ctx.translate(0,middleRadius-0.04);
+                        ctx.translate(-textSize*0.8,0)
+
+                        // ctx.translate(0,this.outerRadius);
+                        // ctx.translate(textSize/2,textSize/2);
+                        // ctx.rotate(-0.2*textSize*TWO_PI);
+                        // ctx.translate(-textSize/2,-textSize);
                         ctx.scale(1,-1);
                         
                         
@@ -326,6 +332,7 @@ class Dial extends Selector{
                 ctx.rotate(-TWO_PI/this.outerNumber);
             }
             ctx.pop();
+            
 
 
             //inner marking
@@ -340,9 +347,10 @@ class Dial extends Selector{
                     ctx.push();
                         ctx.noStroke();
                         ctx.translate(0,this.innerRadius);
-                        ctx.translate(textSize/2,textSize/2);
-                        ctx.rotate(-0.2*textSize*TWO_PI);
-                        ctx.translate(-textSize/2,-textSize/2);
+                        ctx.translate(-textSize*0.7,middleRadius-this.innerRadius)
+                        // ctx.translate(textSize/2,textSize/2);
+                        // ctx.rotate(-0.2*textSize*TWO_PI);
+                        // ctx.translate(-textSize/2,-textSize/2);
                         ctx.scale(1,-1);
                         
                         ctx.fill(drawColor)
@@ -356,6 +364,7 @@ class Dial extends Selector{
             ctx.pop();
         
 
+            
             //draw arrow
             ctx.strokeWeight(2*weight)
             if(this.doPrintMode || !this.doArrow){
@@ -398,10 +407,23 @@ class Dial extends Selector{
             ctx.fill(this.noColor);
             ctx.circle(0,0,2*this.innerRadius);
             
+           
+
+            //draw center label
+            ctx.push();
+            ctx.scale(1,-1);
+            textSize= this.innerRadius*1;
+            ctx.textSize(textSize);
+            ctx.translate(0,textSize*0.3)
+            ctx.text(this.centerLabel,
+                    0,0);
+            ctx.pop();
+
             //draw point at zero
-            ctx.fill(this.neutralColor);
+            ctx.fill(drawColor);
             ctx.noStroke();
             ctx.circle(0,0,0.02);
+
 
         ctx.pop();
 

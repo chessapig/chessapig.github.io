@@ -7,9 +7,20 @@ let frame=0;
 
 let Shader;
 
+const BKG = '#2c2621'; //background color
+const FRG = '#E6CFB3'; //foreground color
+
+
+//Parent in file is "ifs_sketch"
+let parent = "pencil";
 
 function setup() {
-	createCanvas(700, 700,WEBGL);
+    let elem = document.getElementById(parent);
+	boundingRect = elem.getBoundingClientRect();
+	canvasSize = min(boundingRect.width*0.9,windowHeight*0.7); //sets size of canvas.
+	canvas = createCanvas(canvasSize , canvasSize , WEBGL);
+	canvas.parent(parent);
+
     Shader=getShader(this._renderer);
 	//background(200);
 	
@@ -55,6 +66,11 @@ function draw() {
 		z.update();
 		z.show();
 	}
+
+    stroke(FRG);
+    strokeWeight(6);
+    noFill();
+    rect(-1,-1,2,2);
 
     frame+=1;
 }
@@ -438,7 +454,7 @@ void main()
         float cubicStrand= plotPolynomial(uv,c,c0,c1,c00,c01,c11,c000,c001,c011,c111,thickness);
         cubicStrand=clamp(cubicStrand,0.,1.);
             
-        vec3 oklch = vec3(cubicStrand*cubicStrand,0.2,2.*pencilParam);
+        vec3 oklch = vec3(cubicStrand*cubicStrand,0.25,6.28*dt*float(i));
         vec3 rgb= smoothstep(0.05,0.1,cubicStrand)*clamp(oklch_to_rgb(oklch),0.,1.);
         pencil+=rgb;
     }
@@ -448,7 +464,12 @@ void main()
     //vec3 rgb=strandSeperation*clamp(oklch_to_rgb(pencil),0.,1.);
 
     pencil=pencil*smoothstep(0.,-0.2,strandSeperation);
-    gl_FragColor = vec4(1.-(1.-pencil)*(1.-vec3(smoothstep(-0.02,0.,strandSeperation))),1.0);
+    vec3 outputColor = 1.-(1.-pencil)*(1.-vec3(smoothstep(-0.02,0.,strandSeperation)));
+    vec3 background = vec3(44./255., 38./255.,33./255.);
+    vec3 foreground = vec3(230./255., 207./255.,179./255.);
+    gl_FragColor = vec4(outputColor,1.0);
+    //gl_FragColor = vec4( (outputColor*foreground + background),1.0);
+    
 
 }
     `;

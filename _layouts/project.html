@@ -42,7 +42,22 @@ layout: default
 <hr class = "mine">
 {% endif %}
 
+{% if page.tags contains "ihp" %}
+  <div class="ihp-back-link">
+    <a href="/ihp" class="btn btn-outline-primary">
+      ← Back to IHP
+    </a>
+  </div>
+{% endif %}
 
+{% if page.tags contains "drawing-club" %}
+  <div class="ihp-back-link">
+    <a href="/ihp" class="btn btn-outline-primary">
+    ← Back to Drawing Club
+  </a>
+    
+  </div>
+{% endif %}
 
 
 {% if page.tags contains "gallery" %}

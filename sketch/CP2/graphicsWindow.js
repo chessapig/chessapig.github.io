@@ -92,7 +92,7 @@ class GraphicsWindow {
 	scroll(delta) {
 		let didScroll=false;
 		for (let s of this.selectors) {
-			didScroll  = didScroll || s.scroll(delta);
+			didScroll  =  s.scroll(delta) || didScroll;
 		}
 		return didScroll;
 	}
@@ -104,7 +104,7 @@ class GraphicsWindow {
 		let mouse = this.mouse();
 		mouse = createVector(mouse.x, mouse.y)
 		for (let s of this.selectors) {
-			didUpdate = didUpdate || s.update(mouse);
+			didUpdate =  s.update(mouse) || didUpdate;
 		}
 		return didUpdate;
 	}

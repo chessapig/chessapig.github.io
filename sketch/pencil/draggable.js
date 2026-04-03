@@ -8,7 +8,7 @@ class Draggable {
     this.x = x;
     this.y = y;
     this.mouse=createVector(0,0);
-    this.radius=0.05;
+    this.radius=0.08;
 	this.selectRadius=this.radius*1.5;
     this.offsetX = 0;
     this.offsetY = 0;

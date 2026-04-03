@@ -4,7 +4,7 @@ $headings-font-family: "Raleway", serif !default;
 $headings-font-weight: 600;
 
 @import "bootstrap/functions";
-@import "bootstrap/variables";
+
 
 $body-bg:          #2c2621;
 $body-color:       #e6cfb3;
@@ -12,16 +12,25 @@ $dark:              lighten($body-bg, 10%);
 $mid:              lighten($body-bg, 40%);
 $light:             lighten($body-bg, 80%);
 
-$primary:       #E56B6F; 
+$primary:       rgb(229, 107, 111); 
 $secondary:     #6ed38e;
 $bold:          #42c36b;    
 $tertiary:      #9f79dd;   
 $success:       #63a4ca;
+
+:root {
+  --bs-primary: $primary;           /* main color */
+  --bs-primary-rgb: 229, 107, 111; /* same color in RGB */
+}
+
+@import "bootstrap/variables";
 $info:          $cyan !default;
 $warning:       $yellow !default;
 $danger:        $red !default;
 $light:         $body-color !default;
 $dark:          $gray-800 !default;
+
+
 
 $theme-colors: () !default;
 $theme-colors: map-merge((
@@ -364,3 +373,4 @@ body.light-page .navbar {
     left: 22px;
   }
 }
+

@@ -13,26 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/ihp/drawing-club/2026-02-02-spheres.md",
+                "file": "_posts/ihp/2026-03-25-sun-dial.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-02-02-spheres"
-            }
-          },
-          {
-            "id": "3ba06c06354eaf4c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_posts/ihp/2025-02-16-drawing-club.md",
-                "mode": "source",
-                "source": true
-              },
-              "icon": "lucide-file",
-              "title": "2025-02-16-drawing-club"
+              "title": "2026-03-25-sun-dial"
             }
           },
           {
@@ -41,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/ihp/2025-02-02-tangent.md",
+                "file": "_posts/talks/2025-12-10-Brion.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-02-02-tangent"
+              "title": "2025-12-10-Brion"
             }
           },
           {
@@ -55,12 +41,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/ihp/drawing-club/2026-03-23-shading.md",
+                "file": "_posts/ihp/2025-01-05-pencil.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "2026-03-23-shading"
+              "title": "2025-01-05-pencil"
+            }
+          },
+          {
+            "id": "6bc672a96a2c74c8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_posts/blog/2025-09-01-pointless.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2025-09-01-pointless"
             }
           }
         ],
@@ -84,7 +84,7 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": true
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -96,7 +96,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "new galler",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -183,10 +183,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/2025-02-01-gauge.md"
+                "file": "_posts/talks/2025-12-10-Brion.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 2025-02-01-gauge"
+              "title": "Outline of 2025-12-10-Brion"
             }
           }
         ],
@@ -208,53 +211,53 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "3ba06c06354eaf4c",
+  "active": "1e4c5fedf617d2ba",
   "lastOpenFiles": [
-    "_site/drawing-club.html",
-    "_site/2025-02-16-drawing-club.html",
-    "_site/assets/drawing-club/gallery/tori.jpeg",
-    "assets/drawing-club/gallery/tori.jpeg",
-    "_site/assets/drawing-club/gallery/spheres.jpeg",
-    "assets/drawing-club/gallery/spheres.jpeg",
-    "_site/assets/drawing-club/gallery/Poincare-Drawing-Club-7119.jpeg",
-    "_site/assets/drawing-club/gallery/Poincare-Drawing-Club-7117.jpeg",
-    "assets/drawing-club/gallery/Poincare-Drawing-Club-7117.jpeg",
-    "assets/drawing-club/gallery/Poincare-Drawing-Club-7119.jpeg",
-    "_posts/ihp/drawing-club/2026-02-09-worms.md",
-    "_posts/ihp/drawing-club/2026-03-16-clay.md",
-    "_posts/ihp/2025-02-16-drawing-club.md",
-    "_posts/ihp/drawing-club/2026-03-02-humanizing.md",
-    "_posts/ihp/drawing-club/2026-02-23-seifert.md",
-    "_posts/ihp/drawing-club/2026-03-09-composition.md",
-    "_site/assets/drawing-club/human/emma.jpeg",
-    "assets/drawing-club/human/emma.jpeg",
-    "_posts/ihp/drawing-club/2026-02-02-spheres.md",
-    "_posts/ihp/drawing-club/2026-01-26-sketching.md",
-    "_posts/ihp/drawing-club/2026-03-23-shading.md",
-    "_posts/ihp/drawing-club/2026-03-29-outside.md",
-    "_posts/2021-09-25-hyperbolic-band-theory.md",
-    "_posts/ihp/2025-02-02-tangent.md",
-    "assets/drawing-club/worm/example2.jpeg.sb-8894d8c1-9Ds1Ea",
-    "assets/drawing-club/gallery/untitled folder",
-    "_site/drawing-club/outside.html",
-    "_site/drawing-club/shading.html",
-    "_site/drawing-club/clay.html",
-    "_site/drawing-club/composition.html",
-    "_site/drawing-club/humanizing.html",
-    "_site/drawing-club/seifert.html",
-    "_site/drawing-club/worms.html",
-    "_posts/2023-01-01-hyperbolic-string-art.md",
-    "_posts/ihp/drawing-club/Untitled.md",
-    "_posts/ihp/drawing-club/2026-02-16-composition.md",
-    "_posts/talks/2025-01-31-Ellipse-billiards.md",
-    "_posts/talks/2021-11-23-topological-recursion.md",
+    "_posts/blog/2025-09-01-pointless.md",
+    "_posts/blog/2024-12-25-baubles.md",
+    "_posts/blog/2023-05-14-cortex.md",
+    "_posts/blog/2022-10-23-Colors.md",
+    "_posts/blog/2022-7-25-Toric.md",
+    "_posts/talks/2025-12-10-Brion.md",
+    "_posts/ihp/2025-01-05-pencil.md",
+    "_posts/ihp/2026-03-25-sun-dial.md",
+    "_posts/blog/2024-01-14-spherical-sticks.md",
+    "_site/files/presentations/thumbnails/brion_fourier.jpeg",
+    "files/presentations/thumbnails/brion_fourier.jpeg",
+    "_site/files/presentations/brion_fourier.pdf",
+    "files/presentations/brion_fourier.pdf",
+    "_site/files/presentations/thumbnails/fourier_transform_polytope.jpg",
+    "files/presentations/thumbnails/fourier_transform_polytope.jpg",
+    "_site/files/presentations/thumbnails/starburst jpg.jpg",
+    "files/presentations/thumbnails/starburst jpg.jpg",
+    "_site/files/presentations/fourier_transform_polytope.pdf",
+    "files/presentations/fourier_transform_polytope.pdf",
+    "_site/files/presentations/fourier tranform of polytopes.pdf",
+    "files/presentations/fourier tranform of polytopes.pdf",
+    "_site/sketch/fourier_polygon/complex.js",
+    "sketch/fourier_polygon/complex.js",
+    "_site/sketch/fourier_polygon/draggable.js",
+    "sketch/fourier_polygon/draggable.js",
     "_posts/talks/2025-10-15-Segal-bargmann.md",
-    "teaching/math_crafts/index.md",
-    "teaching/teaching.md",
-    "_posts/crafts/2024-01-07-Plateaus law.md",
-    "_posts/crafts/2024-01-01-polyhera.md",
-    "_posts/crafts/2024-01-02-weaving.md",
-    "_posts/crafts/2024-01-03-hyperbolic-flexor.md",
-    "_posts/crafts/2024-01-08-minimal surfaces.md"
+    "_posts/talks/2022-02-04-integrable.md",
+    "_posts/gallery/2023-11-12-Mirror-symmetree.md",
+    "().md",
+    "_site/().md",
+    "_posts/talks/2022-03-03-BPS.md",
+    "_posts/talks/2022-11-04-stick-bombs.md",
+    "_posts/talks/2022-03-12-enceladus.md",
+    "_posts/talks/2023-01-23-polygons.md",
+    "_posts/talks/2024-02-24-Abelian-CS.md",
+    "_posts/ihp/2025-03-15-straws.md",
+    "_posts/talks/2025-10-01-Packing-stability.md",
+    "_posts/talks/2025-08-11-torus.md",
+    "_posts/talks/2025-07-08-Riemann.md",
+    "_posts/talks/2020-11-01-mirror.md",
+    "_posts/crafts/2024-01-05-hyperbolic-origami.md",
+    "_posts/crafts/2024-01-04-string-art.md",
+    "_site/assets/ihp/pseudosphere/unstacked.jpeg",
+    "assets/ihp/pseudosphere/unstacked.jpeg",
+    "_site/assets/ihp/pseudosphere/straight.jpeg",
+    "assets/ihp/pseudosphere/straight.jpeg"
   ]
 }
