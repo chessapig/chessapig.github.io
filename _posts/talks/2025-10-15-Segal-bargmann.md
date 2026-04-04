@@ -5,6 +5,7 @@ date: 2025-10-15 6:03:47 -0500
 categories: talks
 tags:
   - talk
+  - code
 attributes:
   - seminar-talk
 image: /files/presentations/thumbnails/Segal_Bargmann.png

@@ -8,6 +8,7 @@ tags:
   - fun
 attributes:
   - fun-talk
+  - illustration-talk
 image: /files/presentations/thumbnails/manifesting_worlds.jpg
 file: /files/presentations_html/manifesting/index.html
 talk-venue: <a href="https://www.youtube.com/watch?v=HYlhjNM6aIM&ab_channel=IllustratingMathSeminar"> Illustrating Math Seminar Online (IMSO) </a>

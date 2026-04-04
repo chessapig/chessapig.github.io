@@ -8,6 +8,7 @@ tags:
   - fun
 attributes:
   - fun-talk
+  - illustration-talk
 image: /files/presentations/thumbnails/ulam.jpg
 file: /files/presentations/visualization.pdf
 talk-venue: "OURFA2M2: Online undergraduate research fair for the advancement and alignment of marginalized mathematicians."

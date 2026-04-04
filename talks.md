@@ -11,7 +11,8 @@ list_title: Projects
   <div class="filter-buttons">
     <div class="btn-group" role="group">
       <button type="button" class="btn btn-primary active" aria-pressed="true" data-bs-toggle="button" data-filter="all">All Talks</button>
-      <button type="button" class="btn btn-primary" data-bs-toggle="button" data-filter="research-talk">Research Talks</button>
+      <button type="button" class="btn btn-primary" data-bs-toggle="button" data-filter="research-talk">Research</button>
+      <button type="button" class="btn btn-primary" data-bs-toggle="button" data-filter="illustration-talk">Illustration</button>
       <button type="button" class="btn btn-primary" data-bs-toggle="button" data-filter="seminar-talk">Learning Seminars</button>
       <button type="button" class="btn btn-primary" data-bs-toggle="button" data-filter="class-talk">Class Presentations</button>
       <button type="button" class="btn btn-primary" data-bs-toggle="button" data-filter="fun-talk">Fun</button>

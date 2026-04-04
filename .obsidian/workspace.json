@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/ihp/2026-03-25-sun-dial.md",
+                "file": "_posts/ihp/2025-02-16-drawing-club.md",
                 "mode": "source",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "2026-03-25-sun-dial"
+              "title": "2025-02-16-drawing-club"
             }
           },
           {
@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/talks/2025-12-10-Brion.md",
+                "file": "talks.md",
                 "mode": "source",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "2025-12-10-Brion"
+              "title": "talks"
             }
           },
           {
@@ -43,7 +43,7 @@
               "state": {
                 "file": "_posts/ihp/2025-01-05-pencil.md",
                 "mode": "source",
-                "source": true
+                "source": false
               },
               "icon": "lucide-file",
               "title": "2025-01-05-pencil"
@@ -183,13 +183,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/talks/2025-12-10-Brion.md",
+                "file": "talks.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 2025-12-10-Brion"
+              "title": "Outline of talks"
             }
           }
         ],
@@ -213,51 +213,51 @@
   },
   "active": "1e4c5fedf617d2ba",
   "lastOpenFiles": [
+    "_posts/talks/2025-10-15-Segal-bargmann.md",
+    "_posts/talks/2026-01-20-Big-Small.md",
+    "_site/assets/ihp/big_small/gallery/thumbnail.jpg",
+    "assets/ihp/big_small/gallery/thumbnail.jpg",
+    "_posts/ihp/2025-02-16-drawing-club.md",
+    "_posts/ihp/2025-02-23-pseudopseudosphere.md",
+    "_posts/ihp/2025-02-02-tangent.md",
+    "_posts/ihp/2025-01-26-wunderlich.md",
+    "_site/assets/ihp/big_small/gallery/thumbnail.jpeg",
+    "assets/ihp/big_small/gallery/thumbnail.jpeg",
+    "_site/assets/ihp/big_small/gallery/title.jpeg",
+    "assets/ihp/big_small/gallery/title.jpeg",
+    "_site/assets/ihp/big_small/gallery/train_tracks copy.jpeg",
+    "assets/ihp/big_small/gallery/train_tracks copy.jpeg",
+    "_site/assets/ihp/big_small/gallery/island.jpeg",
+    "assets/ihp/big_small/gallery/island.jpeg",
+    "_site/assets/ihp/big_small/gallery",
+    "assets/ihp/big_small/gallery",
+    "assets/ihp/big_small/untitled folder",
+    "assets/ihp/big_small/geography/title.jpeg.sb-8894d8c1-DZCvMP",
+    "assets/ihp/big_small/geography/math big small.004.jpeg.sb-8894d8c1-fgr139",
+    "assets/ihp/big_small/geography/math big small.001.jpeg.sb-8894d8c1-diAxxP",
+    "_site/assets/ihp/big_small/geography",
+    "assets/ihp/big_small/geography",
+    "_site/assets/ihp/big_small/slides",
+    "assets/ihp/big_small/slides",
     "_posts/blog/2025-09-01-pointless.md",
-    "_posts/blog/2024-12-25-baubles.md",
-    "_posts/blog/2023-05-14-cortex.md",
-    "_posts/blog/2022-10-23-Colors.md",
-    "_posts/blog/2022-7-25-Toric.md",
-    "_posts/talks/2025-12-10-Brion.md",
     "_posts/ihp/2025-01-05-pencil.md",
     "_posts/ihp/2026-03-25-sun-dial.md",
-    "_posts/blog/2024-01-14-spherical-sticks.md",
-    "_site/files/presentations/thumbnails/brion_fourier.jpeg",
-    "files/presentations/thumbnails/brion_fourier.jpeg",
-    "_site/files/presentations/brion_fourier.pdf",
-    "files/presentations/brion_fourier.pdf",
-    "_site/files/presentations/thumbnails/fourier_transform_polytope.jpg",
-    "files/presentations/thumbnails/fourier_transform_polytope.jpg",
-    "_site/files/presentations/thumbnails/starburst jpg.jpg",
-    "files/presentations/thumbnails/starburst jpg.jpg",
-    "_site/files/presentations/fourier_transform_polytope.pdf",
-    "files/presentations/fourier_transform_polytope.pdf",
-    "_site/files/presentations/fourier tranform of polytopes.pdf",
-    "files/presentations/fourier tranform of polytopes.pdf",
-    "_site/sketch/fourier_polygon/complex.js",
-    "sketch/fourier_polygon/complex.js",
-    "_site/sketch/fourier_polygon/draggable.js",
-    "sketch/fourier_polygon/draggable.js",
-    "_posts/talks/2025-10-15-Segal-bargmann.md",
-    "_posts/talks/2022-02-04-integrable.md",
-    "_posts/gallery/2023-11-12-Mirror-symmetree.md",
-    "().md",
-    "_site/().md",
-    "_posts/talks/2022-03-03-BPS.md",
-    "_posts/talks/2022-11-04-stick-bombs.md",
-    "_posts/talks/2022-03-12-enceladus.md",
-    "_posts/talks/2023-01-23-polygons.md",
-    "_posts/talks/2024-02-24-Abelian-CS.md",
-    "_posts/ihp/2025-03-15-straws.md",
+    "_posts/talks/2025-12-10-Brion-formula.md",
+    "_posts/talks/2025-02-09-Visualization-vistas.md",
+    "_posts/talks/2025-01-31-Ellipse-billiards.md",
+    "_posts/talks/2024-10-09-Caustics.md",
+    "_posts/talks/2025-08-11-Torus.md",
     "_posts/talks/2025-10-01-Packing-stability.md",
-    "_posts/talks/2025-08-11-torus.md",
-    "_posts/talks/2025-07-08-Riemann.md",
-    "_posts/talks/2020-11-01-mirror.md",
-    "_posts/crafts/2024-01-05-hyperbolic-origami.md",
-    "_posts/crafts/2024-01-04-string-art.md",
-    "_site/assets/ihp/pseudosphere/unstacked.jpeg",
-    "assets/ihp/pseudosphere/unstacked.jpeg",
-    "_site/assets/ihp/pseudosphere/straight.jpeg",
-    "assets/ihp/pseudosphere/straight.jpeg"
+    "_posts/talks/2025-03-19-Asymptotic-holomorphic copy.md",
+    "_posts/talks/2025-03-11-Gromov-witten.md",
+    "_posts/talks/2025-02-27-Matrix-factorizations.md",
+    "_posts/talks/2024-11-18-Kempf-ness.md",
+    "_posts/talks/2024-11-04-Quasihamiltonian.md",
+    "_posts/talks/2024-10-14-Biran.md",
+    "_posts/talks/2024-09-16-Caratheodory.md",
+    "_posts/talks/2024-06-14-Manifesting.md",
+    "_posts/talks/2024-02-24-Abelian-CS.md",
+    "_posts/talks/2023-11-15-Quantization.md",
+    "_posts/talks/2023-10-12-TQFT-Jones.md"
   ]
 }
