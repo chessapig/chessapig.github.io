@@ -195,7 +195,7 @@ class ComplexSelector extends Selector{
             ctx.pop();
             return false;
         }
-        if (!this.enabled) { //if not enabled then drwa a small dot
+        if (!this.enabled) { //if not enabled then draw a small dot
             ctx.noStroke();
             ctx.fill(this.noColor);
             ctx.circle(0,0,1);

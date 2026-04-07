@@ -64,63 +64,6 @@
 }
 
 
-class RandomCP2CurveScheudler extends PointScheduler {
-	constructor(curve, options){
-		super(options);
-		this.curve = curve; 
-		const defaults = {
-			doBackground: false,
-			projectionMode: "REAL",
-			deterministic: true,
-			BKG: BKG, 
-			FRG: FRG,
-			PRIMARY: PRIMARY,
-			SECONDARY: SECONDARY,
-			TERTIARY: TERTIARY,
-			scheduleReset: false,
-			doClearPoints: false,
-			style: {size:1 , color: color(0) }
-		};
-		
-		Object.assign(this, defaults, options);
-
-	}
-
-	//passes style in options to points
-	generate(newPoints, options) {		
-		let points = [];
-		for (let i = 0; i < newPoints; i++) {
-			if(this.deterministic){
-				let pointNumber = this.numPoints+i; //keep track of the point number
-				options.seed=pointNumber; //seed for deterministic random number generator;
-			}
-			if (this.curve.isZero()) {
-				points.push(CP2Point.randPoint(options));
-			} else {
-				let l = CP2Line.randLine(options);
-				let intersectPts = this.curve.intersect(l, options);
-				
-				for(let p of intersectPts){
-					
-
-					if(options.style){
-						p.style = options.style; //pass style to points
-					} else {
-						p.style = this.defaultStyle
-					}
-					points.push(p);
-				}
-			}
-
-		}
-		return points;
-	}
-
-	update(){
-		return this.curve.didUpdate;
-	}
-}
-
 //class contianing hooks for point Projection class
 class Projection {
 	setup(r){}
@@ -177,7 +120,7 @@ class PointRenderer extends GraphicsWindowCamera{
 			scheduleReset: false,
 			doClearPoints: false
 		};
-		defaults.coarseStyle  	= { size: 2, color: color(defaults.FRG) };
+		defaults.coarseStyle  	= { size: 1, color: color(defaults.FRG) };
 		defaults.fineStyle 		= { size: 0.2, color: color(defaults.FRG) },
 
 		Object.assign(this, defaults, options);
@@ -237,7 +180,7 @@ class PointRenderer extends GraphicsWindowCamera{
 		this.reset();
 	}
 
-	//converts this.scheduler.points to a pointcloud via projection, then saves as svg.
+	//converts this.scheduler.points to a pointcloud via projection, then saves as csv.
 	exportPoints(){
 		let points = this.scheduler.points;
 		let coords = points.map(pt => this.projection.getPointCoord(pt)); //This will break if i return array of poitns. but thats okay

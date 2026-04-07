@@ -46,7 +46,8 @@ function setup() {
 	curveUI = new CP2CurveSelectorUI({
 		pixels: canvasSize,
 		x:-2, y:-1, width:2, canvasMode: WEBGL,
-		degree:3
+		degree: defaultUIState.degree,
+		real: defaultUIState.realCoefs
 	})
 
 	curveRender = new CurveRenderer(curveUI.curve,{
@@ -81,18 +82,18 @@ function draw() {
 	// r.render(); //draw points to internal image
 	// r.draw();
 
-	if(HDRender){
-		HDRender.render();
-		HDRender.draw();
+	// if(HDRender){
+	// 	HDRender.render();
+	// 	HDRender.draw();
 
-		console.log(HDRender.numPts/HDRender.maxPts);
+	// 	console.log(HDRender.numPts/HDRender.maxPts);
 
-		if(HDRender.numPts>= HDRender.maxPts){
-			print("done rendering");
-			save(HDRender.g,"HD_Render.jpg");
-			noLoop();
-		}
-	}
+	// 	if(HDRender.numPts>= HDRender.maxPts){
+	// 		print("done rendering");
+	// 		save(HDRender.g,"HD_Render.jpg");
+	// 		noLoop();
+	// 	}
+	// }
 }
 
 
@@ -110,6 +111,10 @@ function setProjection(render, mode, options){
 			render.projection = new realToricProjection(options);
 			break;
 
+		case "STELLAR":
+			render.projection = new StellarProjection(options);
+			break;
+
 		case "TORIC":
 			render.projection = new toricProjection(options);
 			break;
@@ -125,13 +130,13 @@ function setProjection(render, mode, options){
 
 function setupUI(){
 	// Left panel controls
-	const inputCoefs = document.getElementById('inputCoefs');
+	//const inputCoefs = document.getElementById('inputCoefs');
 	const realCoefs = document.getElementById('realCoefs');
 	const degreeSlider = document.getElementById('degreeSlider');
 	const enableRealCurve = document.getElementById('realCurve');
 	const projectionMode = document.getElementById('projectionMode');
 	const symmetrize = document.getElementById('symmetrize');
-	const pointMode = document.getElementById('pointMode');
+	// const pointMode = document.getElementById('pointMode');
 
 
 	realCoefs.checked = defaultUIState.realCoefs;
@@ -139,7 +144,7 @@ function setupUI(){
 	enableRealCurve.checked = defaultUIState.enableRealCurve;
 	projectionMode.value = defaultUIState.projectionMode;
 	symmetrize.value = defaultUIState.symmetrize;
-	pointMode.value = defaultUIState.pointMode;
+	// pointMode.value = defaultUIState.pointMode;
 
 	//input for your own curve form
 	// inputCoefs.addEventListener('change', () => {
@@ -174,7 +179,7 @@ function setupUI(){
 
 	enableRealCurve.addEventListener('change', () => {
 		uiState.enableRealCurve = enableRealCurve.checked;
-		curveRender.enableRealCurve = uiState.enableRealCurve;
+		curveRender.setRealCurve(uiState.enableRealCurve);
 	 	curveRender.scheduleReset=true;
 	});
 
@@ -188,12 +193,11 @@ function setupUI(){
 		curveUI.doSymmetrize =uiState.symmetrize;
 	});
 
-	pointMode.addEventListener('change', () => {
-		uiState.pointMode = pointMode.value;
-		r.setPointMode(uiState.pointMode)
-		disableRealCheckbox(uiState.pointMode=="starscape");
-
-	});
+	// pointMode.addEventListener('change', () => {
+	// 	uiState.pointMode = pointMode.value;
+	// 	r.setPointMode(uiState.pointMode)
+	// 	disableRealCheckbox(uiState.pointMode=="starscape");
+	// });
 
 }
 

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/ihp/2025-02-16-drawing-club.md",
+                "file": "_posts/ihp/CP2/2026-02-26-curve.md",
                 "mode": "source",
-                "source": true
+                "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-02-16-drawing-club"
+              "title": "2026-02-26-curve"
             }
           },
           {
@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/ihp/2025-01-26-wunderlich.md",
+                "file": "_posts/ihp/2026-02-02-tangent.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-01-26-wunderlich"
+              "title": "2026-02-02-tangent"
             }
           },
           {
@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/ihp/2025-02-15-shape.md",
+                "file": "_posts/ihp/CP2/2026-02-13-toric.md",
                 "mode": "source",
-                "source": true
+                "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-02-15-shape"
+              "title": "2026-02-13-toric"
             }
           },
           {
@@ -183,13 +183,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/ihp/2025-02-15-shape.md",
+                "file": "_posts/ihp/CP2/2026-02-13-toric.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 2025-02-15-shape"
+              "title": "Outline of 2026-02-13-toric"
             }
           }
         ],
@@ -213,51 +213,51 @@
   },
   "active": "72542bbdfd4b1c9c",
   "lastOpenFiles": [
-    "_site/files/presentations/manifesting.pdf",
-    "files/presentations/manifesting.pdf",
-    "_site/files/presentations/presentation_compresed.pdf",
-    "files/presentations/presentation_compresed.pdf",
-    "_site/assets/ihp/shapes/gallery/pinata.jpeg",
-    "assets/ihp/shapes/gallery/pinata.jpeg",
-    "_site/assets/ihp/shapes/gallery/piniata2.jpeg",
-    "assets/ihp/shapes/gallery/piniata2.jpeg",
-    "_site/assets/ihp/shapes/gallery/wunderlich.jpeg",
-    "assets/ihp/shapes/gallery/wunderlich.jpeg",
-    "_site/assets/ihp/shapes/gallery/twisty1.jpeg",
-    "assets/ihp/shapes/gallery/twisty1.jpeg",
-    "_site/ihp/shape.html",
-    "_site/2025-02-15-shape.html",
-    "_site/Screenshot 2025-01-30 at 12.16.46 AM.png",
-    "Screenshot 2025-01-30 at 12.16.46 AM.png",
-    "_posts/ihp/2025-03-10-normal.md",
-    "_site/assets/ihp/normals/fish.mp4",
-    "assets/ihp/normals/fish.mp4",
-    "_site/assets/ihp/normals/motion.mp4",
-    "assets/ihp/normals/motion.mp4",
-    "_posts/ihp/2025-01-26-wunderlich.md",
-    "_posts/ihp/2025-03-15-straws.md",
-    "_posts/ihp/2025-02-15-shape.md",
-    "_posts/ihp/2025-02-02-tangent.md",
-    "_posts/ihp/2025-02-16-drawing-club.md",
-    "_posts/ihp/2025-02-23-pseudopseudosphere.md",
-    "_posts/ihp/2025-01-05-pencil.md",
-    "_site/assets/ihp/normals/flythrough.mp4",
-    "_posts/talks/2026-01-20-Big-Small.md",
-    "_posts/talks/2024-06-14-Manifesting.md",
-    "_posts/talks/2024-10-09-Caustics.md",
-    "_posts/talks/2025-08-11-Torus.md",
-    "_posts/gallery/2025-01-12-stacks.md",
+    "_site/assets/ihp/CP2/toric/C2_tile.jpg",
+    "assets/ihp/CP2/toric/C2_tile.jpg",
+    "_site/assets/ihp/CP2/toric/C2_checkerboard.jpg",
+    "assets/ihp/CP2/toric/C2_checkerboard.jpg",
+    "_site/assets/ihp/CP2/toric/C2_grid.jpg",
+    "assets/ihp/CP2/toric/C2_grid.jpg",
+    "_site/assets/ihp/CP2/toric/grid.jpeg",
+    "assets/ihp/CP2/toric/grid.jpeg",
+    "_site/assets/ihp/CP2/toric/grid.jpg",
+    "assets/ihp/CP2/toric/grid.jpg",
+    "_site/assets/ihp/CP2/toric/kahler_potential.png",
+    "_posts/ihp/2026-02-02-tangent.md",
+    "_posts/ihp/CP2/2026-02-13-toric.md",
+    "_posts/ihp/CP2/2026-02-26-curve.md",
+    "_posts/ihp/CP2/2026-03-21-gaussian.md",
+    "_posts/ihp/CP2/2026-03-22-torsion.md",
+    "_posts/ihp/drawing-club/2025-02-15-shape.md",
+    "_posts/ihp/drawing-club/2026-01-26-sketching.md",
+    "_posts/ihp/2026-02-02-CP2.md",
     "_posts/ihp/drawing-club/2026-02-02-spheres.md",
-    "_posts/code/2022-06-05-toric.md",
-    "_posts/blog/2022-7-25-Toric.md",
-    "_posts/code/2021-10-12-diffeos.md",
-    "_posts/code/2024-12-16-ifs.md",
-    "_posts/code/2020-02-15-kam.md",
-    "diary/10.md",
-    "talks.md",
-    "_posts/talks/2025-10-15-Segal-bargmann.md",
-    "_posts/blog/2025-09-01-pointless.md",
+    "_posts/ihp/drawing-club/2026-03-23-shading.md",
+    "_posts/ihp/2026-02-16-drawing-club.md",
+    "_posts/ihp/drawing-club/2026-02-23-seifert.md",
+    "_posts/ihp/2026-01-26-wunderlich.md",
+    "ihp.md",
+    "_site/assets/ihp/CP2/toric",
+    "assets/ihp/CP2/toric",
+    "assets/ihp/CP2/untitled folder",
+    "_site/cp2/toric.html",
+    "_site/cp2/torsion.html",
+    "_site/code/gaussian.html",
+    "_site/cp2/curve.html",
+    "_posts/ihp/2026-01-05-pencil.md",
+    "_site/cp2/CP2-curve.html",
+    "_posts/ihp/2026-03-10-normal.md",
+    "_site/cp2/CP2-curves.html",
+    "_posts/ihp/drawing-club/2026-03-02-humanizing.md",
+    "_site/code/CP2-gaussian.html",
+    "_posts/2021-09-25-hyperbolic-band-theory.md",
+    "_posts/ihp/2026-02-23-pseudopseudosphere.md",
+    "_posts/ihp/2026-03-15-straws.md",
     "_posts/ihp/2026-03-25-sun-dial.md",
-    "_posts/talks/2025-12-10-Brion-formula.md"
+    "_posts/ihp/Untitled 1.md",
+    "_posts/ihp/Untitled.md",
+    "_posts/code/2024-12-16-ifs.md",
+    "_posts/ihp/drawing-club/2026-03-16-clay.md"
   ]
 }

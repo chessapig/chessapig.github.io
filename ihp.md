@@ -4,13 +4,12 @@ title: Projects
 list_title: Projects
 ---
 
+ <h1 class="mt-4 mb-4">Semester of Illustrating Mathematics at IHP</h1>
+
+  I spent Spring 2026 in Paris at the Institute Henri Poincare, participating in the semester program [Illustration as a Mathematical Research Technique](https://www.ihp.fr/en/news-research-activities/t1-2026-illustration-mathematical-research-technique).  Here's a bunch of things I did!
+
 
   <div class="container">
-  <h1 class="mt-4 mb-4">Semester of Illustrating Mathematics</h1>
-
-  I spent Spring 2026 in Paris at the Institute Henri Poincare, participating in the semester [Illustration as a Mathematical Research Technique](https://www.ihp.fr/en/news-research-activities/t1-2026-illustration-mathematical-research-technique).  Here's a bunch of things I did!
-
-
  {% for project in site.tags.ihp %}
  {% include project_card.html %}
   {% endfor %}

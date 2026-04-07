@@ -379,13 +379,19 @@ class POVProjection extends Projection{
 }
 
 
-class StellarProjection {
-	setup(r) {
-		r.doCameraControl = true;
-		r.g.scale(0.7);
+class StellarProjection extends Projection{
+	constructor(options){
+		super(options);
 	}
 
-	renderPoint(p, r) {
+	setup(r) {
+		r.g.ortho();
+		let newCam = new Camera3D();
+		newCam.zoom=-0.1;
+		r.camera=newCam;
+	}
+
+	plotPoint(p, r) {
 		for (let c of p.getSpherical()) {
 			r.g.point(c.x, c.y, c.z);
 		}
@@ -399,14 +405,101 @@ class StellarProjection {
 	}
 }
 
+
+class RandomCP2CurveScheudler extends PointScheduler {
+	constructor(curve, options){
+		super(options);
+		this.curve = curve; 
+		const defaults = {
+			doBackground: false,
+			projectionMode: "REAL",
+			deterministic: true,
+			BKG: BKG, 
+			FRG: FRG,
+			PRIMARY: PRIMARY,
+			SECONDARY: SECONDARY,
+			TERTIARY: TERTIARY,
+			scheduleReset: false,
+			doClearPoints: false,
+			enableRealCurve: false,
+			portionRealPoints: 0.2,
+			style: {size:1 , color: color(0) }
+		};
+		
+		Object.assign(this, defaults, options);
+
+	}
+
+	next(options={}) {
+		let n = this.pointsThisFrame();
+		if(!this.enableRealCurve){
+			this.nextPoints = this.generate(n, options) //stores last generated point;
+		} else {
+			this.nextPoints = this.generate((1-this.portionRealPoints)*n, options) //stores last generated point;
+			let realPointOptions = {
+				real: true,
+				style: {color: this.SECONDARY, size:5}
+			}
+			options = Object.assign({}, options, realPointOptions );
+			this.nextPoints.push(...this.generate(this.portionRealPoints*n, options)) //adds in some real points
+		}
+		
+		if(this.savePoints){
+			this.points.append(this.nextPoints);
+		}
+		return this.nextPoints;
+	}
+
+	//passes style in options to points
+	generate(newPoints, options) {		
+		let points = [];
+		for (let i = 0; i < newPoints; i++) {
+			if(this.deterministic){
+				let pointNumber = this.numPoints+i; //keep track of the point number
+				options.seed=pointNumber; //seed for deterministic random number generator;
+			}
+			if (this.curve.isZero()) {
+				points.push(CP2Point.randPoint(options));
+			} else {
+				let l = CP2Line.randLine(options);
+				let intersectPts = this.curve.intersect(l, options);
+				
+				for(let p of intersectPts){
+					
+
+					if(options.style){
+						p.style = options.style; //pass style to points
+					} else {
+						p.style = this.defaultStyle
+					}
+					points.push(p);
+				}
+			}
+
+		}
+		return points;
+	}
+
+	update(){
+		return this.curve.didUpdate;
+	}
+}
+
+
 class CurveRenderer extends PointRenderer{
 	constructor(curve,options){
 		const defaults = {
 			scheduler: new RandomCP2CurveScheudler(curve),
 			projection: new CP2RealProjection(),
+			FRG: FRG,
+			BKG: BKG,
 		};
 		options = Object.assign({}, defaults, options);
 		super(options);
+	}
+	
+	setRealCurve(enableRealCurve){
+		this.scheduler.enableRealCurve=enableRealCurve;
 	}
 }
 
