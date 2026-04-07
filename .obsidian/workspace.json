@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "illustration.md",
+                "file": "_posts/gallery/2023-05-05-symplectic-city.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "illustration"
+              "title": "2023-05-05-symplectic-city"
             }
           },
           {
@@ -168,13 +168,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "illustration.md",
+                "file": "_posts/gallery/2023-05-05-symplectic-city.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of illustration"
+              "title": "Outline of 2023-05-05-symplectic-city"
             }
           }
         ],
@@ -198,6 +198,11 @@
   },
   "active": "b47dd5ad9f1b30b2",
   "lastOpenFiles": [
+    "_site/assets/gallery/symplectic-city/thumbnail copy.jpg",
+    "assets/gallery/symplectic-city/thumbnail copy.jpg",
+    "_site/assets/gallery/symplectic-city/darboux copy.JPG",
+    "assets/gallery/symplectic-city/darboux copy.JPG",
+    "illustration.md",
     "_posts/gallery/2025-10-31-langlands.md",
     "_site/art/langlands.html",
     "_site/2025-10-31-langlands.html",
@@ -205,7 +210,6 @@
     "_site/art/stacks.html",
     "_site/2025-01-12-stacks.html",
     "_posts/gallery/2025-11-01-test.md",
-    "illustration.md",
     "_posts/blog/2025-09-01-pointless.md",
     "_posts/2021-09-25-hyperbolic-band-theory.md",
     "_posts/ihp/CP2/2026-02-26-curve.md",
@@ -237,9 +241,6 @@
     "assets/ihp/ihp.jpeg",
     "writing/old.md",
     "_site/assets/ihp/ihp.jpg",
-    "assets/ihp/ihp.jpg",
-    "_site/assets/ihp/people.jpg",
-    "assets/ihp/people.jpg",
     "assets/images/hyperbolic copy 2.jpeg.sb-8894d8c1-vbBZNa",
     "assets/images/hyperbolic copy 2.jpeg.sb-8894d8c1-4FT2r6",
     "assets/images/hyperbolic_square.jpeg.sb-8894d8c1-J74J7g"
