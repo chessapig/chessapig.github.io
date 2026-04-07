@@ -9,6 +9,7 @@ tags:
   - paper
   - research
   - gallery
+  - drawing
 attributes:
   - research-talk
 image: \assets\research\hyperbolic_crystal.png
@@ -29,13 +30,13 @@ gallery-title: Hyperbolic band theory
 gallery-folder: /assets/gallery/hyperbolic-band-theory/
 gallery-captions:
   - image: flowchart1
-    title: 
+    title:
     caption: Flowchart I made early in the project, mapping out the different related areas and how they interconnect
   - image: flowchart2
-    title: 
+    title:
     caption: Another flowchart from later in the project. This is a little more focused, as I narrrowed things down
   - image: flowchart3
-    title: 
+    title:
     caption: The final flowchart, which appeared in the paper. This shows different ways the project can expand out to interface with other areas of math and physics.
 ---
 <style>

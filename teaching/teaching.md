@@ -1,6 +1,6 @@
 ---
 layout: default
-title: MATH53
+title: Teaching
 permalink: /teaching
 show_sidebar: false
 ---

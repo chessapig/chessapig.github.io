@@ -1,7 +1,6 @@
 ---
-
 layout: minima-default
-
+title: Twitter
 ---
 
 # Twitter threads

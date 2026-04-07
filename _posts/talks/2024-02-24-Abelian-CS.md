@@ -5,6 +5,7 @@ date: 2024-02-24 16:03:47 -0500
 categories: talk
 tags:
   - talk
+  - drawing
 attributes:
   - seminar-talk
 image: /files/presentations/thumbnails/abelian_CS.jpg

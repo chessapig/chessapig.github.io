@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Projects
-list_title: Projects
+title: Writing
+list_title: Writing
 ---
 
 

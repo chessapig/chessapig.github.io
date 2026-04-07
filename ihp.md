@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Projects
-list_title: Projects
+title: IHP
+list_title: IHP
 ---
 
  <h1 class="mt-4 mb-4">Semester of Illustrating Mathematics at IHP</h1>

@@ -1,8 +1,7 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
 layout: default
+title: Gallery
+list_title: Gallery
 ---
 
 
@@ -27,42 +26,69 @@ layout: default
 
 <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-<script>
-  let msnry;
-  document.addEventListener('DOMContentLoaded', function () {
-    var grid = document.querySelector('.masonry-grid');
-    imagesLoaded(grid, function () {
-      msnry = new Masonry(grid, {
-        itemSelector: '.masonry-item',
-        columnWidth: '.grid-sizer', // use the grid-sizer to get relayout to work
-        percentPosition: true
-      });
-    });
-  });
-// Filtering setup
-  const buttons = document.querySelectorAll('.filter-buttons .btn');
-  buttons.forEach(button => {
-    button.addEventListener('click', function () {
-      buttons.forEach(btn => btn.classList.remove('active'));
-      this.classList.add('active');
-      const filter = this.getAttribute('data-filter');
-      const items = document.querySelectorAll('.masonry-item');
-      items.forEach(item => {
-        const tags = item.getAttribute('data-tags') || '';
-        if (filter === 'all' || tags.includes(filter)) {
-          item.style.display = '';
-        } else {
-          item.style.display = 'none';
-        }
-      });
-      // Refresh Masonry layout after filtering
-      var grid = document.querySelector('.masonry-grid');
-      imagesLoaded(grid, function () {
-        console.log("test");
-        msnry.layout();
-      });
-    });
-  });
+<script>  
+let msnry;  
+  
+document.addEventListener('DOMContentLoaded', function () {  
+const grid = document.querySelector('.masonry-grid');  
+  
+imagesLoaded(grid, function () {  
+msnry = new Masonry(grid, {  
+itemSelector: '.masonry-item',  
+columnWidth: '.grid-sizer',  
+percentPosition: true  
+});  
+  
+// Apply filter from URL on load  
+const params = new URLSearchParams(window.location.search);  
+const filterFromURL = params.get('filter') || 'all';  
+applyFilter(filterFromURL);  
+setActiveButton(filterFromURL);  
+});  
+});  
+  
+const buttons = document.querySelectorAll('.filter-buttons .btn');  
+  
+function applyFilter(filter) {  
+const items = document.querySelectorAll('.masonry-item');  
+  
+items.forEach(item => {  
+const tags = item.getAttribute('data-tags') || '';  
+if (filter === 'all' || tags.includes(filter)) {  
+item.style.display = '';  
+} else {  
+item.style.display = 'none';  
+}  
+});  
+  
+const grid = document.querySelector('.masonry-grid');  
+imagesLoaded(grid, function () {  
+msnry.layout();  
+});  
+}  
+  
+function setActiveButton(filter) {  
+buttons.forEach(btn => {  
+btn.classList.remove('active');  
+if (btn.getAttribute('data-filter') === filter) {  
+btn.classList.add('active');  
+}  
+});  
+}  
+  
+buttons.forEach(button => {  
+button.addEventListener('click', function () {  
+const filter = this.getAttribute('data-filter');  
+  
+// Update URL WITHOUT reloading page  
+const url = new URL(window.location);  
+url.searchParams.set('filter', filter);  
+window.history.replaceState({}, '', url);  
+  
+applyFilter(filter);  
+setActiveButton(filter);  
+});  
+});  
 </script>
 
 

@@ -8,6 +8,7 @@ tags:
   - expository
   - slides
   - gallery
+  - drawing
 attributes:
   - seminar-talk
 image: /files/presentations/thumbnails/Geometric_Langlands_S_Duality.jpg

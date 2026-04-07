@@ -30,7 +30,6 @@ layout: default
 {% assign own_Page = true %}
 {% if page.tags contains "paper" %}
   {% include paper_card.html %}
-
 {% else %}
   {% include project_card.html %}
 {%- endif -%}
@@ -41,6 +40,13 @@ layout: default
 {{ content }} 
 <hr class = "mine">
 {% endif %}
+
+{% if page.attributes contains "illustrated-paper" %}
+  <h2>
+    {{ project.paper-title | escape }}
+  </h2>
+  {% include paper_card.html %}
+{%- endif -%}
 
 {% if page.tags contains "ihp" %}
   <div class="ihp-back-link">

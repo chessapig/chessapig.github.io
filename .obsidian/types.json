@@ -5,7 +5,7 @@
     "tags": "tags",
     "talk-venue": "text",
     "images": "multitext",
-    "attributes": "multitext",
+    "attributes": "checkbox",
     "week": "multitext"
   }
 }

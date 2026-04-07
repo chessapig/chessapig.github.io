@@ -24,11 +24,15 @@
   <div class="project-details">
   <p><h4>Abstract:</h4> {{ project.paper-abstract | markdownify }}</p>
 </div>
-    {%- if project.image -%}
+    {%- if project.paper-image -%}
+      <div class="project-image">
+        <img src="{{ project.paper-image }}" alt="{{ project.title }}" class="img-fluid" >
+      </div>
+    {% elsif project.image -%}
       <div class="project-image">
         <img src="{{ project.image }}" alt="{{ project.title }}" class="img-fluid" >
       </div>
-      {%- endif -%}
+    {%- endif -%}
     
   </div>
   

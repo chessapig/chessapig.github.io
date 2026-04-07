@@ -8,6 +8,7 @@ tags:
   - blog
   - art
   - talk
+  - drawing
 attributes:
 image: /assets/gallery/symmetree/thumbnail.jpg
 talk-venue: <a href="https://www.youtube.com/watch?v=kqOqRiOsXdo"> Berkeley - UIUC 3D mirror symmetry seminar </a>

@@ -6,10 +6,16 @@ categories: art
 tags:
   - gallery
   - art
-attributes: 
-image: 
-file: 
+  - drawing
+attributes: illustrated-paper
 summary: Drawings of some objects from the Geometric Langlands correspondence. These figures were drawn on commission for [David Ben-Zvi](https://web.ma.utexas.edu/users/benzvi/)
+paper-title: What is the Geometric Langlands Correspondence About?
+authors: David Ben-Zvi
+paper-year: 2026
+paper-image: /assets/gallery/langlands/thumbnail.jpg
+journal: <a href="https://www.ams.org/meetings/lectures/CEB-2026-ePDF.pdf">2026 AMS Current Events Bulletin</a>
+paper-abstract: The recent proof of the unramified Geometric Langlands Conjecture has attracted a lot of publicity, so this seems like a good time to address the title question. In one line, the Geometric Langlands correspondence is an algebraic spectral theorem for a certain class of differential equations called automorphic sheaves. It asserts they can be decomposed into monochromatic objects, which diagonalize the action of natural symmetries (Hecke operators), and it describes the corresponding colors or frequencies (Langlands parameters). The statement is very technical and esoteric sounding, the proof takes thousands of pages, and there are relatively few easily stated immediate consequences. So what’s the deal? In this brief survey I will present the subject informally as a blueprint for a master plan for the study of nonabelian symmetry, touching on some of the main motivations, connections and structures that have emerged.
+arxiv: https://web.ma.utexas.edu/users/benzvi/CurrentEvents021426.pdf
 pageHasContent: true
 gallery-title: Langlands
 gallery-folder: /assets/gallery/langlands

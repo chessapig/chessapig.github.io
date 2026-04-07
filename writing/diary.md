@@ -1,5 +1,7 @@
 ---
 layout: minima-default
+title: Diary
+list_title: Diary
 ---
 
 # Math diary
