@@ -11,8 +11,6 @@ summary: To humanize math, its good to include something to empathize with in yo
 pageHasContent: true
 ---
 
-Part of [Drawing Club](/drawing-club) at the IHP trimester in illustrating mathematics.
-
 One homunculus produced by a member of the community during this workshop
 <div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
   <img src="/assets/ihp/drawing-club/human/emma.jpeg" alt="picture of a horse on a chalkboard saying neigh" class="card-img-top" >

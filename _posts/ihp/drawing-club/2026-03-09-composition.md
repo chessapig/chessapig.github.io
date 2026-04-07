@@ -12,8 +12,6 @@ summary: We talked about composition of images, and analyzed how our eye moves a
 pageHasContent: true
 ---
 
-Part of [Drawing Club](/drawing-club) at the IHP trimester in illustrating mathematics.
-
 Here's a collection of compositions people made:
 <div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
   <img src="/assets/ihp/drawing-club/composition/samuel.jpeg" alt="on the right, a circle rearranged to become a square. on the left, a square rearranged to become a circle" class="card-img-top" >
