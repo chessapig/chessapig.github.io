@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/ihp/2026-03-25-sun-dial.md",
+                "file": "_posts/ihp/2026-02-16-drawing-club.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-03-25-sun-dial"
+              "title": "2026-02-16-drawing-club"
             }
           },
           {
@@ -169,13 +169,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/ihp/2026-03-25-sun-dial.md",
+                "file": "_posts/ihp/2026-02-16-drawing-club.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 2026-03-25-sun-dial"
+              "title": "Outline of 2026-02-16-drawing-club"
             }
           }
         ],
@@ -199,6 +199,16 @@
   },
   "active": "1e4c5fedf617d2ba",
   "lastOpenFiles": [
+    "_posts/ihp/2026-02-02-tangent.md",
+    "_posts/ihp/2026-02-02-CP2.md",
+    "_posts/ihp/2026-03-25-sun-dial.md",
+    "_posts/ihp/2026-03-10-normal.md",
+    "_posts/ihp/CP2/2026-02-26-curve.md",
+    "_posts/ihp/2026-02-23-pseudopseudosphere.md",
+    "_posts/ihp/2026-02-16-drawing-club.md",
+    "_site/sun-dial.html",
+    "_site/ihp/sun-dial.html",
+    "_posts/ihp/2026-03-15-straws.md",
     "_site/assets/ihp/sun/jumping.jpeg",
     "assets/ihp/sun/jumping.jpeg",
     "_site/assets/ihp/sun/label_process_2.jpeg",
@@ -209,27 +219,17 @@
     "assets/ihp/sun/bezout.jpeg",
     "_site/assets/ihp/sun/unlabeled.jpeg",
     "assets/ihp/sun/unlabeled.jpeg",
-    "_site/assets/ihp/sun/unlabeled.jpg",
     "assets/ihp/sun/60.jpg.sb-8894d8c1-HQ1fPj",
     "_posts/ihp/CP2/2026-03-21-gaussian.md",
-    "_posts/ihp/2026-03-25-sun-dial.md",
-    "_posts/ihp/2026-03-10-normal.md",
-    "_posts/ihp/2026-03-15-straws.md",
-    "_posts/ihp/2026-02-23-pseudopseudosphere.md",
     "_site/assets/ihp/sun",
     "assets/ihp/sun",
     "assets/ihp/untitled folder",
     "_posts/ihp/2026-02-15-shape.md",
-    "_posts/ihp/2026-02-02-tangent.md",
     "_site/assets/ihp/tangent/cubic",
     "assets/ihp/tangent/cubic",
     "assets/ihp/tangent/untitled folder",
     "assets/ihp/tangent/cones/packing.jpeg.sb-8894d8c1-tcqUWj",
     "_posts/ihp/2026-01-26-wunderlich.md",
-    "_site/assets/ihp/tangent/cones",
-    "assets/ihp/tangent/cones",
-    "_posts/ihp/2026-02-02-CP2.md",
-    "_posts/ihp/2026-02-16-drawing-club.md",
     "_posts/blog/2025-09-01-pointless.md",
     "_posts/ihp/2026-01-05-pencil.md",
     "illustration.md",
