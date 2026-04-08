@@ -46,7 +46,7 @@ show_sidebar: false
 
   <div class="col-md-8 mb-4">
     <h1>Hello!</h1>
-    <p>  I'm Elliot Kienzle, a fourth year mathematics PhD student at UC Berkeley, advised by Constantin Teleman. I'm interested in physical mathematics, especially its intersections with geometry and topology. <br/>
+    <p>  I'm Elliot Kienzle, a fourth year mathematics PhD student at UC Berkeley, advised by Constantin Teleman. I'm interested in physical mathematics, especially its intersections with geometry, and <a href="/illustration"> mathematical illustration</a> <br/>
 	<h2>Math </h2>
 	<p> I like geometry in whatever form it may take. Right now I'm primarily a symplectic geometer. I'm currently studying symplectic ball packing through the lens of quantum mechanics. Here are some words which I think:
   
@@ -72,7 +72,7 @@ show_sidebar: false
 	<p>My previous research applied Higgs bundles to condensed matter physics. You can read about it  <a href="/paper/hyperbolic-band-theory">here</a>. To see other things I've thought about, check out my past <a href="/talks">talks</a>. 
      <!-- To see what I'm thinking about at this exact moment, you can peek inside my <a href="/writing/diary.html">math diary</a>.</p> -->
     <h2>Art </h2>
-    <p> I think about math very visually (hence the geometry). I try to capture mathematical objects and the feelings they illicit using digital art, which you can check out in the <a href="/gallery">gallery</a>. I also enjoy creative coding, which often has a mathematical component. See some examples in <a href="/code">code</a>. My favorite example is my explorations of <a href="/code/hyperbolic-string-art">hyperbolic string art</a>
+    <p> I think about math very visually (hence the geometry). I try to capture mathematical objects and the feelings they illicit using digital art, which you can check out in the <a href="/gallery">gallery</a>. I also enjoy creative coding, which often has a mathematical component. See some examples in <a href="/code">code</a>. One good example is my explorations of <a href="/code/hyperbolic-string-art">hyperbolic string art</a>
 
   <!-- </div>
 </div> -->
