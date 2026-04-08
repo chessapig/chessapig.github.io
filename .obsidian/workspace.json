@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/ihp/2026-02-16-drawing-club.md",
+                "file": "illustration.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-02-16-drawing-club"
+              "title": "illustration"
             }
           },
           {
@@ -169,13 +169,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/ihp/2026-02-16-drawing-club.md",
+                "file": "illustration.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 2026-02-16-drawing-club"
+              "title": "Outline of illustration"
             }
           }
         ],
@@ -199,13 +199,13 @@
   },
   "active": "1e4c5fedf617d2ba",
   "lastOpenFiles": [
+    "_posts/ihp/2026-02-16-drawing-club.md",
     "_posts/ihp/2026-02-02-tangent.md",
     "_posts/ihp/2026-02-02-CP2.md",
     "_posts/ihp/2026-03-25-sun-dial.md",
     "_posts/ihp/2026-03-10-normal.md",
     "_posts/ihp/CP2/2026-02-26-curve.md",
     "_posts/ihp/2026-02-23-pseudopseudosphere.md",
-    "_posts/ihp/2026-02-16-drawing-club.md",
     "_site/sun-dial.html",
     "_site/ihp/sun-dial.html",
     "_posts/ihp/2026-03-15-straws.md",

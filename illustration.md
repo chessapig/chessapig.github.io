@@ -70,7 +70,7 @@ I like to illustrate mathematics, in any medium that calls for. This includes ha
 
 
 <div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
-  <a href="/talks/?filter=illustration-talk">  
+  <a href="/talks?filter=illustration-talk">  
 		<img src="/assets/gallery/caustics/gallery/presentation.jpeg"  
 		alt="Elliot talking on front of a board holding a laser"  
 		class="card-img-top">  
@@ -78,7 +78,7 @@ I like to illustrate mathematics, in any medium that calls for. This includes ha
 
   <div class="card-body text-center">
 	  <h5 class="card-title">  
-		<a href="/talks/?filter=illustration-talk" class="card-title">  
+		<a href="/talks?filter=illustration-talk" class="card-title">  
 			Talks about mathematical illustration
 		</a>  
 		</h5>  
