@@ -80,6 +80,18 @@ $dropdown-link-hover-bg:  $dark;
   padding: 10px;
 }
 
+.form-control {
+  background-color: $dark;
+  color: $body-color;
+  border-color: $body-color;
+}
+
+.form-control:focus {
+  color: $body-color;
+  border-color: $primary ;
+  box-shadow: 0 0 0 0.2rem rgba($primary, 0.25);
+}
+
 
 .project {
   display: flex;

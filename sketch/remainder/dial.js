@@ -228,6 +228,7 @@ class Dial extends Selector{
             doPrintMode: false,
             doOutsideLabel: true,
             doInsideLabel: true,
+            doCopywrite: false,
             innerNumber: 5,  //number of ticks on the inside
             outerNumber: 35, //number of ticks on the outside
             centerLabel: 35,
@@ -280,6 +281,7 @@ class Dial extends Selector{
         let innerMultiplier = modularInverse(this.innerSpacing,this.innerNumber);
        
         let weight=0.01;
+        let number = 0;
         ctx.push();
             ctx.rotate(this.angle);// oveall rotation
         
@@ -304,7 +306,7 @@ class Dial extends Selector{
             
             //outer marking 
             ctx.push();
-            let textSize= min(0.2*this.outerRadius,0.5*TWO_PI*this.outerRadius/this.outerNumber);
+            let textSize= min(0.35*(this.outerRadius-this.innerRadius),0.5*TWO_PI*this.outerRadius/this.outerNumber);
             textSize = min(textSize,0.1);
             ctx.textSize(textSize);
             let middleRadius= map(0.9,0,1,this.innerRadius,this.outerRadius);
@@ -324,8 +326,14 @@ class Dial extends Selector{
                         
                         
                         ctx.fill(drawColor)
-                        ctx.text(mod(outerMultiplier*i,this.outerNumber),
-                            textSize*0.8,0.5*textSize);
+                        number = mod(outerMultiplier*i,this.outerNumber) ;
+                        ctx.push();
+                        if(number==0){
+                            ctx.translate(textSize*0.5,0);
+                        }
+                        ctx.text(number,textSize*0.8,0.5*textSize);
+                        ctx.pop();
+                        
                         
                     ctx.pop();
                 }
@@ -338,8 +346,10 @@ class Dial extends Selector{
             //inner marking
             ctx.push();
             middleRadius= map(0.2,0,1,this.innerRadius,this.outerRadius);
-            textSize= min(0.2*middleRadius,0.5*TWO_PI*middleRadius/this.innerNumber);
-            textSize = max(textSize,0.05);
+            textSize=min(textSize*1.5,(this.outerRadius-this.innerRadius)*0.2);
+            textSize=min(textSize, 0.5*TWO_PI*middleRadius/this.innerNumber);
+            //textSize= min(0.2*middleRadius,0.5*TWO_PI*middleRadius/this.innerNumber);
+            //textSize = max(textSize,0.05);
             ctx.textSize(textSize);
             for(let i=0;i<this.innerNumber; i++){
                 ctx.line(0, this.innerRadius, 0, middleRadius);
@@ -354,8 +364,11 @@ class Dial extends Selector{
                         ctx.scale(1,-1);
                         
                         ctx.fill(drawColor)
-                        ctx.text(mod(innerMultiplier*i,this.innerNumber),
-                            textSize*0.7,-textSize/3);
+                        let number = mod(innerMultiplier*i,this.innerNumber);
+                        if(number!=0){
+                            ctx.text(number,textSize*0.7,-textSize/3);
+                        }
+                        
                         
                     ctx.pop();
                 }
@@ -378,25 +391,26 @@ class Dial extends Selector{
             
 
             //draw label numbering prime on dial
-            middleRadius= map(0.4,0,1,this.innerRadius,this.outerRadius);
-            textSize = min(0.3*(this.outerRadius-this.innerRadius),0.5);
+            middleRadius= map(0.35,0,1,this.innerRadius,this.outerRadius);
+            textSize = min(0.4*(this.outerRadius-this.innerRadius),0.5);
             ctx.textSize(textSize);
             ctx.push();
                 ctx.rotate(0.02*(TWO_PI)/middleRadius);
                 ctx.translate(0,middleRadius);
                 ctx.scale(1,-1);
                 
-                ctx.noStroke();
-                ctx.fill(drawColor);
+                ctx.stroke(drawColor);
+                ctx.strokeWeight(weight*textSize*3);
+                ctx.noFill();
                 ctx.text(this.innerNumber,
                     0,0);
 
-                let w = ctx.textWidth(this.innerNumber);
-                let h = textSize;
-                ctx.stroke(drawColor);
-                ctx.strokeWeight(weight/2);
-                ctx.noFill();
-                ctx.rect(0, -h*0.35, w + .04, h + .04,0.01); // padding
+                // let w = ctx.textWidth(this.innerNumber);
+                // let h = textSize;
+                // ctx.stroke(drawColor);
+                // ctx.strokeWeight(weight/2);
+                // ctx.noFill();
+                // ctx.rect(0, -h*0.35, w + .04, h + .04,0.01); // padding
 
                 
             ctx.pop();
@@ -414,11 +428,25 @@ class Dial extends Selector{
             ctx.scale(1,-1);
             textSize= this.innerRadius*1;
             ctx.textSize(textSize);
-            ctx.translate(0,textSize*0.3)
+            ctx.translate(0,this.innerRadius*0.3)
             ctx.text(this.centerLabel,
                     0,0);
+
+            //draw copywrite
+                if(this.doCopywrite){
+                textSize= this.innerRadius*0.1;
+                ctx.noStroke();
+                ctx.fill(drawColor);
+                ctx.textSize(textSize);
+                ctx.translate(0,this.innerRadius*0.3)
+                ctx.text("chessapig.github.io/sun-dial",
+                        0,0);
+            }
             ctx.pop();
 
+           
+
+            
             //draw point at zero
             ctx.fill(drawColor);
             ctx.noStroke();

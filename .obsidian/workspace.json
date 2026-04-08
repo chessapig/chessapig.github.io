@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/gallery/2023-05-05-symplectic-city.md",
+                "file": "talks.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "2023-05-05-symplectic-city"
+              "title": "talks"
             }
           },
           {
@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/gallery/2025-10-31-langlands.md",
+                "file": "_posts/ihp/2026-03-25-sun-dial.md",
                 "mode": "source",
-                "source": true
+                "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-10-31-langlands"
+              "title": "2026-03-25-sun-dial"
             }
           },
           {
@@ -41,15 +41,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/blog/2025-09-01-pointless.md",
+                "file": "_posts/ihp/2026-01-26-wunderlich.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2025-09-01-pointless"
+              "title": "2026-01-26-wunderlich"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -106,7 +107,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 613.5039024353027
+    "width": 361.50390243530273
   },
   "right": {
     "id": "6ef206bcfa0f9c8a",
@@ -168,13 +169,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/gallery/2023-05-05-symplectic-city.md",
+                "file": "_posts/ihp/2026-03-25-sun-dial.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 2023-05-05-symplectic-city"
+              "title": "Outline of 2026-03-25-sun-dial"
             }
           }
         ],
@@ -196,53 +197,53 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "b47dd5ad9f1b30b2",
+  "active": "1e4c5fedf617d2ba",
   "lastOpenFiles": [
-    "_site/assets/gallery/symplectic-city/thumbnail.jpg",
-    "assets/gallery/symplectic-city/thumbnail.jpg",
-    "_site/assets/gallery/symplectic-city/darboux.jpg",
-    "assets/gallery/symplectic-city/darboux.jpg",
-    "_site/assets/gallery/symplectic-city/thumbnail copy.jpg",
-    "assets/gallery/symplectic-city/thumbnail copy.jpg",
-    "_site/assets/gallery/symplectic-city/darboux copy.JPG",
-    "assets/gallery/symplectic-city/darboux copy.JPG",
+    "_site/assets/ihp/sun/jumping.jpeg",
+    "assets/ihp/sun/jumping.jpeg",
+    "_site/assets/ihp/sun/label_process_2.jpeg",
+    "_site/assets/ihp/sun/label_process_1.jpeg",
+    "_site/assets/ihp/sun/bezout.jpeg",
+    "assets/ihp/sun/label_process_2.jpeg",
+    "assets/ihp/sun/label_process_1.jpeg",
+    "assets/ihp/sun/bezout.jpeg",
+    "_site/assets/ihp/sun/unlabeled.jpeg",
+    "assets/ihp/sun/unlabeled.jpeg",
+    "_site/assets/ihp/sun/unlabeled.jpg",
+    "assets/ihp/sun/60.jpg.sb-8894d8c1-HQ1fPj",
+    "_posts/ihp/CP2/2026-03-21-gaussian.md",
+    "_posts/ihp/2026-03-25-sun-dial.md",
+    "_posts/ihp/2026-03-10-normal.md",
+    "_posts/ihp/2026-03-15-straws.md",
+    "_posts/ihp/2026-02-23-pseudopseudosphere.md",
+    "_site/assets/ihp/sun",
+    "assets/ihp/sun",
+    "assets/ihp/untitled folder",
+    "_posts/ihp/2026-02-15-shape.md",
+    "_posts/ihp/2026-02-02-tangent.md",
+    "_site/assets/ihp/tangent/cubic",
+    "assets/ihp/tangent/cubic",
+    "assets/ihp/tangent/untitled folder",
+    "assets/ihp/tangent/cones/packing.jpeg.sb-8894d8c1-tcqUWj",
+    "_posts/ihp/2026-01-26-wunderlich.md",
+    "_site/assets/ihp/tangent/cones",
+    "assets/ihp/tangent/cones",
+    "_posts/ihp/2026-02-02-CP2.md",
+    "_posts/ihp/2026-02-16-drawing-club.md",
+    "_posts/blog/2025-09-01-pointless.md",
+    "_posts/ihp/2026-01-05-pencil.md",
     "illustration.md",
     "_posts/gallery/2025-10-31-langlands.md",
-    "_site/art/langlands.html",
-    "_site/2025-10-31-langlands.html",
-    "_posts/gallery/2025-01-12-stacks.md",
-    "_site/art/stacks.html",
-    "_site/2025-01-12-stacks.html",
-    "_posts/gallery/2025-11-01-test.md",
-    "_posts/blog/2025-09-01-pointless.md",
-    "_posts/2021-09-25-hyperbolic-band-theory.md",
-    "_posts/ihp/CP2/2026-02-26-curve.md",
-    "_posts/ihp/CP2/2026-02-13-toric.md",
-    "_posts/ihp/2026-01-05-pencil.md",
-    "gallery.md",
-    "genus 2.jpeg",
-    "ihp.md",
-    "_posts/ihp/2026-03-15-straws.md",
-    "writing/index.md",
     "talks.md",
-    "_posts/gallery/2024-10-31-Mathoween.md",
-    "_posts/talks/2020-11-01-mirror.md",
-    "_posts/talks/2023-05-11-cortex.md",
-    "teaching/STIC/MATH299G Syllabus.pdf",
-    "index.md",
-    "code.md",
-    "blog.md",
-    "teaching/teaching.md",
-    "teaching/STIC/thumbnail.png",
-    "README.md",
-    "writing/diary.md",
-    "writing/twitter.md",
-    "_site/assets/ihp/pencil/pencil.mp4",
-    "assets/ihp/pencil/pencil.mp4",
-    "_site/assets/ihp/pencil/pencil.gif",
-    "writing/old.md",
-    "assets/images/hyperbolic copy 2.jpeg.sb-8894d8c1-vbBZNa",
-    "assets/images/hyperbolic copy 2.jpeg.sb-8894d8c1-4FT2r6",
-    "assets/images/hyperbolic_square.jpeg.sb-8894d8c1-J74J7g"
+    "_site/illustration.md",
+    "ihp.md",
+    "_posts/talks/2025-10-15-Segal-bargmann.md",
+    "_posts/talks/2022-02-04-integrable.md",
+    "_posts/talks/2021-05-05-cobordism.md",
+    "_posts/talks/2021-11-23-topological-recursion.md",
+    "_posts/gallery/2023-05-05-symplectic-city.md",
+    "_posts/gallery/2025-01-12-stacks.md",
+    "_posts/gallery/2025-11-01-test.md",
+    "_posts/2021-09-25-hyperbolic-band-theory.md"
   ]
 }

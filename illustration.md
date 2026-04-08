@@ -66,10 +66,28 @@ list_title: Illustration
 </div>  
 </div>
 
+I like to illustrate mathematics, in any medium that calls for. This includes hand-drawings (physical or digital), various cheap and easy crafts, and interactive programs. For some fleshed out examples, I've given a number of talks about mathematical illustration.
 
-I like to illustrate mathematics, in any medium that calls for. I'm involved in the [Illustrating mathematics community](https://illustratingmath.org/people). In the Spring of 2026, I attended the trimester program on  [Illustration as a Mathematical Research Technique](https://www.ihp.fr/en/news-research-activities/t1-2026-illustration-mathematical-research-technique) at the Institute Henri Poincare. I met many wonderful people, and made lots of mathematical illustrations!
 
-<div class="card my-4 shadow-sm" style="max-width: 400px; margin: auto;">
+<div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
+  <a href="/talks/?filter=illustration-talk">  
+		<img src="/assets/gallery/caustics/gallery/presentation.jpeg"  
+		alt="Elliot talking on front of a board holding a laser"  
+		class="card-img-top">  
+		</a>  
+
+  <div class="card-body text-center">
+	  <h5 class="card-title">  
+		<a href="/talks/?filter=illustration-talk" class="card-title">  
+			Talks about mathematical illustration
+		</a>  
+		</h5>  
+  </div>
+</div>
+
+I'm involved in the [Illustrating mathematics community](https://illustratingmath.org/people). In the Spring of 2026, I attended the trimester program on  [Illustration as a Mathematical Research Technique](https://www.ihp.fr/en/news-research-activities/t1-2026-illustration-mathematical-research-technique) at the Institute Henri Poincare. I met many wonderful people, and made lots of mathematical illustrations!
+
+<div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
   <a href="/ihp">  
 		<img src="/assets/ihp/ihp.jpeg"  
 		alt="selfie in a lecture hall full of people"  
@@ -85,7 +103,7 @@ I like to illustrate mathematics, in any medium that calls for. I'm involved in 
   </div>
 </div>
 # Illustrated papers
-I illustrate all of [my papers](/writing/). I occasionally take commissions to illustrate other people's papers. Here's some papers I've illustrated:
+I illustrate all of [my papers](/writing/). I occasionally take commissions to illustrate figures for other people's papers:
 
  {% for project in site.posts %}
  {% if project.attributes contains "illustrated-paper"%}

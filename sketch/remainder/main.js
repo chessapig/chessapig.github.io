@@ -36,7 +36,7 @@ function setup() {
 }
 
 //for n, setup CRT dials on window w
-function setupDials(w, N,options={doPrintMode: false , doLabels: doLabel}){
+function setupDials(w, N,options={doPrintMode: false , doLabels: doLabel, doCopywrite: false}){
 	w.selectors=[];//clear selectors
 	
 	let factors  = factorize(N);
@@ -87,6 +87,7 @@ function setupDials(w, N,options={doPrintMode: false , doLabels: doLabel}){
 			arrowLength:  map(0.6,0,1,r,lastR),
 			doArrow:  (i!=numDials),
 			doPrintMode: options.doPrintMode,
+			doCopywrite: options.doCopywrite,
 			doOutsideLabel: doOutsideLabel,
 			doInsideLabel: doInsideLabel,
 			noColor: bkgColor,
@@ -157,24 +158,53 @@ function setupUI(){
 }
 
 function saveTemplate(){
-	let printScreen = new GraphicsWindow({
-			pixels: 1000,
+	let pixels=600;
+
+	let dialHolder = new GraphicsWindow({
+			pixels: pixels,
 			x: -1,
 			y:-1,
 			width: 2,
 			canvasMode: P2D
 		}); 
-	
-	setupDials(printScreen,N,{
+	setupDials(dialHolder,N,{
 		doPrintMode: true,
-		doLabels:doLabel});
+		doLabels:doLabel,
+		doCopywrite: false});
+	let dials = dialHolder.selectors;
+	let totalWidth = 0;
+	let margin= 0.1;
+	let maxRadius = 0;
+	for(let i=0;i<dials.length;i++){
+		let dial = dials[i];
+		totalWidth+= 2*dial.outerRadius;
+		totalWidth+=0.1; //margin
+		if(dial.outerRadius>maxRadius){
+			maxRadius=dial.outerRadius;
+		}
+		if(i!=dials.length-1){
+			dial.doCopywrite=true;
+		}
+	}
+	let totalHeight = 2*maxRadius+margin*2;
+	let printScreen = createGraphics(pixels*totalWidth,pixels*totalHeight);
+	printScreen.scale(pixels,-pixels);
+	printScreen.translate(0,-totalHeight/2);
+	printScreen.background(255);
+	for(let dial of dials){
+		printScreen.translate((dial.outerRadius+margin/2),0);
+		dial.draw(printScreen);
+		printScreen.translate((dial.outerRadius+margin/2),0);
+	}
 	
-	printScreen.g.background(255);
-	printScreen.g.scale(1,-1);
-	printScreen.render();
-	save(printScreen.g, 'CRT_' + N+ '.jpg');
+	// printScreen.g.background(255);
+	// printScreen.g.scale(1,-1);
+	//printScreen.render();
+	save(printScreen, 'dials_template_' + N+ '.jpg');
+	//w.g.image(printScreen,0,0,1);
 
-	printScreen.g.remove();
+	printScreen.remove();
+	dialHolder.g.remove();
 }
 
 

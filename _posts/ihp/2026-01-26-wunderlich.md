@@ -7,12 +7,12 @@ tags:
   - craft
   - ihp
 image: /assets/ihp/wunderlich/pseudosphere.jpeg
-summary: A discrete model of a surface of constant negative curvature. This manifests Hilbert's proof that there is no complete, immersed hyperbolic plane in Euclidean 3-space
+summary: A discrete model of a surface of constant negative curvature. This illustrates Hilbert's proof that there is no complete, immersed hyperbolic plane in Euclidean 3-space
 pageHasContent: true
 ---
 *Joint work with Chaim Goodman-Strauss and Henry Segerman*
 
-Start with a grid of sticks living in three dimensional space, with four sticks hinged at each point. Then enforce these two constraints:
+Start with a grid of sticks living in three dimensional space, with four sticks hinged at each point. Enforce these two constraints:
 1.  (Equal length) The four sticks around each square of the grid are the same length
 2. (Planarity) The four sticks meeting at each vertex are planar. 
 
@@ -24,19 +24,41 @@ Here's the one grid satisfying the constraints:
     <h5 class="card-title"> Wunderlich's web</h5>
   </div>
 </div>
-It turns out, the constraints force the grid to approximate a surface with *Constant negative curvature*. (In the lingo, a surface of constant negative curvature is called a "pseudosphere". The standard pseudosphere is only one type of pseudosphere) This was discovered by Wunderlich in his 1950s paper (LINK PAPER HERE) (In german). The paper is inspiring combination of pure and applied math. It draws from the literature studying the shape of fishing nets in the current, and includes a diagram of a physical steel sculpture Wunderlich had made. 
+And here's how it looks in motion:
 
+<div class="card my-4 shadow-sm" style="max-width: 400px; margin: auto;">
+	<div centering>
+	<video class="w-100" preload muted controls>
+	    <source src="/assets/ihp/wunderlich/motion.mp4" type="video/mp4"/>
+	</video></div>
+
+  <div class="card-body text-center">
+	  <p class="card-text"> Wunderlich's web in motion. In this model, I've fixed the torsion angle along each edge, more on this later.
+    </p>
+  </div>
+</div>
+
+It turns out, the constraints force the grid to approximate a surface with *Constant negative curvature*. (In the lingo, a surface of constant negative curvature is called a "pseudosphere". The standard pseudosphere is only one type of pseudosphere) This was discovered by Wunderlich in his 1950s paper "Zur Differenzengeometrίe der Flάchen konstanter negativer Krummung" (This paper is both in german, and impossible to find online. [Here](/assets/ihp/wunderlich/wunderlich.pdf) is a PDF, auto-translated).   The paper is inspiring combination of pure and applied math. It builds on  literature studying the shape of fishing nets in the current, and includes a drawing of a physical steel sculpture Wunderlich had made. 
+
+<div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
+  <img src="/assets/ihp/wunderlich/model.jpeg" alt="a black and white drawing of a constant negatuve curvature mdoel, made out of steel strips" class="card-img-top" >
+
+  <div class="card-body text-center">
+    <p class="card-text"> Diagram from Wunderlich's paper, showing his model made out of metal strips.
+    </p>
+  </div>
+</div>
 
 Wunderlich's mechanism for enforcing negative curvature is unusual. In the 21st century, we are awash in ways to hold a hyperbolic plane. Hyperbolic crochet relies on adding extra length compared to euclidean space. Piecing together [right angled pentagons](/ihp/straws) creates the hyperbolic plane by adding extra angle. Both of these techniques enforce an intrinsic metric, and let gauss's theorem egregium deal with the embedding into 3-space. 
 
-Wunderlich's web works extrinsically. Imagine the surface stretched along the discrete grid. Due to the planarity constraint, we can define the "tangent plane" at a vertex as the unique plane passing though all sticks adjacent to the vertex. This gives a well-defined normal vector at each vertex. Our proxy for curvature will be the torsion, the angle between the normal vectors of adjacent vertices. Imposing equal lengths forces constant torsion, so the angle between adjacent normals is the same everywhere on the grid.  This unlocks negative curvature. 
+Wunderlich's web works extrinsically. Imagine the surface stretched along the discrete grid. Due to the planarity constraint, we can define the "tangent plane" at a vertex as the unique plane passing though all sticks adjacent to the vertex. This gives a well-defined normal vector at each vertex. Our proxy for curvature will be the torsion, the angle between the normal vectors of adjacent vertices. Imposing equal lengths forces constant torsion, so the angle between adjacent normals is the same everywhere on the grid.  This implies negative curvature.
 
 Let's do an example. The simplest way to have planar vertices and equal lengths is to make a square grid in the plane... but it isn't particularly negatively curved. 
 <div class="card my-4 shadow-sm" style="max-width: 400px; margin: auto;">
   <img src="/assets/ihp/wunderlich/mockup_flat.jpeg" alt="a cardboard and wooden skewer model of 4 units of the grid. It lays flat in the plane" class="card-img-top" >
 
   <div class="card-body text-center">
-    <p class="card-text"> A planar configuration satisfying Wunderlich's constraints. It's not very exciting. (This was a cardboard mockup I made a while ago)
+    <p class="card-text"> A planar configuration satisfying Wunderlich's constraints. It's not very exciting. 
     </p>
   </div>
 </div>
@@ -60,13 +82,18 @@ The most interesting thing about this surface is that the curvature is constant 
   </div>
 </div>
 In the rest of this page, I want to explain the math behind this object. In the following sections I'll explain
-1. Why the mechanism forces constant torsion
-2. How we constructed this device
-3.  Why constant torsion approximates a pseudosphere
-4. How Wunderlich's web proves Hilbert's theorem: There are no complete imbedded hyperbolic planes in $\RR^3$. 
+1. [Why the mechanism forces constant torsion](#torsion)
+2. [How we constructed this device](#construction)
+3. [Why constant torsion approximates a pseudosphere](#dress)
+4. [How Wunderlich's web proves Hilbert's theorem:](#hilbert) There are no complete imbedded hyperbolic planes in $\RR^3$.  (This part is still under construction)
+
+
+
+
+<div id="torsion"></div>
 
 ## Constant torsion
-In this section, I'll explain why any grid with equal lengths and planar verticies has constant torsion.   let's look at the atomic unit of this grid, consisting of four sticks arranged in a loop. I will call this a "tessera:. The equal length condition implies this tessera forms an equilateral quadrilateral. If the tessera lay in a plane, then it would be a parallelogram. In 3 space, we can fold this parallelogram along one diagonal, as pictured below.
+In this section, I'll explain why any grid with equal lengths and planar vertices has constant torsion.   let's look at the atomic unit of this grid, consisting of four sticks arranged in a loop. I will call this a "tessera". The equal length condition implies this tessera forms an equilateral quadrilateral. If the tessera lay in a plane, then it would be a parallelogram. In 3 space, we can fold this parallelogram along one diagonal, as pictured below.
 <div class="card my-4 shadow-sm" style="max-width: 400px; margin: auto;">
   <img src="/assets/ihp/wunderlich/figures/equilateral.jpeg" alt="An equilateral quadrelatrial standing on its feet, with its verticies roughly arranged in a tetrahedron" class="card-img-top" >
 
@@ -84,7 +111,7 @@ Consider the torsion of, say, the left most edge. This measures the angle betwee
   </div>
 </div>
 
-To do this, we need that each edge is the same length. Then, we can exploit symmetry! If all edges are the same, then the quadrilateral has two mirror symmetries in three dimensional space. The planes of reflection contains one of the diagonals, and is the perpendicular to the other. 
+To do this, we need that every edge is the same length. Then we exploit symmetry! Since all edges are the same, then the quadrilateral has two mirror symmetries in three dimensional space. The planes of reflection contains one of the diagonals, and is the perpendicular to the other. 
 <div class="card my-4 shadow-sm" style="max-width: 400px; margin: auto;">
   <img src="/assets/ihp/wunderlich/figures/symmetries.jpeg" alt="the same quadrelateral as above, with mirror planes passing through each oppisite pair of verticies" class="card-img-top" >
 
@@ -124,20 +151,23 @@ Look along one of the lines of the grid in the final model, and you can see the 
   </div>
 </div>
 
+
+<div id="construction"></div>
+
 ## Construction
 Now is a good time to describe how we made our rendition of Wunderlich's web. Let's review our requirements, and how we might implement them
 1.  Equal lengths. This is easy. We assemble our grid out of sticks, and make each stick the same length.
 2. Planar vertices. The easiest way is by having each stick terminate in a flat piece with a hole, then connect the 4 sticks at a vertex with a nut and bolt. If the nut isn't too tight, this works as a hinge
-To satisfy just these two conditions, we could take a piece of metal with holes in either end, with a fixed twist of angle $\tau$ between the two holes. Assemble many of these into a grid, and we will get a grid approximating a pseduosphere.  This was the technique Wunderlich described in his paper.
+To satisfy just these two conditions, we could take a piece of metal with holes in either end, with a fixed twist of angle $\tau$ between the two holes. Assemble many of these into a grid, and we will get a grid approximating a pseudosphere.  This was the technique Wunderlich described in his paper.
 <div class="card my-4 shadow-sm" style="max-width: 300px; margin: auto;">
   <img src="/assets/ihp/wunderlich/figures/link.png" alt="An elongated circle, with two small circles in each end." class="card-img-top" >
 
   <div class="card-body text-center">
-    <p class="card-text">  Fundamental unit, for fixed torsion.
+    <p class="card-text">  Fundamental unit. To get fixed torsion, twist each piece of metal by a constant angle.
     </p>
   </div>
 </div>
-This solution doesn't make me so happy, because it constrains $\tau$. What if the torsion $\tau$ could vary? This is tricky, as we want a twist without any bend. The solution (proposed and designed by Henry Segerman) was to put a hinge in the middle of each piece. Our edge units were 3D printed in two parts. Each half had a hole for one vertex of an edge. Then, the halfs were connected with a bolt that allowed torsional twisting.  The differing heights of each end is some cleverness to ensure that the torsional bolts were all in the same plane.
+This solution doesn't make me so happy, because it constrains $\tau$. What if the torsion $\tau$ could vary? This is tricky, as we want a twist without any bend. The solution (proposed and designed by Henry Segerman) was to put a hinge in the middle of each piece. Our edge units were 3D printed in two parts. Each half had a hole for one vertex of an edge. Then, the halves were connected with a bolt which let the two ends twist with respect to one other.  The differing heights of each end is some cleverness to ensure that the torsional bolts all lie in the same plane.
 
 <div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
   <img src="/assets/ihp/wunderlich/units.jpeg" alt="three black edges of the grid. There is metal hinge in the middle" class="card-img-top" >
@@ -159,28 +189,31 @@ With the units printed, its time to clock in to the [shape factory](/ihp/shape).
   </div>
 </div>
 
-These units help us visualize the torsion. First, the screws for each vertex are pointing in the normal direction. Second, the angle of the hinge along an edge is exactly the torsion along that edge. Visually inspecting the device, you can see that the torsion angles are constant throughout the sheet. It's nice to experimentally verify our math.
+These units help us visualize the torsion. First, the screws for each vertex are pointing in the normal direction. Second, the angle of the hinge along an edge is exactly the torsion along that edge. Visually inspecting the device, you can see that the torsion angles are constant throughout the sheet.  Moreover, you can tighten one of the screws to stop one edge from twisting. This propagates throughout the grid, locking the web into fixed curvature. It's nice to experimentally verify our math. 
+
+
+<div id="dress"></div>
 
 ## Dressing a Pseudosphere
-Hopefully I've convinced you that this plastic monstrosity produces things with constant torsion. But what does that have to do with pseudospheres?  Here's a picture of the normal vectors of a pseudosphere. Notice how they twist at a constant rate? It's a good sign
+Hopefully I've convinced you that this plastic monstrosity produces things with constant torsion. But what does that have to do with pseudospheres?  Here's a picture of the normal vectors of a pseudosphere. Notice how they twist at a constant rate? This hints at a relationship...
 
 <div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
   <img src="/assets/ihp/normals/asymptotic.jpeg" alt="A close up shot of many red straws pointing out of a saddle like surface. We are looking down a tunnel, as the straws turn around us." class="card-img-top" >
 
   <div class="card-body text-center">
 	  <h5 class="card-title">Normals to a pseudosphere</h5>
-    <p class="card-text">  The normals twist as we move along the surface. I also made this device during the trimester, see my page on [normals](/ihp/normals)
+    <p class="card-text">  The normals twist as we move along the surface. I also made this device during the trimester, see my page on <a href="/ihp/normal">normals</a>
     </p>
   </div>
 </div>
 
-Our approach will be to "dress" a pseudosphere, by finding a grid lying on it which satisfies Wunderlich's condition. Indeed, this corner of differential geometry originated from dressmaking. In the late 1800s, Chebyshev needed cash, so he did a lot of consultancy work. While obsessing over these non-mathematical problems, Chebyshev discovered several deep mathematical results. For example, Chebyshev polynomials were born from his work on linkage design, which were used in steam engines.
+Our approach will be to "dress" a pseudosphere, by finding a grid lying on it which satisfies Wunderlich's condition. Indeed, this corner of differential geometry originated from dressmaking. Chebyshev often came to deep mathematical results from problems arising in application math.  For example, Chebyshev polynomials were born from his desire to make a straight line linkage, for potential application in steam engines.
 
-Our story starts when a dressmaking company hires Chebyshev. They wanted him to optimize their clothing patterns to use less cloth. Chebyshev interpreted that to mean, "how does cloth drape over an arbitrary surface"? Cloth is woven, so up close it looks like a tiny grid made of tiny squares. The angle between the two threads may change, but the spacing is constant. Chebyshev studied infinitesimal grids on surfaces with equal spacings, now called "Chebyshev nets". He got so excited by the differential geometry of cloth that he never finished his dressmaking.
+The [Apocryphal story](https://mathshistory.st-andrews.ac.uk/Extras/Chebyshev_nets/chebyshevnets.pdf) goes that a dressmaking company hires Chebyshev to optimize their cloth usage in garments. Chebyshev tackled this by asking, "how does cloth drape over an arbitrary surface"? Cloth is woven, so up close it looks like a tiny grid made of tiny squares. The angle between the two threads may change, but the spacing is constant. Chebyshev studied infinitesimal grids on surfaces with equal spacings, now called "Chebyshev nets". He got so excited by the differential geometry of cloth that he never finished his dressmaking job.
 
-Imagine that we didn't constrain each vertex to be planar, leaving us with a very floppy equilateral grid. We could drape a grid over any surface we'd like, positive or negative curvature. If we additionally impose that each vertex is planar, then it constrains the geometry of the chebyshev net. In particular, all adjacent vertices like in the tangent plane to that vertex. 
+A Chebyshev net is flexible. Imagine building a equilateral grid with no other constraints. This can drape over any surface we'd like, positive or negative curvature. Additionally imposing that each vertex is planar constrains the geometry of the Chebyshev net. 
 
-Making our grid finer and finer, we can think of the edges as tangent vectors, living in the tangent plane of a vertex. The planarity condition implies that the edge vectors must live in the (tangent space of) the intersection of the surface and its tangent plane. Indeed, any other direction would cause the adjacent vertex to bend away from the tangent plane, violating planarity!   The directions in the tangent space with this property are called the *asymptotic directions*, and a curve which is everywhere moving in an asymptotic direction is called an *asymptotic line*.
+Making our grid finer and finer, we can think of the edges as tangent vectors, living in the tangent plane of a vertex. The planarity condition implies that the edge vectors must live in the (tangent space of) the intersection of the surface and its tangent plane. Indeed, any other direction would cause the adjacent vertex to bend away from the tangent plane, violating planarity!   The directions in the tangent space which lie along the surface like this are called the *asymptotic directions*. A curve which is everywhere tangent to an asymptotic direction is called an *asymptotic line*.
 <div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
   <img src="/assets/ihp/wunderlich/figures/asymptotic.jpeg" alt="A saddle shape cut with a tangent plane" class="card-img-top" >
 
@@ -191,7 +224,7 @@ Making our grid finer and finer, we can think of the edges as tangent vectors, l
   </div>
 </div>
 
-Notice that asymptotic lines only exist when the surface looks like a saddle or a plane, i.e the curvature is $\leq 0$. You can experimentally find the asymptotic directions by holding a pencil to the surface. Rotating around the tangency point, the pencil will eventually collide with the surface. This direction is the asymptotic direction. Rotating the other way, you can find the other asymptotic direction. There are always 2 asymptotic directions through every point with negative curvature. 
+Notice that asymptotic lines only exist when the surface looks like a saddle or a plane, i.e the curvature is $\leq 0$. You can experimentally find the asymptotic directions by holding a pencil to the surface. Rotating around the tangency point, the pencil will eventually collide with the surface, pointing along the asymptotic direction.  Rotating the other way, you can find the other asymptotic direction. There are always 2 asymptotic directions through every point with negative curvature. 
 
 <div class="card my-4 shadow-sm" style="max-width: 600px; margin: auto;">
   <img src="/assets/ihp/wunderlich/figures/pencil.jpeg" alt="A saddle shape with a pencil on top. It lies tangent to the surface, facing along an asymptotic line." class="card-img-top" >
@@ -202,8 +235,7 @@ Notice that asymptotic lines only exist when the surface looks like a saddle or 
   </div>
 </div>
 
-All together, Wunderlich's web is a discrete approximation to a Chebyshev net (equal length constraint), such that every grid line is an asymptotic line (planar constraint).  In the infinitesimal world, the torsion is the rate of change of the normal vector as you walk along a curve. By our derivation in the first section, the torsion for this chebyshev net is constant.  But, we can compute the curvature of a surface from the torsion of an asymptotic line! 
-Therefore, constant torsion implies constant negative curvature, and Wunderlich's web has constant negative curvature.
+All together, Wunderlich's web is a discrete approximation to a Chebyshev net (equal length constraint), such that every grid line is an asymptotic line (planar constraint). Such a chebyshev net exists if and only if your surface is a pseudosphere. In the infinitesimal world, the torsion is the rate of change of the normal vector as you walk along a curve. By our derivation in the first section, the torsion for this chebyshev net is constant.  But, we can compute the curvature of a surface from the torsion of an asymptotic line!  Therefore, constant torsion implies constant negative curvature, and Wunderlich's web has constant negative curvature.
 
 To see the curvature from the torsion, we model a surface locally as a spiral staircase. Every nonpositive curvature surface is (to second order) a quadratic surface. For a quadratic, the asymptotic lines are actually lines in $\RR^3$. The two sets of asymptotic lines make the quadratic a doubly ruled surface. Along one asymptotic line, the other lines are arranged in a "spiral staircase" rotating around the given line. The normal vectors rotate at the same rate as these lines. Spin the lines around faster, and get a larger gaussian curvature. I imagine we can make this argument precise if need be.
 
@@ -217,17 +249,17 @@ To see the curvature from the torsion, we model a surface locally as a spiral st
 </div>
 
 
+
+<div id="hilbert"></div>
+
 ## Hilbert's hyperbolic immersion theorem
 Hilbert proved that there is no complete, twice differentiable immersion of a hyperbolic plane into $\RR^3$. Let's unpack these words
 - Immersion: The hyperbolic plane may intersect itself, but it can't have any kinks. The derivative is everywhere defined
 - Complete: An embedding is complete if it is defined on the entire hyperbolic plane.
 - Twice differentiable: This is a hint that the proof relies on curvature, whose definition uses two derivatives. Nash proved later that you can embed a complete hyperbolic plane with only one derivative.
 
-You can embed patches of the hyperbolic plane, see your favorite pseudosphere. Hilbert's theorem states that if you grow your hyperbolic patch, it will always develop a singularity. For example, think of the circle at the bottom of a standard pseudosphere, which is not differentiable. This won't surprise anyone whose made a model of the hyperbolic plane. If you have enough patience to continue out 4 or 5 layers, the object will invariably not want to exist. (Think hyperbolic crochet, weaving, etc) The internal stresses get too high. 
+You can embed patches of the hyperbolic plane, see everyones favorite pseudosphere. Hilbert's theorem states that if you grow s hyperbolic patch, it will always develop a singularity. For example, think of the circle at the bottom of a standard pseudosphere, which is not differentiable. This won't surprise anyone whose made a model of the hyperbolic plane. If you have enough patience to continue out 4 or 5 layers, the object will invariably not want to exist. (Think hyperbolic crochet, weaving, etc) The internal stresses get too high. 
 
-Hilberts theorem is somewhat subtle. You can embed patches of arbitrarly large area, by modifying the standard pseudospere. Yet, no individual embedding is complete. 
+Hilberts proof of his embedding theorem relied on the Chebyshev nets derived from constant negative curvature surfaces. If we had a complete surface, then we would have a complete Chebyshev net. There is NO complete Chebyshev net of constant negative curvature. This is apparent from Wunderlich's web. When you twist too far, the web always has angles which go to zero. These are singularities on the associated pseudosphere. Hence, there can be no complete pseudosphere.
 
-
-DISCUSS ASYMPTOTIC  LINES  AND WHAT THEY LOOK LIKE (THEY CRASH INTO THEMSEVES)
-SAY HOW ASYMPTOTIC LIENS CRASHING IMPLIES ITS NOT AN EMBEDDING
-ADD LINKS TO CHEBYSHEV AND WUNDERLICH PAPER
+At some point, I'll come back and elaborate on this. To be continued!

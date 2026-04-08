@@ -33,13 +33,54 @@ document.addEventListener('DOMContentLoaded', function () {
   const allItems = Array.from(document.querySelectorAll('.project'));
   const buttons = document.querySelectorAll('.btn-group .btn');
   const paginationContainer = document.getElementById('pagination');
-
+	
   const perPage = 10;
+
   let currentPage = 1;
   let currentFilter = 'all';
   let filteredItems = [...allItems];
+  let hasUserInteracted = false;
 
-  function applyFilter(filter) {
+  // --- URL helpers ---
+function updateURL() {  
+  if (!hasUserInteracted) return; // 👈 prevent default URL pollution  
+  
+  const url = new URL(window.location);  
+  
+  if (currentFilter === 'all') {  
+    url.searchParams.delete('filter');  
+  } else {  
+    url.searchParams.set('filter', currentFilter);  
+  }  
+  
+  if (currentPage === 1) {  
+    url.searchParams.delete('page');  
+  } else {  
+    url.searchParams.set('page', currentPage);  
+  }  
+  
+  window.history.replaceState({}, '', url);  
+}
+
+  function readURL() {
+    const params = new URLSearchParams(window.location.search);
+
+    currentFilter = params.get('filter') || 'all';
+    currentPage = parseInt(params.get('page')) || 1;
+  }
+
+  // --- UI sync ---
+  function setActiveButton(filter) {
+    buttons.forEach(btn => {
+      btn.classList.remove('active');
+      if (btn.getAttribute('data-filter') === filter) {
+        btn.classList.add('active');
+      }
+    });
+  }
+
+  // --- Core logic ---
+  function applyFilter(filter, resetPage = true) {
     currentFilter = filter;
 
     if (filter === 'all') {
@@ -51,23 +92,24 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    currentPage = 1; // reset page on filter change
+    if (resetPage) currentPage = 1;
+
+    setActiveButton(filter);
     render();
+    updateURL();
   }
 
   function render() {
-    // Hide everything first
     allItems.forEach(item => item.style.display = 'none');
 
-    // Compute slice
     const start = (currentPage - 1) * perPage;
     const end = start + perPage;
     const pageItems = filteredItems.slice(start, end);
 
-    // Show current page
     pageItems.forEach(item => item.style.display = '');
 
     renderPagination();
+    updateURL();
   }
 
   function renderPagination() {
@@ -76,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (totalPages <= 1) return;
 
-    // Previous button
+    // Previous
     if (currentPage > 1) {
       const prev = document.createElement('button');
       prev.textContent = 'Previous';
@@ -88,16 +130,17 @@ document.addEventListener('DOMContentLoaded', function () {
       paginationContainer.appendChild(prev);
     }
 
-    // Page numbers
+    // Numbers
     for (let i = 1; i <= totalPages; i++) {
       const btn = document.createElement('button');
       btn.textContent = i;
       btn.className = 'btn btn-sm btn-outline-primary mx-1';
 
-     if (i === currentPage) {  
-		btn.classList.remove('btn-outline-primary');  
-		btn.classList.add('btn-primary', 'active');  
-	}
+      if (i === currentPage) {
+        btn.classList.remove('btn-outline-primary');
+        btn.classList.add('btn-primary', 'active');
+      }
+
       btn.onclick = () => {
         currentPage = i;
         render();
@@ -106,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
       paginationContainer.appendChild(btn);
     }
 
-    // Next button
+    // Next
     if (currentPage < totalPages) {
       const next = document.createElement('button');
       next.textContent = 'Next';
@@ -119,19 +162,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // Button click handling
-  buttons.forEach(button => {
-    button.addEventListener('click', function () {
-      buttons.forEach(btn => btn.classList.remove('active'));
-      this.classList.add('active');
+  // --- Button clicks ---
+buttons.forEach(button => {  
+	button.addEventListener('click', function () {  
+		hasUserInteracted = true; // 👈 mark interaction  
+		  
+		const filter = this.getAttribute('data-filter');  
+		applyFilter(filter, true);  
+	});  
+});
 
-      const filter = this.getAttribute('data-filter');
-      applyFilter(filter);
-    });
+  // --- Back/forward navigation ---
+  window.addEventListener('popstate', () => {
+    readURL();
+    applyFilter(currentFilter, false);
   });
 
-  // Initial render
-  applyFilter('all');
+  // --- Initial load ---
+  readURL();
+  applyFilter(currentFilter, false);
 });
 </script>
-  
