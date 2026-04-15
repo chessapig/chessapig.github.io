@@ -66,6 +66,10 @@
 
 //class contianing hooks for point Projection class
 class Projection {
+	constructor(options){
+		Object.assign(this, options);
+	}
+
 	setup(r){}
 
 	renderPoint(p,r){
