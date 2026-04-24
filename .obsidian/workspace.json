@@ -36,6 +36,18 @@
             }
           },
           {
+            "id": "d6d9c69598a822ff",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.12.7"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.12.7"
+            }
+          },
+          {
             "id": "6bc672a96a2c74c8",
             "type": "leaf",
             "state": {
@@ -50,7 +62,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -197,31 +209,35 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "1e4c5fedf617d2ba",
+  "active": "d6d9c69598a822ff",
   "lastOpenFiles": [
+    "_site/sketch/wherl/dice.css",
+    "sketch/wherl/dice.css",
+    "_site/sketch/wherl/wherl copy.css",
+    "sketch/wherl/wherl copy.css",
+    "_site/sketch/wherl/dice.html",
+    "sketch/wherl/dice.html",
+    "_site/sketch/wherl/index copy.html",
+    "sketch/wherl/index copy.html",
+    "_site/sketch/wherl/quantum_dice.js",
+    "sketch/wherl/quantum_dice.js",
+    "_site/sketch/wherl/sphere_selectors.js",
+    "_site/sketch/wherl/lebedev.png",
+    "sketch/wherl/lebedev.png",
+    "_site/sketch/wherl/lebedev_rgba.png",
+    "sketch/wherl/lebedev_rgba.png",
+    "sketch/wherl/lebedev_order_131 copy.png",
     "_posts/ihp/2026-03-10-normal.md",
     "_posts/ihp/2026-03-25-sun-dial.md",
     "_posts/talks/2021-04-23-Kapustin-Witten.md",
     "index.md",
     "_sass/Screenshot 2026-04-13 at 1.05.42 PM.png",
-    "_site/sketch/CP2/index.css",
-    "sketch/CP2/index.css",
-    "_site/sketch/CP2/wherl.css",
-    "sketch/CP2/wherl.css",
-    "_site/sketch/CP2/almost_toric_main.js",
-    "sketch/CP2/almost_toric_main.js",
-    "_site/sketch/CP2/ellipticCurve_main copy.js",
-    "sketch/CP2/ellipticCurve_main copy.js",
-    "_site/sketch/wherl/wherl.css",
-    "sketch/wherl/wherl.css",
     "_site/sketch/libraries/wilson/README.md",
     "_site/sketch/libraries/wilson/reset.png",
     "_site/sketch/libraries/wilson/exit-fullscreen.png",
     "_site/sketch/libraries/wilson/enter-fullscreen.png",
     "sketch/libraries/wilson/reset.png",
-    "sketch/libraries/wilson/exit-fullscreen.png",
     "sketch/libraries/wilson/README.md",
-    "sketch/libraries/wilson/enter-fullscreen.png",
     "illustration.md",
     "_posts/ihp/2026-02-16-drawing-club.md",
     "_posts/ihp/2026-02-02-tangent.md",
@@ -229,9 +245,6 @@
     "_posts/ihp/CP2/2026-02-26-curve.md",
     "_posts/ihp/2026-02-23-pseudopseudosphere.md",
     "_posts/ihp/2026-03-15-straws.md",
-    "_site/assets/ihp/sun/jumping.jpeg",
-    "assets/ihp/sun/jumping.jpeg",
-    "_site/assets/ihp/sun/label_process_2.jpeg",
     "_posts/ihp/CP2/2026-03-21-gaussian.md",
     "_posts/ihp/2026-02-15-shape.md",
     "_posts/ihp/2026-01-26-wunderlich.md",
@@ -243,7 +256,6 @@
     "ihp.md",
     "_posts/talks/2025-10-15-Segal-bargmann.md",
     "_posts/talks/2022-02-04-integrable.md",
-    "_posts/talks/2021-05-05-cobordism.md",
-    "_posts/talks/2021-11-23-topological-recursion.md"
+    "_posts/talks/2021-05-05-cobordism.md"
   ]
 }

@@ -5,6 +5,23 @@ html
 	background-color: rgb(24, 24, 24);
 }
 
+body {
+  background-color: #121212;
+  color: #f8f9fa;
+}
+
+.card {
+  background-color: #1e1e1e;
+  color: #f8f9fa;
+}
+
+.form-control,
+.form-range {
+  background-color: #2a2a2a;
+  color: #fff;
+  border-color: #444;
+}
+
 body
 {
 	-webkit-text-size-adjust: 100%;
@@ -12,10 +29,27 @@ body
 
 #wherl-canvas
 {
-	width: 100vmin;
-	height: calc(100vmin * 9 / 16);
+	width: 90vw;
+	height: calc(90vw/2);
 
-	border: 2px solid rgb(64, 64, 64);
-	padding: 2px;
-	border-radius: 18px;
+	border: 10px solid rgb(64, 64, 64);
+	padding: 0px;
+	border-radius: 0px;
+
+	margin: 0 auto;  /* centers horizontally */
+  	display: block;  /* important if it's not already block */
 }
+
+#dice-canvas
+{
+	width: 70vh;
+	height: 70vh;
+
+	border: 10px solid rgb(64, 64, 64);
+	padding: 0px;
+	border-radius: 0px;
+
+	margin: 0 auto;  /* centers horizontally */
+  	display: block;  /* important if it's not already block */
+}
+
