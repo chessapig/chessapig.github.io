@@ -16,11 +16,15 @@ function initWilson() {
 		varying vec2 uv;
 
         const int MAX_POINTS = 16;
+        #define MAX_ITERATIONS 40
+
 		
         uniform float points[32];
 		uniform vec2 worldCenter;
 		uniform vec2 worldSize;
         uniform int NUM_PTS;
+        uniform float hbar;
+        uniform float time;
         
 
         uniform sampler2D overlay;
@@ -46,48 +50,125 @@ function initWilson() {
             return p;
         }
 
-        float logDensity(vec2 z){
-            float logRho=0.;
-            for(int i = 0;i<MAX_POINTS;i++){
-                if(i<NUM_PTS){
-                    float d = length(z-getPoint(i));
-                    logRho += 2.*log(d);
-                }
-            }
-            logRho += -log(1.+pow(length(z),2.))*float(NUM_PTS);
-            return logRho;
+        // All components are in the range [0…1], including hue.
+        vec3 hsv2rgb(vec3 c)
+        {
+            vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+            vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+            return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
         }
 
+        vec3 getDensity(vec2 z){
+            float logDensity=0.;
+            vec2 gradLogDensity = vec2(0.,0.);
+            for(int i = 0;i<MAX_POINTS;i++){
+                if(i<NUM_PTS){
+                    vec2 root = getPoint(i);
+                    vec2 delta = z-root;
+                    float magSqDelta = dot(delta,delta);
+                    logDensity += 2.*log(magSqDelta)- magSqDelta/hbar;
+                    gradLogDensity += 4.*delta / magSqDelta - 2.*delta/hbar;
+                }
+            }
+            float density =  exp(logDensity);
+
+            vec2 gradDensity = gradLogDensity*pow(density,0.1);
+            return vec3(density, gradDensity); //EDIT THIS MAYBE
+        }
+
+        //takes in a point z, and outputs the time it too to reach a selector, and which selector it hit
+        vec2 flow(vec2 z){
+            float learningRate=0.01;
+            float seedSize=0.03;
+            float squareSeedSize = seedSize*seedSize;
+            float numSteps = 0.;
+            bool doBreak=false;
+            vec2 minZero = vec2(100.,-1.);
+            for(int iter=0; iter < MAX_ITERATIONS; iter++) {
+                vec2 grad = getDensity(z).yz;
+                z = z-grad*learningRate;
+                for(int i = 0;i<MAX_POINTS;i++){
+                    if(i<NUM_PTS){
+                        vec2 delta = z-getPoint(i);
+                        if(dot(delta,delta)<squareSeedSize){
+                            doBreak=true;
+                        }
+                    }
+                }
+                numSteps+=1.;
+
+                if(doBreak){break;}
+            }
+
+            if(!doBreak){
+                return vec2(100.,-1); //if never converged, return time 1000 and vertex -1
+            }
+
+            //at the end of the day, see which point im closest to
+            vec2 closestPoint = vec2(-1.,100.);
+            
+            for(int i = 0;i<MAX_POINTS;i++){
+                    if(i<NUM_PTS){
+                        vec2 delta = z-getPoint(i);
+                        float magSqDelta = dot(delta,delta);
+                        if(magSqDelta<closestPoint.y){
+                            closestPoint = vec2(float(i),magSqDelta);
+                        }
+                    }
+                }
+            
+            
+            return vec2(numSteps/float(MAX_ITERATIONS),closestPoint.x);
+           
+        }
 
         void main(void)
         { 
             
             // Normalized pixel coordinates (from 0 to 1)
             vec2 z = uv * worldSize * 0.5 + worldCenter;
-            float ld= -logDensity(z);
+            vec3 densityInfo = getDensity(z);
+            float density = densityInfo.x;
+            vec2 gradDensity = densityInfo.yz;
+
+            float ld= -log(density);
             float cutoff=1.;
             float levelSpacing=0.3;
-            float brightness=0.;
-            if(ld<cutoff){
-                brightness=ld-cutoff+1.;
-            } else {
-                //brightness=(1.5-ld)*(1.-smoothstep(levelSpacing/10.,levelSpacing/10.+0.01,abs(mod(ld,levelSpacing))));
-            }
-            brightness=(1.5-ld)*(1.-smoothstep(levelSpacing/10.,levelSpacing/10.+0.01,abs(mod(ld,levelSpacing))));
-            vec4 outputColor = vec4(vec3(brightness),1.0);
-			
-            vec2 overlayUV = 0.5*vec2(uv.x,-uv.y)+vec2(0.5,0.5);
-            vec4 overlayColor =  texture2D(overlay, overlayUV);
 
-			gl_FragColor =  mix(outputColor, overlayColor, overlayColor.a);
+            float levelSets=(-10.-ld)*(1.-smoothstep(levelSpacing/10.,levelSpacing/10.+0.01,abs(mod(ld,levelSpacing))));
+            float blob = clamp(levelSets+density*30.,0.,1.);
+            vec2 flow = flow(z);
+            float flowTime = flow.x;
+            float flowZero = flow.y;
+            vec3 flowColor;
+            if(flowZero<0.){
+                flowColor = vec3(0.);
+            } else {
+                flowColor = hsv2rgb(vec3(flowZero/float(NUM_PTS) , 0.8, 0.7 ) );
+            }
+            
+
+            float dt = 1./float(MAX_ITERATIONS);
+            float basinOutside = (1.-step(0.,1.-flowTime));
+            float basinBoundries =  (1.-smoothstep(0.4,0.6,1.-flowTime))-basinOutside;
+            vec3 basinInside = flowColor;
+            
+            (1.-smoothstep(0.4,0.6,1.-flowTime))-basinOutside;
+             
+    
+            vec3 outputColor = vec3(basinBoundries)+ basinInside;
+			
+			gl_FragColor =  vec4(outputColor,1.);
         }
 	`;
 
-    let numPts=5;
+    let numPts=10;
     let draggableInit = [];
+    let radius = 1;
     for(let i=0;i<numPts;i++){
-        draggableInit.push(i*0.1); //x coordinate
-        draggableInit.push(0);     // y coordinate
+        let theta = 2*3.14159*i/numPts;
+        draggableInit.push(radius*math.cos(theta)); //x coordinate
+        draggableInit.push(radius*math.sin(theta));     // y coordinate
     }
     let draggableJson={};
     for (let i = 0; i < numPts; i++) {
@@ -108,7 +189,9 @@ function initWilson() {
             worldCenter: [0, 0],
             worldSize: [2, 2],
             NUM_PTS: numPts,
-            points: draggableInit
+            points: draggableInit,
+            hbar: 1,
+            time:1,
         },
         canvasWidth: resolution,
          onResizeCanvas: () => {
@@ -180,7 +263,8 @@ function initWilson() {
         });
         wilson.setUniforms({
             worldCenter: [wilson.worldCenterX, wilson.worldCenterY],
-            worldSize: [wilson.worldWidth, wilson.worldHeight]
+            worldSize: [wilson.worldWidth, wilson.worldHeight],
+            time: (Date.now()/1000)%1
         });
         wilson.drawFrame();
         

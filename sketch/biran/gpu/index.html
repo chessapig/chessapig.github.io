@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Rubik&family=Sofia&family=Bree+Serif&family=Roboto+Slab&family=Oswald&display=swap"rel="stylesheet">
+
+	<script language="javascript" type="text/javascript" src="../../libraries/p5.min.js"></script>
+	<script src="../../libraries/myHelpers/graphicsWindow.js"></script>
+	<script src="../../libraries/myHelpers/complex.js"></script>
+	<script src="../../libraries/myHelpers/selector.js"></script>
+	<script src="../../libraries/myHelpers/polynomial.js"></script>
+	<script src="biran_gpu.js"></script>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="biran_gpu.css">
+	
+</head>
+
+<body>
+	
+	<div style="width: 100%; display: flex; justify-content: center; margin-top: 100px;">
+		<div class="sketch" id="biran-canvas"></div>
+	</div>
+
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-12 col-md-9 col-lg-4">
+				<div class="card shadow-sm">
+					<div class="card-body">
+						
+						<!-- hbar Slider -->
+						<label for="hbarSlider" class="form-label">Area of each region: <span id="hbarLabel">1</span></label>
+						<input type="range" class="form-range" id="hbarSlider" min="0" max="2" step="0.01" defaultUIState>
+
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

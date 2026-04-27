@@ -52,8 +52,19 @@ class Selector{
         }
         return this.isPressed;
     }
-
     onPressed(){} //modify in lower classes to do extra things when button is pressed
+
+    doubleClicked(){
+        // Did I double click on this object
+        let didDoubleClick=false;
+        if (this.rollover && !this.hidden) {
+            didDoubleClick=true;
+            this.onDoubleClicked();
+        }
+        return didDoubleClick
+    }
+
+    onDoubleClicked(){} //modify in lower classes to do extra things when button is double clicked
 
     released(){
         this.onReleased();
@@ -394,7 +405,8 @@ class ComplexDragger extends Selector {
             drawRatio: 1,
             doConstrain: false,
             xRange: [-1,1],
-            yRange: [-1,1]
+            yRange: [-1,1],
+            isDoubleClicked: false
 		};
 		options=Object.assign({}, defaults, options); 
 
@@ -417,6 +429,10 @@ class ComplexDragger extends Selector {
             this.y = this.mouse.y + this.offset.y;
         }
         
+    }
+
+    onDoubleClicked(){
+        this.isDoubleClicked=true;
     }
 
     draw(ctx){
@@ -450,18 +466,36 @@ class ComplexDragger extends Selector {
 
 }
 
-//select complex number on Riemann sphere
+//select point on 3 sphere
 class SphereSelector extends ComplexDragger{
-    constructor(z,options){
-        const defaults = {
-            z: z,
-            camera: new Camera3D(),
-            hidden: false,
-		};
+    constructor(input,options){ //input either complex number or 3-vector
+        let defaults
+        let sphereInput = (input.z !=  null);
+        if(sphereInput){
+            defaults = {
+                sphere: input,
+                z: Complex.zero(),
+                camera: new Camera3D(),
+                hidden: false,
+            };
+        } else {
+            defaults = {
+                sphere: createVector(0,0,0),
+                z: new Complex(input.x,input.y),
+                camera: new Camera3D(),
+                hidden: false,
+            };
+        }
 		options=Object.assign({}, defaults, options); 
 
-        super(z.x,z.y,options);
+        super(0,0,options);
         
+
+        if(sphereInput){
+            this.sphereToComplex();
+        } else {
+            this.complexToSphere();
+        }
         this.update();
     }
 
@@ -471,10 +505,11 @@ class SphereSelector extends ComplexDragger{
                 2*z.y/(1+z.abs2()),
                 1-2/(1+z.abs2())
             );
+        this.sphere = sphere;
         return sphere;
     }
 
-    sphereToWorld(sphere = this.complexToSphere()){
+    sphereToWorld(sphere = this.sphere){
         let [xBasis, yBasis,view] = this.camera.getFrame();
         return createVector(
                 xBasis.dot(sphere),
@@ -502,6 +537,8 @@ class SphereSelector extends ComplexDragger{
         let sphere = xBasis.mult(world.x)
                     .add(yBasis.mult(world.y))
                     .add(view.mult(sqrt(sphereHit)));
+        this.sphere = sphere;
+
         return sphere;
     }
 
@@ -510,7 +547,7 @@ class SphereSelector extends ComplexDragger{
         this.sphereToComplex(this.worldToSphere(world));
     }
 
-    sphereToComplex(sphere = this.worldToSphere()){
+    sphereToComplex(sphere = this.sphere){
         if(!sphere){return false;}
         let z = createVector(sphere.x/(1-sphere.z),sphere.y/(1-sphere.z));
         this.z.x= z.x;
@@ -519,12 +556,13 @@ class SphereSelector extends ComplexDragger{
     }
 
     update(mouse){
-        let sphere = this.complexToSphere(); //store the 3D position
-        let world = this.sphereToWorld(sphere);
+        //let sphere = this.complexToSphere(); //store the 3D position
+        let world = this.sphereToWorld();
+       
         this.x = world.x;
         this.y = world.y;
         this.hidden = world.z<0; 
-
+        
         let didUpdate = false;
         if(mouse){
             didUpdate = super.update(mouse); //changes world cordinates with mouse
@@ -533,7 +571,6 @@ class SphereSelector extends ComplexDragger{
             }
         }
         this.sphereToComplex(sphere); //use 3D position to recompute the complex position
-        
         return didUpdate;
     }
     
@@ -557,7 +594,11 @@ class SphereSelector extends ComplexDragger{
     }
 
     value(){
-        return this.z;
+        return this.sphere;
+    }
+
+    valueComplex(){
+        return this.sphereToComplex();
     }
 
     getUniform(){

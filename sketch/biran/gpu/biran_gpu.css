@@ -27,23 +27,11 @@ body
 	-webkit-text-size-adjust: 100%;
 }
 
-#wherl-canvas
+
+#biran-canvas
 {
-	width: 90vw;
-	height: calc(90vw/2);
-
-	border: 10px solid rgb(64, 64, 64);
-	padding: 0px;
-	border-radius: 0px;
-
-	margin: 0 auto;  /* centers horizontally */
-  	display: block;  /* important if it's not already block */
-}
-
-#dice-canvas
-{
-	width: 85vw;
-	height: calc(85vw/2);
+	width: 70vh;
+	height: 70vh;
 
 	border: 10px solid rgb(64, 64, 64);
 	padding: 0px;

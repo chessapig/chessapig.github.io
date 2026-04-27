@@ -27,28 +27,49 @@
 <body>
 	<div class="sketch" id="dice-canvas"></div>
 
-	<div class="container mt-5">
-		<div class="row justify-content-center">
-			<div class="col-12 col-md-9 col-lg-4">
-				<div class="card shadow-sm">
-					<div class="card-body">
-						
-						<!-- Degree Slider -->
-						<label for="roundnessSlider" class="form-label">Roundness: <span id="roundnessLabel">0.5</span></label>
-						<input type="range" class="form-range" id="roundnessSlider" min="0" max="1" step="0.01" defaultUIState>
 
-						<!-- Real Coefficients Checkbox -->
-						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" id="doPolarBox" checked="true">
-							<label class="form-check-label" for="toggleRealCoeff">Draw dice</label>
-						</div>
+	<div class="row mb-3 justify-content-center">
+		<!-- LEFT CARD -->
+		<div class="col-md-5 mb-2">
+			<div class="card shadow-sm">
+				<div class="card-body">
+					<h5 class="card-title">Basins of attractions</h5>
 
+					<!-- Flow time  Slider -->
+					<label for="timeSlider" class="form-label">Flow time: <span id="timeLabel">0.5</span></label>
+					<input type="range" class="form-range" id="timeSlider" min="0" max="1" step="0.001" defaultUIState>
 
-
+					<!-- Do marble Checkbox -->
+					<div class="form-check form-switch">
+						<input class="form-check-input" type="checkbox" id="doMarbleBox" checked="true">
+						<label class="form-check-label" for="doMarbleBox">Marble sphere?</label>
 					</div>
 				</div>
 			</div>
 		</div>
+
+		<!-- RIGHT CARD -->
+		<div class="col-md-5 mb-2">
+			<div class="card shadow-sm">
+				<div class="card-body">
+					<h5 class="card-title">Dice</h5>
+
+					<!-- Roundness Slider -->
+					<label for="roundnessSlider" class="form-label">Roundness: <span
+							id="roundnessLabel">0.5</span></label>
+					<input type="range" class="form-range" id="roundnessSlider" min="0" max="1" step="0.01"
+						defaultUIState>
+
+					<!-- Polar Checkbox -->
+					<div class="form-check form-switch">
+						<input class="form-check-input" type="checkbox" id="doPolarBox" checked="true">
+						<label class="form-check-label" for="doPolarBox">Draw dice</label>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
 	</div>
 </body>
 

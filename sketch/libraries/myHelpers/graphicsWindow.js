@@ -101,6 +101,12 @@ class GraphicsWindow {
 
 
 	transformCoords() {
+		this.baseTransformCoords()
+		this.cameraTransform();
+	}
+
+	//coordinate transform with no frills. To be accesssed by subclasses
+	baseTransformCoords(){
 		this.g.resetMatrix();
 		let h = this.pixels;
 		if (this.g._renderer.isP3D) { //IF WEBGLMODE: 
@@ -109,8 +115,6 @@ class GraphicsWindow {
 			this.g.translate(h / 2, h / 2);
 			this.g.scale(h / 2, h / 2);
 		}
-
-		this.cameraTransform();
 	}
 
 	cameraTransform(){} //hook to be changed for camera subclasses
@@ -171,7 +175,9 @@ class GraphicsWindow {
 						minDistanceSelector = s
 					}
 				}
-				didPress = minDistanceSelector.pressed(); //only press the closest selector. 
+				if(minDistanceSelector){
+					didPress = minDistanceSelector.pressed(); //only press the closest selector. 
+				}
 				break;
 		}
 		return didPress;
@@ -182,6 +188,16 @@ class GraphicsWindow {
 			s.released();
 		}
 	}
+
+	doubleClicked(mouseX,mouseY){
+		if(!this.screenToLocal(mouseX,mouseY).isInside){return false;}
+		let didDoubleClickSelector = false;
+		for (let s of this.selectors) {
+			didDoubleClickSelector =  s.doubleClicked() || didDoubleClickSelector;
+		}
+		return didDoubleClickSelector;
+	}
+
 
 	scroll(delta) {
 		let didScroll=false;
@@ -245,7 +261,8 @@ class GraphicsWindow {
 				values.push(...this.defaultSelectorValueUniform);
 			}
 		}
-		this.uniforms.selectorValues=values; 		
+		this.uniforms.selectorValues=values; 	
+		return values;	
 	}
 
 	updateShader(){
@@ -371,6 +388,7 @@ class Camera2D {
 			dZoom : 0,
 			zoomRange:[0.1,10],
 			drag : 0.9,
+			disablePan: false,
 		};
 
 		Object.assign(this, defaults, options);
@@ -425,6 +443,7 @@ class Camera2D {
 		let oldX = this.x;
 		let oldY = this.y;
 		let oldZoom = this.zoom;
+		let eps = 1e-6;
 
 		let z0 = this.zoomLevel(this.zoom);
 
@@ -433,6 +452,11 @@ class Camera2D {
 		this.zoom = constrain(this.zoom,
 					this.inverseZoomLevel(this.zoomRange[0]),
 					this.inverseZoomLevel(this.zoomRange[1]))
+		if(Math.abs(this.zoom - oldZoom) > eps){
+			this.didUpdate = true;
+		}
+
+		if(this.disablePan){return true;}
 
 		let z1 = this.zoomLevel(this.zoom);
 
@@ -445,11 +469,10 @@ class Camera2D {
 		this.x = mx- s * (mx - this.x);
 		this.y = my - s * (my - this.y);
 
-		let eps = 1e-6;
+		
 		if (
 			Math.abs(this.x - oldX) > eps ||
-			Math.abs(this.y - oldY) > eps ||
-			Math.abs(this.zoom - oldZoom) > eps
+			Math.abs(this.y - oldY) > eps
 		) {
 			this.didUpdate = true;
 		}
@@ -457,6 +480,7 @@ class Camera2D {
 
 	//takes mouse position and previous mouse position
 	dragged(dMouseX, dMouseY){
+		if(this.disablePan){return false;}
 		this.dx = dMouseX;
 		this.dy = dMouseY;
 	}
@@ -487,7 +511,7 @@ class Camera3D extends Camera2D {
             rotation: Quaternion.identity(),
             dPanAngle: 0,   // Momentum for horizontal rotation
             dTiltAngle: 0,  // Momentum for vertical rotation
-            dragMode: "ROTATE" // "ROTATE" or "PAN"
+            dragMode: "ROTATE", // "ROTATE" or "PAN"
         };
         Object.assign(this, defaults, options);
     }
@@ -585,7 +609,7 @@ class Camera3D extends Camera2D {
                 break;
             
             case "PAN":
-                super.dragged(dx, dy);
+				super.dragged(dx, dy);
                 break;
         }
     }
@@ -615,7 +639,60 @@ class Camera3D extends Camera2D {
 
 
 
-class SphereWindow extends GraphicsWindowCamera{
+
+
+//may different 2D selectors, which can be created and destroyed
+class DraggerWindow extends GraphicsWindowCamera{
+    constructor(options={}){
+
+        super(options);
+    }
+
+    cameraTransform(){ 
+        let zoom = this.camera.zoomLevel();
+        for(let s of this.selectors){
+            s.setRadius(min(0.1/zoom,0.1));
+        }
+        super.cameraTransform();
+	}
+
+    doubleClicked(mouseX=0,mouseY=0){
+        let didDoubleClickSelector = super.doubleClicked();
+        let mousePos= super.screenToLocal(mouseX,mouseY)
+		if(!mousePos.isInside){return false;}
+        if(didDoubleClickSelector){ //delete closest selector
+            let closetSelector = { //stores index in first variable and distance in second
+                index: -1,
+                distance: 10000
+            }; 
+            for(let i=0; i< this.selectors.length; i++){
+                let s = this.selectors[i];
+                if(s.isDoubleClicked){
+                    let offset = createVector(s.x-mousePos.x,s.y-mousePos.y);
+                    let distance = offset.magSq();
+                    if(distance<closetSelector.distance){
+                        closetSelector.index = i;
+                        closetSelector.distance = distance;
+                    }
+                    s.isDoubleClicked=false;
+                }
+            }
+            if(closetSelector.index>=0){ //now delete this index
+                this.selectors.splice(closetSelector.index,1);
+            }
+        } else {
+            if(this.selectors.length<this.MAX_SELECTORS){
+                this.selectors.push(this.generateSelectorDoubleClick(mousePos));
+            }
+        }
+    }
+
+	generateSelectorDoubleClick(mousePos){
+		return new ComplexDragger(mousePos.x,mousePos.y);
+	}
+}
+
+class SphereWindow extends DraggerWindow{
     constructor(options={}){
         super(options);
     }
@@ -640,5 +717,14 @@ class SphereWindow extends GraphicsWindowCamera{
         for(let s of this.selectors){
             s.setRadius(min(0.1/zoom,0.1));
         }
+	}
+
+	generateSelectorDoubleClick(mousePos){
+		let s =  new SphereSelector({
+			z: new Complex(0,1),
+			camera: this.camera
+		});
+
+		s.worldToComplex(mousePos)
 	}
 }
