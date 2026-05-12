@@ -1,6 +1,254 @@
 const FRG = '#E6CFB3'; //background color
 const BKG = '#2c2621'; //foreground color
 
+const commonFunctions = `
+// All components are in the range [0…1], including hue.
+// OKLab → linear sRGB
+vec3 oklab_to_linear_srgb(vec3 c) {
+    float L = c.x;
+    float a = c.y;
+    float b = c.z;
+
+    float l = L + 0.3963377774*a + 0.2158037573*b;
+    float m = L - 0.1055613458*a - 0.0638541728*b;
+    float s = L - 0.0894841775*a - 1.2914855480*b;
+
+    l = l*l*l;
+    m = m*m*m;
+    s = s*s*s;
+
+    return vec3(
+        +4.0767416621*l - 3.3077115913*m + 0.2309699292*s,
+        -1.2684380046*l + 2.6097574011*m - 0.3413193965*s,
+        -0.0041960863*l - 0.7034186147*m + 1.7076147010*s
+    );
+}
+
+// linear → display (gamma approx)
+vec3 linear_to_srgb(vec3 c) {
+    return pow(max(c, 0.0), vec3(1.0/2.2));
+}
+
+// "HSV-like" in OKLab
+vec3 oklab_hsv(vec3 c) {
+    float h = c.x; // 0–1
+    float s = c.y; // chroma
+    float v = c.z; // lightness
+
+    float angle = 6.28318530718 * h;
+
+    float L = v;
+    float a = s * cos(angle);
+    float b = s * sin(angle);
+
+    vec3 rgb = oklab_to_linear_srgb(vec3(L, a, b));
+    return linear_to_srgb(rgb);
+}
+
+
+
+//first 3 entries contain gradient, last contains density
+vec4 density(vec3 sphere) {
+    float log2Density = 0.0;
+    vec3 gradLogDensity = vec3(0.0);
+
+    // OPTIMIZATION 1: Remove the internal branch
+    for(int i = 0; i < MAX_SELECTORS; i++) {
+        if(i >= numSelectors) break;
+
+        // OPTIMIZATION 2: Single fetch
+        vec4 selector = selectorValues[i];
+        vec3 root = selector.xyz;
+        float weight = selector.w;
+        
+        vec3 delta = sphere - root;
+        float magSqDelta = dot(delta, delta);
+
+        // Optional: Uncomment the next line to prevent NaN/Inf explosions 
+        // if a 'sphere' point ever perfectly aligns with a 'root' point.
+        // magSqDelta = max(magSqDelta, 1e-8);
+
+        // OPTIMIZATION 3: Use native base-2 logarithms
+        log2Density += log2(magSqDelta) * (weight * 0.5);
+        gradLogDensity += delta * (weight / magSqDelta);
+    }
+
+    // Project off the sphere direction
+    gradLogDensity -= dot(gradLogDensity, sphere) * sphere;
+
+    // OPTIMIZATION 4: Use native base-2 exponential
+    float finalDensity = exp2(log2Density) * normalization;
+    vec3 gradDensity = gradLogDensity * finalDensity;
+    
+    return vec4(gradDensity, finalDensity);
+}
+
+vec3 worldToSphere(vec2 world , vec3 frame[3]){
+    vec3 xBasis = frame[0];
+    vec3 yBasis = frame[1];
+    vec3 view = frame[2];
+    
+    vec3 sphere = xBasis*world.x + yBasis*world.y + sqrt(1.-dot(world,world))*view;
+    sphere=normalize(sphere);
+    return sphere;
+}
+
+
+//   transports frame from frameZ to sphere. 
+void transportFrameToPoint(vec3 sphere, vec3 frame[3], out vec3 result[3]) {
+    // Compute the "rotation" that sends frameZ -> p
+    vec3 frameX = frame[0];
+    vec3 frameY = frame[1];
+    vec3 frameZ = frame[2];
+    vec3 u = frameZ + sphere;               // safe since not antipodal
+    float invDenom = 2.0 / dot(u, u);       // = 1 / (1 + dot(frameZ, p))
+
+    // Transport the tangent vectors
+    vec3 resultX = frameX - dot(frameX,u) * invDenom * u;
+    resultX = normalize(resultX - sphere * dot(sphere, resultX));
+    vec3 resultY = cross(sphere, resultX);
+
+    result[0] = resultX;
+    result[1] = resultY;
+    result[2] = sphere;
+}
+
+void getNearbyPoints(
+    vec3 sphere,
+    vec3 tangentFrame[3],
+    float radius,
+    out vec3 p0,
+    out vec3 p1,
+    out vec3 p2
+){
+    vec3 dx = tangentFrame[0] * radius;
+    vec3 dy = tangentFrame[1] * radius;
+
+    const float s32 = 0.86602540378;
+
+    // Placed 120 degrees apart to form an equilateral triangle
+    p0 = normalize(sphere + dx);
+    p1 = normalize(sphere - 0.5 * dx + s32 * dy);
+    p2 = normalize(sphere - 0.5 * dx - s32 * dy);
+}
+    
+//returns the index and distance nearst selector
+vec2 closestRoot(vec3 sphere){
+    vec3 closest = vec3(-1.,100.,100.); // first coordinate contains index, second the squared distance, third the weighted distance
+    for(int i = 0;i<MAX_SELECTORS;i++){
+        if(i<numSelectors){
+            vec3 root = selectorValues[i].xyz;
+            float weight = selectorValues[i].w;
+            vec3 delta = sphere-root;
+            float magSq = dot(delta,delta);
+            float weightedMagSq = magSq/weight;
+            if(weightedMagSq <closest.z){  //divide by weight to subdivide the points better
+                closest = vec3(float(i),magSq,weightedMagSq);
+            }
+        }
+    }
+    return vec2(closest.x, sqrt(closest.y) );
+}
+
+float voronoiBorder(vec3 sphere, vec3 tangentFrame[3], float borderSize){
+    vec3 p0, p1, p2;
+    getNearbyPoints(sphere, tangentFrame, borderSize, p0, p1, p2);
+
+    vec2 cell = closestRoot(p0);
+    float border = 0.0;
+   
+    if(abs(closestRoot(p1).x - cell.x) > 1e-5) border = 1.0;
+    if(abs(closestRoot(p2).x - cell.x) > 1e-5) border = 1.0;    
+
+    return border;
+}
+
+    
+
+vec3 flow(vec3 sphere, float time){
+    float dt = time/float(NUM_ITERATIONS);
+
+    vec3 nextSphere = sphere;
+    for(int i=0; i<NUM_ITERATIONS; i++){
+        vec4 myDensity = density(sphere);
+        nextSphere = normalize(sphere - dt*myDensity.xyz);
+        vec3 delta = sphere-nextSphere;
+        sphere=nextSphere;
+        if(dot(delta,delta)<0.001*dt){
+            break;
+        }
+    }
+    return sphere;
+}
+
+//first term tells us the root number. if root number is -1, then am on border. 
+vec2 flowVoronoi(vec3 sphere, vec3 tangentFrame[3], float borderSize, float time){
+    vec3 p0, p1, p2;
+    getNearbyPoints(sphere, tangentFrame, borderSize, p0, p1, p2);
+
+    vec2 cell0 = closestRoot(flow(p0, time));
+    vec2 cell1 = closestRoot(flow(p1, time));
+    vec2 cell2 = closestRoot(flow(p2, time));
+    
+    float border = 0.0;
+   
+    if(abs(cell1.x - cell0.x) > 1e-5) border = 1.0;
+    if(abs(cell2.x - cell0.x) > 1e-5) border = 1.0;    
+
+    // Average distance now divided by 3
+    float avgDist = (cell0.y + cell1.y + cell2.y) * 0.3333333;
+    
+    if(border == 0.0){
+        return vec2(cell0.x, avgDist);
+    } else {
+        return vec2(-1.0, avgDist);
+    }
+}
+
+vec3 darkColor = vec3(0.33,0.21,0.33);
+vec3 lightColor =  vec3(0.9,0.81,0.7);
+vec3 bkgColor = vec3(0.17,0.15,0.13);
+
+
+vec3 marbledBlobs(vec3 sphere,vec3 frame[3]){
+    // --------- MARBLED SPHERE ------ //  numIter= 20
+    // vec2 r = closestRoot(sphere); 
+    // vec3 startingColor = hsv2rgb(vec3( 
+    //             r.x/float(numSelectors) ,  
+    //             0.8, 
+    //             0.7* pow((1.-r.y),5.)    ) );
+    //
+        
+
+    vec3 startingColor = vec3(0.);
+    float denominator=1.;
+    float hue = 0.;
+    float lightness =0.;
+    for(int i = 0;i<MAX_SELECTORS;i++){
+        if(i<numSelectors){
+            vec3 root = selectorValues[i].xyz;
+            float weight = selectorValues[i].w;
+            vec3 delta = sphere-root;
+            float magSqDelta=dot(delta,delta); //from 0 to 1
+            float magnitude = exp(-magSqDelta*10./weight*sqrt(float(numSelectors)));
+
+            startingColor += oklab_hsv(vec3(float(i)/float(numSelectors),0.22,sqrt(magnitude)));
+
+            denominator+= magnitude;
+        }
+    }
+    hue=hue/denominator;
+    lightness= lightness/denominator;
+
+    startingColor= startingColor/denominator;
+
+    return  mix(startingColor,
+                lightColor,
+                1.-smoothstep(1.,2.,denominator)
+                );
+
+} 
+`
 
 const diceVertSrc = `#version 300 es
 
@@ -222,22 +470,89 @@ void main() {
 }
 `
 
+const diceVertSrc2 = `#version 300 es
+
+in vec3 aPosition;
+
+uniform mat4 uModelViewMatrix;
+uniform mat4 uProjectionMatrix;
+
+#define MAX_SELECTORS 32
+
+uniform vec4 selectorValues[MAX_SELECTORS];
+uniform int numSelectors;
+uniform float u_roundness;
+uniform float normSqPerPt;
+uniform bool u_doPolar;
+
+out vec3 vWorldPosition;
+out vec3 vNormal;
+
+
+//first 3 entries contain gradient, last contains density
+vec3 outputDice(vec3 sphere) {
+    float density = 1.0;
+    vec3 gradLogDensity = vec3(0.0);
+
+    for(int i = 0; i < MAX_SELECTORS; i++) {
+        if(i >= numSelectors) break;
+
+        vec4 selector = selectorValues[i];
+        vec3 root = selector.xyz;
+        float weight = selector.w;
+        
+        vec3 delta = sphere - root;
+        float magSqDelta = dot(delta, delta);
+
+        //magSqDelta = max(magSqDelta, 1e-8);
+
+        float densityContribution = pow( magSqDelta /normSqPerPt , weight);
+        density *=  densityContribution;
+        gradLogDensity += delta * (2.*weight / magSqDelta* normSqPerPt)-sphere;
+    }
+    
+    
+    vec3 outputDice = (1.-u_roundness)*gradLogDensity*density + mix(density,1.,u_roundness)*sphere;
+    
+    return outputDice;
+}
+
+void main() {
+    vec3 position = aPosition;
+    vec3 n_hat = normalize(position);
+    vNormal = n_hat;
+
+    vec3 newPosition = outputDice(n_hat); 
+    vWorldPosition = (uModelViewMatrix * vec4(newPosition, 1.0)).xyz;
+    gl_Position = uProjectionMatrix * vec4(vWorldPosition, 1.0);
+    
+}
+`
+
 const diceFragSrc = `#version 300 es
 precision highp float;
+precision highp int; // Add this!
 
 // Inputs from the vertex shader
 in vec3 vWorldPosition;
 in float vRadius;
 in vec3 vNormal;
 
+
+#define MAX_SELECTORS 32
+#define PI 3.1415926535897932384626433832795
+#define NUM_ITERATIONS 20
+
+uniform vec4 selectorValues[MAX_SELECTORS];
+uniform int numSelectors;
+uniform vec3 frame[3];
+uniform float normalization;
+
 // Output to the screen
 out vec4 fragColor;
 
 uniform mat4 uModelViewMatrix;
-
-
-
-
+` + commonFunctions + `
 void main() {
     vec3 normal = normalize(vNormal);
 
@@ -245,7 +560,7 @@ void main() {
     vec3 lightDir = normalize(inverse(mat3(uModelViewMatrix)) * worldLightPos);
     
     // Ambient light so the shadowed sides aren't pitch black
-    float ambient = 0.1;
+    float ambient = 0.2;
     
     // Diffuse lighting (Lambertian)
     // max(0.0, ...) ensures we don't get negative light on the dark side
@@ -259,11 +574,18 @@ void main() {
     // 3. Define the Material Color
     // A standard ivory/white dice color
     vec3 baseColor = vec3(0.9, 0.85, 0.8); 
-    
-    // (Optional) Color mapping based on the radius
-    // This maps smaller radii (the stable flat faces) to one color and peaks to another,
-    // which can be helpful for debugging the depth of your minimization!
-    // baseColor = mix(vec3(0.2, 0.5, 0.9), vec3(0.9, 0.2, 0.2), (vRadius ));
+
+    //Color based on face
+    vec3 tangentFrame[3];
+    transportFrameToPoint(normal, frame, tangentFrame);
+    // vec2 r = flowVoronoi(normal,tangentFrame, 0.01, 100.);
+    // if(r.x>=0.){
+    //     baseColor = oklab_hsv(vec3(r.x/float(numSelectors),0.17,0.6));
+    // } else {
+    //     baseColor = lightColor;
+    // }
+    vec3 flowSphere = flow(normal,0.2);
+    baseColor = marbledBlobs(flowSphere,tangentFrame);
 
   
     float rateOfChange = length(fwidth(normal));
@@ -296,254 +618,7 @@ uniform vec3 frame[3];
 uniform float normalization;
 uniform float flowTime;
 uniform bool doMarble;
-
-
-// All components are in the range [0…1], including hue.
-// OKLab → linear sRGB
-vec3 oklab_to_linear_srgb(vec3 c) {
-    float L = c.x;
-    float a = c.y;
-    float b = c.z;
-
-    float l = L + 0.3963377774*a + 0.2158037573*b;
-    float m = L - 0.1055613458*a - 0.0638541728*b;
-    float s = L - 0.0894841775*a - 1.2914855480*b;
-
-    l = l*l*l;
-    m = m*m*m;
-    s = s*s*s;
-
-    return vec3(
-        +4.0767416621*l - 3.3077115913*m + 0.2309699292*s,
-        -1.2684380046*l + 2.6097574011*m - 0.3413193965*s,
-        -0.0041960863*l - 0.7034186147*m + 1.7076147010*s
-    );
-}
-
-// linear → display (gamma approx)
-vec3 linear_to_srgb(vec3 c) {
-    return pow(max(c, 0.0), vec3(1.0/2.2));
-}
-
-// "HSV-like" in OKLab
-vec3 oklab_hsv(vec3 c) {
-    float h = c.x; // 0–1
-    float s = c.y; // chroma
-    float v = c.z; // lightness
-
-    float angle = 6.28318530718 * h;
-
-    float L = v;
-    float a = s * cos(angle);
-    float b = s * sin(angle);
-
-    vec3 rgb = oklab_to_linear_srgb(vec3(L, a, b));
-    return linear_to_srgb(rgb);
-}
-
-
-
-//first 3 entries contain gradient, last contains density
-vec4 density(vec3 sphere) {
-    float log2Density = 0.0;
-    vec3 gradLogDensity = vec3(0.0);
-
-    // OPTIMIZATION 1: Remove the internal branch
-    for(int i = 0; i < MAX_SELECTORS; i++) {
-        if(i >= numSelectors) break;
-
-        // OPTIMIZATION 2: Single fetch
-        vec4 selector = selectorValues[i];
-        vec3 root = selector.xyz;
-        float weight = selector.w;
-        
-        vec3 delta = sphere - root;
-        float magSqDelta = dot(delta, delta);
-
-        // Optional: Uncomment the next line to prevent NaN/Inf explosions 
-        // if a 'sphere' point ever perfectly aligns with a 'root' point.
-        // magSqDelta = max(magSqDelta, 1e-8);
-
-        // OPTIMIZATION 3: Use native base-2 logarithms
-        log2Density += log2(magSqDelta) * (weight * 0.5);
-        gradLogDensity += delta * (weight / magSqDelta);
-    }
-
-    // Project off the sphere direction
-    gradLogDensity -= dot(gradLogDensity, sphere) * sphere;
-
-    // OPTIMIZATION 4: Use native base-2 exponential
-    float finalDensity = exp2(log2Density) * normalization;
-    vec3 gradDensity = gradLogDensity * finalDensity;
-    
-    return vec4(gradDensity, finalDensity);
-}
-
-vec3 worldToSphere(vec2 world , vec3 frame[3]){
-    vec3 xBasis = frame[0];
-    vec3 yBasis = frame[1];
-    vec3 view = frame[2];
-    
-    vec3 sphere = xBasis*world.x + yBasis*world.y + sqrt(1.-dot(world,world))*view;
-    sphere=normalize(sphere);
-    return sphere;
-}
-
-
-//   transports frame from frameZ to sphere. 
-void transportFrameToPoint(vec3 sphere, vec3 frame[3], out vec3 result[3]) {
-    // Compute the "rotation" that sends frameZ -> p
-    vec3 frameX = frame[0];
-    vec3 frameY = frame[1];
-    vec3 frameZ = frame[2];
-    vec3 u = frameZ + sphere;               // safe since not antipodal
-    float invDenom = 2.0 / dot(u, u);       // = 1 / (1 + dot(frameZ, p))
-
-    // Transport the tangent vectors
-    vec3 resultX = frameX - dot(frameX,u) * invDenom * u;
-    resultX = normalize(resultX - sphere * dot(sphere, resultX));
-    vec3 resultY = cross(sphere, resultX);
-
-    result[0] = resultX;
-    result[1] = resultY;
-    result[2] = sphere;
-}
-
-void getNearbyPoints(
-    vec3 sphere,
-    vec3 tangentFrame[3],
-    float radius,
-    out vec3 p0,
-    out vec3 p1,
-    out vec3 p2
-){
-    vec3 dx = tangentFrame[0] * radius;
-    vec3 dy = tangentFrame[1] * radius;
-
-    const float s32 = 0.86602540378;
-
-    // Placed 120 degrees apart to form an equilateral triangle
-    p0 = normalize(sphere + dx);
-    p1 = normalize(sphere - 0.5 * dx + s32 * dy);
-    p2 = normalize(sphere - 0.5 * dx - s32 * dy);
-}
-    
-//returns the index and distance nearst selector
-vec2 closestRoot(vec3 sphere){
-    vec3 closest = vec3(-1.,100.,100.); // first coordinate contains index, second the squared distance, third the weighted distance
-    for(int i = 0;i<MAX_SELECTORS;i++){
-        if(i<numSelectors){
-            vec3 root = selectorValues[i].xyz;
-            float weight = selectorValues[i].w;
-            vec3 delta = sphere-root;
-            float magSq = dot(delta,delta);
-            float weightedMagSq = magSq/weight;
-            if(weightedMagSq <closest.z){  //divide by weight to subdivide the points better
-                closest = vec3(float(i),magSq,weightedMagSq);
-            }
-        }
-    }
-    return vec2(closest.x, sqrt(closest.y) );
-}
-
-float voronoiBorder(vec3 sphere, vec3 tangentFrame[3], float borderSize){
-    vec3 p0, p1, p2;
-    getNearbyPoints(sphere, tangentFrame, borderSize, p0, p1, p2);
-
-    vec2 cell = closestRoot(p0);
-    float border = 0.0;
-   
-    if(abs(closestRoot(p1).x - cell.x) > 1e-5) border = 1.0;
-    if(abs(closestRoot(p2).x - cell.x) > 1e-5) border = 1.0;    
-
-    return border;
-}
-
-    
-
-vec3 flow(vec3 sphere, float time){
-    float dt = time/float(NUM_ITERATIONS);
-
-    vec3 nextSphere = sphere;
-    for(int i=0; i<NUM_ITERATIONS; i++){
-        vec4 density = density(sphere);
-        nextSphere = normalize(sphere - dt*density.xyz);
-        vec3 delta = sphere-nextSphere;
-        sphere=nextSphere;
-        if(dot(delta,delta)<0.001*dt){
-            break;
-        }
-    }
-    return sphere;
-}
-
-//first term tells us the root number. if root number is -1, then am on border. 
-vec2 flowVoronoi(vec3 sphere, vec3 tangentFrame[3], float borderSize, float time){
-    vec3 p0, p1, p2;
-    getNearbyPoints(sphere, tangentFrame, borderSize, p0, p1, p2);
-
-    vec2 cell0 = closestRoot(flow(p0, time));
-    vec2 cell1 = closestRoot(flow(p1, time));
-    vec2 cell2 = closestRoot(flow(p2, time));
-    
-    float border = 0.0;
-   
-    if(abs(cell1.x - cell0.x) > 1e-5) border = 1.0;
-    if(abs(cell2.x - cell0.x) > 1e-5) border = 1.0;    
-
-    // Average distance now divided by 3
-    float avgDist = (cell0.y + cell1.y + cell2.y) * 0.3333333;
-    
-    if(border == 0.0){
-        return vec2(cell0.x, avgDist);
-    } else {
-        return vec2(-1.0, avgDist);
-    }
-}
-
-vec3 darkColor = vec3(0.33,0.21,0.33);
-vec3 lightColor =  vec3(0.9,0.81,0.7);
-vec3 bkgColor = vec3(0.17,0.15,0.13);
-
-
-vec3 marbledBlobs(vec3 sphere,vec3 frame[3]){
-    // --------- MARBLED SPHERE ------ //  numIter= 20
-    // vec2 r = closestRoot(sphere); 
-    // vec3 startingColor = hsv2rgb(vec3( 
-    //             r.x/float(numSelectors) ,  
-    //             0.8, 
-    //             0.7* pow((1.-r.y),5.)    ) );
-    //
-        
-
-    vec3 startingColor = vec3(0.);
-    float denominator=1.;
-    float hue = 0.;
-    float lightness =0.;
-    for(int i = 0;i<MAX_SELECTORS;i++){
-        if(i<numSelectors){
-            vec3 root = selectorValues[i].xyz;
-            float weight = selectorValues[i].w;
-            vec3 delta = sphere-root;
-            float magSqDelta=dot(delta,delta); //from 0 to 1
-            float magnitude = exp(-magSqDelta*10./weight*sqrt(float(numSelectors)));
-
-            startingColor += oklab_hsv(vec3(float(i)/float(numSelectors),0.22,sqrt(magnitude)));
-
-            denominator+= magnitude;
-        }
-    }
-    hue=hue/denominator;
-    lightness= lightness/denominator;
-
-    startingColor= startingColor/denominator;
-
-    return  mix(startingColor,
-                lightColor,
-                1.-smoothstep(1.,2.,denominator)
-                );
-
-}
+` + commonFunctions + `
 
 void main(void)
 { 
@@ -566,10 +641,10 @@ void main(void)
     if(doMarble){
         vec3 flowSphere = flow(sphere,time);
         outputColor = marbledBlobs(flowSphere,tangentFrame);
-        vec2 r = flowVoronoi(sphere,tangentFrame, 0.03, time);
-        if(r.x<0.){
-            outputColor = lightColor;
-        }
+        //vec2 r = flowVoronoi(sphere,tangentFrame, 0.03, time);
+        // if(r.x<0.){
+        //     outputColor = lightColor;
+        // }
     } else {
         vec2 r = flowVoronoi(sphere,tangentFrame, 0.01, time);
         if(r.x>=0.){
@@ -635,7 +710,7 @@ function setup() {
 
     let camera = new Camera3D({
         zoom: -0.1,
-        zoomRange:[0.3,20],
+        zoomRange:[0.001,20],
         disablePan: false
     });
 
@@ -646,16 +721,19 @@ function setup() {
         camera: camera , 
         logRange: [-1,1]
     }
-    selectors[0] = new WeightedSphereSelectors(createVector(1,0,0),             weightedSphereOptions);
-    selectors[1] = new WeightedSphereSelectors(createVector(-1,0,0),            weightedSphereOptions);
-    selectors[2] = new WeightedSphereSelectors(createVector(0,1,0),             weightedSphereOptions)
-    selectors[3] = new WeightedSphereSelectors(createVector(0,-1,0),            weightedSphereOptions)
-    selectors[4] = new WeightedSphereSelectors(createVector(0,0.001,0.9999999), weightedSphereOptions)
-    selectors[5] = new WeightedSphereSelectors(createVector(0,0,-1),            weightedSphereOptions)
-    //selectors[6] = new WeightedSphereSelectors(createVector(-1,1,0),options)
-    //selectors[7] = new WeightedSphereSelectors(createVector(0,1,-1),options)
-    //selectors[8] = new WeightedSphereSelectors(createVector(0,1,1),options)
-    //selectors[9] = new WeightedSphereSelectors(createVector(0,0,-1),options)
+    function ran(){
+        return 0.2 * (random()*2.-1.);
+    }
+    selectors.push(new WeightedSphereSelector(Object.assign({}, weightedSphereOptions, {sphere:  createVector( 1,ran(),ran())})));
+    selectors.push(new WeightedSphereSelector(Object.assign({}, weightedSphereOptions, {sphere:  createVector(-1,ran(),ran())})));
+    selectors.push(new WeightedSphereSelector(Object.assign({}, weightedSphereOptions, {sphere:  createVector(ran(), 1,ran())})));
+    selectors.push(new WeightedSphereSelector(Object.assign({}, weightedSphereOptions, {sphere:  createVector(ran(),-1,ran())})));
+    selectors.push(new WeightedSphereSelector(Object.assign({}, weightedSphereOptions, {sphere:  createVector(ran(),ran(), 1)})));
+    selectors.push(new WeightedSphereSelector(Object.assign({}, weightedSphereOptions, {sphere:  createVector(ran(),ran(),-1)})));
+    //selectors.push(new WeightedSphereSelector(Object.assign({}, weightedSphereOptions, {sphere:  createVector( 1, 1,1)})));
+    //selectors.push(new WeightedSphereSelector(Object.assign({}, weightedSphereOptions, {sphere:  createVector(-1, 1,1)})));
+    //selectors.push(new WeightedSphereSelector(Object.assign({}, weightedSphereOptions, {sphere:  createVector( 1,-1,1)})));
+    //selectors.push(new WeightedSphereSelector(Object.assign({}, weightedSphereOptions, {sphere:  createVector(-1,-1,1)})));
 
 
     basinWindow = new BasinWindow({
@@ -664,10 +742,10 @@ function setup() {
         selectors: selectors,
         camera: camera,
         fragSrc: basinFragSrc,
-        defaultSelectorValueUniform: [0,0,0,0],
+        defaultSelectorValueUniform: WeightedSphereSelector.defaultUniform(),
         drawShader: true,
         uniforms:{
-            normalization: 1,
+            normalization: 4,
             doMarble:defaultUIState.doMarble,
             flowTime: defaultUIState.flowTime,
         },
@@ -675,18 +753,21 @@ function setup() {
         multiDragType: "CLOSEST"
 	});
 
+
 	diceWindow = new DiceWindow({
 		pixels: canvasSize,
         x: 0, y: -1, width: 2,
         camera: camera,
-        vertSrc: diceVertSrc,
+        vertSrc: diceVertSrc2,
         fragSrc: diceFragSrc,
         selectorWindow: basinWindow, //get shader uniforms from this window
         uniforms:{
+            normSqPerPt: 2,
+            normalization: 4,
             u_roundness: defaultUIState.u_roundness,
             u_doPolar: defaultUIState.u_doPolar,
         },
-        sphereResolution: 200,
+        sphereResolution: 300,
         multiDragType: "CLOSEST"
 	});
 
@@ -695,7 +776,7 @@ function setup() {
 
 
 	windows = [basinWindow,diceWindow]; 
-    setupUI()
+    setupUI();
 }
 
 function setupUI(){
@@ -736,11 +817,23 @@ function setupUI(){
 }
 
 
-
+let doSave=false;
+let totalFrames;
+let initialFrame;
 
 function draw() {
 	scale(height / 2, -height / 2, height / 2) //recale to a box [-1,1]times [-1,1]
 	background(BKG);
+
+   
+    if(doSave){
+         let frame = frameCount-initialFrame-1;
+        saveAnimationFrames(basinWindow,frame,(frame+1),totalFrames);
+        if(frame >= totalFrames){
+            doSave=false;
+            frameRate(60);
+        }
+    }
 
     //basinWindow.uniforms.flowTime = (sin(frameCount/200)+1)/2;
 
@@ -750,6 +843,24 @@ function draw() {
 		w.render();
 		w.draw();
 	}
+}
+
+function saveAnimation(numFrames){
+    totalFrames = numFrames;
+    frameRate(1);
+    doSave = true;
+    initialFrame=frameCount;
+    basinWindow.uniforms.flowTime =0;
+}
+
+function saveAnimationFrames(w,startFrame, endFrame,totalFrames){
+    for(let i=startFrame; i< endFrame ; i++){
+        let t = sin((PI*i/totalFrames) / 2); //sin easing
+        let flowTime = t;
+        w.uniforms.flowTime = flowTime;
+        console.log("frame number" + i);
+        w.g.save("flow_"+i+".jpg");
+    }
 }
 
 class DiceWindow extends SphereWindow{
@@ -770,7 +881,7 @@ class DiceWindow extends SphereWindow{
         this.shaderLayer.noStroke();
         this.camera.transform(this.shaderLayer);
         this.shaderLayer.sphere(this.g.width*0.3, this.sphereResolution, this.sphereResolution);
-        super.renderShader();
+        //super.renderShader();
         
     }
 
@@ -799,6 +910,11 @@ class DiceWindow extends SphereWindow{
     }
 
     updateUniforms(){
+        let p = basinWindow.getPolynomial();
+        let norm = p.sphericalNormSq();
+        this.uniforms.normSqPerPt = pow(norm,1/basinWindow.selectors.length);
+        this.uniforms.normalization = 12./this.uniforms.numSelectors;
+        
 		this.uniforms.numSelectors = this.selectorWindow.uniforms.numSelectors;
 		this.uniforms.selectorValues = this.selectorWindow.uniforms.selectorValues
 	}
@@ -821,30 +937,27 @@ class BasinWindow extends SphereWindow{
     }
 
     generateSelectorDoubleClick(mousePos){
-		let s =  new WeightedSphereSelectors(createVector(1,0,0),
-			weightedSphereOptions
-		);
-
-		s.worldToSphere(createVector(mousePos.x,mousePos.y));
-        return s;
+		let s =  new WeightedSphereSelector(Object.assign({}, weightedSphereOptions, {world:  mousePos}));
+		if(s.sphere){
+			return s;
+		} else {
+			return false;
+		}
+		
 	}
 }
 
-class WeightedSphereSelectors extends SphereSelector{
-    constructor(sphere,options){
+class WeightedSphereSelector extends SphereSelector{
+    constructor(options){
         const defaults = {
             logWeight: 0,
             logRange: [1,1],
 		};
         options = Object.assign({}, defaults, options);
-        super(sphere,
-            options);
+        super(options);
     }
 
-    getUniform(){
-        let sphere = this.sphere;
-        return [sphere.x,sphere.y,sphere.z,this.getWeight()];
-    }
+   
 
     onScroll(delta){
         if(this.hidden){
@@ -868,8 +981,17 @@ class WeightedSphereSelectors extends SphereSelector{
         return exp(this.logWeight);
     }
 
+    getUniform(){
+        let sphere = this.sphere;
+        return [sphere.x,sphere.y,sphere.z,this.getWeight()];
+    }
 
+    static defaultUniform(){
+        return [0,0,0,0];
+    }
 }
+
+
 
 /////////////////////////
 // MOUSE INTERACTION
@@ -917,6 +1039,9 @@ function keyPressed() {
         diceWindow.multiDragType = "ALL";
         basinWindow.camera.dragMode = "PAN";
     } 
+    if(key === "s"){
+        //saveAnimation(70);
+    }
 }
 
 function keyReleased() {

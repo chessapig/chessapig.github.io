@@ -10,17 +10,10 @@ const int MAX_SELECTORS = 32;
 uniform vec2 worldCenter;
 uniform vec2 worldSize;
 uniform int numSelectors;
-uniform vec4 selectorValues[MAX_SELECTORS];
+uniform vec3 selectorValues[MAX_SELECTORS];
 uniform vec3 frame[3];
-uniform float logL2Norm;
+uniform float normSqPerSelector;
 
-
-vec2 cMult(vec2 z, vec2 w){
-    return vec2(
-        z.x*w.x - z.y*w.y,
-        z.x*w.y + z.y*w.x
-        );  
-}
 
 float gain( float x, float k ) 
 {
@@ -28,35 +21,25 @@ float gain( float x, float k )
     return (x<0.5)?a:1.0-a;
 }
 
-float logDensity(vec2 z){
-    float logRho=0.;
+float density(vec3 sphere){
+    float density=1.;
     for(int i = 0;i<MAX_SELECTORS;i++){
         if(i<numSelectors){
-            vec4 proj = selectorValues[i];
-            vec2 z0 = vec2(proj.x,proj.y);
-            vec2 z1 = vec2(proj.z,proj.w);
-            float d = length(cMult(z,z0) -z1);
-            logRho += 2.*log(d);
+            vec3 delta = sphere-selectorValues[i];
+            density *= dot(delta,delta)/normSqPerSelector;
         }
     }
-    logRho += -log(1.+pow(length(z),2.))*float(numSelectors);
-    return logRho;
+    return density;
 }
 
 
-vec2 worldToComplex(vec2 world,vec3 frame[3]){
+vec3 worldToSphere(vec3 world,vec3 frame[3]){
     vec3 xBasis = frame[0];
     vec3 yBasis = frame[1];
     vec3 view = frame[2];
-    
-    vec3 sphere = xBasis*world.x + yBasis*world.y + sqrt(1.-dot(world,world))*view;
-    sphere=normalize(sphere);
-    return vec2(sphere.x/(1.-sphere.z),sphere.y/(1.-sphere.z)); //stereographic projection
-}
 
-vec3 complexToSphere(vec2 z){
-    float K = 1.+dot(z,z);
-    return vec3(2.*z.x/K, 2.*z.y/K,1.-2./K);
+    vec3 sphere = xBasis*world.x + yBasis*world.y + world.z*view;
+    return normalize(sphere);
 }
 
 vec3 darkColor = vec3(0.33,0.21,0.33);
@@ -66,26 +49,24 @@ vec3 bkgColor = vec3(0.17,0.15,0.13);
 void main(void)
 { 
     // Normalized pixel coordinates (from 0 to 1)
-	vec2 world = worldCenter + (vTexCoord - 0.5) * worldSize;
+	vec2 uv = worldCenter + (vTexCoord - 0.5) * worldSize;
 
-    //from world coordinates to z coordinates
-    vec2 z = worldToComplex(world, frame);
-
-    //from sphere coordinates
-    vec3 sphere = complexToSphere(z);
-
-    float sphereHit = 1.-dot(world,world);
+    float sphereHit = 1.-dot(uv,uv);
+    if(sphereHit<0.){
+        gl_FragColor = vec4(vec3(0.1), 1.);
+        return;
+    }
+    vec3 world = vec3(uv,sqrt(sphereHit));
+    vec3 sphere = worldToSphere(world,frame);
     
     vec3 outputColor = bkgColor;
-    if(sphereHit>0.){
-        float logRho= logDensity(z);
-        float normalization = logL2Norm; 
-        float rho = exp(logRho-normalization);
+    if(sphereHit>0.){ 
+        float rho = density(sphere);
         float levelSpacing = 1.;
         float levelWidth=0.06;
         float blobCutoff=1.;
 
-        float diff = normalization-logRho;
+        float diff = log(rho);
         
         if(diff < blobCutoff){
             outputColor= mix(darkColor, lightColor, clamp(diff,0.,1.));
@@ -94,9 +75,8 @@ void main(void)
             outputColor= mix(outputColor, lightColor, alpha);
         }
         
-        outputColor = mix(bkgColor,lightColor,gain(rho,3.));
+        outputColor = mix(bkgColor,lightColor,(rho + gain(rho,3.))/2.);
         outputColor = mix(lightColor,outputColor , smoothstep(levelWidth,levelWidth*1.1,mod(diff,levelSpacing)/levelSpacing));
-
     } else {
         outputColor = vec3(0.1,0.1,0.1);
     }
@@ -115,33 +95,22 @@ const int MAX_SELECTORS = 32;
 #define NUM_LEBEDEV_POINTS 5294
 
 uniform int numSelectors;
-uniform vec4 selectorValues[MAX_SELECTORS];
-uniform float logL2Norm;
+uniform vec3 selectorValues[MAX_SELECTORS];
+uniform float normSqPerSelector;
 uniform vec2 iResolution;
 uniform sampler2D uLebedevTex;
 
-vec2 cMult(vec2 z, vec2 w){
-    return vec2(
-        z.x*w.x - z.y*w.y,
-        z.x*w.y + z.y*w.x
-        );  
-}
-
-float density(vec2 z){
-    float logRho=0.;
+float density(vec3 sphere){
+    float density=1.;
     for(int i = 0;i<MAX_SELECTORS;i++){
         if(i<numSelectors){
-            vec4 proj = selectorValues[i];
-            vec2 z0 = vec2(proj.x,proj.y);
-            vec2 z1 = vec2(proj.z,proj.w);
-            float d = length(cMult(z,z0) -z1);
-            logRho += 2.*log(d);
+            vec3 delta = sphere-selectorValues[i];
+            density *= dot(delta,delta)/normSqPerSelector;
         }
     }
-    logRho += -log(1.+pow(length(z),2.))*float(numSelectors);
-
-    return exp(logRho-logL2Norm); //return actual density, not the log computation
+    return density;
 }
+
 
 float unpackFloat(vec4 rgba) {
     return rgba.r +
@@ -166,20 +135,13 @@ vec3 getLebedevPt(float i) {
 
 //returns density and log of weight
 vec2 getRhoWeight(vec2 seed){
-    float index = gl_FragCoord.x + gl_FragCoord.y * iResolution.x;
+    float index = seed.x + seed.y * iResolution.x;
     if(index>=float(NUM_LEBEDEV_POINTS)){
         return vec2(0.,0.);
     }
     vec3 sphere = getLebedevPt(index);
     float logWeight = readRow(3.0, float(index));  
-
-    //stereographic projection
-    vec2 complex = vec2(
-                        sphere.x/(1.-sphere.z),
-                        sphere.y/(1.-sphere.z)
-                    ); 
-
-    return vec2( density(complex) , logWeight);
+    return vec2( density(sphere) , logWeight);
 }
 
 //input vector containing rho and the weight
@@ -199,9 +161,12 @@ vec4 encodeRhoWeight(vec2 rhoWeight) {
 }
 
 void main(void){ 
-    vec2 pixel = gl_FragCoord.xy;
-    gl_FragColor =  encodeRhoWeight( getRhoWeight(pixel) );
-    
+    //vec2 pixel = gl_FragCoord.xy;
+    //gl_FragColor =  encodeRhoWeight( getRhoWeight(pixel) );
+
+    float index = gl_FragCoord.x + gl_FragCoord.y * iResolution.x;
+    vec3 sphere = getLebedevPt(index);
+    gl_FragColor = vec4(sphere* 0.5 + 0.5, 1.0);
     }  
 `
 
@@ -214,77 +179,69 @@ const int MAX_SELECTORS = 32;
 #define PI 3.1415926535897932384626433832795
 
 uniform int numSelectors;
-uniform vec4 selectorValues[MAX_SELECTORS];
+uniform vec3 selectorValues[MAX_SELECTORS];
 uniform float iFrame;
-uniform float logL2Norm;
+uniform float normSqPerSelector; //norm square, to the power of 1/numSelectors
 
 
-//return 2d random variable uniformly distributed in (0,1)
-float random(vec2 p) {
-    vec3 p3 = fract(vec3(p.xyx) * vec3(0.1031, 0.1030, 0.0973));
+// Sine-free 1D-to-1D hash to completely scatter the frame integer
+float hash11(float p) {
+    p = fract(p * 0.1031);
+    p *= p + 63.33;
+    p *= p + p;
+    return fract(p);
+}
+
+vec3 hash23_sphere(vec2 p, float frame) {
+    // 1. Scatter the frame to break the linear chain
+    float scrambledFrame = hash11(mod(frame, 10000.0));
+
+    // 2. Pass into the 3D Hoskins Hash
+    vec3 p3 = fract(vec3(p.x, p.y, scrambledFrame) * vec3(0.1031, 0.1030, 0.0973));
     p3 += dot(p3, p3.yzx + 33.33);
-    return fract((p3.x + p3.y) * p3.z);
+    
+    // 3. Break the symmetry
+    vec2 h = fract(vec2(
+        (p3.x + p3.y) * (p3.z + 13.513),
+        (p3.x + p3.z) * (p3.y + 93.179)
+    ));
+
+    // 3.5 THE AVALANCHE STEP: Scramble the decoupled hash one final time.
+    // We multiply by large irregular scalars and wrap them again.
+    // This shatters any surviving linear correlation between X and Y.
+    h = fract(h * vec2(43.231, 71.989)); 
+    h += dot(h, h.yx + 19.19);
+    h = fract(h);
+
+    // 4. Map the uniform [0, 1) 2D hash to S^2
+    float z = h.y * 2.0 - 1.0;               
+    float a = h.x * 6.28318530718;           
+    float r = sqrt(1.0 - z * z);             
+
+    // 5. Combine into 3D Cartesian coordinates (Already length 1.0, no normalize needed)
+    return vec3(r * cos(a), r * sin(a), z);
 }
 
-vec2 cMult(vec2 z, vec2 w){
-    return vec2(
-        z.x*w.x - z.y*w.y,
-        z.x*w.y + z.y*w.x
-        );  
-}
-
-float density(vec2 z){
-    float logRho=0.;
+float density(vec3 sphere){
+    float density=1.;
     for(int i = 0;i<MAX_SELECTORS;i++){
         if(i<numSelectors){
-            vec4 proj = selectorValues[i];
-            vec2 z0 = vec2(proj.x,proj.y);
-            vec2 z1 = vec2(proj.z,proj.w);
-            float d = length(cMult(z,z0) -z1);
-            logRho += 2.*log(d);
+            vec3 delta = sphere-selectorValues[i];
+            density *= dot(delta,delta)/normSqPerSelector;
         }
     }
-    logRho += -log(1.+pow(length(z),2.))*float(numSelectors);
-
-    return exp(logRho-logL2Norm); //return actual density, not the log computation
-}
-
-//returns density and log of weight
-float getRandomRho(vec2 seed){
-    vec2 toric = vec2(
-                random(seed),
-                random(seed+vec2(1.,0.))
-            );
-
-    float theta = 2.*PI*toric.x;
-    float z = toric.y*2.-1.; //range [-1,1]
-    float r = sqrt(1.-z*z);
-
-    //toric to ambient
-    vec3 sphere = vec3( 
-                r*cos(theta),
-                r*sin(theta),
-                z
-            ); 
-    
-    //stereographic projection
-    vec2 complex = vec2(
-                        sphere.x/(1.-sphere.z),
-                        sphere.y/(1.-sphere.z)
-                    ); 
-
-    return  density(complex);
+    return density;
 }
 
 //input vector containing rho
 vec4 encodeFloat(float v) {
-    v = clamp(v, 0.0, 1.0);
+    float f = clamp(v, 0.0, 1.0);
 
-    vec4 enc = fract(v * vec4(
+    vec4 enc = fract(f * vec4(
         1.0,
         255.0,
         65025.0,
-        160581375.0
+        16581375.0
     ));
 
     enc -= enc.yzww * vec4(
@@ -298,7 +255,8 @@ vec4 encodeFloat(float v) {
 }
 
 void main(void){ 
-    gl_FragColor =  encodeFloat( getRandomRho(vTexCoord + vec2(0.,iFrame*1.618) )); 
+    gl_FragColor =  encodeFloat( density(hash23_sphere(vTexCoord, iFrame) )); 
+    //gl_FragColor = vec4(hash23_sphere(vTexCoord, iFrame)* 0.5 + 0.5, 1.0);
 }  
 
 `
@@ -308,14 +266,14 @@ const FRG = '#E6CFB3'; //background color
 const BKG = '#2c2621'; //foreground color
 const NUM_LEBEDEV_POINTS = 5294;
 
-let parent = "wherl-canvas";
+let containerId = "wherl-canvas";
 
 let wherlWindow;
 let histogramWindow;
+let sphereSelectorOptions;
 let histogram;
 let windows = [];
 let canvasSize;
-let gl;
 let lebedevTex;
 
 function preload() {
@@ -326,7 +284,7 @@ function preload() {
 
 function setup() {
    
-	let elem = document.getElementById(parent);
+	let elem = document.getElementById(containerId);
 	boundingRect = elem.getBoundingClientRect();
     // get computed border size
     let style = getComputedStyle(elem);
@@ -334,42 +292,95 @@ function setup() {
     let borderRight = parseFloat(style.borderRightWidth);
     let canvasWidth =  boundingRect.width - borderLeft - borderRight; //sets size of canvas.
     let canvasHeight =  boundingRect.height - borderLeft - borderRight; //sets size of canvas.
-    canvasSize = canvasHeight;
-	canvas = createCanvas(canvasWidth, canvasHeight , WEBGL);
-	canvas.parent(parent);
+    canvasSize =canvasWidth/2;
+	canvas = createCanvas(canvasWidth, canvasSize , WEBGL);
+	//canvas.parent(containerId);
+
+   // THE MANUAL OVERRIDE: 
+    // Wait a tiny fraction of a second to let any other scripts finish their nonsense, 
+    // then forcefully move the canvas into the div.
+    setTimeout(() => {
+        let targetDiv = document.getElementById(containerId);
+        let myCanvas = document.getElementById("defaultCanvas0");
+        
+        if (targetDiv && myCanvas) {
+            targetDiv.appendChild(myCanvas);
+        }
+    }, 50); // 50 milliseconds is usually plenty of time
 
     let camera = new Camera3D({
         zoom: -0.1,
         zoomRange:[0.7,20]
     });
 
-    let selectors = []
-    let numSelectors=6;
-    let selectorRadius = 1;
-    for(let i=0;i<numSelectors;i++){
-        z=Complex.polar(selectorRadius,2*PI*i/numSelectors);
-        selectors.push(new SphereSelector(z,
-            { camera: camera }
-        ));
-    }
 
+
+    let selectors = []
+    // let numSelectors=6;
+    // let selectorRadius = 5;
+    // for(let i=0;i<numSelectors;i++){
+    //     z=Complex.polar(selectorRadius,2*PI*i/numSelectors);
+    //     selectors.push(new SphereSelector({ 
+    //         z: z,
+    //         camera: camera 
+    //     }));
+    // }
+    selectorOptions = {camera: camera};
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 1, 0, 0)})));
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector(-1, 0, 0)})));
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 0, 1, 0)})));
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 0,-1, 0)})));
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 0, 0.00001, 1)})));
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 0, 0,-1)})));
+
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 1, 1, 0)})));
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector(-1, 1, 0)})));
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 1, -1, 0)})));
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( -1,-1, 0)})));
+
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 1, 0, 1)})));
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector(-1, 0, 1)})));
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 1, 0, -1)})));
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( -1,0, -1)})));
+
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 0, 1, 1)})));
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 0, -1, 1)})));
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 0, 1, -1)})));
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 0, -1,-1)})));
+
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 1, 1, 1)})));
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector(-1, 1, 1)})));
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 1,-1, 1)})));
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 1, 1,-1)})));
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector(-1,-1, 1)})));
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector(-1, 1,-1)})));
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 1,-1,-1)})));
+    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector(-1,-1,-1)})));
     histogram = new Histogram({
         numBoxes:1000,
         range: [0,1],
         color: FRG,
-        drawMode: "REARRANGEMENT"
+        drawMode: "REARRANGEMENT"  //"REARRANGEMENT" or "HISTOGRAM"
     });
   
-
 	wherlWindow = new WherlWindow({
 		pixels: canvasSize,
         x: -2, y: -1, width: 2,
         selectors: selectors,
         camera: camera,
-        computePtsPerFrame: 10000,
+        computePtsPerFrame: 100000,
         histogram: histogram,
-        histogramMaxEntries: 10,
-        doLebedev: true,
+        histogramMaxEntries: 1000000000,
+        doLebedev: false,
+        doGradientFlow: false,
+        gradientFlowDt: 0.0005, //negative for contract, postive for expand
+	});
+
+    pointCloudWindow = new PointDisplayWindow(wherlWindow.randomComputeLayer,
+    {
+		pixels: canvasSize,
+        x: -2, y: -1, width: 2,
+        camera: camera,
 	});
 
     histogramWindow = new HistogramWindow({
@@ -385,7 +396,40 @@ function setup() {
 }
 
 
+class PointDisplayWindow  extends GraphicsWindowCamera{
+    constructor(pixelCanvas, options={}){
+        super(options);
+        this.pixelCanvas = pixelCanvas;
+    }
 
+    render(){
+        // Force p5 to read the shader's output into the CPU-side pixels array
+        this.pixelCanvas.loadPixels();
+        let pixels = this.pixelCanvas.pixels;
+        let ctx = this.g;
+        
+        // Set up the aesthetic for the points
+        ctx.stroke(255, 180); // White dots with a little transparency
+        ctx.strokeWeight(2);
+        
+        // Use POINTS to render the vertices efficiently
+        ctx.beginShape(POINTS);
+        
+        // Step through the pixel array (R, G, B, A)
+        for (let i = 0; i < pixels.length; i += 4) {
+            
+            // 1. Unpack the 0-255 color values back to the -1.0 to 1.0 range
+            let x = (pixels[i]     / 255.0) * 2.0 - 1.0;
+            let y = (pixels[i + 1] / 255.0) * 2.0 - 1.0;
+            let z = (pixels[i + 2] / 255.0) * 2.0 - 1.0;
+            
+            // 2. Scale by the desired visual radius and draw the point
+            ctx.vertex(x, y, z);
+        }
+        
+        ctx.endShape();
+    }
+}
 
 class Histogram{
     constructor(options={}){
@@ -600,9 +644,10 @@ class WherlWindow extends SphereWindow{
                 frame: [1,0,0,0,1,0,0,0,1],
                 logL2Norm: 0
             },
-            defaultSelectorValueUniform: [0,0,0,0],
             multiDragType: "CLOSEST",
-            doLebedev: false
+            doLebedev: false,
+            doGradientFlow: true,
+            gradientFlowDt: 0.001
 		};
         options = Object.assign({}, defaults, options);
         super(options); 
@@ -620,19 +665,35 @@ class WherlWindow extends SphereWindow{
 
     }
 
+
+
     update(){
+        
         let p = this.getPolynomial();
-        this.uniforms.logL2Norm = log(p.sphericalNormSq());
-        let didUpdate = super.update();
-        if(didUpdate){
+        let norm = p.sphericalNormSq();
+        this.uniforms.normSqPerSelector = pow(norm,1/this.selectors.length);
+        console.log(this.uniforms.normSqPerSelector);
+         if(this.doGradientFlow){
+            this.momentMapGradFlow(-this.gradientFlowDt);
+        }
+        super.update();
+        if(this.didSelectorUpdate){
             this.histogram.reset();
         }
         this.generateHistogram();
         
+        
     }
+
+    updateUniforms(){
+        super.updateUniforms();
+    }
+
+    
 
     generateHistogram(){
         if(this.histogram.numEntries>this.histogramMaxEntries){return false;}
+        
         this.runCompute();
         let computeLayer;
         if(this.doLebedev){
@@ -646,6 +707,20 @@ class WherlWindow extends SphereWindow{
             
         }
         return this.histogram;
+    }
+
+    momentMapGradFlow(dt){
+        let totalRoots = createVector(0,0,0);
+        for(let s of this.selectors){
+            totalRoots.add(s.sphere);
+        }
+        totalRoots.mult(dt);
+
+        for(let s of this.selectors){
+            s.sphere.add(totalRoots).normalize();;
+        }
+
+        this.flagSelectorUpdate =true; 
     }
 
     runCompute() {
@@ -666,7 +741,7 @@ class WherlWindow extends SphereWindow{
         // uniforms
         shader.setUniform("numSelectors", this.uniforms.numSelectors);
         shader.setUniform("selectorValues", this.uniforms.selectorValues);
-        shader.setUniform("logL2Norm", this.uniforms.logL2Norm);
+        shader.setUniform("normSqPerSelector", this.uniforms.normSqPerSelector);
 
         // draw full quad
         ctx.push();
@@ -674,21 +749,12 @@ class WherlWindow extends SphereWindow{
         ctx.noStroke();
         ctx.shader(shader); 
         ctx.rectMode(CENTER);
-        //ctx.clear();
+        ctx.clear();
 
         
         ctx.rect(0, 0, ctx.width, ctx.height);
 
         ctx.pop();
-    }
-
-    getPolynomial(){
-        let projRoots = [];
-        for(let s of this.selectors){
-            projRoots.push(s.complexToProjective());
-        }
-        this.polynomial=Polynomial.fromProjectiveRoots(projRoots);
-        return this.polynomial;
     }
 
     decode(r,g,b,a){
@@ -715,11 +781,13 @@ class WherlWindow extends SphereWindow{
         }
         
         //if not lebedev, set weight to 1 and use all bits to decode the rho
-        return [r +
+        let f =  r +
                 g / 255 +
                 b / 65025 +
-                a / 160581375,
-                1];
+                a / 160581375;
+        
+       
+        return [f,1];
                 
     }
 
@@ -736,7 +804,7 @@ class WherlWindow extends SphereWindow{
             const g = pixels[4 * i + 1];
             const b = pixels[4 * i + 2];
             const a = pixels[4 * i + 3];
-            
+   
             decode = this.decode(r, g, b, a);
             result.push(decode);
         }
@@ -748,15 +816,14 @@ function remap(x){
     return (x/255)*2-1
 }
 
-//for function G taking in a list of points on P1, computes the gradient
-function projectiveGradient(G){
-
-}
-
 
 function draw() {
 	scale(height / 2, -height / 2, height / 2) //recale to a box [-1,1]times [-1,1]
 	background(BKG);
+
+    if(frameCount>=10){
+             //noLoop();
+        }
 
 	for (let w of windows) {
         w.clear();
@@ -797,6 +864,12 @@ function mouseReleased() {
 	}
 }
 
+function doubleClicked() {
+    for (let w of windows) {
+		w.doubleClicked(mouseX, mouseY);
+	}
+}
+
 function mouseDragged() {
 	for (let w of windows) {
 		w.dragged(mouseX, mouseY, pmouseX, pmouseY);
@@ -812,6 +885,15 @@ function keyPressed() {
     if (key === ' ') {
 		wherlWindow.doLebedev = !wherlWindow.doLebedev;
         console.log("Use lebedev points  " + wherlWindow.doLebedev);
+        histogram.reset();
+    } 
+
+    if (key === 'h') {
+        if(histogram.drawMode==="REARRANGEMENT"){
+            histogram.drawMode="HISTOGRAM";
+        } else {
+             histogram.drawMode="REARRANGEMENT"
+        }
         histogram.reset();
     } 
 }

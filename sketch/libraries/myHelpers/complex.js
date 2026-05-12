@@ -14,6 +14,10 @@ class Complex {
 		return abs(this.y) < eps;
 	}
 
+	typeOf(){
+		return "complex"
+	}
+
 	display() {
 		let numDigits = 1;
 		let eps = 0.00001;

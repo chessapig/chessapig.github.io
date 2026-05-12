@@ -96,6 +96,7 @@ class GraphicsWindow {
 		this.loadShader();
 
 		this.MAX_SELECTORS = 32;
+		this.flagSelectorUpdate=false;
 		
 	}
 
@@ -214,13 +215,21 @@ class GraphicsWindow {
 			this.updateShader();
 		}
 
-		let didUpdate=false;
+		let didUpdate = false;
+		didUpdate = this.selectorUpdate();
+		return didUpdate;
+	}
+
+	selectorUpdate(){
+		this.didSelectorUpdate = this.flagSelectorUpdate;
+		this.flagSelectorUpdate = false;
 		let mouse = this.mouse();
 		mouse = createVector(mouse.x, mouse.y)
 		for (let s of this.selectors) {
-			didUpdate =  s.update(mouse) || didUpdate;
+			this.didSelectorUpdate =  s.update(mouse) || this.didSelectorUpdate;
 		}
-		return didUpdate;
+		return this.didSelectorUpdate;
+		
 	}
 
 	
@@ -261,7 +270,7 @@ class GraphicsWindow {
 				values.push(...this.defaultSelectorValueUniform);
 			}
 		}
-		this.uniforms.selectorValues=values; 	
+		this.uniforms.selectorValues=values;
 		return values;	
 	}
 
@@ -337,7 +346,9 @@ class GraphicsWindowCamera extends GraphicsWindow{
 	//return wether or not the camera updated.
 	update(){
 		this.transformCoords(); //retransform coords every update
-		return super.update() || this.camera.update();;
+		super.update();
+		this.camera.update();
+		return this.didSelectorUpdate || this.camera.update();
 	}
 
 	updateUniforms(){
@@ -682,9 +693,15 @@ class DraggerWindow extends GraphicsWindowCamera{
             }
         } else {
             if(this.selectors.length<this.MAX_SELECTORS){
-                this.selectors.push(this.generateSelectorDoubleClick(mousePos));
+				let s = this.generateSelectorDoubleClick(mousePos);
+				if(s){
+					this.selectors.push(s);
+				}
+                
             }
         }
+
+		this.flagSelectorUpdate=true;
     }
 
 	generateSelectorDoubleClick(mousePos){
@@ -694,6 +711,10 @@ class DraggerWindow extends GraphicsWindowCamera{
 
 class SphereWindow extends DraggerWindow{
     constructor(options={}){
+		const defaults = {
+            defaultSelectorValueUniform: SphereSelector.defaultUniform(),
+		};
+        options = Object.assign({}, defaults, options);
         super(options);
     }
 
@@ -709,6 +730,15 @@ class SphereWindow extends DraggerWindow{
                             ];
     }
 
+	 getPolynomial(){
+        let roots = [];
+        for(let s of this.selectors){
+            roots.push(s.getComplex());
+        }
+        this.polynomial=Polynomial.fromRootsNormalize(roots);
+        return this.polynomial;
+    }
+
     cameraTransform(){ //only use the 3D camera to keep track of view, not spin.
 		let zoom = this.camera.zoomLevel();
 		this.g.scale(zoom);
@@ -721,10 +751,15 @@ class SphereWindow extends DraggerWindow{
 
 	generateSelectorDoubleClick(mousePos){
 		let s =  new SphereSelector({
-			z: new Complex(0,1),
+			world: mousePos,
 			camera: this.camera
-		});
-
-		s.worldToComplex(mousePos)
+		}
+		);
+		if(s.sphere){
+			return s;
+		} else {
+			return false;
+		}
+		
 	}
 }

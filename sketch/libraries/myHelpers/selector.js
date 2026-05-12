@@ -468,65 +468,33 @@ class ComplexDragger extends Selector {
 
 //select point on 3 sphere
 class SphereSelector extends ComplexDragger{
-    constructor(input,options){ //input either complex number or 3-vector
-        let defaults
-        let sphereInput = (input.z !=  null);
-        if(sphereInput){
-            defaults = {
-                sphere: input,
-                z: Complex.zero(),
+    constructor(options){ //input either complex number or 3-vector
+        const defaults = {
                 camera: new Camera3D(),
                 hidden: false,
+                z: null,  //takes Complex
+                sphere: null, //takes p5vector length 3
+                world: null   //takes p5vector length 2
             };
-        } else {
-            defaults = {
-                sphere: createVector(0,0,0),
-                z: new Complex(input.x,input.y),
-                camera: new Camera3D(),
-                hidden: false,
-            };
-        }
 		options=Object.assign({}, defaults, options); 
-
         super(0,0,options);
-        
 
-        if(sphereInput){
-            this.sphereToComplex();
-        } else {
-            this.complexToSphere();
+        let didSucceed = true;
+        if(this.sphere){
+            this.sphere.normalize();
+        } else if (this.z){
+            this.setComplex(this.z);
+        } else if(this.world){
+            let didSucceed = this.setWorld(this.world);
+            
         }
-        this.update();
+        if(didSucceed){
+            this.update();
+        }
+        
     }
 
-    complexToSphere(z = this.z){
-        let sphere =  createVector(
-                2*z.x/(1+z.abs2()),
-                2*z.y/(1+z.abs2()),
-                1-2/(1+z.abs2())
-            );
-        this.sphere = sphere;
-        return sphere;
-    }
-
-    sphereToWorld(sphere = this.sphere){
-        let [xBasis, yBasis,view] = this.camera.getFrame();
-        return createVector(
-                xBasis.dot(sphere),
-                yBasis.dot(sphere),
-                view.dot(sphere) //include the z coordiante
-            )
-    }
-
-    //converts z to projective coordinates, evenly distributing the norms of the compponents around 1 in log scale
-    complexToProjective(z = this.z){
-        let multiplier =  1/sqrt(z.abs());
-        return [new Complex(multiplier) , z.copy().mult(multiplier)]
-    }
-
-    complexToWorld(z= this.z){
-        return this.sphereToWorld(this.complexToSphere(z));
-    }
+    
 
     worldToSphere(world= createVector(this.x,this.y)){
         let sphereHit = 1.-world.magSq();
@@ -537,27 +505,61 @@ class SphereSelector extends ComplexDragger{
         let sphere = xBasis.mult(world.x)
                     .add(yBasis.mult(world.y))
                     .add(view.mult(sqrt(sphereHit)));
-        this.sphere = sphere;
-
         return sphere;
     }
 
-    //sets z coordinate from world
-    worldToComplex(world = createVector(this.x,this.y)){
-        this.sphereToComplex(this.worldToSphere(world));
+    setWorld(world= createVector(this.x,this.y)){
+        let sphereHit = 1.-(world.x*world.x + world.y*world.y);
+        if(sphereHit<0){
+            return false;
+        }
+        let [xBasis, yBasis,view] = this.camera.getFrame();
+        let sphere = xBasis.mult(world.x)
+                    .add(yBasis.mult(world.y))
+                    .add(view.mult(sqrt(sphereHit)));
+        this.sphere = sphere;
+        return sphere;
     }
 
-    sphereToComplex(sphere = this.sphere){
-        if(!sphere){return false;}
-        let z = createVector(sphere.x/(1-sphere.z),sphere.y/(1-sphere.z));
-        this.z.x= z.x;
-        this.z.y=z.y;
+    getWorld(){
+        let [xBasis, yBasis,view] = this.camera.getFrame();
+        return createVector(
+                xBasis.dot(this.sphere),
+                yBasis.dot(this.sphere),
+                view.dot(this.sphere) //include the z coordiante
+            )
+    }
+
+    setComplex(z){
+        let sphere =  createVector(
+                2*z.x/(1+z.abs2()),
+                2*z.y/(1+z.abs2()),
+                1-2/(1+z.abs2())
+            );
+        this.sphere = sphere;
+        return sphere;
+    }
+
+    getComplex(){
+        let sphere = this.sphere;
+        let z = new Complex(sphere.x/(1-sphere.z),sphere.y/(1-sphere.z));
         return z;
     }
 
+    //gets nicely normalized projective coordinates
+    getProjective(){
+        let z = this.getComplex();
+        let norm = z.abs();
+        if(norm < 1e-7){
+            return  [new Complex(0) , new Complex(1) ]
+        }
+        let multiplier =  1/sqrt(norm);
+        return [new Complex(multiplier) , z.copy().mult(multiplier)]
+    }
+
+
     update(mouse){
-        //let sphere = this.complexToSphere(); //store the 3D position
-        let world = this.sphereToWorld();
+        let world = this.getWorld();
        
         this.x = world.x;
         this.y = world.y;
@@ -565,12 +567,11 @@ class SphereSelector extends ComplexDragger{
         
         let didUpdate = false;
         if(mouse){
-            didUpdate = super.update(mouse); //changes world cordinates with mouse
+            didUpdate = super.update(mouse); //changes this.x and this.y cordinates with mouse
             if(this.isPressed){
-                sphere = this.worldToSphere(); //restores new sphere value, if dragged
+                sphere = this.setWorld(); //restores new sphere value, if dragged
             }
         }
-        this.sphereToComplex(sphere); //use 3D position to recompute the complex position
         return didUpdate;
     }
     
@@ -602,8 +603,11 @@ class SphereSelector extends ComplexDragger{
     }
 
     getUniform(){
-        let proj = this.complexToProjective();
-        return [proj[0].x,proj[0].y,proj[1].x,proj[1].y];
+        return [this.sphere.x,this.sphere.y,this.sphere.z];
+    }
+
+     static defaultUniform(){
+        return [0,0,0];
     }
 
     draw(ctx){

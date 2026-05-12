@@ -24,7 +24,17 @@ class Polynomial {
         return poly;
     }
 
-    //computes norm in geometric quantization of S^2
+    //monomial is (z-r)* sqrt( 4 / (1+r^2) )
+    static fromRootsNormalize(roots){
+        let poly = new Polynomial();
+        for(let r of roots){
+            let normalization = 2/sqrt(1+r.abs2());
+            let linear = new Polynomial([r.copy().mult(-normalization), normalization]);
+            poly.mult(linear);
+        }
+        return poly;
+    }
+ 
     //scaling of the bombieri norm
     sphericalNormSq(){
         let d = this.degree
