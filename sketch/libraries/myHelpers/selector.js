@@ -406,8 +406,22 @@ class ComplexDragger extends Selector {
             doConstrain: false,
             xRange: [-1,1],
             yRange: [-1,1],
-            isDoubleClicked: false
+            isDoubleClicked: false,
+            color: "#2C7D15",
+            rolloverColor: "#a2e817",
+            pressedColor: "#e6ed1c"
 		};
+        //deduce rollover color and pressed color from color
+        if(options.color){
+            let c = color(options.color);
+            let white = color(255);
+            if(!options.rolloverColor){
+                options.rolloverColor = lerpColor(c,white,0.1);
+            }
+            if(!options.pressedColor){
+                options.pressedColor = lerpColor(c,white,0.3);
+            }
+        }
 		options=Object.assign({}, defaults, options); 
 
         super(options);
@@ -442,13 +456,13 @@ class ComplexDragger extends Selector {
         ctx.strokeWeight(2);
 
         if (this.isPressed) {
-            ctx.fill(230, 237, 28);
+            ctx.fill(this.pressedColor);
         } 
         else if (this.rollover) {
-            ctx.fill(162, 232, 23);
+            ctx.fill(this.rolloverColor);
         } 
         else {
-            ctx.fill(44, 125, 21);
+            ctx.fill(this.color);
         }
 
         ctx.circle(this.x, this.y, this.radius*this.drawRatio);

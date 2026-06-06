@@ -152,6 +152,23 @@ class Complex {
 		return this.x==z.x && this.y==z.y;
 	}
 
+	dot(z){
+		return this.x*z.x+this.y*z.y;
+	}
+
+	//returns array of both complex square roots
+	sqrt(){
+		let theta = this.arg()/2;
+		let r = sqrt(this.abs());
+		let sqrt1 = Complex.polar(r,theta);
+		let sqrt2 = sqrt1.copy().mult(-1);
+		return[sqrt1,sqrt2];
+	}
+
+	static dot(z,w){
+		return w.x*z.x+w.y*z.y;
+	}
+
 	static pow(z, n) {
 		let rad = pow(z.abs(), n);
 		let angle = z.theta() * n;

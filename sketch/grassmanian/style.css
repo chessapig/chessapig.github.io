@@ -1,0 +1,43 @@
+html
+{
+	font-family: "Rubik", sans-serif;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	background-color: rgb(24, 24, 24);
+}
+
+body {
+  background-color: #121212;
+  color: #f8f9fa;
+}
+
+.card {
+  background-color: #1e1e1e;
+  color: #f8f9fa;
+}
+
+.form-control,
+.form-range {
+  background-color: #2a2a2a;
+  color: #fff;
+  border-color: #444;
+}
+
+body
+{
+	-webkit-text-size-adjust: 100%;
+}
+
+#grassmanian-canvas
+{
+	width: 85vw;
+	height: calc(85vw/2);
+
+	border: 10px solid rgb(64, 64, 64);
+	padding: 0px;
+	border-radius: 0px;
+
+	margin: 0 auto;  /* centers horizontally */
+  	display: block;  /* important if it's not already block */
+}
+
+
