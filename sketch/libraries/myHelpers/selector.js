@@ -455,6 +455,7 @@ class ComplexDragger extends Selector {
         ctx.stroke(0);
         ctx.strokeWeight(2);
 
+
         if (this.isPressed) {
             ctx.fill(this.pressedColor);
         } 
@@ -636,13 +637,13 @@ class SphereSelector extends ComplexDragger{
         ctx.strokeWeight(3);
 
         if (this.isPressed) {
-            ctx.fill(230, 237, 28);
+            ctx.fill(this.pressedColor);
         } 
         else if (this.rollover) {
-            ctx.fill(162, 232, 23);
+            ctx.fill(this.rolloverColor);
         } 
         else {
-            ctx.fill(44, 125, 21);
+            ctx.fill(this.color);
         }
 
         ctx.circle(0,0, this.radius*this.drawRatio);

@@ -386,14 +386,16 @@ class ComplexDragger extends Selector {
 
     // dragging behavior
     onUpdate(){
+        this.x = this.mouse.x + this.offset.x;
+        this.y = this.mouse.y + this.offset.y;
         if(this.doConstrain){
-            this.x = constrain(this.mouse.x + this.offset.x,this.xRange[0],this.xRange[1]);
-            this.y = constrain(this.mouse.y + this.offset.y,this.yRange[0],this.yRange[1]);
-        } else {
-            this.x = this.mouse.x + this.offset.x;
-            this.y = this.mouse.y + this.offset.y;
-        }
-        
+            this.constrain();
+        } 
+    }
+
+    constrain(){
+        this.x = constrain(this.x,this.xRange[0],this.xRange[1]);
+        this.y = constrain(this.y,this.yRange[0],this.yRange[1]);
     }
 
     draw(ctx){

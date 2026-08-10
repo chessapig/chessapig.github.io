@@ -46,6 +46,8 @@ class Polynomial {
         return norm;
     }
 
+    
+
 
     setCoefs(coefs) {
         this.coefs = coefs;
@@ -107,6 +109,18 @@ class Polynomial {
         let newPoly = Polynomial.pow(this, k);
         this.setCoefs(newPoly.coefs);
         return this;
+    }
+
+     //finds the coherent state on P^1 centered at a point z with given degree
+    // z is class Complex, degree is integer
+    static coherentState(z,degree){
+        let zOp = z.copy().mult(-1/z.abs2()); //oppisite side of sphere is the inversion aroudn unit circle
+        let roots = [];
+        for(let n = 0; n< degree; n++){
+            roots[n] = zOp
+        }
+        
+        return this.fromRootsNormalize(roots)
     }
 
     static pow(p, k) {

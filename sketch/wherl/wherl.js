@@ -263,6 +263,7 @@ void main(void){
 
 
 const FRG = '#E6CFB3'; //background color
+const PRIMARY = "hsl(0, 71%, 49%)"; //highlight color
 const BKG = '#2c2621'; //foreground color
 const NUM_LEBEDEV_POINTS = 5294;
 
@@ -333,29 +334,7 @@ function setup() {
     selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 0, 0.00001, 1)})));
     selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 0, 0,-1)})));
 
-    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 1, 1, 0)})));
-    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector(-1, 1, 0)})));
-    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 1, -1, 0)})));
-    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( -1,-1, 0)})));
 
-    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 1, 0, 1)})));
-    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector(-1, 0, 1)})));
-    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 1, 0, -1)})));
-    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( -1,0, -1)})));
-
-    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 0, 1, 1)})));
-    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 0, -1, 1)})));
-    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 0, 1, -1)})));
-    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 0, -1,-1)})));
-
-    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 1, 1, 1)})));
-    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector(-1, 1, 1)})));
-    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 1,-1, 1)})));
-    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 1, 1,-1)})));
-    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector(-1,-1, 1)})));
-    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector(-1, 1,-1)})));
-    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector( 1,-1,-1)})));
-    selectors.push(new SphereSelector(Object.assign({}, selectorOptions, {sphere:  createVector(-1,-1,-1)})));
     histogram = new Histogram({
         numBoxes:1000,
         range: [0,1],
@@ -383,7 +362,7 @@ function setup() {
         camera: camera,
 	});
 
-    histogramWindow = new HistogramWindow({
+    histogramWindow = new WherlEntropyWindow({
         pixels: canvasSize/2,
         x: 0, y: -1, width: 2,
         histogram: histogram,
@@ -439,7 +418,8 @@ class Histogram{
             color: color(255),
             drawLabels:true,
             drawMode:"GRAPH", //options are "GRAPH" and "HISTOGRAM" and "REARRANGEMENT"
-            drawEntropy: true
+            drawEntropy: true,
+            wherlNormalization: 1
 		};
         Object.assign(this, defaults, options);
         this.reset();
@@ -448,6 +428,7 @@ class Histogram{
     reset(){
         this.histogram = new Array(this.numBoxes).fill(0);
         this.numEntries=0;
+        this.computeRearrangement();
     }
 
     include(x, weight=1){
@@ -458,6 +439,20 @@ class Histogram{
         let boxNumber = floor(value*this.numBoxes);
         this.histogram[boxNumber]+=weight;
         this.numEntries+=weight;
+    }
+
+    //produce an array showing the wherl entropy for functions of the form G_c = max(rho-c,0)
+    //this.rearrangement is already paramertized in terms of x. 
+    wherlGraph(){
+        let rearrange = this.rearrangement;
+        let entropy = Array(rearrange.length).fill(0);
+        let sum=0;
+        for(let i = this.numBoxes-1; i>=0; i--){
+            sum += rearrange[i]/this.numBoxes; //Indefinite integral of rearrange
+            entropy[i] = sum * this.wherlNormalization; //subtract off rectangle below current value
+            //We will take wherlNormalization = number of zeros + 1 (decided emphiercally).
+        }  
+        return entropy;  
     }
 
     //given function G, computes the wherl entropy using the histogram
@@ -528,6 +523,7 @@ class Histogram{
         
         //draw histogram itself
         let x,y
+        const dy = 1/this.numBoxes;
         switch(this.drawMode){
             case "GRAPH":
                 ctx.push();
@@ -547,12 +543,11 @@ class Histogram{
                 ctx.push();
                 ctx.noStroke();
                 ctx.fill(this.color);
-                ctx.rectMode(CORNERS)
-                const dx = 1/this.numBoxes;
+                ctx.rectMode(CORNERS);
                 for(let i=0;i<this.numBoxes;i++){
-                    x = i/this.numBoxes;
-                    y =  this.histogram[i]/this.numEntries*this.numBoxes/10;
-                    ctx.rect(x,0,x+dx,y);
+                    y = i/this.numBoxes;
+                    x =  this.histogram[i]/this.numEntries*this.numBoxes/10;
+                    ctx.rect(0,y,x,y+dy);
                 }
 
                 if(this.drawLabels){
@@ -569,13 +564,12 @@ class Histogram{
                 ctx.noStroke();
                 ctx.fill(this.color);
                 ctx.rectMode(CORNERS)
-                let rearrangement = this.computeRearrangement();
-                let dy = 1/this.numBoxes;
+                this.computeRearrangement();
                 for(let i=0;i<this.numBoxes;i++){
                     y = i/this.numBoxes;
-                    x = rearrangement[i];
-                    ctx.rect(0,y,x,y+dy);
-                }
+                    x = this.rearrangement[i];
+                    ctx.rect(0,y,x,y+dy);  //Draw rearrangeent, but like on its side. Inverted. Beautiful
+                } 
 
                 if(this.drawLabels){
                     ctx.translate(0.5,1);
@@ -588,12 +582,26 @@ class Histogram{
         }
 
         if(this.drawEntropy){
-            ctx.translate(0.3,1-labelSize*2);
-            ctx.scale(1,-1);
-            ctx.noStroke();
-            ctx.fill(this.color);
-            ctx.textAlign(ctx.LEFT);
-            ctx.text("Entropy " + nf(100*this.wherlEntropy(t => pow(t,3)),1,3),0,0);
+            // ctx.translate(0.3,1-labelSize*2);
+            // ctx.scale(1,-1);
+            // ctx.noStroke();
+            // ctx.fill(this.color);
+            // ctx.textAlign(ctx.LEFT);
+            // ctx.text("Entropy " + nf(100*this.wherlEntropy(t => pow(t,3)),1,3),0,0);
+
+             this.computeRearrangement();
+            ctx.push();
+            ctx.strokeWeight(2);
+            ctx.stroke(PRIMARY);
+            ctx.beginShape();
+            let entropy = this.wherlGraph();
+            for(let i=0;i<this.numBoxes;i++){
+                x =  i/this.numBoxes;
+                y =  entropy[i];
+                ctx.vertex(y,x);
+            }
+            ctx.endShape();
+            ctx.pop();
         }
 
 
@@ -603,19 +611,19 @@ class Histogram{
 
     computeRearrangement(){
         let rearrangement = new Array(this.numBoxes).fill(0);
-        //compute integral of histogram, inverted.
+        //compute integral of histogram from the top!
         for(let i=0;i<this.numBoxes;i++){
             for(let j=i;j<this.numBoxes;j++){
                 rearrangement[i]+=this.histogram[j]/this.numEntries;
             }
         }
-        return rearrangement;
+        this.rearrangement = rearrangement;
     }
 
 
 }
 
-class HistogramWindow extends GraphicsWindowCamera{
+class WherlEntropyWindow extends GraphicsWindowCamera{
     constructor(options={}){
         const defaults = {
             histogram: new Histogram(),
@@ -631,6 +639,8 @@ class HistogramWindow extends GraphicsWindowCamera{
         this.histogram.draw(this.g);
     }
 }
+
+
 
 class WherlWindow extends SphereWindow{
     constructor(options={}){
@@ -668,21 +678,29 @@ class WherlWindow extends SphereWindow{
 
 
     update(){
+
+        this.maximum = this.maximize();
+        this.deformToCoherent(this.maximum.getComplex(),0.001);
         
         let p = this.getPolynomial();
         let norm = p.sphericalNormSq();
         this.uniforms.normSqPerSelector = pow(norm,1/this.selectors.length);
-        console.log(this.uniforms.normSqPerSelector);
          if(this.doGradientFlow){
             this.momentMapGradFlow(-this.gradientFlowDt);
         }
         super.update();
+         this.histogram.wherlNormalization = this.selectors.length+1
         if(this.didSelectorUpdate){
             this.histogram.reset();
         }
         this.generateHistogram();
         
         
+    }
+
+    render(){
+        super.render();
+        this.maximum.draw(this.g);
     }
 
     updateUniforms(){
@@ -717,11 +735,38 @@ class WherlWindow extends SphereWindow{
         totalRoots.mult(dt);
 
         for(let s of this.selectors){
-            s.sphere.add(totalRoots).normalize();;
+            s.sphere.add(totalRoots).normalize(); 
         }
 
         this.flagSelectorUpdate =true; 
     }
+
+    //linearly intperpolate between this and maximum
+    deformToCoherent(z, dt){
+        let coh = Polynomial.coherentState(z, this.selectors.length);
+        let p = this.getPolynomial();
+        let valueAtZ = p.eval(z);
+        let phase = valueAtZ.mult(1/valueAtZ.abs());
+        let coherentPhase = coh.eval(z);
+        coherentPhase.mult(1/coherentPhase.abs());
+        coh.mult(coherentPhase.inverse()); //normalize phase of coh
+        p.add(coh.mult(phase.mult(dt)))
+        let newRoots = p.roots();
+        let tolerance=0.01
+        for(let j=0; j< newRoots.length; j++){
+            let r = newRoots[j];
+            for(let i=0; i< this.selectors.length; i++){
+                let s=  this.selectors[i]
+                if(s.getComplex().sub(newRoots[j]).abs()<tolerance){
+                    s.setComplex(newRoots[j]);
+                    continue;
+                }
+            }
+        }
+        this.flagSelectorUpdate =true; 
+    }
+
+
 
     runCompute() {
        let ctx, shader;
@@ -755,6 +800,91 @@ class WherlWindow extends SphereWindow{
         ctx.rect(0, 0, ctx.width, ctx.height);
 
         ctx.pop();
+    }
+
+    maximize(){
+        let polynomial=this.getPolynomial(); //get the L^2 normalized polynomial
+    
+        function density(x,y){
+            let z = new Complex(x,y);
+            let val = polynomial.eval(z).abs2();
+            let density = pow(1+x*x+y*y , -polynomial.degree)
+            return val*density; 
+        }
+
+        // ==========================================
+        // 1. Coarse Grid Search (Find the highest hill)
+        // ==========================================
+        let bestX = 0, bestY = 0;
+        let maxVal = -Infinity;
+        
+        // Logarithmic polar grid (rExp from -2 to 2 covers r=0.01 to r=100)
+        for (let rExp = -2; rExp <= 2; rExp += 0.2) {
+            let r = Math.pow(10, rExp);
+            if (rExp === -2) r = 0; // Ensure we explicitly check the origin
+            
+            let thetaSteps = r === 0 ? 1 : 36; // 10-degree increments
+            for (let i = 0; i < thetaSteps; i++) {
+                let theta = (i / thetaSteps) * TWO_PI;
+                let x = r * cos(theta);
+                let y = r * sin(theta);
+                
+                let v = density(x, y);
+                if (v > maxVal) {
+                    maxVal = v;
+                    bestX = x;
+                    bestY = y;
+                }
+            }
+        }
+
+        // ==========================================
+        // 2. Finite-Difference Gradient Ascent 
+        // ==========================================
+        let lr = 0.5;      // Initial learning rate (step size)
+        let h = 1e-6;      // Epsilon for finite differences
+        let maxIters = 100;
+        
+        for (let i = 0; i < maxIters; i++) {
+            let currentVal = density(bestX, bestY);
+            
+            // Calculate gradient via finite differences
+            let dx = (density(bestX + h, bestY) - currentVal) / h;
+            let dy = (density(bestX, bestY + h) - currentVal) / h;
+            
+            // Normalize gradient to control exact step size via `lr`
+            let gradMag = Math.sqrt(dx * dx + dy * dy);
+            if (gradMag < 1e-9) break; // We've reached the peak (gradient is zero)
+            
+            let dirX = dx / gradMag;
+            let dirY = dy / gradMag;
+            
+            // Evaluate a step in the direction of the gradient
+            let stepVal = density(bestX + lr * dirX, bestY + lr * dirY);
+            
+            // Simple backtracking line-search
+            if (stepVal > currentVal) {
+                // The step improved our value: commit the step and accelerate
+                bestX += lr * dirX;
+                bestY += lr * dirY;
+                lr *= 1.2; 
+            } else {
+                // The step overshot the peak: reject the step and slow down
+                lr *= 0.5; 
+            }
+            
+            // If the step size becomes microscopic, we are done
+            if (lr < 1e-8) break;
+        }
+
+        // Return a complex number at the maximum
+        let maxZ = new Complex(bestX, bestY);
+        
+        return new SphereSelector({
+            z: maxZ, 
+            camera: this.camera,
+            color: PRIMARY,
+        });
     }
 
     decode(r,g,b,a){
@@ -894,7 +1024,6 @@ function keyPressed() {
         } else {
              histogram.drawMode="REARRANGEMENT"
         }
-        histogram.reset();
     } 
 }
 

@@ -461,8 +461,8 @@ class Camera2D {
 		// apply zoom
 		this.zoom += -delta / 1000;
 		this.zoom = constrain(this.zoom,
-					this.inverseZoomLevel(this.zoomRange[0]),
-					this.inverseZoomLevel(this.zoomRange[1]))
+					Camera2D.inverseZoomLevel(this.zoomRange[0]),
+					Camera2D.inverseZoomLevel(this.zoomRange[1]))
 		if(Math.abs(this.zoom - oldZoom) > eps){
 			this.didUpdate = true;
 		}
@@ -496,7 +496,7 @@ class Camera2D {
 		this.dy = dMouseY;
 	}
 
-	inverseZoomLevel(z){
+	static inverseZoomLevel(z){
 		return log(z);
 	}
 

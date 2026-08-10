@@ -50,7 +50,19 @@ function setup() {
 		real: defaultUIState.realCoefs
 	})
 
-	curveRender = new CurveRenderer(curveUI.curve,{
+	// -y^2 - y + x^3-x^2-10x-20
+	let monomials = [
+		{yDeg: 2, xDeg: 0, c:-1},
+		{yDeg: 1, xDeg: 0, c:-1},
+		{yDeg: 0, xDeg: 3, c:1},
+		{yDeg: 0, xDeg: 2, c:-1},
+		{yDeg: 0, xDeg: 1, c:-10},
+		{yDeg: 0, xDeg: 0, c:-20}
+		// {yDeg: 0, xDeg: 1, c:-1}
+	]
+	let X11 = new CP2Curve(monomials);
+
+	curveRender = new CurveRenderer(X11,{
 		pixels: canvasSize,
 	 	x:0, y:-1, width:2,
 		projectionMode:defaultUIState.projectionMode

@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/talks/2026-01-20-Big-Small.md",
+                "file": "_posts/blog/2024-12-25-baubles.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-01-20-Big-Small"
+              "title": "2024-12-25-baubles"
             }
           },
           {
@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/blog/2027-06-02-eutactic.md",
+                "file": "_posts/code/2026-08-08-floer.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2027-06-02-eutactic"
+              "title": "2026-08-08-floer"
             }
           },
           {
@@ -84,7 +84,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": true
+                "autoReveal": true,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -213,39 +215,43 @@
   },
   "active": "d6d9c69598a822ff",
   "lastOpenFiles": [
-    "_site/sketch/grassmanian/style.css",
-    "sketch/grassmanian/style.css",
-    "_site/sketch/grassmanian/wherl.css",
-    "sketch/grassmanian/wherl.css",
-    "_site/blog/eutactic.html",
-    "_site/talks/torus.md",
-    "_site/sketch/grassmanian/index.html",
-    "_site/sketch/grassmanian/grassmanian.js",
-    "_site/sketch/grassmanian",
-    "sketch/grassmanian/grassmanian.js",
-    "sketch/grassmanian/index.html",
-    "sketch/grassmanian/dice.html",
+    "_site/assets/research/floer/images/inflection_orbits.png",
+    "assets/research/floer/images/inflection_orbits.png",
+    "_site/assets/research/floer/images/reeb orbits.png",
+    "assets/research/floer/images/reeb orbits.png",
+    "_site/assets/research/floer/images/inflection_freq_plot.png",
+    "assets/research/floer/images/inflection_freq_plot.png",
+    "_site/assets/research/floer/images/frequencies vs energy.png",
+    "assets/research/floer/images/frequencies vs energy.png",
+    "assets/research/floer/frequencies vs energy.png",
+    "assets/research/floer/images/quadradic_chain_complex_3.png.sb-6f1f5f95-fCGZFQ",
+    "assets/research/floer/images/quadradic_chain_complex_2.png.sb-6f1f5f95-JyRHOs",
+    "_site/assets/research/floer/images/quadradic_chain_complex_2.png",
+    "assets/research/floer/images/quadradic_chain_complex_2.png",
+    "assets/research/floer/images/pinn_figures.png.sb-6f1f5f95-TStoad",
+    "assets/research/floer/data/data_quadradic.json.sb-6f1f5f95-LzUA0f",
+    "_site/assets/research/floer/data/data_saddle.json",
+    "assets/research/floer/data/data_saddle.json",
+    "_site/assets/research/floer/data/data_saddle_v2.json",
+    "assets/research/floer/data/data_saddle_v2.json",
+    "_site/assets/research/floer/data/data.json",
+    "assets/research/floer/data/data.json",
+    "_posts/blog/2024-12-25-baubles.md",
+    "_posts/code/2026-08-08-floer.md",
     "_posts/ihp/2026-01-26-wunderlich.md",
-    "talks.md",
+    "_posts/talks/2026-01-20-Big-Small.md",
     "_posts/blog/2027-06-02-eutactic.md",
+    "_site/talks/torus.md",
+    "talks.md",
     "talks/torus.md",
     "_posts/blog/2023-02-16-Hyperbolic.md",
     "_posts/blog/2023-12-23-two sphere.md",
-    "_posts/blog/2024-12-25-baubles.md",
     "_posts/blog/2024-03-02-Fubini-Study.md",
     "_posts/blog/2025-09-01-pointless.md",
     "_posts/blog/2024-01-14-spherical-sticks.md",
     "_posts/diary/2024-05-14-32.md",
     "_posts/diary/2023-04-30-0.md",
     "_posts/code/2026-04-26-quantum-dice.md",
-    "_site/assets/images/quantum_dice.jpeg",
-    "assets/images/quantum_dice.jpeg",
-    "_site/assets/images/quantum_dice.peg.jpg",
-    "assets/images/quantum_dice.peg.jpg",
-    "_site/assets/images/quantum_dice.jpg",
-    "assets/images/quantum_dice.jpg",
-    "_site/assets/images/voronoi.png",
-    "assets/images/voronoi.png",
     "_posts/code/2024-12-16-ifs.md",
     "_posts/code/2023-05-31-binary.md",
     "_posts/crafts/2024-01-10-curvature from strips.md",
@@ -253,11 +259,7 @@
     "_posts/code/2026-04-27-quantum-dice.md",
     "_posts/code/2026-02-26-curve copy.md",
     "_posts/ihp/CP2/2026-02-26-curve copy.md",
-    "_site/sketch/wherl/lebedev.png",
-    "sketch/wherl/lebedev.png",
     "_posts/ihp/2026-03-10-normal.md",
-    "_posts/ihp/2026-03-25-sun-dial.md",
-    "_posts/talks/2021-04-23-Kapustin-Witten.md",
-    "index.md"
+    "_posts/ihp/2026-03-25-sun-dial.md"
   ]
 }
