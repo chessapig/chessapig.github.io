@@ -72,7 +72,7 @@ show_sidebar: false
 	<p>My previous research applied Higgs bundles to condensed matter physics. You can read about it  <a href="/paper/hyperbolic-band-theory">here</a>. To see other things I've thought about, check out my past <a href="/talks">talks</a>. 
      <!-- To see what I'm thinking about at this exact moment, you can peek inside my <a href="/writing/diary.html">math diary</a>.</p> -->
     <h2>Art </h2>
-    <p> I think about math very visually (hence the geometry). I try to capture mathematical objects and the feelings they illicit using digital art, which you can check out in the <a href="/gallery">gallery</a>. I also enjoy creative coding, which often has a mathematical component. See some examples in <a href="/code">code</a>. One good example is my explorations of <a href="/code/hyperbolic-string-art">hyperbolic string art</a>
+    <p> I think about math very visually (hence the geometry). I try to capture mathematical objects and the feelings they elicit using digital art, which you can check out in the <a href="/gallery">gallery</a>. I also enjoy creative coding, which often has a mathematical component. See some examples in <a href="/code">code</a>. One good example is my explorations of <a href="/code/hyperbolic-string-art">hyperbolic string art</a>
 
   <!-- </div>
 </div> -->

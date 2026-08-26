@@ -351,8 +351,8 @@ function setup() {
         histogram: histogram,
         histogramMaxEntries: 1000000000,
         doLebedev: false,
-        doGradientFlow: false,
-        gradientFlowDt: 0.0005, //negative for contract, postive for expand
+        doGradientFlow: true,
+        gradientFlowDt: 0.005, //negative for contract, postive for expand
 	});
 
     pointCloudWindow = new PointDisplayWindow(wherlWindow.randomComputeLayer,
@@ -368,6 +368,12 @@ function setup() {
         histogram: histogram,
         BKG: color(25,25,25),
         camEnabled: false,
+    })
+
+    polyWindow = new PolygonWindow({
+        pixels: canvasSize/2,
+        x: 0, y: -1, width: 2,
+        selectorWindow: wherlWindow,
     })
 
 	windows = [wherlWindow,histogramWindow]; 
@@ -640,6 +646,34 @@ class WherlEntropyWindow extends GraphicsWindowCamera{
     }
 }
 
+class PolygonWindow extends GraphicsWindowCamera{
+    constructor(options={}){
+        let camera = new Camera3D({
+            zoom:-1
+        });
+        const defaults = {
+            camera: camera,
+            selectorWindow: false,
+            
+		};
+        options = Object.assign({}, defaults, options);
+        super(options); 
+    }
+
+    render(){
+        let ctx = this.g;
+        let p = createVector(0,0,0)
+        ctx.stroke(FRG);
+        ctx.strokeWeight(4);
+        for( let s of this.selectorWindow.selectors){
+            let pNext = p.copy().add( s.getWorld()); 
+            ctx.line(p.x,p.y,p.z,pNext.x,pNext.y,pNext.z);
+            p = pNext;
+        }
+        print(p.x,p.y,p.z)
+    }
+}
+
 
 
 class WherlWindow extends SphereWindow{
@@ -680,7 +714,7 @@ class WherlWindow extends SphereWindow{
     update(){
 
         this.maximum = this.maximize();
-        this.deformToCoherent(this.maximum.getComplex(),0.001);
+        //this.deformToCoherent(this.maximum.getComplex(),0.001);
         
         let p = this.getPolynomial();
         let norm = p.sphericalNormSq();
@@ -734,8 +768,10 @@ class WherlWindow extends SphereWindow{
         }
         totalRoots.mult(dt);
 
+        let zDirection = createVector(0,0,totalRoots.z)
         for(let s of this.selectors){
-            s.sphere.add(totalRoots).normalize(); 
+            // s.sphere.add(totalRoots).normalize();  //POLYGON SPACE
+             s.sphere.add(zDirection).normalize();  //ABELIAN POLYGON SPACE
         }
 
         this.flagSelectorUpdate =true; 

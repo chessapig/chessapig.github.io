@@ -41,12 +41,24 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/code/2026-08-08-floer.md",
+                "file": "index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-08-08-floer"
+              "title": "index"
+            }
+          },
+          {
+            "id": "76d195f057d53415",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.13.7"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.13.7"
             }
           },
           {
@@ -64,7 +76,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -123,7 +135,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 361.50390243530273
+    "width": 361.50390243530273,
+    "collapsed": true
   },
   "right": {
     "id": "6ef206bcfa0f9c8a",
@@ -213,8 +226,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "d6d9c69598a822ff",
+  "active": "76d195f057d53415",
   "lastOpenFiles": [
+    "writing/index.md",
+    "diary/31.md",
+    "_posts/code/2026-08-08-floer.md",
     "_site/assets/research/floer/images/inflection_orbits.png",
     "assets/research/floer/images/inflection_orbits.png",
     "_site/assets/research/floer/images/reeb orbits.png",
@@ -227,7 +243,6 @@
     "assets/research/floer/images/quadradic_chain_complex_3.png.sb-6f1f5f95-fCGZFQ",
     "assets/research/floer/images/quadradic_chain_complex_2.png.sb-6f1f5f95-JyRHOs",
     "_site/assets/research/floer/images/quadradic_chain_complex_2.png",
-    "assets/research/floer/images/quadradic_chain_complex_2.png",
     "assets/research/floer/images/pinn_figures.png.sb-6f1f5f95-TStoad",
     "assets/research/floer/data/data_quadradic.json.sb-6f1f5f95-LzUA0f",
     "_site/assets/research/floer/data/data_saddle.json",
@@ -237,7 +252,6 @@
     "_site/assets/research/floer/data/data.json",
     "assets/research/floer/data/data.json",
     "_posts/blog/2024-12-25-baubles.md",
-    "_posts/code/2026-08-08-floer.md",
     "_posts/ihp/2026-01-26-wunderlich.md",
     "_posts/talks/2026-01-20-Big-Small.md",
     "_posts/blog/2027-06-02-eutactic.md",
@@ -259,7 +273,6 @@
     "_posts/code/2026-04-27-quantum-dice.md",
     "_posts/code/2026-02-26-curve copy.md",
     "_posts/ihp/CP2/2026-02-26-curve copy.md",
-    "_posts/ihp/2026-03-10-normal.md",
-    "_posts/ihp/2026-03-25-sun-dial.md"
+    "_posts/ihp/2026-03-10-normal.md"
   ]
 }
