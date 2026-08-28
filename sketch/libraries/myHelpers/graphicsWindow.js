@@ -380,7 +380,6 @@ class GraphicsWindowCamera extends GraphicsWindow{
 			this.camera.scroll(delta,mouse);
 			didScroll = true;
 		}
-		didScroll = didScroll || super.scroll(delta);
 		return didScroll;
 	}
 }
@@ -400,6 +399,7 @@ class Camera2D {
 			zoomRange:[0.1,10],
 			drag : 0.9,
 			disablePan: false,
+			disableZoom: false
 		};
 
 		Object.assign(this, defaults, options);
@@ -459,14 +459,16 @@ class Camera2D {
 		let z0 = this.zoomLevel(this.zoom);
 
 		// apply zoom
-		this.zoom += -delta / 1000;
-		this.zoom = constrain(this.zoom,
-					Camera2D.inverseZoomLevel(this.zoomRange[0]),
-					Camera2D.inverseZoomLevel(this.zoomRange[1]))
-		if(Math.abs(this.zoom - oldZoom) > eps){
-			this.didUpdate = true;
+		if(!this.disableZoom){
+			this.zoom += -delta / 1000;
+			this.zoom = constrain(this.zoom,
+						Camera2D.inverseZoomLevel(this.zoomRange[0]),
+						Camera2D.inverseZoomLevel(this.zoomRange[1]))
+			if(Math.abs(this.zoom - oldZoom) > eps){
+				this.didUpdate = true;
+			}
 		}
-
+		
 		if(this.disablePan){return true;}
 
 		let z1 = this.zoomLevel(this.zoom);

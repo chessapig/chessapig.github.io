@@ -76,16 +76,18 @@ class Selector{
     // scroll hook
     //return true if scroll was recognized, false otherwise
     scroll(delta){
+        if(delta == 0){
+            this.scrolling=false;
+        }
         if(this.rollover && !this.hidden){
             if (delta != 0) {
                 this.scrolling=true;
                 return this.onScroll(delta);
-            } else {
-                this.scrolling=false;
             }
 
             return true;
         }
+        this.scrolling=false;
         return false
     }
 
@@ -532,7 +534,7 @@ class SphereSelector extends ComplexDragger{
         let sphere = xBasis.mult(world.x)
                     .add(yBasis.mult(world.y))
                     .add(view.mult(sqrt(sphereHit)));
-        this.sphere = sphere;
+        this.sphere = sphere.normalize();
         return sphere;
     }
 
@@ -596,14 +598,19 @@ class SphereSelector extends ComplexDragger{
         this.y = this.mouse.y + this.offset.y;
         let pos = createVector(this.x,this.y);
         let limitRadius=0.99;
-        let sensitivity = 0.1;
-        let distance = pos.mag();
-        if(distance>limitRadius && this.isPressed){
-            let rotationAngle = (distance-limitRadius)*sensitivity;
-            pos.normalize().mult(limitRadius); // clamp magnitude to 0
-            let forward = this.camera.getFrame()[2];
-            let selectorVector = this.worldToSphere(pos);
-            this.camera.rotateAroundAxis( selectorVector.cross(forward),-rotationAngle);
+
+        if (this.isPressed) {
+            let sensitivity = 0.1;
+            let distance = pos.mag();
+            if(distance > limitRadius){
+                let rotationAngle = (distance - limitRadius) * sensitivity;
+                pos.normalize().mult(limitRadius); // clamp magnitude
+                let forward = this.camera.getFrame()[2];
+                let selectorVector = this.worldToSphere(pos);
+                if (selectorVector) {
+                    this.camera.rotateAroundAxis(selectorVector.cross(forward), -rotationAngle);
+                }
+            }
         }
         this.x = pos.x;
         this.y = pos.y;

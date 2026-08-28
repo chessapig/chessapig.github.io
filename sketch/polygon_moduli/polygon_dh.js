@@ -1,7 +1,7 @@
 const FRG = '#E6CFB3'; //background color
 const BKG = '#2c2621'; //foreground color
 
-let containerId = "canvas";
+let containerId = "canvas-square";
 let canvasSize
 let windows, renderWindow
 
@@ -37,9 +37,13 @@ function setup() {
 
     let selectors = [];
     let numSelectors=5;
-    let integerQuantization = 0.001;
+    let integerQuantization = 0.1;
+    let doQuantize = false
     for(let i=0;i<numSelectors;i++){
-        selectors.push(new IntervalDragger(0.3, {integerQuantization: integerQuantization}))
+        selectors.push(new IntervalDragger(0.3, {
+            integerQuantization: integerQuantization,
+            doQuantize: doQuantize
+        }))
 
     }
 
@@ -49,7 +53,7 @@ function setup() {
         selectors: selectors,
         integerQuantization: integerQuantization,
         doConstrain: true,
-        doInteger: true,
+        doQuantize: doQuantize
 	});
 
 	windows = [renderWindow]; 
@@ -68,131 +72,190 @@ function draw() {
 	}
 }
 
-class IntervalDragger extends ComplexDragger{
-    
-    constructor(x,options={}){
+class IntervalDragger extends ComplexDragger {
+    constructor(x, options = {}) {
         const defaults = {
-            integerQuantization: 0.1, //Scale of the integer
-            doInteger: false,
-		    };
+            integerQuantization: 0.1, // Scale of the integer
+            doQuantize: false,
+        };
         options = Object.assign({}, defaults, options);
-        super(x,0,options);
+        super(x, 0, options);
+        
+        // Initialize the conceptual value right away
+        this.updateValue(x);
+    }
+
+    // New helper to handle the math in one place
+    updateValue(targetX) {
+        if (this.doQuantize) {
+            // Stored as a pure integer
+            this.value = Math.round(targetX / this.integerQuantization);
+            // x is constrained to the grid
+            this.x = this.value * this.integerQuantization;
+        } else {
+            // Stored as continuous raw value
+            this.value = targetX;
+            this.x = targetX;
+        }
     }
 
     // dragging behavior
-    onUpdate(){
+    onUpdate() {
         let newX = this.mouse.x + this.offset.x;
-        if(this.doInteger){
-            this.x = round(newX/this.integerQuantization)*this.integerQuantization;
-        } else {
-            this.x = newX;
-        }
-
-        
-    }    
+        this.updateValue(newX);
+    }
 }
 
-class DH_window extends DraggerWindow{
-    constructor(options={}){
+class DH_window extends DraggerWindow {
+    constructor(options = {}) {
         let camera = new Camera2D({
-            xRange:[-10,10],
-            yRange:[-0.5,0.5],
+            xRange: [-10, 10],
+            yRange: [-0.5, 0.5],
             zoom: -0.1
-        })
+        });
         const defaults = {
             camera: camera,
-            doInteger:false,
             multiDragType: "CLOSEST",
-            allowVariableDimensions:false,
-            integerQuantization: 0.1, //Scale of the integer
-		};
+            allowVariableDimensions: false,
+            integerQuantization: 0.1, // Scale of the integer
+            doQuantize: false,
+            fixedPoints: false,
+            largestValue: false,
+            totalVolume: false
+        };
         options = Object.assign({}, defaults, options);
         super(options);
+        this.numSticks = this.selectors.length;
     }
 
-    update(){
-        let numSelectors = this.selectors.length;
-        for(let i=0; i<this.selectors.length; i++){
+    update() {
+        this.numSticks = this.selectors.length;
+        for (let i = 0; i < this.selectors.length; i++) {
             let s = this.selectors[i];
-            s.doInteger = this.doInteger
-            s.y = map(i,0,numSelectors,-numSelectors/10,0);
+            // Ensure child draggers respect the parent's mode
+            s.doQuantize = this.doQuantize;
+            s.integerQuantization = this.integerQuantization;
+            s.y = map(i, 0, this.numSticks, -this.numSticks / 10, 0);
         }
+        this.getFixedPoints();
+        
         return super.update();
     }
 
-    getFixedPoints(){
-        let numSticks = this.selectors.length;
+    getFixedPoints() {
         let fixedPoints = [];
-        for(let n = 0; n<pow(2,numSticks);n++){
-            let binary = numberToNary(n,2,numSticks) //string of ones and zeros
+        for (let n = 0; n < pow(2, this.numSticks); n++) {
+            let binary = numberToNary(n, 2, this.numSticks); // string of ones and zeros
             let value = 0;
-            for(let i = 0; i<numSticks; i++){
-                value += (binary[i]*2-1)*abs(this.selectors[i].x/this.integerQuantization)
-            }
-            fixedPoints[n] = {value: value, binary: binary}
             
+            for (let i = 0; i < this.numSticks; i++) {
+                // Because IntervalDragger now manages `.value`, we just use it directly!
+                // No need to check if we are quantized here anymore.
+                value += (binary[i] * 2 - 1) * abs(this.selectors[i].value);
+            }
+            fixedPoints[n] = { value: value, binary: binary };
         }
+        this.fixedPoints = fixedPoints;
         return fixedPoints;
     }
 
-    render(){
-        
+    render() {
         let ctx = this.g;
      
         ctx.noFill();
         ctx.stroke(FRG);
         ctx.strokeWeight(3);
-        ctx.line(-100,0,100,0); 
+        ctx.line(-100, 0, 100, 0); 
         
-        
-        for(let s of this.selectors){
-            ctx.stroke(lerpColor(s.color,color(255),0.5));
-            ctx.line(s.x,s.y,-s.x,s.y);
+        for (let s of this.selectors) {
+            ctx.stroke(lerpColor(s.color, color(255), 0.5));
+            ctx.line(s.x, s.y, -s.x, s.y);
         }
 
-        this.plotFixedPoints(ctx)
-
+        this.plotFixedPoints(ctx);
+        this.plotVolumeFunction(ctx);
 
         super.render();
-    
     }
 
-    plotFixedPoints(ctx){
+    plotFixedPoints(ctx) {
         const fixedPoints = this.getFixedPoints();
         const frequencies = new Map();
 
         // 1. Count how many times each 'value' appears
-        let largestValue=0;
-        for(let pt of fixedPoints){
-            let val = round(pt.value);
+        let largestValue = -Infinity;
+        for (let pt of fixedPoints) {
+            // If continuous, rounding groups floats together. 
+            // We use toFixed(4) for floats to avoid JS floating point math errors (e.g. 0.1 + 0.2 = 0.300000004)
+            let val = this.doQuantize ? Math.round(pt.value) : parseFloat(pt.value.toFixed(4));
+            
             frequencies.set(val, (frequencies.get(val) || 0) + 1);
-            if(val > largestValue){
+            if (val > largestValue) {
                 largestValue = val;
             }
         }
+        this.largestValue = largestValue;
 
         // 2. Draw the lines based on their counts
         const baseLength = 0.1; 
-        for(let [val, count] of frequencies.entries()){
-            // val is the coordinate, count determines the length
-            ctx.line(val*this.integerQuantization, -baseLength * count, val*this.integerQuantization, baseLength * count);
+        for (let [val, count] of frequencies.entries()) {
+            // If quantized, val is an integer, so multiply by scale to get screen X
+            // If continuous, val is already a raw screen coordinate
+            let drawX = this.doQuantize ? val * this.integerQuantization : val;
+            
+            ctx.line(drawX, -baseLength * count, drawX, baseLength * count);
         }
 
-        ctx.noStroke();
-        ctx.fill("#e66a57");
-        ctx.circle(largestValue-this.selectors.length*this.integerQuantization,0,0.1)
-
+        // Draw monotone indicator
+        if (this.doQuantize) {
+            ctx.noStroke();
+            ctx.fill("#e66a57");
+            // Multiply the pure integer calculation by the quantization scale to get the physical coordinate
+            let indicatorX = (largestValue - this.selectors.length) * this.integerQuantization;
+            ctx.circle(indicatorX, 0, 0.1);
+        }
     }
-    generateSelectorDoubleClick(mousePos){
-        if(abs(mousePos.y)<0.1){
-            return new IntervalDragger(round(mousePos.x/this.integerQuantization)*this.integerQuantization);
+
+    plotVolumeFunction(ctx) {
+        let res = 1000;
+
+        let totalVolume = 1
+        for (let i = 0; i < this.selectors.length; i++) {
+            let s = this.selectors[i];
+            totalVolume*= 2*s.value;
         }
-        
-	}
+
+        ctx.noFill();
+        ctx.stroke(FRG);
+        ctx.beginShape();
+        for (let i = 0; i < res; i++) {
+            let x = map(i, 0, res, -this.largestValue, this.largestValue);
+            let y = this.volumeFunction(x);
+            ctx.vertex(x, y);
+        }
+        ctx.endShape();
+    }
+
+    generateSelectorDoubleClick(mousePos) {
+        if (abs(mousePos.y) < 0.1) {
+            return new IntervalDragger(mousePos.x, {
+                doQuantize: this.doQuantize,
+                integerQuantization: this.integerQuantization
+            });
+        }
+    }
 
 
-    
-
+    volumeFunction(lambda, normalization  =1) {
+        let vol = 0;
+        for (let pt of this.fixedPoints) {
+            if (lambda > pt.value) {
+                let sign = (pt.binary.filter(x => x === 0).length % 2) * 2 - 1;     
+                vol += sign * pow(abs((lambda - pt.value)), this.numSticks - 1) ;
+            }
+        }
+        return -vol/normalization*pow(-1,this.numSticks);
+    }
 }
 
 /////////////////////////

@@ -27,10 +27,11 @@ body
 	-webkit-text-size-adjust: 100%;
 }
 
+
 #canvas
 {
-	width: 85vh;
-	height: 85vh;
+	width: 85vw;
+	height: calc(85vw/2);
 
 	border: 10px solid rgb(64, 64, 64);
 	padding: 0px;
@@ -40,10 +41,11 @@ body
   	display: block;  /* important if it's not already block */
 }
 
-#canvas-wide
+
+#canvas-square
 {
-	width: 85vw;
-	height: calc(85vw/2);
+	width: 90vh;
+	height: 90vh;
 
 	border: 10px solid rgb(64, 64, 64);
 	padding: 0px;

@@ -943,7 +943,6 @@ class BasinWindow extends SphereWindow{
 		} else {
 			return false;
 		}
-		
 	}
 }
 

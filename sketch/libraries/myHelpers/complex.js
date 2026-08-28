@@ -303,4 +303,30 @@ class Quaternion {
 			0,0,0,1
 		];
 	}
+
+	rotateVector(v) {
+		let { w, x, y, z } = this;
+		let vx = v.x, vy = v.y, vz = v.z;
+
+		// Algebraically apply the rotation matrix to the vector
+		let rx = vx * (1 - 2*y*y - 2*z*z) + vy * (2*x*y - 2*z*w) + vz * (2*x*z + 2*y*w);
+		let ry = vx * (2*x*y + 2*z*w) + vy * (1 - 2*x*x - 2*z*z) + vz * (2*y*z - 2*x*w);
+		let rz = vx * (2*x*z - 2*y*w) + vy * (2*y*z + 2*x*w) + vz * (1 - 2*x*x - 2*y*y);
+
+		return createVector(rx, ry, rz);
+	}
+
+	inverse() {
+		let normSq = this.w * this.w + this.x * this.x + this.y * this.y + this.z * this.z;
+		
+		// Guard against division by zero for a zero quaternion
+		if (normSq === 0) return Quaternion.identity(); 
+
+		return new Quaternion(
+			 this.w / normSq,
+			-this.x / normSq,
+			-this.y / normSq,
+			-this.z / normSq
+		);
+	}
 }
