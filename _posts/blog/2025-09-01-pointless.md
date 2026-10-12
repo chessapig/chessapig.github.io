@@ -7,7 +7,7 @@ tags:
   - blog
   - talk
   - fun
-image: "/assets/images/pointless/thumbnail.png"
+image: /assets/images/pointless/thumbnail.png
 attributes:
   - fun-talk
 talk-venue: Many cheerful facts, Fall 2025

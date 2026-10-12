@@ -273,22 +273,42 @@ class HamiltonianOrbit extends Selector{
     }
 
     //Evaluate a point on the orbit from the fourier series 
-    // t is between 0 and 2 pi
+   // t is between 0 and 2 pi
     eval(t, tolerance=0.001){
-        let pos = [0,0] //Encode position as an array (not vector to make this faster)
-        let path = this.path
-        for(let i = 0; i<=2*path.max_freq; i++){
-            if(abs(path.real[i]) < tolerance && abs(path.imag[i]) < tolerance){
+        let pos = [0,0]; //Encode position as an array (not vector to make this faster)
+        let path = this.path;
+        let m = this.multiplicity;
+
+        for(let i = 0; i <= 2 * path.max_freq; i++){
+            let raw_real = path.real[i];
+            let raw_imag = path.imag[i];
+
+            // Tolerance check on the raw parameters
+            if(abs(raw_real) < tolerance && abs(raw_imag) < tolerance){
                 continue;
             }
 
+            // k is now strictly the unscaled frequency (-N to N)
             let k = i - path.max_freq;
-            let cos_k = cos(k*t);
-            let sin_k = sin(k*t);
-            pos[0] += path.real[i]*cos_k - path.imag[i]*sin_k;
-            pos[1] += path.imag[i]*cos_k + path.real[i]*sin_k;
+            
+            // The physical frequency applies the multiplicity
+            let true_freq = k * m;
+
+            // Rescale the weighting to apply sobolev preconditioning, following my python serialization
+            // weights = 1.0 / max(1.0, abs(k * multiplicity))
+            let weight = 1.0 / max(1, abs(true_freq));
+            
+            let c_real = raw_real * weight;
+            let c_imag = raw_imag * weight;
+
+            // 4Evaluate the trigonometric functions using the physical frequency
+            let cos_k = cos(true_freq * t);
+            let sin_k = sin(true_freq * t);
+            
+            pos[0] += c_real * cos_k - c_imag * sin_k;
+            pos[1] += c_imag * cos_k + c_real * sin_k;
         }
-        return pos
+        return pos;
     }
 
     generateDiscretePath(res = 100){

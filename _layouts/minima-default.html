@@ -1,29 +1,9 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
 
-  <!--setup mathjax-->
-  <script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
-  </script>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      extensions: [
-        "MathMenu.js",
-        "MathZoom.js",
-        "AssistiveMML.js",
-        "a11y/accessibility-menu.js"
-      ],
-      jax: ["input/TeX", "output/CommonHTML"],
-      TeX: {
-        extensions: [
-          "AMSmath.js",
-          "AMSsymbols.js",
-          "noErrors.js",
-          "noUndefined.js",
-        ]
-      }
-    });
-  </script>
+  {%- include page-position.html -%}
+  {%- include callouts.html -%}
+  {%- include mathjax.html -%}
   
 
   {%- include head.html -%}
@@ -34,7 +14,7 @@
 
   {%- include head.html -%}
 
-  <body>
+  <body{% if page.compact-lists %} class="compact-lists"{% endif %}>
 
     {%- include header.html -%}
 

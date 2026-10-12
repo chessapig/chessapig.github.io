@@ -1,0 +1,33 @@
+<!--setup mathjax 4; macros live in /preamble.sty (shared with Obsidian)-->
+<style>
+  /* Equations too wide to line-break scroll sideways instead of widening the page. */
+  mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [["$", "$"], ["\\(", "\\)"]],
+      displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+    },
+    output: {
+      displayOverflow: "linebreak",   // break long display equations to fit the column
+      linebreaks: { inline: true },
+    },
+    startup: {
+      typeset: false,
+      // Load the preamble, define its macros, then typeset the page.
+      // pageReady runs after the DOM is built, so callouts.html's captions are already in place.
+      pageReady: function () {
+        return MathJax.startup.defaultPageReady()
+          .then(function () { return fetch("{{ '/preamble.sty' | relative_url }}"); })
+          .then(function (r) { return r.ok ? r.text() : ""; })
+          .catch(function () { return ""; })
+          .then(function (tex) { return MathJax.tex2chtmlPromise(tex.replace(/(^|[^\\])%.*$/gm, "$1")); })
+          .catch(function (e) { console.error("preamble.sty:", e); })
+          .then(function () { return MathJax.typesetPromise(); })
+          .then(function () { if (window.settlePage) settlePage(); });   // the page has changed: see page-position.html
+      },
+    },
+  };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-chtml.js"></script>

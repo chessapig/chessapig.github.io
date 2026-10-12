@@ -1,0 +1,31 @@
+<!--Going to page#label, also on a reload. The target may only exist once callouts.html has run, and the page keeps
+    changing height after it loads (MathJax, its fonts, images, sketches), so the browser's own jump lands in the
+    wrong place, and on a reload it restores the old scroll position instead. So with a #label the browser's
+    restoring is turned off, and the target is put back at the top of the window whenever the page changes size,
+    until the reader scrolls. settlePage() does this once; callouts.html and mathjax.html call it when they are done.-->
+<script>
+  (function () {
+    if (!location.hash) return;
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+    var readerScrolled = false;
+    ['wheel', 'touchmove', 'keydown', 'mousedown'].forEach(function (e) {
+      addEventListener(e, function () { readerScrolled = true; }, { once: true, passive: true });
+    });
+
+    window.settlePage = function () {
+      var target = !readerScrolled && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (target) target.scrollIntoView();
+    };
+
+    var pending = false;
+    var resized = new ResizeObserver(function () {
+      if (readerScrolled) { resized.disconnect(); return; }
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(function () { pending = false; settlePage(); });
+    });
+    document.addEventListener('DOMContentLoaded', function () { resized.observe(document.body); });
+    addEventListener('load', settlePage);
+  })();
+</script>

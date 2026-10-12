@@ -47,12 +47,11 @@
   }
 
   @include media-query($on-palm) {
-    position: absolute;
-    top: 9px;
-    right: $spacing-unit / 2;
-    background-color: $body-bg;
-    border: 1px solid $light;
-    border-radius: 5px;
+    // Keep the Bootstrap navbar in normal flow at the top of the page,
+    // so the expanded menu pushes the content down.
+    position: static;
+    float: none;
+    width: 100%;
     text-align: left;
 
 

@@ -35,6 +35,15 @@
   background-image: linear-gradient(0deg,$back-primary, $back-secondary);
 }
 
+// In the collapsed (mobile) navbar, let submenus show the gradient behind them
+@media (max-width: 767.98px) {
+  .navbar .dropdown-menu {
+    background-color: transparent;
+    border: none;
+    padding-left: 1rem;
+  }
+}
+
 body {
   min-height: 100vh;
   height: 100%;
@@ -99,6 +108,61 @@ blockquote {
 
 .card-header .card-title {
   margin-bottom: 0;
+}
+
+// Sketch controls (the panel under a [!sketch] callout, _includes/callouts.html), in the colors of the
+// filter buttons and tags: buttons and dropdowns, checkboxes (sliders keep their own look)
+.sketch-ui {
+  button, select {
+    padding: 0.3rem 0.9rem;
+    font: inherit;
+    color: $body-color;
+    background-color: $dark;
+    border: 2px solid $mid;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover { background-color: $primary; border-color: $light; }
+    &:focus-visible { outline: none; box-shadow: 0 0 0 0.2rem rgba($primary, 0.4); }
+  }
+  select:hover { background-color: $mid; }   // a coral menu would be hard to read
+  option { background-color: $body-bg; color: $body-color; }
+
+  input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    position: relative;
+    width: 1.15em;
+    height: 1.15em;
+    margin: 0;
+    vertical-align: -0.15em;
+    background-color: $dark;
+    border: 2px solid $mid;
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover { border-color: $light; }
+    &:checked { background-color: $primary; border-color: $primary; }
+    &:checked::after {   // the tick
+      content: "";
+      position: absolute;
+      left: 0.32em;
+      top: 0.1em;
+      width: 0.3em;
+      height: 0.6em;
+      border: solid $body-bg;
+      border-width: 0 0.15em 0.15em 0;
+      transform: rotate(45deg);
+    }
+    &:focus-visible { outline: none; box-shadow: 0 0 0 0.2rem rgba($primary, 0.4); }
+  }
+  label { display: inline-flex; align-items: center; gap: 0.4em; cursor: pointer; }
+}
+
+// Pages with "compact-lists: true" in their front matter: a list between paragraphs sits close to them
+.compact-lists {
+  p:has(+ ol), p:has(+ ul),
+  ol:has(+ p), ul:has(+ p) {
+    margin-bottom: 0.25rem;
+  }
 }
 
 @mixin glow($size, $color) {

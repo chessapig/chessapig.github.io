@@ -1,5 +1,8 @@
-const FRG = '#E6CFB3'; //background color
-const BKG = '#2c2621'; //foreground color
+// const FRG = '#E6CFB3'; //background color
+// const BKG = '#2c2621'; //foreground color
+
+const FRG = '#000000'; 
+const BKG = '#FFFFFF';
 
 let containerId = "canvas-square";
 let canvasSize

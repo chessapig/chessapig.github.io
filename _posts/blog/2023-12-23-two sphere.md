@@ -14,7 +14,7 @@ Here we will define $S^2$ as a manifold. In particular, we will provide coordina
 ## $S^2$ as a locus of points in $\mathbb{R}^3$
 
 >[!todo] Definition 1:
-> $S^2$ is the locus of points $\left\{(x,y,z) \in \mathbb{R}^3\right\}$ such that $x^2 + y^2 + z^2 =r^2$. The parameter $r$ is called the *radius*. 
+> $S^2$ is the locus of points $\left\lbrace(x,y,z) \in \mathbb{R}^3\right\rbrace$ such that $x^2 + y^2 + z^2 =r^2$. The parameter $r$ is called the *radius*. 
 
 This realizes $S^2$ as the radius $r$ sphere inside of three-dimensional space, the familiar definition for day-to-day life. Definition 1 induces a manifold structure on $S^2$. Indeed, defining $f(x,y,z) = x^2 + y^2 + z^2$,  we see $S^2 = f^{-1}(r^2)$. Using essentially the implicit function theorem, the manifold structure on $\mathbb{R}^3$ induces one on $S^2$ provided that $\nabla f \neq 0$ for any point on $S^2$. We compute:
 $$\nabla f = (2x,2y,2z) \neq0  \text{ whenever } x^2+y^2+z^2 \neq 0$$

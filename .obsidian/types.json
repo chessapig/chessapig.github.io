@@ -6,6 +6,7 @@
     "talk-venue": "text",
     "images": "multitext",
     "attributes": "checkbox",
-    "week": "multitext"
+    "week": "multitext",
+    "compact-lists": "checkbox"
   }
 }

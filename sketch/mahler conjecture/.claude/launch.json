@@ -1,0 +1,1 @@
+{"version":"0.0.1","configurations":[{"name":"static","runtimeExecutable":"sh","runtimeArgs":["-c","python3 -m http.server ${PORT:-8765} -d ../.."],"port":8765,"autoPort":true}]}

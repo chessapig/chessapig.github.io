@@ -1,0 +1,376 @@
+<!--Obsidian callouts. A blockquote whose first line is [!type|meta] head becomes:
+
+      > [!sketch] mahler conjecture/polar polygon
+      > Caption, with $math$.
+    a bordered figure: the sketch in an iframe, its controls (built by sketch/libraries/sketch-ui.js),
+    then the caption. The path is relative to /sketch/ and points at a folder with an index.html, or at
+    an .html file. [!sketch|500] sets the height in px; [!sketch|square] makes the frame square (as wide as the figure, up to 500px)
+    The sketch shows its poster (a screenshot, made by _tools/make-posters.py) until clicked; [!sketch|live] (or
+    [!sketch|500 live]) loads it right away.
+    instead, for single-panel sketches.
+
+      > [!theorem] Symplectic monotonicity
+      > Statement, with $math$.
+
+      ^thm-mono
+    a theorem: a Bootstrap card titled "Theorem 1 (Symplectic monotonicity)" (just "Theorem 1" with no name),
+    with the statement in its body. Theorems are numbered in order down the page. The optional label, in
+    Obsidian's block-id form (^label on its own line after the callout, or at the end of any of its lines),
+    lets the theorem be linked to with [[#^label]], which shows as "Theorem 1", or [[#^label|other text]].
+    (_plugins/block_refs.rb turns labels into <span class="block-label"> and links into <a class="block-ref">.)
+    A label on any other block makes its paragraph or list item the target.
+    [!lemma], [!proposition] and [!corollary] work the same way and share the theorems' numbering
+    (Theorem 1, Lemma 2, Corollary 3, ...).
+
+      > [!proof]-
+      > The proof.
+    a proof, ending with ∎. Right after a theorem-like box it goes in the box, at the bottom; anywhere else it is
+    a block of its own. [!proof]- starts folded and [!proof]+ open (click "Proof" to toggle); [!proof] can't be folded.
+
+      > [!remark]- On constants
+      > A remark.
+    a remark, "Remark (On constants)", foldable the same way as a proof.
+
+      > [!epigraph] Hermann Weyl
+      > In these days the angel of topology and the devil of abstract algebra fight for the soul of each individual mathematical domain.
+    an epigraph: the quote centered and in italics, with the title, the attribution, at its bottom right
+    (after a dash, unless it starts with one). Line breaks in the quote are kept, as in a poem.
+
+      > [!figure|60%] The polar body
+      > ![](assets/polar.png)
+      > Caption, with $math$.
+    a figure: a Bootstrap card with the images on top (markdown ![](path) or Obsidian ![[path]]; a path relative to
+    the vault root works on the site too) and "Figure 1: The polar body." with the caption in its body. Figures are
+    numbered on their own, and can be labeled and linked to like theorems. [!figure|60%] or [!figure|400] caps the
+    width of the card (% or px), centered.
+
+    Other callout types are left as blockquotes.-->
+<style>
+  .sketch-figure { border: 1px solid currentColor; border-radius: 6px; margin: 1.5rem 0; overflow: hidden; }
+  .sketch-figure.square { max-width: 500px; margin-left: auto; margin-right: auto; }   /* [!sketch|square]: at most 500px wide, centered */
+  .sketch-stage { position: relative; background: rgb(5, 25, 70); }   /* the sketches' ocean, behind the poster */
+  .sketch-stage iframe { display: block; width: 100%; height: 100%; border: 0; }
+  .sketch-poster { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+                   width: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+  .sketch-poster img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: filter 0.2s; }
+  .sketch-poster:hover img, .sketch-poster:focus-visible img { filter: brightness(0.75); }
+  .sketch-play { position: relative; padding: 0.4rem 1rem; color: #e6cfb3; background: rgba(44, 38, 33, 0.85);
+                 border: 2px solid #9d8b7c; border-radius: 5px; transition: background 0.2s; }
+  .sketch-poster:hover .sketch-play, .sketch-poster:focus-visible .sketch-play { background: #e56b6f; }
+  .sketch-poster:focus-visible { outline: none; box-shadow: inset 0 0 0 3px #e56b6f; }
+  .sketch-figure .sketch-ui,
+  .sketch-figure figcaption { padding: 0.6rem 0.9rem; border-top: 1px solid currentColor; }
+  .sketch-figure .sketch-ui { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .sketch-figure .sketch-ui:empty { display: none; }
+  .sketch-figure .sketch-ui-row { display: flex; align-items: center; justify-content: center; gap: 0.75rem; flex-wrap: wrap; width: 100%; }
+  .sketch-figure .sketch-ui-row > * { position: static !important; }  /* undo p5's .position() */
+  /* sliders grow from 8rem to fill their row, up to 24rem, so the label beside them always fits; a row only
+     wraps when even the smallest slider leaves no room */
+  .sketch-figure .sketch-ui input[type=range] { flex: 1 1 8rem; min-width: 8rem; max-width: 24rem; width: auto !important; }
+  .sketch-figure .sketch-ui-readout { min-width: 5.5em; white-space: nowrap; font-variant-numeric: tabular-nums; }   /* fixed width, so the row doesn't shift as it changes */
+  .sketch-figure .sketch-ui-hint { order: -1; font-size: 0.9em; opacity: 0.75; text-align: center; }   /* hints above the controls */
+  .sketch-figure figcaption { font-size: inherit; }   /* minima makes captions 80% */
+  .sketch-figure figcaption > :last-child { margin-bottom: 0; }
+
+  .theorem { margin: 1.5rem 0; }
+  .theorem .card-title { font-weight: normal; }
+  .theorem .card-body > :last-child { margin-bottom: 0; }
+
+  .fold { margin: 1rem 0; }                       /* proofs and remarks */
+  .fold:not(.card-footer) { padding-left: 1rem; border-left: 1px solid currentColor; }
+  .fold.card-footer { margin: 0; }
+  .fold-head { font-style: italic; }
+  summary.fold-head { cursor: pointer; }
+  details.fold[open] > .fold-head { margin-bottom: 0.5rem; }
+  .fold-body > :last-child { margin-bottom: 0; }
+  .proof .qed { float: right; margin-left: 1rem; }
+  .proof div.qed { float: none; text-align: right; }
+
+  .figure-callout { margin: 1.5rem auto; }   /* not .figure: Bootstrap's .figure is inline-block */
+  .figure-media { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.75rem; overflow: hidden; }
+  .figure-media img, .figure-media video { display: block; max-width: 100%; height: auto; }
+  .figure-media > a { display: contents; }
+  .figure-callout figcaption { font-size: inherit; }
+  .figure-callout .card-body > :last-child { margin-bottom: 0; }
+
+  .epigraph { max-width: 34rem; margin: 2rem auto; }
+  .epigraph-quote { text-align: center; font-style: italic; }   /* not a <blockquote>: the theme styles those (grey, never italic) */
+  .epigraph-quote > :last-child { margin-bottom: 0; }
+  .epigraph-quote p { white-space: pre-line; }   /* a single line break in the quote is a line break */
+  .epigraph figcaption { margin-top: 0.5rem; text-align: right; }
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var HEADER = /^\s*\[!(\w+)(?:\|([^\]]*))?\]([+-]?)[ \t]*([^\n]*)\n?/;   // type, meta, fold sign, head
+    var theorems = 0;   // theorems, lemmas, propositions and corollaries are numbered together
+    var figures = 0;
+
+    // Removes a block label marker (and its paragraph, if that is left empty); returns the label.
+    function takeLabel(span) {
+      var p = span.parentElement;
+      span.remove();
+      if (p.tagName === 'P' && !p.textContent.trim() && !p.children.length) p.remove();
+      return span.dataset.label;
+    }
+
+    // The label of the callout bq, with body el: a marker inside it, or in a paragraph of its own right after it.
+    function label(bq, el) {
+      var span = el.querySelector('span.block-label'), next = bq.nextElementSibling;
+      if (!span && next && next.tagName === 'P' && !next.textContent.trim() && next.children.length === 1 &&
+          next.firstElementChild.matches('span.block-label')) span = next.firstElementChild;
+      return span ? takeLabel(span) : null;
+    }
+
+    // Moves everything after the header line into a new element of the given tag; returns it.
+    function body(bq, p, header, tag) {
+      p.innerHTML = p.innerHTML.slice(header.length);
+      if (!p.textContent.trim() && !p.children.length) p.remove();
+      var el = document.createElement(tag);
+      while (bq.firstChild) el.appendChild(bq.firstChild);
+      return el;
+    }
+
+    // A block headed by title that, as in Obsidian, [!kind]- starts folded, [!kind]+ starts open and [!kind] can't
+    // be folded (click the title to toggle). Returns the block and its body. The math of a folded block is typeset
+    // when it is first opened: MathJax breaks lines to fit, and a folded block has no width.
+    function foldable(bq, p, m, kind, title) {
+      var fold = m[3];
+      var el = document.createElement(fold ? 'details' : 'div');
+      el.className = 'fold ' + kind;
+      if (fold === '+') el.open = true;
+      var head = document.createElement(fold ? 'summary' : 'div');
+      head.className = 'fold-head';
+      head.innerHTML = title + (fold ? '' : '.');
+      var text = body(bq, p, m[0], 'div');
+      text.className = 'fold-body';
+      el.appendChild(head);
+      el.appendChild(text);
+      if (fold === '-') {
+        text.classList.add('mathjax_ignore');
+        el.addEventListener('toggle', function typeset() {
+          el.removeEventListener('toggle', typeset);
+          text.classList.remove('mathjax_ignore');
+          if (window.MathJax && MathJax.startup) MathJax.startup.promise.then(function () { return MathJax.typesetPromise([text]); });
+        });
+      }
+      return { el: el, text: text };
+    }
+
+    // Sketches are loaded only when their poster is clicked, and unloaded again when they have been off screen
+    // for IDLE_MS, or to keep at most MAX_LIVE running (the one used least recently goes). Each unloaded sketch
+    // costs one image; a running one costs p5, its scripts and often WebGL contexts (browsers allow ~16 a page).
+    // Posters are made by _tools/make-posters.py: folder/index.html -> folder/poster.jpg, x.html -> x.poster.jpg.
+    var MAX_LIVE = 4, IDLE_MS = 30000, liveSketches = [];
+    function posterOf(src) { return /\/index\.html?$/i.test(src) ? src.replace(/index\.html?$/i, 'poster.jpg') : src.replace(/\.html?$/i, '.poster.jpg'); }
+    function used(sk) { liveSketches = liveSketches.filter(function (x) { return x !== sk; }); liveSketches.push(sk); }
+    var onScreen = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var sk = e.target.sketch;
+        if (!sk || !sk.frame) return;
+        clearTimeout(sk.timer);
+        if (!e.isIntersecting) sk.timer = setTimeout(function () { unloadSketch(sk); }, IDLE_MS);
+      });
+    });
+    function loadSketch(sk) {
+      if (sk.frame) return;
+      while (liveSketches.length >= MAX_LIVE) unloadSketch(liveSketches[0]);
+      var frame = document.createElement('iframe');
+      frame.title = sk.path;
+      frame.sketchPanel = sk.ui;   // picked up by sketch-ui.js inside the iframe
+      frame.src = encodeURI(sk.src);
+      sk.poster.replaceWith(frame);
+      sk.frame = frame;
+      used(sk);
+      sk.stage.sketch = sk;
+      onScreen.observe(sk.stage);
+    }
+    function unloadSketch(sk) {
+      if (!sk.frame) return;
+      clearTimeout(sk.timer);
+      onScreen.unobserve(sk.stage);
+      sk.frame.replaceWith(sk.poster);
+      sk.frame = null;
+      sk.ui.textContent = '';   // its controls went with it
+      liveSketches = liveSketches.filter(function (x) { return x !== sk; });
+    }
+
+    var CALLOUTS = {
+      sketch: function (bq, p, m) {
+        var path = m[4].trim().replace(/^\/+|\/+$/g, '');
+        var src = '/sketch/' + path + (/\.html?$/i.test(path) ? '' : '/index.html');
+        var meta = m[2] || '', square = /\bsquare\b/i.test(meta), height = parseInt(meta, 10) || 400;
+
+        var fig = document.createElement('figure');
+        fig.className = 'sketch-figure';
+        var stage = document.createElement('div');   // holds the poster, or the sketch once it is loaded
+        stage.className = 'sketch-stage';
+        if (square) { stage.style.aspectRatio = '1 / 1'; fig.classList.add('square'); }
+        else stage.style.height = height + 'px';
+        var ui = document.createElement('div');
+        ui.className = 'sketch-ui';
+
+        var poster = document.createElement('button');
+        poster.type = 'button';
+        poster.className = 'sketch-poster';
+        poster.setAttribute('aria-label', 'Load the interactive sketch');
+        var img = document.createElement('img');
+        img.alt = '';
+        img.loading = 'lazy';
+        img.onerror = function () { img.remove(); };   // no poster yet: just the button
+        img.src = encodeURI(posterOf(src));
+        var play = document.createElement('span');
+        play.className = 'sketch-play';
+        play.textContent = '▶ Load interactive';
+        poster.appendChild(img);
+        poster.appendChild(play);
+        stage.appendChild(poster);
+
+        var sk = { path: path, src: src, stage: stage, ui: ui, poster: poster, frame: null, timer: null };
+        poster.addEventListener('click', function () { loadSketch(sk); });
+        stage.addEventListener('pointerenter', function () { if (sk.frame) used(sk); });
+        if (/\blive\b/i.test(meta)) loadSketch(sk);
+
+        var cap = body(bq, p, m[0], 'figcaption');
+        fig.appendChild(stage);
+        fig.appendChild(ui);
+        if (cap.textContent.trim()) fig.appendChild(cap);
+        return fig;
+      },
+
+      // A proof: right after a theorem-like card it becomes the card's footer, otherwise a block of its own.
+      proof: function (bq, p, m) {
+        var head = m[4].trim();
+        var f = foldable(bq, p, m, 'proof', 'Proof' + (!head ? '' : /^of\b/.test(head) ? ' ' + head : ' (' + head + ')'));   // Proof of X, Proof (sketch)
+        var last = f.text.lastElementChild, qed = document.createElement(last && last.tagName === 'P' ? 'span' : 'div');
+        qed.className = 'qed';
+        qed.textContent = '∎';
+        (last && last.tagName === 'P' ? last : f.text).appendChild(qed);
+
+        var card = bq.previousElementSibling;
+        if (card && card.classList.contains('theorem')) {
+          f.el.classList.add('card-footer');
+          card.appendChild(f.el);
+          return null;
+        }
+        return f.el;
+      },
+
+      // A remark, "Remark (head)."
+      remark: function (bq, p, m) {
+        var head = m[4].trim();
+        return foldable(bq, p, m, 'remark', 'Remark' + (head ? ' (' + head + ')' : '')).el;
+      },
+
+      // A figure: its images, then "Figure n: head." and the caption (the rest of the body).
+      figure: function (bq, p, m) {
+        var head = m[4].trim(), width = (m[2] || '').trim(), ref = 'Figure ' + ++figures;
+        var fig = document.createElement('figure');
+        fig.className = 'card figure-callout';
+        if (width) fig.style.maxWidth = /^\d+$/.test(width) ? width + 'px' : width;
+        var text = body(bq, p, m[0], 'div');
+        var id = label(bq, text);
+        if (id) fig.id = id;
+        fig.dataset.ref = ref;   // the text of links to it
+
+        // Obsidian embeds ![[path]] or ![[path|width]] become images
+        text.querySelectorAll('p').forEach(function (par) {
+          par.innerHTML = par.innerHTML.replace(/!\[\[([^\]|]+?)(?:\|(\d+))?\]\]/g, function (_, src, w) {
+            return '<img src="' + src + '" alt=""' + (w ? ' width="' + w + '"' : '') + '>';
+          });
+        });
+        // the images go above the caption; a path relative to the vault root is made absolute
+        var media = document.createElement('div');
+        media.className = 'figure-media card-img-top';
+        text.querySelectorAll('img, video, iframe').forEach(function (el) {
+          var src = el.getAttribute('src');
+          if (src && !/^([a-z]+:|\/|#)/i.test(src)) el.setAttribute('src', '/' + encodeURI(decodeURI(src)));
+          media.appendChild(el.parentElement.tagName === 'A' ? el.parentElement : el);
+        });
+        text.querySelectorAll('p').forEach(function (par) { if (!par.textContent.trim() && !par.children.length) par.remove(); });
+
+        var cap = document.createElement('figcaption');
+        cap.className = 'card-body';
+        var num = document.createElement('strong');
+        num.className = 'figure-num';
+        num.innerHTML = ref + (head ? ': ' + head : '') + '.';
+        var first = text.firstElementChild;
+        if (first && first.tagName === 'P') { first.insertBefore(document.createTextNode(' '), first.firstChild); first.insertBefore(num, first.firstChild); }
+        else text.insertBefore(num, text.firstChild);
+        while (text.firstChild) cap.appendChild(text.firstChild);
+
+        fig.appendChild(media);
+        fig.appendChild(cap);
+        return fig;
+      },
+
+      // An epigraph: the quote centered in italics, attributed (the head) at its bottom right.
+      epigraph: function (bq, p, m) {
+        var head = m[4].trim();
+        var fig = document.createElement('figure');
+        fig.className = 'epigraph';
+        var quote = body(bq, p, m[0], 'div');
+        quote.className = 'epigraph-quote';
+        fig.appendChild(quote);
+        if (head) {
+          var cap = document.createElement('figcaption');
+          cap.innerHTML = (/^[—–-]/.test(head) ? '' : '— ') + head;
+          fig.appendChild(cap);
+        }
+        return fig;
+      },
+    };
+
+    // A theorem-like statement: a card titled "Kind n (name)", numbered with the theorems.
+    function statement(kind) {
+      return function (bq, p, m) {
+        var card = document.createElement('div');
+        card.className = 'card theorem ' + kind.toLowerCase();
+        var header = document.createElement('div');
+        header.className = 'card-header';
+        var title = document.createElement('h5');
+        title.className = 'card-title';
+        var name = m[4].trim(), ref = kind + ' ' + ++theorems;
+        title.innerHTML = ref + (name ? ' (' + name + ')' : '');
+        header.appendChild(title);
+        var text = body(bq, p, m[0], 'div');
+        text.className = 'card-body';
+        var id = label(bq, text);
+        if (id) card.id = id;
+        card.dataset.ref = ref;   // the text of links to it
+        card.appendChild(header);
+        card.appendChild(text);
+        return card;
+      };
+    }
+    ['Theorem', 'Lemma', 'Proposition', 'Corollary', 'Conjecture'].forEach(function (kind) { CALLOUTS[kind.toLowerCase()] = statement(kind); });
+
+    document.querySelectorAll('blockquote').forEach(function (bq) {
+      var p = bq.firstElementChild;
+      var m = p && p.tagName === 'P' && p.innerHTML.match(HEADER);
+      var make = m && CALLOUTS[m[1].toLowerCase()];
+      if (!make) return;
+      var el = make(bq, p, m);
+      if (el) bq.replaceWith(el); else bq.remove();
+    });
+
+    // labels on other blocks: the paragraph or list item the label ends, or the block before a label on its own line
+    document.querySelectorAll('span.block-label').forEach(function (span) {
+      var p = span.parentElement, alone = p.tagName === 'P' && !p.textContent.trim() && p.children.length === 1;
+      var block = alone ? p.previousElementSibling : span.closest('p, li, td, div');
+      var id = takeLabel(span);
+      if (block && !block.id) block.id = id;
+    });
+
+    // links to labeled blocks: [[#^label]] shows the target's name. A label that isn't on this page
+    // (a link to another Obsidian note, say) goes back to the text it was written as.
+    document.querySelectorAll('a.block-ref').forEach(function (a) {
+      var id = a.getAttribute('href').slice(1), target = document.getElementById(id), text = a.textContent.trim();
+      if (!target) {
+        console.warn('No block labeled ^' + id + ' on this page');
+        a.replaceWith('[[#^' + id + (text ? '|' + text : '') + ']]');
+      } else if (!text) a.textContent = target.dataset.ref || id;
+    });
+
+    if (window.settlePage) settlePage();   // the page has changed: see page-position.html
+  });
+</script>

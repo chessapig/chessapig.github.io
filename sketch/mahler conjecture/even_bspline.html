@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Even B-spline</title>
+<style>
+  :root { --bg:#fff; --ink:#222; --curve:#2557d6; --pt:#d6492b; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#16171a; --ink:#ddd; --curve:#7ea2ff; --pt:#ff8a6b; } }
+  body { margin:0; background:var(--bg); }
+  #row { display:flex; justify-content:center; gap:8px; }
+  canvas { width:min(48vw, 44vh); aspect-ratio:2.3/4.5; display:block; touch-action:none; }
+  #ks { text-align:center; font:14px system-ui; color:var(--ink); padding:6px; }
+  #ks input { vertical-align:middle; width:min(60vw,240px); }
+  @media (orientation:portrait) { #row { flex-direction:column; align-items:center; } canvas { width:min(90vw, 22vh); } }
+</style>
+</head>
+<body>
+<div id="row"><canvas id="c"></canvas></div>
+<div id="ks"><label>k = <output id="ko">1</output> <input id="k" type="range" min="1" max="8" step="1" value="1"></label> <label><input id="fm" type="checkbox"> F⁻¹</label></div>
+<script>
+// Clamped cubic B-spline, 6 basis functions, interior knots at ±0.5.
+const P = 3, T = [-1,-1,-1,-1,-0.5,0.5,1,1,1,1], N = 6;
+
+function basis(i, p, x) {
+  if (p === 0) return (T[i] <= x && x < T[i+1]) ? 1 : 0;
+  let a = 0, b = 0;
+  const d1 = T[i+p]-T[i], d2 = T[i+p+1]-T[i+1];
+  if (d1 > 0) a = (x-T[i])/d1 * basis(i, p-1, x);
+  if (d2 > 0) b = (T[i+p+1]-x)/d2 * basis(i+1, p-1, x);
+  return a + b;
+}
+function dbasis(i, x) {
+  let a = 0, b = 0;
+  const d1 = T[i+P]-T[i], d2 = T[i+P+1]-T[i+1];
+  if (d1 > 0) a = P/d1 * basis(i, P-1, x);
+  if (d2 > 0) b = P/d2 * basis(i+1, P-1, x);
+  return a - b;
+}
+const EPS = 1e-12, XR = 1 - EPS;
+
+function solve3(A, b) {
+  const M = A.map((r,i) => [...r, b[i]]);
+  for (let c = 0; c < 3; c++) {
+    let p = c; for (let r = c+1; r < 3; r++) if (Math.abs(M[r][c]) > Math.abs(M[p][c])) p = r;
+    [M[c], M[p]] = [M[p], M[c]];
+    for (let r = 0; r < 3; r++) if (r !== c) { const f = M[r][c]/M[c][c]; for (let k = c; k < 4; k++) M[r][k] -= f*M[c][k]; }
+  }
+  return M.map((r,i) => r[3]/r[i]);
+}
+// symmetric coefficients c = [u0,u1,u2,u2,u1,u0]; solve f(1)=0, f'(1)=s, f(0)=h
+function fit(h, s) {
+  const col = j => [
+    basis(j,P,XR) + basis(N-1-j,P,XR),
+    dbasis(j,XR) + dbasis(N-1-j,XR),
+    basis(j,P,0) + basis(N-1-j,P,0)
+  ];
+  const cols = [0,1,2].map(col);
+  const A = [0,1,2].map(r => [0,1,2].map(c => cols[c][r]));
+  const u = solve3(A, [0, s, h]);
+  return [u[0],u[1],u[2],u[2],u[1],u[0]];
+}
+function evalSpline(c, x) {
+  x = Math.min(Math.abs(x), XR); // evenness
+  let y = 0; for (let i = 0; i < N; i++) y += c[i]*basis(i,P,x);
+  return y;
+}
+
+// ---- conformal map: Szego kernel on the boundary + Cauchy integral ----
+const MH = 300, NK = 56;
+function boundary(c) {
+  const zr = [], zi = [];
+  for (let k = 0; k <= MH; k++) { const x = -Math.cos(Math.PI*k/MH); zr.push(wa*x); zi.push(-evalSpline(c,x)); }
+  for (let k = MH-1; k >= 1; k--) { const x = -Math.cos(Math.PI*k/MH); zr.push(wa*x); zi.push(evalSpline(c,x)); }
+  return { zr: Float64Array.from(zr), zi: Float64Array.from(zi) };
+}
+// returns boundary values (unit modulus) of the Riemann map g: region -> disc, g(0)=0, g(+-1)=+-1
+function boundaryMap(c) {
+  const { zr, zi } = boundary(c), M = zr.length;
+  const w = new Float64Array(M); let L = 0;
+  for (let m = 0; m < M; m++) {
+    const p = (m+M-1)%M, n = (m+1)%M;
+    w[m] = (Math.hypot(zr[m]-zr[p], zi[m]-zi[p]) + Math.hypot(zr[n]-zr[m], zi[n]-zi[m]))/2; L += w[m];
+  }
+  const ip = (ur,ui,qr,qi) => { let a = 0, b = 0; for (let m = 0; m < M; m++) { a += w[m]*(ur[m]*qr[m]+ui[m]*qi[m]); b += w[m]*(ui[m]*qr[m]-ur[m]*qi[m]); } return [a,b]; };
+  const Qr = [new Float64Array(M).fill(1/Math.sqrt(L))], Qi = [new Float64Array(M)];
+  const p0r = [1/Math.sqrt(L)], p0i = [0];            // phi_k(0)
+  for (let k = 0; k < NK; k++) {
+    const ur = new Float64Array(M), ui = new Float64Array(M);
+    for (let m = 0; m < M; m++) { ur[m] = zr[m]*Qr[k][m] - zi[m]*Qi[k][m]; ui[m] = zr[m]*Qi[k][m] + zi[m]*Qr[k][m]; }
+    let sr = 0, si = 0;
+    for (let pass = 0; pass < 2; pass++) for (let j = 0; j <= k; j++) {
+      const [hr,hi] = ip(ur,ui,Qr[j],Qi[j]);
+      for (let m = 0; m < M; m++) { ur[m] -= hr*Qr[j][m]-hi*Qi[j][m]; ui[m] -= hr*Qi[j][m]+hi*Qr[j][m]; }
+      sr += hr*p0r[j]-hi*p0i[j]; si += hr*p0i[j]+hi*p0r[j];
+    }
+    let nrm = 0; for (let m = 0; m < M; m++) nrm += w[m]*(ur[m]*ur[m]+ui[m]*ui[m]);
+    nrm = Math.sqrt(nrm); if (nrm < 1e-13) break;
+    for (let m = 0; m < M; m++) { ur[m] /= nrm; ui[m] /= nrm; }
+    Qr.push(ur); Qi.push(ui); p0r.push(-sr/nrm); p0i.push(-si/nrm);
+  }
+  // Szego kernel S(z,0) on the boundary, then g' ~ S^2 integrated along the boundary from z=-1
+  const p2r = new Float64Array(M), p2i = new Float64Array(M);
+  for (let m = 0; m < M; m++) {
+    let a = 0, b = 0;
+    for (let k = 0; k < Qr.length; k++) { a += p0r[k]*Qr[k][m] + p0i[k]*Qi[k][m]; b += p0r[k]*Qi[k][m] - p0i[k]*Qr[k][m]; }
+    p2r[m] = a*a-b*b; p2i[m] = 2*a*b;
+  }
+  const cr = new Float64Array(M), ci = new Float64Array(M);
+  for (let m = 1; m < M; m++) {
+    const dr = zr[m]-zr[m-1], di = zi[m]-zi[m-1], ar = (p2r[m]+p2r[m-1])/2, ai = (p2i[m]+p2i[m-1])/2;
+    cr[m] = cr[m-1] + ar*dr-ai*di; ci[m] = ci[m-1] + ar*di+ai*dr;
+  }
+  const sc = 2/cr[MH], gr = new Float64Array(M), gi = new Float64Array(M);
+  for (let m = 0; m < M; m++) { const a = -1+sc*cr[m], b = sc*ci[m], r = Math.hypot(a,b); gr[m] = a/r; gi[m] = b/r; }
+  // Cauchy weights g*dz/(2 pi i)
+  const Ar = new Float64Array(M), Ai = new Float64Array(M);
+  for (let m = 0; m < M; m++) {
+    const p = (m+M-1)%M, n = (m+1)%M, dr = (zr[n]-zr[p])/2, di = (zi[n]-zi[p])/2;
+    const a = gr[m]*dr-gi[m]*di, b = gr[m]*di+gi[m]*dr;
+    Ar[m] = b/(2*Math.PI); Ai[m] = -a/(2*Math.PI);
+  }
+  return { zr, zi, Ar, Ai, M };
+}
+// ---- UI ----
+const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+let kk = 1;
+const YMIN = -2.25, YMAX = 2.25, XM = 1.15, D = 0.5, MAXANG = 89*Math.PI/180, HMIN = 0.25;
+let h = 1, wa = 1, ang = Math.PI/4, drag = null, W, H, K, dpr, eff = ang;
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const X = x => W/2 + x*K, Y = y => H/2 - y*K;
+
+function solveCurve() {
+  const ok = t => { const c = fit(h, -wa*Math.tan(ang)*t); for (let k=0;k<=200;k++) if (evalSpline(c,k/200) < -1e-9) return false; return true; };
+  let t = 1;
+  if (!ok(1)) { let lo = 0, hi = 1; for (let i=0;i<30;i++) { const m=(lo+hi)/2; ok(m) ? lo=m : hi=m; } t = lo; }
+  const s = -wa*Math.tan(ang)*t;
+  return { c: fit(h, s), eff: Math.atan(-s/wa) };
+}
+function resize() {
+  dpr = window.devicePixelRatio || 1;
+  const r = cv.getBoundingClientRect();
+  W = r.width; H = r.height; K = W/(2*XM);
+  for (const [cn,cx] of [[cv,ctx]]) { cn.width = W*dpr; cn.height = H*dpr; cx.setTransform(dpr,0,0,dpr,0,0); }
+  draw(true);
+}
+// ---- F(w) = (8/pi^2) sum (-1)^l w^(2l+1)/(2l+1)^2 ----
+const C8 = 8/(Math.PI*Math.PI);
+function Fval(wr, wi, N) {
+  let pr = wr, pi = wi, sr = 0, si = 0;
+  const qr = -(wr*wr-wi*wi), qi = -2*wr*wi;
+  for (let l = 0; l < N; l++) {
+    const d = (2*l+1)*(2*l+1); sr += pr/d; si += pi/d;
+    const t = pr*qr - pi*qi; pi = pr*qi + pi*qr; pr = t;
+  }
+  return [C8*sr, C8*si];
+}
+function Fder(wr, wi) {   // F'(w) = C8 atan(w)/w
+  if (wr*wr+wi*wi < 1e-16) return [C8, 0];
+  const ar = 1-wi, ai = wr, br = 1+wi, bi = -wr;
+  const Lr = Math.log(Math.hypot(ar,ai)/Math.hypot(br,bi)), Li = Math.atan2(ai,ar) - Math.atan2(bi,br);
+  const tr = Li/2, ti = -Lr/2, d = wr*wr+wi*wi;
+  return [C8*(tr*wr+ti*wi)/d, C8*(ti*wr-tr*wi)/d];
+}
+function Finv(zr, zi) {   // Newton; returns [wr, wi] or null
+  let wr = zr/C8, wi = zi/C8, a = Math.hypot(wr,wi);
+  if (a > 0.97) { wr *= 0.97/a; wi *= 0.97/a; }
+  for (let it = 0; it < 40; it++) {
+    const N = Math.min(3000, Math.ceil(6/(1-Math.hypot(wr,wi))) + 10);
+    const [fr, fi] = Fval(wr, wi, N), [dr, di] = Fder(wr, wi);
+    const er = fr-zr, ei = fi-zi, dd = dr*dr+di*di;
+    let sr = (er*dr+ei*di)/dd, si = (ei*dr-er*di)/dd;
+    while (Math.hypot(wr-sr, wi-si) >= 0.999999) { sr /= 2; si /= 2; }
+    wr -= sr; wi -= si;
+    if (Math.hypot(sr,si) < 1e-10) return [wr, wi];
+  }
+  return null;
+}
+const FB = (() => {   // boundary of i*F(disc): F(e^{i theta}) rotated by 90 degrees
+  const Q = 160, xa = [], ya = [];
+  for (let m = Q; m >= 0; m--) { const t = Math.PI/2*m/Q, [x,y] = Fval(Math.cos(t), Math.sin(t), 4000); xa.push(x); ya.push(y); }
+  const zr = [], zi = [];
+  const quad = (sx, sy, rev) => { for (let m = 0; m < Q; m++) { const k = rev ? Q-m : m; zr.push(-sy*ya[Q-k]); zi.push(sx*xa[Q-k]); } };
+  quad(1,1,false); quad(-1,1,true); quad(-1,-1,false); quad(1,-1,true);
+  const Xa = ya.slice().reverse(), Ya = xa.slice().reverse();   // profile y = Ya(x), x ascending
+  const fU = x => { x = Math.abs(x); if (x >= Xa[Q]) return 0; let lo = 0, hi = Q; while (hi-lo > 1) { const m = (lo+hi)>>1; Xa[m] <= x ? lo = m : hi = m; } return Ya[lo] + (Ya[hi]-Ya[lo])*(x-Xa[lo])/(Xa[hi]-Xa[lo]); };
+  return { zr: Float64Array.from(zr), zi: Float64Array.from(zi), M: zr.length, xr: Xa[Q], fU };
+})();
+
+function draw(final) {
+  const useF = document.getElementById('fm').checked;
+  const sol = useF ? null : solveCurve(), c = useF ? null : sol.c; if (sol) eff = sol.eff;
+  const wp = final ? 150 : 60, hp = 2*Math.floor(Math.round(wp*H/W)/2)+1, mid = (hp-1)/2;
+  const { zr, zi, Ar, Ai, M } = useF ? FB : boundaryMap(c);
+  const prof = useF ? FB.fU : x => evalSpline(c,x/wa), xr = useF ? FB.xr : wa;
+  const xg = Math.max(1.15, 1.1*xr);
+  const dx = 2*xg/(wp-1), dy = (YMAX-YMIN)/(hp-1);
+  const gx = u => -xg + u*dx, gy = v => YMAX - v*dy;
+  const gr = new Float64Array(wp*hp).fill(NaN), gi = new Float64Array(wp*hp).fill(NaN);
+  const Fv = new Float64Array(wp*hp).fill(NaN);
+  for (let j = 0; j < hp; j++) { const y = gy(j);
+    for (let i = 0; i < wp; i++) {
+      const x = gx(i);
+      if (Math.abs(x) >= xr || Math.abs(y) >= prof(x)) continue;
+      if (useF) {
+        const w = Finv(y, -x); if (!w) continue;
+        const [dr, di] = Fder(w[0], w[1]);
+        gr[j*wp+i] = w[0]; gi[j*wp+i] = w[1];
+        Fv[j*wp+i] = Math.pow(w[0]*w[0]+w[1]*w[1], kk-1) / (dr*dr+di*di);
+        continue;
+      }
+      let sr = 0, si = 0, md = 1e9;
+      for (let m = 0; m < M; m++) {
+        const dr = zr[m]-x, di = zi[m]-y, d2 = dr*dr+di*di, q = 1/d2, ir = dr*q, ii = -di*q;
+        if (d2 < md) md = d2;
+        sr += Ar[m]*ir - Ai[m]*ii; si += Ar[m]*ii + Ai[m]*ir;
+      }
+      if (md < 2.25*dy*dy) continue;
+      gr[j*wp+i] = sr; gi[j*wp+i] = si;
+    } }
+  // J_k(x,y) = int_0^y |g|^(2k-2) |g'|^2 dt, with g' = dg/dx by finite differences
+  const Jf = new Float64Array(wp*hp).fill(NaN);
+  for (let j = 0; j < hp; j++) for (let i = 0; i < wp; i++) {
+    const n = j*wp+i; if (useF || gr[n] !== gr[n]) continue;
+    const l = i > 0 && gr[n-1] === gr[n-1], r = i < wp-1 && gr[n+1] === gr[n+1];
+    if (!l && !r) continue;
+    const a = r ? n+1 : n, b = l ? n-1 : n, d = (a-b)*dx;
+    const pr = (gr[a]-gr[b])/d, pi = (gi[a]-gi[b])/d;
+    Fv[n] = Math.pow(gr[n]*gr[n]+gi[n]*gi[n], kk-1) * (pr*pr+pi*pi);
+  }
+  for (let i = 0; i < wp; i++) {
+    if (Fv[mid*wp+i] !== Fv[mid*wp+i]) continue;
+    Jf[mid*wp+i] = 0;
+    for (let j = mid-1; j >= 0; j--) {
+      const n = j*wp+i; if (Fv[n] !== Fv[n]) break;
+      Jf[n] = Jf[n+wp] + 0.5*(Fv[n]+Fv[n+wp])*dy;
+    }
+  }
+  const k2 = kk*kk, top = [[-xr,0]];
+  for (let i = 0; i < wp; i++) {
+    const x = gx(i); if (Math.abs(x) >= xr || Jf[mid*wp+i] !== Jf[mid*wp+i]) continue;
+    let lj = mid; while (lj > 0 && Jf[(lj-1)*wp+i] === Jf[(lj-1)*wp+i]) lj--;
+    const fx = prof(x), n = lj*wp+i;
+    top.push([x, fx + k2*(Jf[n] + Fv[n]*Math.max(0, fx-gy(lj)))]);
+  }
+  top.push([xr,0]);
+  const YM = Math.max(2.25, 1.05*Math.max(...top.map(p => p[1])));
+  K = Math.min(W/(2*xg), H/(2*YM));
+  const bg = css('--bg'), ink = css('--ink');
+  ctx.clearRect(0,0,W,H);
+  ctx.strokeStyle = css('--curve'); ctx.lineWidth = 2; ctx.beginPath();
+  for (let m = 0; m <= M; m++) { const k = m % M; m ? ctx.lineTo(X(zr[k]),Y(zi[k])) : ctx.moveTo(X(zr[k]),Y(zi[k])); }
+  ctx.stroke();
+  // image of the boundary under (x,y) -> (x, y + k^2 J_k), and its reflection
+  ctx.strokeStyle = ink; ctx.lineWidth = 2;
+  for (const sg of [1,-1]) { ctx.beginPath(); top.forEach((p,i) => i ? ctx.lineTo(X(p[0]),Y(sg*p[1])) : ctx.moveTo(X(p[0]),Y(sg*p[1]))); ctx.stroke(); }
+  const dot = (x,y,r) => { ctx.fillStyle = css('--pt'); ctx.strokeStyle = bg; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(X(x),Y(y),r,0,7); ctx.fill(); ctx.stroke(); };
+  if (useF) return;
+  dot(0,h,8); dot(0,-h,4);
+  dot(wa-D*Math.cos(eff), D*Math.sin(eff), 7); dot(wa,0,8); dot(-wa,0,4);
+  for (const [sx,sy] of [[1,-1],[-1,1],[-1,-1]]) dot(sx*(wa-D*Math.cos(eff)), sy*D*Math.sin(eff), 4);
+}
+
+function pos(e) { const r = cv.getBoundingClientRect(); return [e.clientX-r.left, e.clientY-r.top]; }
+const near = (px,py,x,y) => Math.hypot(px-X(x), py-Y(y)) < 18;
+cv.addEventListener('pointerdown', e => {
+  if (document.getElementById('fm').checked) return;
+  const [px,py] = pos(e);
+  if (near(px,py,wa-D*Math.cos(eff),D*Math.sin(eff))) drag = 'a';
+  else if (near(px,py,0,h)) drag = 'h';
+  else if (near(px,py,wa,0) || near(px,py,-wa,0)) drag = 'w';
+  if (drag) cv.setPointerCapture(e.pointerId);
+});
+cv.addEventListener('pointermove', e => {
+  if (!drag) return;
+  const [px,py] = pos(e);
+  if (drag === 'h') h = Math.max(HMIN, Math.min(2, Math.abs((H/2 - py)/K)));
+  else if (drag === 'w') wa = Math.max(0.4, Math.min(1.8, Math.abs((px-W/2)/K)));
+  else ang = Math.max(0, Math.min(MAXANG, Math.atan2(Y(0)-py, X(wa)-px)));
+  draw(false);
+});
+cv.addEventListener('pointerup', () => { if (drag) { drag = null; draw(true); } });
+document.getElementById('k').addEventListener('input', e => { kk = +e.target.value; document.getElementById('ko').textContent = kk; draw(true); });
+document.getElementById('fm').addEventListener('change', () => draw(true));
+addEventListener('resize', resize);
+resize();
+</script>
+</body>
+</html>

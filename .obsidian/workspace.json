@@ -36,31 +36,17 @@
             }
           },
           {
-            "id": "d6d9c69598a822ff",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "illustration.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "illustration"
-            }
-          },
-          {
             "id": "76d195f057d53415",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/code/2026-08-28-abelian-polygons.md",
+                "file": "_posts/blog/2026-10-09-Mahler.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-08-28-abelian-polygons"
+              "title": "2026-10-09-Mahler"
             }
           },
           {
@@ -69,16 +55,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/talks/2023-01-23-polygons.md",
+                "file": "_drafts/sketch-playground.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2023-01-23-polygons"
+              "title": "sketch-playground"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -229,50 +215,51 @@
   },
   "active": "76d195f057d53415",
   "lastOpenFiles": [
-    "_posts/talks/2023-01-23-polygons.md",
-    "_posts/code/2026-08-28-abelian-polygons.md",
-    "_site/assets/polygons/abelian/dh.png",
-    "assets/polygons/abelian/dh.png",
-    "_site/assets/polygons/abelian/dh logo.png",
-    "assets/polygons/abelian/dh logo.png",
-    "_site/assets/polygons/abelian/thumbnail.png",
-    "assets/polygons/abelian/thumbnail.png",
-    "_site/assets/polygons/abelian/polygon logo.png",
-    "_site/assets/polygons/abelian",
-    "assets/polygons/abelian/polygon logo.png",
-    "assets/polygons/abelian",
-    "assets/polygons/untitled folder",
+    "_site/sketch/mahler conjecture/images/thumbnail.jpg",
+    "sketch/mahler conjecture/images/thumbnail.jpg",
+    "_site/sketch/mahler conjecture/images/thumbnail.png",
+    "sketch/mahler conjecture/images/thumbnail.png",
+    "_site/sketch/mahler conjecture/images/Screenshot 2026-10-11 at 11.50.31 PM.png",
+    "sketch/mahler conjecture/images/Screenshot 2026-10-11 at 11.50.31 PM.png",
+    "_site/sketch/mahler conjecture/images/sweep.mp4",
+    "sketch/mahler conjecture/images/sweep.mp4",
+    "_site/sketch/mahler conjecture/images/ combined.png",
+    "sketch/mahler conjecture/images/ combined.png",
+    "_site/sketch/mahler conjecture/images/image.png",
+    "sketch/mahler conjecture/images/image.png",
+    "_site/sketch/mahler conjecture/images/symplectic balls.png",
+    "_drafts/sketch-playground.md",
+    "_posts/blog/2026-10-09-Mahler.md",
+    "_tools/make-posters.py",
+    "_tools",
+    "_site/sketch/mahler conjecture/images/symplectic-k-sweep.mp4",
+    "_site/sketch/mahler conjecture/images/symplectic-k-sweep-left.mp4",
+    "sketch/mahler conjecture/images/symplectic-k-sweep.mp4",
+    "sketch/mahler conjecture/images/symplectic-k-sweep-left.mp4",
+    "_site/sketch/mahler conjecture/hexagonal grid/symplectic-k-sweep-left.mp4",
+    "sketch/mahler conjecture/hexagonal grid/symplectic-k-sweep-left.mp4",
+    "_drafts/zz-ui-test.md",
     "illustration.md",
-    "code.md",
-    "index.md",
-    "_site/abelian-polygons.html",
-    "_site/assets/images/polygon logo.png",
-    "assets/images/polygon logo.png",
-    "_posts/ihp/2026-01-26-wunderlich.md",
-    "_posts/code/2026-04-26-quantum-dice.md",
-    "_site/polygons.html",
-    "_posts/code/2026-08-08-floer.md",
-    "writing/index.md",
-    "diary/31.md",
-    "assets/research/floer/images/quadradic_chain_complex_3.png.sb-6f1f5f95-fCGZFQ",
-    "assets/research/floer/images/quadradic_chain_complex_2.png.sb-6f1f5f95-JyRHOs",
-    "assets/research/floer/images/pinn_figures.png.sb-6f1f5f95-TStoad",
-    "assets/research/floer/data/data_quadradic.json.sb-6f1f5f95-LzUA0f",
-    "_site/assets/research/floer/data/data_saddle.json",
-    "_posts/blog/2024-12-25-baubles.md",
-    "_posts/talks/2026-01-20-Big-Small.md",
-    "_posts/blog/2027-06-02-eutactic.md",
-    "_site/talks/torus.md",
+    "sketch/mahler.md",
+    "_site/sketch/mahler.md",
+    "_drafts/zz-fig-test.md",
+    "_drafts/zz-remark-test.md",
+    "_drafts/zz-epi-test.md",
+    "_drafts/zz-proof-test.md",
+    "_drafts/zz-thm-test.md",
+    "_drafts/zz-ref-test.md",
+    "_drafts/zz-cl-off.md",
+    "_drafts/zz-cl-on.md",
+    "_drafts/zz-callout-test.md",
     "talks.md",
-    "talks/torus.md",
-    "_posts/blog/2023-02-16-Hyperbolic.md",
-    "_posts/blog/2023-12-23-two sphere.md",
+    "_posts/blog/2024-12-25-baubles.md",
+    "_posts/talks/2023-01-23-polygons.md",
+    "zz-sketch-test.md",
     "_posts/blog/2024-03-02-Fubini-Study.md",
     "_posts/blog/2025-09-01-pointless.md",
     "_posts/blog/2024-01-14-spherical-sticks.md",
-    "_posts/diary/2024-05-14-32.md",
-    "_posts/diary/2023-04-30-0.md",
-    "_posts/code/2024-12-16-ifs.md",
-    "_posts/code/2023-05-31-binary.md"
+    "_posts/blog/2027-06-02-eutactic.md",
+    "_posts/code/2026-08-28-abelian-polygons.md",
+    "code.md"
   ]
 }

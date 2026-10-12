@@ -49,8 +49,22 @@
   {%- endif -%}
   </div>
   {%- if project.image -%}
+  {%- assign image_ending = project.image | split: "." | last | downcase -%}
+  {%- comment -%} a path relative to the site root (as in Obsidian) gets its leading /; others are left as they are {%- endcomment -%}
+  {%- assign image_first = project.image | slice: 0 -%}
+  {%- if image_first == "/" or image_first == '\' or project.image contains "://" -%}
+    {%- assign image_src = project.image -%}
+  {%- else -%}
+    {%- assign image_src = "/" | append: project.image -%}
+  {%- endif -%}
   <div class="project-image">
-   <a href = "{{ project.url | relative_url }}"> <img src="{{ project.image }}" alt="{{ project.title }}" class="img-fluid" ></a>
+   <a href = "{{ project.url | relative_url }}">
+    {%- if image_ending == "mp4" or image_ending == "webm" -%}
+    <video src="{{ image_src }}" class="img-fluid" autoplay loop muted playsinline aria-label="{{ project.title }}"></video>
+    {%- else -%}
+    <img src="{{ image_src }}" alt="{{ project.title }}" class="img-fluid" >
+    {%- endif -%}
+   </a>
   </div>
   {%- endif -%}
 
