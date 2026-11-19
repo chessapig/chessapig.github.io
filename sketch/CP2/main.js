@@ -62,7 +62,7 @@ function setup() {
 	]
 	let X11 = new CP2Curve(monomials);
 
-	curveRender = new CurveRenderer(X11,{
+	curveRender = new CurveRenderer(curveUI.curve,{
 		pixels: canvasSize,
 	 	x:0, y:-1, width:2,
 		projectionMode:defaultUIState.projectionMode

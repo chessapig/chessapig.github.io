@@ -105,7 +105,7 @@ class CP2CurveSelectorUI extends GraphicsWindow {
 				c: s.value()
 			};
 			
-			didUpdate= didUpdate || this.curve.setMonomial(monomial);
+			didUpdate = this.curve.setMonomial(monomial) || didUpdate;
 		}
 
 		// delete monomials with no selector

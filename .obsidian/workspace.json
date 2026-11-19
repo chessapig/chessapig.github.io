@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/blog/2026-10-09-Mahler.md",
+                "file": "_posts/code/2026-11-17-SU3.md",
                 "mode": "source",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "2026-10-09-Mahler"
+              "title": "2026-11-17-SU3"
             }
           }
         ],
@@ -200,29 +200,31 @@
   },
   "active": "262093cf363f811f",
   "lastOpenFiles": [
-    "_site/sketch/mahler conjecture/images/combined.png",
-    "sketch/mahler conjecture/images/combined.png",
-    "_drafts/sketch-playground.md",
+    "_site/sketch/SU(3)/weights.poster.jpg",
+    "sketch/SU(3)/weights.poster.jpg",
+    "_site/sketch/SU(3)/weights.html",
+    "sketch/SU(3)/weights.html",
+    "_site/sketch/SU(3)/images/veronese.png",
+    "_site/sketch/SU(3)/images",
+    "sketch/SU(3)/images/veronese.png",
+    "sketch/SU(3)/images",
+    "sketch/SU(3)/untitled folder",
+    "_site/sketch/SU(3)/veronese.png",
+    "sketch/SU(3)/veronese.png",
+    "_site/sketch/veronese.png",
+    "sketch/veronese.png",
+    "_site/assets/images/veronese.png",
+    "assets/images/veronese.png",
+    "_site/sketch/SU(3)/Screenshot 2026-11-18 at 4.11.52 PM.png",
+    "_posts/code/2026-08-28-abelian-polygons.md",
+    "_posts/code/2026-11-17-SU3.md",
+    "_site/sketch/SU(3)/index.html",
+    "sketch/SU(3)/index.html",
+    "_site/sketch/SU(3)/su3.js",
+    "sketch/SU(3)/su3.js",
     "_posts/blog/2026-10-09-Mahler.md",
-    "_site/Mahler.html",
-    "_site/craft/Mahler.html",
-    "_site/sketch/mahler conjecture/images/thumbnail.jpg",
-    "sketch/mahler conjecture/images/thumbnail.jpg",
-    "_site/sketch/mahler conjecture/images/thumbnail.png",
-    "sketch/mahler conjecture/images/thumbnail.png",
-    "_site/sketch/mahler conjecture/images/Screenshot 2026-10-11 at 11.50.31 PM.png",
-    "sketch/mahler conjecture/images/Screenshot 2026-10-11 at 11.50.31 PM.png",
-    "_site/sketch/mahler conjecture/images/sweep.mp4",
-    "sketch/mahler conjecture/images/sweep.mp4",
-    "_site/sketch/mahler conjecture/images/ combined.png",
-    "sketch/mahler conjecture/images/ combined.png",
-    "_site/sketch/mahler conjecture/images/image.png",
-    "_tools/make-posters.py",
-    "_tools",
-    "_site/sketch/mahler conjecture/images/symplectic-k-sweep.mp4",
-    "_site/sketch/mahler conjecture/images/symplectic-k-sweep-left.mp4",
-    "sketch/mahler conjecture/images/symplectic-k-sweep.mp4",
-    "sketch/mahler conjecture/images/symplectic-k-sweep-left.mp4",
+    "_site/sketch/SU(3)/of_math.js",
+    "_drafts/sketch-playground.md",
     "_drafts/zz-ui-test.md",
     "illustration.md",
     "sketch/mahler.md",
@@ -243,8 +245,6 @@
     "_posts/blog/2024-03-02-Fubini-Study.md",
     "_posts/blog/2025-09-01-pointless.md",
     "_posts/blog/2024-01-14-spherical-sticks.md",
-    "_posts/blog/2027-06-02-eutactic.md",
-    "_posts/code/2026-08-28-abelian-polygons.md",
-    "code.md"
+    "_posts/blog/2027-06-02-eutactic.md"
   ]
 }
